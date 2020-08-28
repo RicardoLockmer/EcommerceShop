@@ -1,0 +1,204 @@
+/* MENU CSS */
+
+
+.menu-container {
+    border-bottom: 0.05em solid rgba(165, 165, 165, 0.658);
+    box-shadow: 0.02em 0.1em #cccccca6;
+    padding-bottom: 1.5em;
+
+}
+
+.containerForm {
+    align-items: center;
+}
+
+.links>a {
+    color: #636b6f;
+    display: inline;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.title {
+    display: inline-flex !important;
+    font-size: 1.6em !important;
+    margin: 0.6em 0 0 2.5em !important;
+}
+
+/* NO MAS MENU CSS */
+
+/* MAIN BODY CSS LAYOUT */
+
+.main-container {
+    margin-bottom: 5em;
+    background-color: white;
+}
+
+/* END MAIN LAYOUT CSS */
+
+/* MAINPAGE CSS */
+.myFirstSection {
+    height: 14em;
+    margin: 4em 0 0 3em;
+    border-bottom: 0.5px solid rgba(126, 126, 126, 0.384);
+
+    background-color: white;
+}
+
+.myFirstSectionInner {
+    height: 12em;
+    margin: 0 0 0 0;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.myFirstSectionInner::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+}
+
+.div {
+    margin: 0 0 0 0.3em;
+    color: #20006b;
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+}
+
+/* SECCION IMAGENES */
+.sectionImage {
+    height: 10em;
+    width: auto;
+    position: center center;
+    object-fit: fill;
+    margin: 0 1em 0 1em;
+
+}
+
+.card {
+    border: none !important;
+    margin: 0 5em 0 5em;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15)
+}
+
+.centerMyImages {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cardContainer {
+    margin: 0 4em 4em 4em;
+
+}
+
+.cardbtn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.jumbotron-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.formTitle {
+    text-transform: uppercase;
+    color: #123C69;
+    margin: 2em 0 0 3em;
+}
+
+.myCards {
+    display: inline-block;
+}
+
+.noWrap {
+    white-space: nowrap;
+}
+
+.sideImage {
+    float: right;
+    width: 450px;
+    height: 756px;
+}
+
+.forms {
+    margin: 4em 0 0 0;
+    width: 100%;
+
+    height: auto;
+    position: relative;
+}
+
+.myFormTitle {
+    font-size: 1.7em;
+    text-transform: uppercase;
+    color: black;
+    margin-bottom: 0.6em;
+
+}
+
+.myFormData {
+    margin: 1em 3em 3em 3em;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.myForms {
+    height: auto;
+    width: 25em;
+    margin: 0 33% 0 33%;
+    border: 1px solid rgba(143, 143, 143, 0.267);
+    border-radius: 5px;
+}
+
+.formitem {
+    margin: 2.3em 0 0 0;
+    display: flexbox;
+}
+
+.newbiz {
+    margin-top: 12px;
+    ;
+}
+
+/* input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    outline: none;
+    padding-left: 15px;
+    border: 1px solid gray;
+} */
+
+/* myStore CSS */
+.myProduct {
+
+    height: 8em;
+    width: 15em;
+    margin: 2em 2em 2em 2em;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 22px;
+    line-height: 6.4em;
+}
+
+.myItems {
+    max-height: 70%;
+    width: 270px;
+
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {}
