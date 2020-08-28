@@ -13,6 +13,7 @@
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <!-- Styles -->
         <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
         {{-- BOOTSTRAP CSS --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
@@ -177,7 +178,22 @@
 <script src="/scripts/addColor.js"></script>
 <script src="/scripts/alerts.js"></script>
 <script src="/scripts/isOther.js"></script>
+<script src="/scripts/Event.js"></script>
+<script src="/scripts/Magnifier.js"></script>
 <script src="/scripts/categoryOptions.vue"></script>
+
+
+@yield('magnifier')
+<script type="text/javascript">
+var evt = new Event(),
+    m = new Magnifier(evt);
+    m.attach({
+    thumb: '#thumb',
+    large: 'http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Starry_Night_Over_the_Rhone.jpg/400px-Starry_Night_Over_the_Rhone.jpg',
+    largeWrapper: 'preview'
+});
+
+</script>
 @yield('addColorProp') 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </body>

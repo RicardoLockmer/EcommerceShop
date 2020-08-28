@@ -1,17 +1,20 @@
 @extends('mainLayout')
 
-
+{{-- BUTING ITEM PAGE --}}
 
 @section('thisItem')
 
 <div class="container">
 <div class="form-row">
-  <div class="card" style="width: 20em; height: auto; margin: 3em 0 0 0.5em">
+  <div class="card" style="width: 20em; height: auto; margin: 3em 0 0 0.5em" >
 
-    <article class="card-body"  style="position: relative;">
-
-      <img class="img-thumbnail" src="{{ Storage::URL('/storage/assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
-{{-- BBB --}}
+    <article class="card-body" >
+      <a class="magnifier-thumb-wrapper">
+          <img class="img-thumbnail"  id="thumb"  src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
+              
+      </a>
+      
+      {{-- BBB --}}
       @if($item->cantidad == 0)
         <button type="button" class="btn btn-outline-secondary cardbtn" disabled>Agotado</button>
       @else
@@ -67,5 +70,20 @@
 
 </div>
 
+
+@endsection
+
+@section('magnifier')
+  <script type="text/javascript">
+var evt = new Event(),
+    m = new Magnifier(evt);
+    m.attach({
+    thumb: '#thumb',
+    mode: 'inside',
+    zoom: 3,
+    zoomable: true
+});
+
+</script>
 
 @endsection
