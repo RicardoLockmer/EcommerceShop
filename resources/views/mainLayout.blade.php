@@ -72,7 +72,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <a class="nav-link" href="{{ route('shoppingCart') }}">
+                    <a class="nav-link" href="##">
                     {{ __('SHOPPING CART') }}
                 </a>
                 @endif
@@ -184,16 +184,7 @@
 
 
 @yield('magnifier')
-<script type="text/javascript">
-var evt = new Event(),
-    m = new Magnifier(evt);
-    m.attach({
-    thumb: '#thumb',
-    large: 'http://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Starry_Night_Over_the_Rhone.jpg/400px-Starry_Night_Over_the_Rhone.jpg',
-    largeWrapper: 'preview'
-});
 
-</script>
 @yield('addColorProp') 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </body>
