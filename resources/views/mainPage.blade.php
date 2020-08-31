@@ -97,7 +97,7 @@
                     <div class="container-fluid">
                         <div class="noWrap">
                             @foreach($mujerItems as $mujeres) 
-                            <a href="/productos/{{$mujeres->id}}">
+                            <a href="/producto/{{$mujeres->id}}">
                                     <img class="sectionImage" src="{{ Storage::URL('/storage/assetItems/'.$mujeres->image) }}" alt="">
                             </a>
                             @endforeach
