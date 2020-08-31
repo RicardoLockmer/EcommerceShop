@@ -10,7 +10,7 @@
 
     <article class="card-body" >
       <a class="magnifier-thumb-wrapper">
-          <img class="img-thumbnail"  id="thumb"  src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
+          <img class="img-thumbnail mainImage" data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
               
       </a>
       
@@ -49,7 +49,7 @@
         {{-- IMAGE 1 --}}
         @foreach ($images as $image)
           @if($image != NULL)
-          <img class="sectionImage" src="{{ Storage::URL('/storage/assetItems/'.$image) }}" alt="{{$item->nombre}}"> 
+          <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('storage/assetItems/'.$image) }}" alt="{{$item->nombre}}"> 
           @endif
         @endforeach
         </div>
@@ -75,15 +75,27 @@
 
 @section('magnifier')
   <script type="text/javascript">
-var evt = new Event(),
-    m = new Magnifier(evt);
-    m.attach({
-    thumb: '#thumb',
-    mode: 'inside',
-    zoom: 3,
-    zoomable: true
-});
+  var evt = new Event()
+      m = new Magnifier(evt);
+      m.attach({
+      thumb: '.mainImage',
+      mode: 'inside',
+      zoom: 3,
+      zoomable: false
+      })
+   
 
 </script>
-
+<script type="text/javascript">
+  
+    $('img').mouseenter(function () {
+      
+    var image = $(this).attr('src');
+    
+    $('.mainImage').attr("src", image);
+    $('#thumb-large').attr("src", image);
+    })
+    
+  
+</script>
 @endsection

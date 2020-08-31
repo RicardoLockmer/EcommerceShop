@@ -42,7 +42,7 @@
                            Inventario: {{$item->cantidad}}
                         </p>
                         @else
-                        <p>
+                        <p> 
                            Inventario: {{$item->cantidad}}
                         </p>
                         @endif
