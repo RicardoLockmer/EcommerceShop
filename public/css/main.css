@@ -70,6 +70,26 @@
     text-transform: uppercase;
 }
 
+.searchItem:link {
+    color: black;
+}
+
+/* visited link */
+.searchItem:visited {
+    color: black;
+}
+
+/* mouse over link */
+.searchItem:hover {
+    color: rgb(9, 9, 53);
+    text-decoration: none;
+}
+
+/* selected link */
+.searchItem:active {
+    color: rgb(9, 9, 53);
+}
+
 /* SECCION IMAGENES */
 .sectionImage {
     height: 10em;

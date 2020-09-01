@@ -18,6 +18,11 @@ Route::get('/', 'MainPageController@index');
 Route::get('destacados/{item}', 'MainPageController@show');
 Route::get('producto/{item}', 'ItemsController@show');
 
+
+//CART ROUTES
+Route::get('/Cart', 'ShoppingController@index');
+
+
 // MAIN ROUTES
 // MY STORE ROUTE
 Route::get('/negocio/{myStore:nombreNegocio}', 'StoreController@index')->middleware('auth'); // mi tienda view
