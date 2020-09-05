@@ -54,7 +54,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <a class="nav-link" href="##">
+                    <a class="nav-link" href="/ShoppingCart">
                     {{ __('SHOPPING CART') }}
                 </a>
                 @else 
@@ -72,7 +72,7 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <a class="nav-link" href="##">
+                    <a class="nav-link" href="/ShoppingCart">
                     {{ __('SHOPPING CART') }}
                 </a>
                 @endif
@@ -104,7 +104,8 @@
             {{-- ??? no me acuerdo --}}
             @yield('loginContent')
             
-            
+            {{-- SHOPPING CART --}}
+            @yield('ShoppingCart')
             {{-- myStore --}}
             @yield('storebanner') 
             @yield('errorStore')

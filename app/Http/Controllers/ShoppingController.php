@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Items;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShoppingController extends Controller
 {
@@ -13,7 +14,13 @@ class ShoppingController extends Controller
      */
     public function index()
     {
-        return view('cart');
+        $userID = Auth::user()->id;
+       $TotalSum = \Cart::session($userID)->getTotal();
+        $myCartItems = \Cart::session($userID)->getContent();
+        return view('shoppingCart', [
+            'myCart' => $myCartItems,
+            'Total' => $TotalSum
+        ]);
     }
 
     /**
@@ -34,7 +41,35 @@ class ShoppingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $uniqueId = rand(0, 1000);
+        $newCartItem = Items::where('id', $request->id)->firstOrFail();
+        if ($newCartItem) {
+            $rowId = $uniqueId;
+            $userId = Auth::user()->id;
+            $itemId = $newCartItem->id;
+            $itemName = $newCartItem->nombre;
+            $itemColor = $newCartItem->color;
+            $itemSize = $newCartItem->size;
+            $itemPrice = $newCartItem->precio;
+            $itemQuantity = 1;
+            $itemImage = $newCartItem->image;
+            $itemDescription = $newCartItem->descripcion;
+
+
+                \Cart::session($userId)->add(array(
+                    'id' => $rowId,
+                    'name' => $itemName,
+                    'color' => $itemColor,
+                    'size' => $itemSize,
+                    'price' => $itemPrice,
+                    'quantity' => $itemQuantity,
+                    'image' => $itemImage,
+                    'description' => $itemDescription,
+                    'associatedModel' => $newCartItem
+                    
+                ));
+            return back();
+        }
     }
 
     /**

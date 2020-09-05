@@ -20,8 +20,8 @@ Route::get('producto/{item}', 'ItemsController@show');
 
 
 //CART ROUTES
-Route::get('/Cart', 'ShoppingController@index');
-
+Route::get('/ShoppingCart', 'ShoppingController@index');
+Route::post('/shoppingCart', 'ShoppingController@store');
 
 // MAIN ROUTES
 // MY STORE ROUTE
