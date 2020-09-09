@@ -66,11 +66,26 @@
         <div class="newbiz ">
             <label class="" for="nombreNegocio">Nombre del Negocio</label>
                 <div class="control">
-                    <input class="form-control @error('nombreNegocio') is-danger @enderror" name="nombreNegocio" id="nombreNegocio" type="text" placeholder="Nombre del Negocio" value="{{old('nombreNegocio')}}">
+                    <input class="form-control @error('nombreNegocio') is-danger @enderror" name="nombreNegocio" id="nombreNegocio" type="text" placeholder="Razon Social" value="{{old('nombreNegocio')}}">
                 </div>
         </div>
         <br>
-        
+        <div class="newbiz ">
+            <label class="" for="CDJ">Cedula Juridica</label>
+                <div class="control">
+                    <input class="form-control @error('CDJ') is-danger @enderror" name="CDJ" id="CDJ" type="text" placeholder="# de Cedula Juridica" value="{{old('CDJ')}}">
+                </div>
+        </div>
+        <br>
+        <div class="newbiz ">
+            <label class="" for="BizE">Correo del Negocio</label>
+                <div class="control">
+                    <input class="form-control @error('BizE') is-danger @enderror" name="BizE" id="BizE" type="text" placeholder="Correo Electronico de su Negocio" value="{{old('BizE')}}">
+                    <small class=""></small>
+                </div>
+        </div>
+        <br>
+        <input type="text" name="email" value="{{Auth::user()->email}}" hidden>
             <div class="newbiz ">
                 <label class="" for="tipoNegocio">Tipo de Negocio</label>
                 <div class="control ">
