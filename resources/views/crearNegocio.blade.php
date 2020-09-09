@@ -116,6 +116,9 @@
                    <label class="checkbox" for="tyc">
                         <input type="checkbox" name="tyc" id="tyc" value="1">
                         Accepto <a href="#">Terminos y Condiciones</a>
+                        @error('tyc')
+                         <br>   <small class="form-text" style="color:red;">Aceptar Terminos y Condiciones</small>
+                        @enderror
                     </label>
                 </div>
             </div>
