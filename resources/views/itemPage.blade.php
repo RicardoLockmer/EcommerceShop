@@ -10,7 +10,7 @@
 
     <article class="card-body" >
       <a class="magnifier-thumb-wrapper">
-          <img class="img-thumbnail mainImage" data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
+          <img class="img-thumbnail mainImage" style="max-height: 440px!important; width: 100%;" data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
               
       </a>
       

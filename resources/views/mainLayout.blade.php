@@ -182,6 +182,8 @@
 <script src="/scripts/Event.js"></script>
 <script src="/scripts/Magnifier.js"></script>
 <script src="/scripts/categoryOptions.vue"></script>
+<script src="/scripts/addressVue.vue"></script>
+
 
 
 @yield('magnifier')

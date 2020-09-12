@@ -38,8 +38,31 @@ class StoreController extends Controller
      */
     public function create()
     {
-        
-        return view('crearNegocio');
+        $arr = [
+        'Manualidades',
+        'Accesorios para Automovil',
+        'Bebes',
+        'Belleza y Cuidado Personal',
+        'Libros',
+        'Celulares y Accesorios',
+        'Ropa, Zapatos y Joyeria',
+        'Computadoras',
+        'Electrónica',
+        'Jardin y Exterior',
+        'Artesanal',
+        'Hogar y Cocina',
+        'Equipaje',
+        'Instrumentos Musicales',
+        'Productos de Oficina',
+        'Suministros para Mascotas',
+        'Deporte',
+        'Herramientas de Trabajo',
+        'Juguetes'
+        ];
+        sort($arr);
+        return view('crearNegocio', [
+            'myCategory' => $arr
+        ]);
     }
 
     /**
@@ -62,6 +85,12 @@ class StoreController extends Controller
                 'user_id' => 'required|unique:stores',
                 'usuario' => 'required|unique:stores|max:50',
                 'tipoNegocio' => 'required',
+                'cedulaJuridica' => 'nullable',
+                'provincia' => 'required',
+                'canton' => 'required',
+                'dir' => 'required',
+                'prefix' => 'required',
+                'ntel' => 'required',
                 'tyc' => 'required',
                 'email_verified_at' => 'nullable',
                 'remember_token' => 'nullable',
@@ -69,7 +98,7 @@ class StoreController extends Controller
                 'karma'=> 'nullable',
                 'updated_at' => 'nullable',
                 'created_at' => 'date',
-                'closeDate' => 'nullable',
+                'closeDate' => 'nullable', 
             ]);
             $newStore = new Store();
             $newStore->primerNombre = $request->primerNombre;
@@ -82,8 +111,15 @@ class StoreController extends Controller
             $newStore->user_id = Auth::user()->id;
             $newStore->usuario = Auth::user()->name;
             $newStore->tipoNegocio = $request->tipoNegocio;
+            $newStore->provincia = $request->provincia;
+            $newStore->canton = $request->canton;
+            $newStore->direccion = $request->dir;
+            $newStore->prefix = $request->prefix;
+            $newStore->phoneNumber = $request->ntel;
             $newStore->tyc = $request->tyc;
             $newStore->created_at = date('dmy');
+            $newStore->cedulaJuridica = $request->CDJ;
+            
             $newStore->save();
             
             $newBiz = User::find($newStore->user_id);

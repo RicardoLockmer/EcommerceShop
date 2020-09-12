@@ -22,6 +22,12 @@ class CreateStoresTable extends Migration
             $table->string('segundoApellido');
             $table->string('descripcion')->nullable();
             $table->string('tipoNegocio');
+            $table->string('cedulaJuridica')->nullable();
+            $table->string('provincia');
+            $table->string('canton');
+            $table->longText('direccion');
+            $table->char('prefix');
+            $table->char('phoneNumber');
             $table->string('usuario')->unique();
             $table->string('email')->unique();
             $table->integer('user_id');

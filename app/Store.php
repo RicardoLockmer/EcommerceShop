@@ -24,6 +24,12 @@ class Store extends Model
     'usuario',
     'user_id',
     'tipoNegocio',
+    'cedulaJuridica',
+    'provincia',
+    'canton',
+    'direccion',
+    'prefix',
+    'phoneNumber',
     'tyc',
     'email_verified_at',
     'remember_token',
@@ -32,7 +38,7 @@ class Store extends Model
     'updated_at',
     'created_at',
     'closeDate'
-
+ 
 
     ];
 }
