@@ -68,21 +68,21 @@
     
         <br>
         <div class="newbiz ">
-            <label class="" for="nombreNegocio"><strong>Nombre del Negocio*</strong> <small class="text-muted">(Razon Social)</small></label>
+            <label class="" for="nombreNegocio"><strong>Nombre del Negocio*</strong> <small class="text-muted">(Razón Social)</small></label>
                 <div class="control">
                     <input class="form-control @error('nombreNegocio') is-invalid @enderror" name="nombreNegocio" id="nombreNegocio" type="text" placeholder="Razon Social" value="{{old('nombreNegocio')}}">
                 </div>
         </div>
         <br>
         <div class="newbiz ">
-            <label class="" for="CDJ"><strong>Cedula Juridica <small class="text-muted">(opcional)</small></strong></label>
+            <label class="" for="CDJ"><strong>Cedula Jurídica <small class="text-muted">(opcional)</small></strong></label>
                 <div class="control">
                     <input class="form-control @error('CDJ') is-invalid @enderror" name="CDJ" id="CDJ" type="text" placeholder="# de Cedula Juridica" value="{{old('CDJ')}}">
                 </div>
         </div>
         <br>
         <div class="newbiz ">
-            <label class="" for="BizE"><strong>Correo del Negocio</strong><small class="text-muted">(opcional)</small></label>
+            <label class="" for="BizE"><strong>Correo Electrónico</strong><small class="text-muted">(opcional)</small></label>
                 <div class="control">
                     <input class="form-control @error('BizE') is-invalid @enderror" name="BizE" id="BizE" type="text" placeholder="{{Auth::user()->email}}" value="{{old('BizE')}}">
                 <small class="form-text text-muted">Puede utilizar el correo personal o agregar uno de negocio.</small>
@@ -172,7 +172,7 @@
         <div class="row">
             <div class="newbiz col">
 
-                <label class="" for="prefix"><strong>Numero Telefono*</strong></label>
+                <label class="" for="prefix"><strong>Numero Teléfono*</strong></label>
             </div>
                 
                
@@ -180,12 +180,12 @@
         
             <div class="row">
                 <div class="newbiz col-2" style="margin-right: 8px!important;">
-                    <input style="width:66px!important; " class="form-control @error('prefix') is-invalid @enderror" name="prefix" id="prefix" type="tel" pattern="[0-9]-{3}-[0-9]-{4}" placeholder="+506" value="{{old('prefix')}}" required disabled>
+                    <input style="width:66px!important; " class="form-control @error('prefix') is-invalid @enderror" id="prefix" type="tel" placeholder="+506" value="+506" required disabled> <input name="prefix" value="+506" required hidden>
                 </div>
                 
             
                 <div class="newbiz ">
-                    <input class="form-control col @error('ntel') is-invalid @enderror" name="ntel" id="ntel" type="tel" pattern="[0-9]-{3}-[0-9]-{4}" placeholder="# Telefono" value="{{old('ntel')}}" required>
+                    <input class="form-control col @error('ntel') is-invalid @enderror" name="ntel" id="ntel" type="tel" pattern="[0-9]{4}[0-9]{4}" placeholder="# Telefono" value="{{old('ntel')}}" required>
                 </div>
             </div>
         
@@ -199,9 +199,9 @@
                 <div class="control">
                    <label class="checkbox" for="tyc">
                         <input type="checkbox" name="tyc" id="tyc" value="1">
-                        Accepto <a href="#">Terminos y Condiciones</a>
+                        Acepto <a href="#">Términos y Condiciones</a>
                         @error('tyc')
-                         <br>   <small class="form-text" style="color:red;">Aceptar Terminos y Condiciones</small>
+                         <br>   <small class="form-text" style="color:red;">Aceptar Términos y Condiciones</small>
                         @enderror
                     </label>
                 </div>

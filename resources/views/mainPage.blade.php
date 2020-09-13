@@ -6,7 +6,7 @@
         <div class="container">
             <div class="jumbotron" style="background-image: url(dummy/jtest.jpg);">
             <h2 class="mb-4">
-                My Store 101
+                XXXX
             </h2>
             <p class="mb-4">
                 DEFINIR EL COLOR PALLETE PARA TODA LA PAGINA
@@ -111,7 +111,7 @@
  
 @section('productosTecnologia')
         <div class="myFirstSection">
-            <p class="div" style="color: rgb(59, 59, 59);"> Tecnologia</p>
+            <p class="div" style="color: rgb(59, 59, 59);"> Tecnología</p>
                 <div class="myFirstSectionInner scroll" >
                     <div class="container is-fluid">
                         <div class="noWrap">

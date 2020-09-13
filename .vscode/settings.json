@@ -1,0 +1,16 @@
+{
+    "spellright.language": [
+        "es"
+    ],
+    "spellright.documentTypes": [
+        "plaintext",
+        "markdown",
+        "blade",
+        "vue"
+    ],
+    "spellright.parserByClass": {
+        "blade": {
+            "parser": "xml"
+        }
+    }
+}

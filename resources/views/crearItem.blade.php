@@ -15,8 +15,8 @@
                     <strong>
                         Parece que falto algo!
                     </strong>
-                        Revisa que todos los campos esten llenos.
-
+                        Revisa que todos los campos estén llenos.
+                     
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">
                             &times;
@@ -49,7 +49,7 @@
             <div>
                 <div class="newbiz" style="margin: 0 0 0 0;">
                 
-                    <label class="" for="nombre">Nombre Producto</label>
+                    <label class="" for="nombre"><strong>Nombre Producto</strong></label>
                         <div class="control">
                             <input class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text" placeholder="Nombre del Producto" value="{{old('nombre')}}">
                         </div>    
@@ -181,7 +181,7 @@
         <div class="newbiz" style="margin: 0 0 0 0;">
                 
                     <div class="control">
-                        <label class="label" for="descripcion">Descripción</label>
+                        <label class="label" for="descripcion"><strong>Descripción</strong></label>
                             <textarea class="textarea form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="descripcion" type="text" placeholder="Describa su Producto" value="{{old('descripcion')}}" ></textarea>
                         </div>    
         </div>     
@@ -193,7 +193,7 @@
             <div id="colors" class="newbiz col" style="margin: 0 0 0 0;">
                 <div class="control">
                     <label  for="color">
-                         Color
+                        <strong> Color</strong>
                     </label>
                     
                     <div class="select">
@@ -219,11 +219,13 @@
                 </div>
                 </div> 
             </div>
+        </div>
         {{-- CATEGORIA --}}
+        <div class='row' style="width: auto;">
             <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
                 <div class="control">
                     <label class="label" for="categoria">
-                        Categoria
+                      <strong>  Categoría</strong>
                     </label>
                     
                     <select 
@@ -243,7 +245,7 @@
                     </select>
                     </div>
                 </div>
-            
+        
     
             {{--  FINISH OPTIONS --}}
             {{-- SUBCATEGORIA --}}
@@ -251,7 +253,7 @@
         <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
                 <div class="control">
                     <label class="label" for="categoria">
-                        Subcategoria
+                      <strong>  Subcategoría</strong>
                     </label>
                 <select 
                     name="subcategoria" 
@@ -266,17 +268,19 @@
                 </select>
             </div>
             </div>
+        
          {{-- SUBCATEGORIA --}}
             
             </div>
         </div>
+        <br>
     {{-- TERMINA CATEGORY --}}
     {{-- PRECIO - CANTIDAD --}}
-        <div class='form-row' style="width: auto;">
-            <div class="newbiz" style="margin: 0 0 0 0;">
+        <div class='row' style="width: auto;">
+            <div class="newbiz col" style="margin: 0 0 0 0;">
                 <div class="control">
                     <label class="label" for="precio">
-                        Precio
+                      <strong>  Precio </strong><small class="text-muted">(Colon Costarricense)</small>
                     </label>
                     <input 
                         class="form-control @error('precio') is-invalid @enderror" 
@@ -293,7 +297,7 @@
             <div class="newbiz col" style="margin: 0 0 0 0;">
                 <div class="control">
                     <label class="label" for="cantidad">
-                        Cantidad
+                       <strong> Inventario </strong><small class="text-muted">(Cantidad)</small>
                     </label>
                     <input 
                         class="form-control @error('cantidad') is-invalid @enderror" 
@@ -309,10 +313,10 @@
     <br>
     {{-- TAMAÑO --}}
             <div class="newbiz" style="margin: 3em 0 0 0;">
-                <label class="label" for="size">Tamaño</label>
+                <label class="label" for="size"><strong>Tamaño/Medidas</strong></label>
                 <div class="control ">
                     <div class="select">
-                        <select name="size" class="custom-select @error('size') is-invalid @enderror">
+                        <select name="size" id="size" class="custom-select @error('size') is-invalid @enderror">
                         <option disabled selected value>--</option>
                         <option value="otro" style="color: green;">Otro</option>
                         <option value="Pequeño (S)">Pequeño (S)</option>
@@ -322,8 +326,12 @@
                         </select>
                     </div>
                 </div>
+               
             </div>
     <br>
+     <div id="OS" class="" style="margin: 1.3em 0 2em 0">
+                        
+                </div>
     <br>
     {{-- SUBMIT ITEM --}}
         <button type="submit" class="btn btn-outline-success">AGREGAR PRODUCTO</button>

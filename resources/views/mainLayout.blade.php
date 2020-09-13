@@ -26,7 +26,7 @@
         <div class="navbar navbar-expand-lg navbar-light bg-light">
            <div class=" links ">
                 <a href="/" class="title" >
-                    Store 101
+                    XXXX
                 </a>
                 
             @guest

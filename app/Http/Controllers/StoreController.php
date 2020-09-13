@@ -87,6 +87,7 @@ class StoreController extends Controller
                 'tipoNegocio' => 'required',
                 'cedulaJuridica' => 'nullable',
                 'provincia' => 'required',
+                'BizE' =>'nullable',
                 'canton' => 'required',
                 'dir' => 'required',
                 'prefix' => 'required',
@@ -105,7 +106,7 @@ class StoreController extends Controller
             $newStore->segundoNombre = $request->segundoNombre;
             $newStore->primerApellido = $request->primerApellido;
             $newStore->segundoApellido = $request->segundoApellido;
-            $newStore->email = Auth::user()->email;
+            
             $newStore->nombreNegocio = $request->nombreNegocio;
             $newStore->descripcion = $request->descripcion;
             $newStore->user_id = Auth::user()->id;
@@ -119,7 +120,11 @@ class StoreController extends Controller
             $newStore->tyc = $request->tyc;
             $newStore->created_at = date('dmy');
             $newStore->cedulaJuridica = $request->CDJ;
-            
+            if($request->BizE != NULL) {
+                $newStore->email = $request->BizE;
+            } else {
+                $newStore->email = Auth::user()->email;
+            }
             $newStore->save();
             
             $newBiz = User::find($newStore->user_id);
@@ -298,8 +303,32 @@ class StoreController extends Controller
      */
     public function edit(Store $myStore)
     {
+        $arr = [
+        'Manualidades',
+        'Accesorios para Automovil',
+        'Bebes',
+        'Belleza y Cuidado Personal',
+        'Libros',
+        'Celulares y Accesorios',
+        'Ropa, Zapatos y Joyeria',
+        'Computadoras',
+        'Electrónica',
+        'Jardin y Exterior',
+        'Artesanal',
+        'Hogar y Cocina',
+        'Equipaje',
+        'Instrumentos Musicales',
+        'Productos de Oficina',
+        'Suministros para Mascotas',
+        'Deporte',
+        'Herramientas de Trabajo',
+        'Juguetes'
+        ];
+        sort($arr);
         return view('editStore', [
-            'store' => $myStore
+            'store' => $myStore,
+            'myCategory' => $arr
+
         ]);
     }
 
@@ -312,7 +341,7 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $myStore)
     {
-        
+        try{
         $myStore = request()->validate([
         'primerNombre' => 'max:50',
         'segundoNombre' => 'max:50',
@@ -323,7 +352,12 @@ class StoreController extends Controller
         'descripcion' =>'nullable|max:125',
         'user_id' => 'unique:stores',
         'usuario' => 'unique:stores|max:50',
-        'tipoNegocio',
+        'tipoNegocio' => 'nullable',
+        'cedulaJuridica' => 'unique:stores',
+        'provincia' => 'nullable',
+        'canton' => 'nullable',
+        'direccion' => 'nullable',
+        'phoneNumber' => 'unique:stores',
         'tyc',
         'email_verified_at' => 'nullable',
         'remember_token' => 'nullable',
@@ -370,7 +404,29 @@ class StoreController extends Controller
         if ($request->tyc != NULL) {
         $newStore->tyc = 1;
         }
+        if ($request->CDJ != NULL) {
+        $newStore->cedulaJuridica = $request->CDJ;
+        }
+        if ($request->BizE != NULL) {
+        $newStore->email = $request->BizE;
+        }
+        //aqui
+        if ($request->dir != NULL) {
+        $newStore->direccion = $request->dir;
+        }
+        if ($request->provincia != NULL) {
+            if($request->canton != NULL) {
+                $newStore->provincia = $request->provincia;
+            }
+        }
+        if ($request->canton != NULL) {
+        $newStore->canton = $request->canton;
+        }
+        if ($request->ntel != NULL) {
+        $newStore->phoneNumber = $request->ntel;
+        }
         $newStore->created_at = date('dmy');
+       
         $newStore->save();
         if ($newStore->nombreNegocio != NULL){
         $newBiz = User::find($newStore->user_id);
@@ -378,6 +434,18 @@ class StoreController extends Controller
         $newBiz->save();
         }
         return redirect('negocio/'.$newStore->nombreNegocio);
+
+    } catch (\Illuminate\Database\QueryException $e) {
+         return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
+    }
+        
+            
+            
+       
+           
+        
+        
+       
     }
 
 

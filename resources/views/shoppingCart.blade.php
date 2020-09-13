@@ -49,7 +49,7 @@
 
             </svg>
                 <small class="text-muted"> 
-                    Envio a todo Costa Rica.
+                    Envió a todo Costa Rica.
                 </small>
         </p>
         

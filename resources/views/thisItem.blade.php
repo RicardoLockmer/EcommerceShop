@@ -37,7 +37,7 @@
     <p class="card-text">&#8353;{{number_format($item->precio, 2, '.', ',')}}</p>
       <div class="card-text">
       <p>{{$item->descripcion}}</p>
-      <p>Categoria: {{$item->categoria}}</p>
+      <p>Categoría: {{$item->categoria}}</p>
       <p>Color: {{$item->color}}</p>
       <p>Tamaño: {{$item->size}}</p>
 

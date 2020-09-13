@@ -14,8 +14,8 @@
                     <strong>
                         Parece que falto algo!
                     </strong>
-                        Revisa que todos los campos esten llenos.
-
+                        Revisa que todos los campos estén llenos.
+ 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">
                             &times;
@@ -224,7 +224,7 @@
             <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
                 <div class="control">
                     <label class="label" for="categoria">
-                        Categoria
+                        Categoría
                     </label>
                     
                     <select 
@@ -251,7 +251,7 @@
         <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
                 <div class="control">
                     <label class="label" for="categoria">
-                        Subcategoria
+                        Subcategoría
                     </label>
                 <select 
                     name="subcategoria" 
