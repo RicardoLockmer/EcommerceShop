@@ -46,12 +46,20 @@ class ItemsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Items $item)
-    {
-        
+    {   
+        $terms = explode(" ", $item->descripcion);
+        foreach ($terms as $q) {
+            $moreitems = Items::where( 'nombre', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
+            ->orWhere('categoria', 'LIKE', '%'.$q.'%')
+            ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
+            ->orWhere('marca', 'LIKE', '%'.$q.'%')
+            ->limit(6)->get();
+            }
         $images = [$item->image, $item->image2, $item->image3, $item->image4, $item->image5, $item->image6];
         return view('itemPage',[
         'item' => $item,
-        
+        'moreItems' => $moreitems,
         'images' => $images
         
         ]);

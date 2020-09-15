@@ -93,11 +93,19 @@
 
 /* SECCION IMAGENES */
 .sectionImage {
-    height: 10em;
+    height: 5em;
     width: auto;
     position: center center;
     object-fit: fill;
     margin: 0 1em 0 1em;
+
+}
+.sectionImage2 {
+    height: 11em;
+    width: auto;
+    position: center center;
+    object-fit: fill;
+    margin: 0.6em 1em 0 1em;
 
 }
 

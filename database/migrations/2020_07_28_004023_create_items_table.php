@@ -24,6 +24,7 @@ class CreateItemsTable extends Migration
             $table->string('size');
             $table->string('color');
             $table->string('marca');
+            $table->json('Specs');
             $table->bigInteger('rep')->nullable();
             $table->bigInteger('karma')->nullable();
             $table->timestamp('updateDate')->nullable();

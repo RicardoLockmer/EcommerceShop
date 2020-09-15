@@ -184,7 +184,7 @@
 <script src="/scripts/categoryOptions.vue"></script>
 <script src="/scripts/addressVue.vue"></script>
 
-
+@yield('categoryOptions')
 
 @yield('magnifier')
 

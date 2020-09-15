@@ -329,7 +329,7 @@
         </div>
         <br>
     {{-- TAMAÑO --}}
-            <div class="newbiz" style="margin: 3em 0 0 0;">
+            <div class="newbiz" style="margin: 0 0 0 0;">
                 <label class="label" for="size"><strong>Tamaño/Medidas</strong></label>
                 <div class="control ">
                     <div class="select">
@@ -349,23 +349,33 @@
         <div id="OS" class="" style="margin: 1.3em 0 2em 0"></div>
         
     {{-- ITEM SPECS --}}
-    <div class="form-row">
-        <div class="newbiz col">
-            <label for="myspec"><strong>Especificaciones<small class="text-muted">(Cuantas Especificaciones)</small></strong></label>
+        <div class="form-row">
+            <div class="newbiz col">
+                <label for="myspec"><strong>Especificaciones</strong></label>
+            </div>
         </div>
-    </div>
-            <div class="row">
-                <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
-                    <div class="control">
-                        
-                    <input class="form-control @error('myspec') is-invalid @enderror" type="number" name="myspec" placeholder="ej. 4" value="{{old('myspec')}}">
+                <div class="row">
+                    <div class="newbiz col-5" style="margin: 0 0 1.5em 0;">
+                        <div class="control">
+                            
+                        <input class="form-control myspec @error('myspec') is-invalid @enderror" type="text" placeholder="ej. Modelo" value="{{old('myspec')}}">
+                        </div>
                     </div>
+                    <div class="newbiz col " style="margin: 0 0 1.5em 0; padding-left: 0;">
+                        <span class="btn btn-outline-success add"><strong>+</strong></span>
+                    </div>
+            </div>
+            <div>
+                <small class="text-muted">
+                    <input type="text" placeholder="ej. Modelo" disabled> => <input type="text" placeholder="ej. Modelo 2000" disabled><br>
+                </small>
+                <div class="myEsp" style="text-decoration: none;">
+
                 </div>
-                <div class="newbiz col" style="margin: 0 0 1.5em 0; padding-left: 0;">
-                    <span class="btn btn-outline-success"><strong>+</strong></span>
-                </div>
-        </div>
-            <br>
+                
+            </div>
+                <br>
+                <br>
     {{-- SUBMIT ITEM --}}
         <button type="submit" class="btn btn-outline-success">AGREGAR PRODUCTO</button>
                 </div>
@@ -378,6 +388,21 @@
 
 @section('categoryOptions')
 
-<script src="/scripts/categoryOptions.js"></script>
+
+
+<script type="text/javascript">
+    $('.add').on('click', function (){
+        var add = $('.myspec').val();
+        
+        if (add) {
+            $('.myEsp').append('<div style="margin: 1em 0 0 0;"><input type="text" placeholder="'+add+'" disabled> => <input type="text" name="Specs['+add+']" ></div>');
+           
+        
+        } else {
+            alert('Agregar Nombre para la Especificacion del Producto');
+        }
+    })
+</script>
+
 
 @endsection

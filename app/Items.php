@@ -19,7 +19,8 @@ class Items extends Model
                 'cantidad',
                 'color',
                 'marca',
-                'shipping',
+                
+                'Specs',
                 'rep',
                 'karma',
                 'updateDate',

@@ -163,7 +163,7 @@ class StoreController extends Controller
                     'cantidad'=>'required',
                     'color' => 'required',
                     'marca' => 'required',
-                    'shipping' => 'required',
+                    'Specs' => 'nullable',
                     'rep' =>'nullable',
                     'karma' => 'nullable',
                     'updateDate' => 'nullable',
@@ -189,10 +189,10 @@ class StoreController extends Controller
         $item->subcategoria = $request->subcategoria;
         $item->precio = $request->precio;
         $item->size = $request->size;
+        $item->Specs = json_encode($request->Specs);
         $item->cantidad = $request->cantidad;
         $item->color = $request->color;
         $item->marca = $request->marca;
-        $item->shipping = $request->shipping;
         $item->rep = NULL;
         $item->karma = NULL;
         $item->updateDate = date("dmy");

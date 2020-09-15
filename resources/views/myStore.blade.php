@@ -52,7 +52,7 @@
                     <div class="myCards">
                         <div class="card-block">
                             
-                        <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}"><img class="sectionImage " src="{{ Storage::URL('/storage/assetItems/'.$item->image) }}" alt=""></a>
+                        <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}"><img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$item->image) }}" alt=""></a>
                         </div>
                     </div>
                    @endforeach
