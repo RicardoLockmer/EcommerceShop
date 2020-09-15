@@ -5,12 +5,15 @@
     "spellright.documentTypes": [
         "plaintext",
         "markdown",
-        "blade",
         "vue"
     ],
     "spellright.parserByClass": {
         "blade": {
             "parser": "xml"
         }
-    }
+    },
+    "prettier.vueIndentScriptAndStyle": true,
+    "prettier.useTabs": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
 }

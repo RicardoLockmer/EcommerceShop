@@ -23,6 +23,7 @@ class CreateItemsTable extends Migration
             $table->bigInteger('cantidad');
             $table->string('size');
             $table->string('color');
+            $table->string('marca');
             $table->bigInteger('rep')->nullable();
             $table->bigInteger('karma')->nullable();
             $table->timestamp('updateDate')->nullable();

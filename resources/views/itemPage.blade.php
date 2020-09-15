@@ -57,7 +57,7 @@
             <p class="div" style="color: rgb(59, 59, 59);">{{$item->nombre}}</p>
                 <div class="myFirstSectionInner scroll" >
                     <div class="container is-fluid">
-                        <div class="noWrap">
+                        <div class="noWrap"> 
         {{-- IMAGE 1 --}}
         @foreach ($images as $image)
           @if($image != NULL)

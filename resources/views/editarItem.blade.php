@@ -9,6 +9,7 @@
         @csrf
         @method('put')
         @error('*')
+         
             <div id="errores">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>
@@ -40,7 +41,7 @@
                 </h3>
 
     <br>
-    
+   <div></div>
             <input type="text" value="{{$store->store_id}}" name="store_id" hidden>
             <input type="text" value="{{Auth::user()->id}}" name="user_id" hidden>
             <input type="text" value="{{$item->id}}" name="item_id" hidden>
@@ -106,7 +107,7 @@
                     >
                     <label class="custom-file-label" for="image3" data-browse="Elegir">Imagen 3*</label>
                     
-
+ 
                 </div>
             </div>
             <div class="newbiz col">            

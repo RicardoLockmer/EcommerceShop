@@ -3,9 +3,9 @@
 
 
 @section('crearItem')
-
+ 
 <div class="container" >
-        
+         
     {{-- NEW ITEM FORM START --}}
         <form action="/negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST" class="forms" enctype="multipart/form-data" >
         @csrf
@@ -40,12 +40,12 @@
                     Información
                 </h3>
 
-    <br>
+        <br>
     {{-- EXTRA --}}
             <input type="text" value="{{$store->store_id}}" name="store_id" hidden>
             <input type="text" value="{{$store->nombreNegocio}}" name="store_name" hidden>
             <input type="text" value="{{Auth::user()->id}}" name="user_id" hidden>
-
+    {{-- NOMBRE DEL PRODUCTO --}}
             <div>
                 <div class="newbiz" style="margin: 0 0 0 0;">
                 
@@ -57,7 +57,7 @@
             </div>
                
             
-    <br> 
+        <br> 
     {{-- IMAGENES 1-2 --}}
     
         <div class='form-row' style="width: auto;">
@@ -73,7 +73,7 @@
                     >
                     <label class="custom-file-label" for="image" data-browse="Elegir">Imagen 1*</label>
                     
-
+ 
                 </div>
             </div>
             <div class="newbiz col">            
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-        {{-- IMAGEN 3-4 --}}
+    {{-- IMAGEN 3-4 --}}
         <div class='form-row' style="width: auto;">
 
             <div class="newbiz col">
@@ -155,7 +155,7 @@
                 </div>
             </div>
         </div>
-    <br>
+        <br>
     {{-- IMAGENES PREVIEW --}}
         <div class="form-row ">
             <span class="file-name col centerMyImages" style='height:100px; width: 70px; text-align:center;'>
@@ -185,11 +185,27 @@
                             <textarea class="textarea form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="descripcion" type="text" placeholder="Describa su Producto" value="{{old('descripcion')}}" ></textarea>
                         </div>    
         </div>     
-    <br>
+        <br>
     {{-- COLORES - CATEORIA - PRECIO - CANTIDAD --}}
         <div class="select" id="app">
-        <div class='form-row' style="width: auto;">
-        {{-- COLOR --}}
+        <div class='row' style="width: auto;">
+    {{-- PRODUCT BRAND --}}
+        <div class="newbiz col" style="margin: 0 0 0 0;">
+            <div class="control">
+                <label class="label" for="marca">
+                  <strong>  Marca </strong>
+                </label>
+                <input 
+                    class="form-control @error('marca') is-invalid @enderror" 
+                    name="marca" 
+                    id="marca" 
+                    type="text" 
+                    placeholder="Marca del Producto" 
+                    value="{{old('marca')}}">
+            </div>
+        </div>
+
+    {{-- COLOR --}}
             <div id="colors" class="newbiz col" style="margin: 0 0 0 0;">
                 <div class="control">
                     <label  for="color">
@@ -211,16 +227,16 @@
                         
                         <br>
                         
-                        <div id="color" class="" style="margin: 1.3em 0 2em 0">
+                        <div id="color" class="" style="margin: 1.3em 0 2em 0; width: 100%; ">
                         
                         </div>
                         
                         
                 </div>
-                </div> 
-            </div>
+            </div> 
+        </div>   
         </div>
-        {{-- CATEGORIA --}}
+    {{-- CATEGORIA --}}
         <div class='row' style="width: auto;">
             <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
                 <div class="control">
@@ -247,13 +263,13 @@
                 </div>
         
     
-            {{--  FINISH OPTIONS --}}
-            {{-- SUBCATEGORIA --}}
+            
+    {{-- SUBCATEGORIA --}}
             
         <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
                 <div class="control">
                     <label class="label" for="categoria">
-                      <strong>  Subcategoría</strong>
+                      <strong>Subcategoría</strong>
                     </label>
                 <select 
                     name="subcategoria" 
@@ -269,13 +285,13 @@
             </div>
             </div>
         
-         {{-- SUBCATEGORIA --}}
+         
             
             </div>
         </div>
         <br>
-    {{-- TERMINA CATEGORY --}}
-    {{-- PRECIO - CANTIDAD --}}
+        
+    {{-- PRECIO --}}
         <div class='row' style="width: auto;">
             <div class="newbiz col" style="margin: 0 0 0 0;">
                 <div class="control">
@@ -293,7 +309,8 @@
                         value="{{old('precio')}}">
                 </div>
             </div>
-            {{-- CANTIDAD --}}
+            
+    {{-- CANTIDAD --}}
             <div class="newbiz col" style="margin: 0 0 0 0;">
                 <div class="control">
                     <label class="label" for="cantidad">
@@ -310,7 +327,7 @@
                 </div>
             </div>
         </div>
-    <br>
+        <br>
     {{-- TAMAÑO --}}
             <div class="newbiz" style="margin: 3em 0 0 0;">
                 <label class="label" for="size"><strong>Tamaño/Medidas</strong></label>
@@ -328,17 +345,33 @@
                 </div>
                
             </div>
-    <br>
-     <div id="OS" class="" style="margin: 1.3em 0 2em 0">
+        
+        <div id="OS" class="" style="margin: 1.3em 0 2em 0"></div>
+        
+    {{-- ITEM SPECS --}}
+    <div class="form-row">
+        <div class="newbiz col">
+            <label for="myspec"><strong>Especificaciones<small class="text-muted">(Cuantas Especificaciones)</small></strong></label>
+        </div>
+    </div>
+            <div class="row">
+                <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
+                    <div class="control">
                         
+                    <input class="form-control @error('myspec') is-invalid @enderror" type="number" name="myspec" placeholder="ej. 4" value="{{old('myspec')}}">
+                    </div>
                 </div>
-    <br>
+                <div class="newbiz col" style="margin: 0 0 1.5em 0; padding-left: 0;">
+                    <span class="btn btn-outline-success"><strong>+</strong></span>
+                </div>
+        </div>
+            <br>
     {{-- SUBMIT ITEM --}}
         <button type="submit" class="btn btn-outline-success">AGREGAR PRODUCTO</button>
                 </div>
         </div>
     </form> {{-- END OF FORM --}}
-
+</div>  
 </div>
 
 @endsection

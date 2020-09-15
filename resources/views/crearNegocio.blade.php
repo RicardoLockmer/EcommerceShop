@@ -75,7 +75,7 @@
         </div>
         <br>
         <div class="newbiz ">
-            <label class="" for="CDJ"><strong>Cedula Jurídica <small class="text-muted">(opcional)</small></strong></label>
+            <label class="" for="CDJ"><strong>Cedula Jurídica*</strong></label>
                 <div class="control">
                     <input class="form-control @error('CDJ') is-invalid @enderror" name="CDJ" id="CDJ" type="text" placeholder="# de Cedula Juridica" value="{{old('CDJ')}}">
                 </div>

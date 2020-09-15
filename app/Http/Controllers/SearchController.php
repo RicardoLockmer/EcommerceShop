@@ -11,13 +11,16 @@ class SearchController extends Controller
         if($request->q === NULL) {
           return redirect('/');
         } else {
-        $q = $request->q;
-        $items = Items::where ( 'nombre', 'LIKE', '%' . $q . '%' )
-        ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
-        ->orWhere('categoria', 'LIKE', '%'.$q.'%')
-        ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
-        ->get();
-
+            // $q = $request->q;
+            $terms = explode(" ", request('q'));
+            foreach ($terms as $q) {
+            $items = Items::where ( 'nombre', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
+            ->orWhere('categoria', 'LIKE', '%'.$q.'%')
+            ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
+            ->orWhere('marca', 'LIKE', '%'.$q.'%')
+            ->get();
+            }
         
         return view('mySearch', [
             'items' => $items,

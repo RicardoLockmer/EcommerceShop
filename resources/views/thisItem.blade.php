@@ -33,21 +33,23 @@
   
   <div class="col-md-6" style="margin-left: 5em;;">
     <article class="card-body">
-    <h1 class="card-title" style="font-size: 28px;">{{$item->nombre}}</h1>
-    <p class="card-text">&#8353;{{number_format($item->precio, 2, '.', ',')}}</p>
+    <h1 class="card-title" style="font-size: 28px; margin-bottom: 0;">{{$item->nombre}}</h1>
+    <p style="margin: 0 0 0 0;"><small class="text-muted"><strong>{{$item->marca}}</strong></small></p>
+    <p class="card-text" style="font-size: 18px;">&#8353; {{number_format($item->precio, 0, '.', ',')}}</p>
       <div class="card-text">
       <p>{{$item->descripcion}}</p>
-      <p>Categoría: {{$item->categoria}}</p>
-      <p>Color: {{$item->color}}</p>
-      <p>Tamaño: {{$item->size}}</p>
+      <p><strong>Categoría:</strong> {{$item->categoria}}</p>
+      <p><strong>Color: </strong>{{$item->color}}</p>
+      <p><strong> Tamaño:</strong> {{$item->size}} </p> 
 
         @if ($item->cantidad == 0)
           <p style="color: red">
-              Inventario: {{$item->cantidad}}
+            <strong>  Inventario:</strong> {{$item->cantidad}}
           </p>
         @else
           <p>
-              Inventario: {{$item->cantidad}}
+            <strong>  Inventario: </strong>{{$item->cantidad}}
+              
           </p>
         @endif
       

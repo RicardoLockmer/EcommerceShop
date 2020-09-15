@@ -85,7 +85,7 @@ class StoreController extends Controller
                 'user_id' => 'required|unique:stores',
                 'usuario' => 'required|unique:stores|max:50',
                 'tipoNegocio' => 'required',
-                'cedulaJuridica' => 'nullable',
+                'cedulaJuridica' => 'required',
                 'provincia' => 'required',
                 'BizE' =>'nullable',
                 'canton' => 'required',
@@ -162,6 +162,8 @@ class StoreController extends Controller
                     'size' => 'required',
                     'cantidad'=>'required',
                     'color' => 'required',
+                    'marca' => 'required',
+                    'shipping' => 'required',
                     'rep' =>'nullable',
                     'karma' => 'nullable',
                     'updateDate' => 'nullable',
@@ -189,6 +191,8 @@ class StoreController extends Controller
         $item->size = $request->size;
         $item->cantidad = $request->cantidad;
         $item->color = $request->color;
+        $item->marca = $request->marca;
+        $item->shipping = $request->shipping;
         $item->rep = NULL;
         $item->karma = NULL;
         $item->updateDate = date("dmy");
