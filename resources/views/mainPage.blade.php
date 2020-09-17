@@ -2,43 +2,41 @@
 
 @section('jumbotron')
 
-<br>
+
+<div >
+    <img class="mainPageImageTop" src="dummy/jtest.jpg" alt="">
+    
+</div>
+
         <div class="container">
-            <div class="jumbotron" style="background-image: url(dummy/jtest.jpg);">
-            <h2 class="mb-4">
-                XXXX
-            </h2>
-            <p class="mb-4">
-                DEFINIR EL COLOR PALLETE PARA TODA LA PAGINA
-            </p>
-            <a href="https://bootstrapious.com/snippets" class="btn btn-primary">VER MAS</a>
-            </div>
-        </div>
+            
    
 <br>
 @endsection
 
 @section('cards')
-    <div class="centerMyImages">
-        <a href="##" class=" centerMyImages">
-        <div style="width: 350px; height: 350px; display: inline-block; background-image:  url(dummy/techcard5.jpg); background-size: cover;">
+<br>
+<div class="container">
+        <div class="row" style="text-align: center;">
             
-              
-                    
-        </div>
-</a>
-        <a href="##" class="card centerMyImages">
-        <div class="" style="width: 350px; height: 450px; display: inline-block; background-image:  url(dummy/mujer8.jpg); background-size: cover;">
-
-        </div>
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regalom.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                1
+            </h1>
         </a>
-
-            <a href="###" class=" centerMyImages"> 
-        <div class="" style="width: 350px; height: 350px; display: inline-block; background-image:  url(dummy/tech2.jpg); background-size: cover;">
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regaloh.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                2
+            </h1>
+        </a>
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                3
+            </h1>
+        </a>
         </div>
-            </a>
-    </div>
-        <br>
+</div>
+<br>
 @endsection   
 
 

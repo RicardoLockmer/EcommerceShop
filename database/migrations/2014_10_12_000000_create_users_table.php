@@ -22,6 +22,13 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('nombreNegocio')->nullable();
+            $table->string('pais')->nullable();
+            $table->string('provincia')->nullable();
+            $table->string('canton')->nullable();
+            $table->longText('direccion')->nullable();
+            $table->char('prefix')->nullable();
+            $table->char('phoneNumber')->nullable();
+            
         });
     }
 

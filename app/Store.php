@@ -13,6 +13,9 @@ class Store extends Model
     public function categoria() {
         return $this->hasMany(categorias::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class, 'nombreNegocio', 'nombreNegocio');
+    }
     protected $fillable = [
     'primerNombre',
     'segundoNombre',

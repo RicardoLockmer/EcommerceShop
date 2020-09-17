@@ -7,11 +7,23 @@
     padding-bottom: 1.5em;
 
 }
-
+.mainPageImageTop {
+    width:100%;     
+    z-index:-1; 
+    margin-bottom: -130px; 
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+.test-border {
+    border: 1px solid red;
+}
 .containerForm {
     align-items: center;
 }
-
+.addAddress:hover {
+    background-color: rgba(245, 245, 245, 0.87);
+    text-decoration: none;
+    
+  }
 .links>a {
 
     color: #636b6f;
@@ -23,7 +35,10 @@
     text-decoration: none;
     text-transform: uppercase;
 }
-
+.nav-link {
+    color: rgb(230, 230, 230)!important;
+    margin: 0 0.5em 0 0.5em!important;
+}
 .title {
     display: inline-flex !important;
     font-size: 1.6em !important;
@@ -201,6 +216,12 @@
     margin-top: 12px;
     ;
 }
+.addressBox {
+    width: 300px; 
+    height: 250px; 
+    margin: 1em 1em 1em 1em;
+    
+}
 
 /* input[type="text"],
 input[type="password"],
@@ -215,9 +236,9 @@ select {
 /* myStore CSS */
 .myProduct {
 
-    height: 8em;
+    height: 4em;
     width: 15em;
-    margin: 2em 2em 2em 2em;
+    margin: 1em 2em 0.5em 2em;
     text-align: center;
     text-transform: uppercase;
     font-size: 22px;

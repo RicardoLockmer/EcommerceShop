@@ -8,6 +8,12 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function store() {
+        return $this->belongsTo(Store::class, 'nombreNegocio', 'nombreNegocio');
+    }
+    public function direcciones(){
+        return $this->hasMany(direcciones::class)->orderBy('selected', 'DESC');
+    }
     use Notifiable;
 
     /**

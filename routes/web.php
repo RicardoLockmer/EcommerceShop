@@ -24,8 +24,15 @@ Route::post('/shoppingCart', 'ShoppingController@store');
 
 // MAIN ROUTES
 // MY STORE ROUTE
-Route::get('/negocio/{myStore:nombreNegocio}', 'StoreController@index')->middleware('auth'); // mi tienda view
+Route::get('/negocio/{myStore:nombreNegocio}', 'StoreController@index')->middleware('auth');
 
+// USER ROUTES
+Route::get('/perfil/{user:name}', 'UserController@index')->middleware('auth');
+Route::get('/prefil/{user:name}/update')->middleware('auth'); //inclompleto
+Route::get('/perfil/{user:name}/direcciones', 'DireccionesController@index')->middleware('auth');
+Route::get('/perfil/{user:name}/direcciones/agregar', 'DireccionesController@create')->middleware('auth');
+
+Route::post('/NuevaDireccion', 'DireccionesController@store')->middleware('auth');
 
 //CREAR NEGOCIO
 Route::get('/iniciar-mi-negocio', 'StoreController@create')->middleware('auth'); // crear negocio view

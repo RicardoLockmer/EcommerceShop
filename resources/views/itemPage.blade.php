@@ -69,39 +69,82 @@
         </svg>
     @endfor
     <small class="text-muted">(1099)</small>
-      <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px;">
+      <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
         &#8353; {{number_format($item->precio, 0, '.', ',')}} <small style="font-size: 14px;" class="text-muted">(no incluye iva) </small><small style="font-size: 13px;"><a href="##">Detalles</a></small>
       </p>
+      <small class="text-muted"> 
+      Envio  +<strong>&#8353; {{number_format(900, 0, '.', ',')}}</strong>
+    </small>
+    <br>
+    <br>
 
       <div class="content">
 
         <p>{{$item->descripcion}}</p>
         <p><strong>Color:</strong> {{$item->color}}</p>
         <p><strong>Tamaño:</strong> {{$item->size}}</p>
-        <p class="card-text" style="position: aboslute; bottom:0; right:0;">
-          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-seam text-muted" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-
-              <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
-
-          </svg>
-              <small class="text-muted"> 
-                  Envió a todo Costa Rica.
-              </small>
-      </p>
-    
         
-            <p><small class="text-muted"> 
-              El paquete llega entre <strong>15-18 Septiembre</strong>.
-          </small></p>
-          <p><small class="text-muted"> 
-            El paquete se envia con <strong>Correos de Costa Rica</strong>.
-        </small></p>
-          <p></p>
-    </div>
-    </article>
-  </div>
-  
+
+          <div id="ENVI" style="border: 1px solid rgb(197, 197, 197);" >
+
+            <p class="card-text" style="position: aboslute; bottom:0; right:0;">
+
+              <svg 
+                width="1em" 
+                height="1em" 
+                viewBox="0 0 16 16" 
+                class="bi bi-box-seam text-muted" 
+                fill="currentColor" 
+                xmlns="http://www.w3.org/2000/svg">
+                  <path 
+                  fill-rule="evenodd" 
+                  d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+              </svg>
+
+            @if (Auth::check())
+              @if(Auth::user()->direccion != NULL)
+              <small class="text-muted"> 
+                Envió a XXXX.
+              </small>
+                
+              @else
+                <small class="text-muted"> 
+                  <a href="##">
+                    Seleccione una Direccion.
+                  </a> 
+                </small>
+              @endif
+              
+            @else
+              <small class="text-muted"> 
+                Envió a <strong>LISTA DE PROVINCIAS</strong>.
+              </small>
+            @endif
+            </p>
+            
+            <p>
+              <small class="text-muted"> 
+                El paquete llega entre 
+                  <strong>
+                    15-18 Septiembre
+                  </strong>.
+              </small>
+            </p>
+
+            <p>
+              <small class="text-muted"> 
+                El paquete se envia por 
+                  <strong>
+                    Correos de Costa Rica
+                  </strong>.
+              </small>
+            </p>
+          </div>
+        </div>
+</article>
 </div>
+          
+
 @if($item->Specs)
 <div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 3em 0 0 0.5em">
   
