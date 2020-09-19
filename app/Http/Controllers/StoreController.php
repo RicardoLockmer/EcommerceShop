@@ -59,6 +59,7 @@ class StoreController extends Controller
         'Herramientas de Trabajo',
         'Juguetes'
         ];
+      
         sort($arr);
         return view('crearNegocio', [
             'myCategory' => $arr

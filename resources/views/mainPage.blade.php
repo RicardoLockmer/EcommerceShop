@@ -4,8 +4,28 @@
 
 
 <div >
-    <img class="mainPageImageTop" src="dummy/jtest.jpg" alt="">
-    
+    {{-- <img class="mainPageImageTop" src="dummy/big1.jpg" alt="First slide"> --}}
+    <div id="carouselExampleControls " class="carousel slide" data-ride="carousel" >
+        <div class="carousel-inner " >
+          <div class="carousel-item active ">
+            <img class="mainPageImageTop" src="dummy/big1.jpg" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="mainPageImageTop" src="dummy/big2.png" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img class="mainPageImageTop" src="dummy/big3.jpg" alt="First slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
 </div>
 
         <div class="container">
@@ -19,19 +39,19 @@
 <div class="container">
         <div class="row" style="text-align: center;">
             
-            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regalom.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
             <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                1
+                Hombres
             </h1>
         </a>
-            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regaloh.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
             <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                2
+                Mujeres
             </h1>
         </a>
-            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
             <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                3
+                Niños
             </h1>
         </a>
         </div>
@@ -42,15 +62,15 @@
 
 @section('productosDestacados')
     <div class="myFirstSection ">
-        <p class="div">
-            Destacados
+        <p class="div text-muted">
+            Mas Vendidos
         </p>
         <div class="myFirstSectionInner scroll">
             <div class="container-fluid">
                 <div class="noWrap">
                     @foreach($mejores as $mejor)
                 <a href="/producto/{{$mejor->id}}">
-                    <img class="sectionImage " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}" alt="">
+                    <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}" alt="">
                         </a>
                     @endforeach
                         
@@ -67,21 +87,42 @@
 <div class="container">
         <div class="row" style="text-align: center;">
             
-            <a href="###" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regalom.jpg); background-size: cover; background-repeat: no-repeat;">
-            <h1 class="has-text-weight-bold has-text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                Regalos para Mujeres
+            <a href="###" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ban1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                Baños
             </h1>
         </a>
-            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regaloh.jpg); background-size: cover; background-repeat: no-repeat;">
-            <h1 class="has-text-weight-bold has-text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                 Regalos para Hombres
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ofi1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                 Oficina
             </h1>
         </a>
-            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:105px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
-            <h1 class="has-text-weight-bold has-text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                Accesorios
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                Exterior
             </h1>
         </a>
+        
+        </div>
+        <br>
+        <div class="row" style="text-align: center;">
+            
+            <a href="###" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                Hogar
+            </h1>
+        </a>
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                 Habitación
+            </h1>
+        </a>
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                Decoración
+            </h1>
+        </a>
+        
         </div>
 </div>
 <br>
@@ -90,13 +131,13 @@
 
 @section('productosMujer')
         <div class="myFirstSection">
-            <p class="div" style="color: rgb(255, 82, 183);"> para Mujeres</p>
+            <p class="div text-muted"> para Mujeres</p>
                 <div class="myFirstSectionInner scroll">
                     <div class="container-fluid">
                         <div class="noWrap">
                             @foreach($mujerItems as $mujeres) 
                             <a href="/producto/{{$mujeres->id}}">
-                                    <img class="sectionImage" src="{{ Storage::URL('/storage/assetItems/'.$mujeres->image) }}" alt="">
+                                    <img class="sectionImage2" src="{{ Storage::URL('/storage/assetItems/'.$mujeres->image) }}" alt="">
                             </a>
                             @endforeach
                         </div>
@@ -109,13 +150,13 @@
  
 @section('productosTecnologia')
         <div class="myFirstSection">
-            <p class="div" style="color: rgb(59, 59, 59);"> Tecnología</p>
+            <p class="div text-muted" style="color: rgb(59, 59, 59);"> Tecnología</p>
                 <div class="myFirstSectionInner scroll" >
                     <div class="container is-fluid">
                         <div class="noWrap">
                             @foreach($techItems as $tech)
                         <a href="/producto/{{$tech->id}}">
-                    <img class="sectionImage " src="{{ Storage::URL('/storage/assetItems/'.$tech->image) }}" alt="">
+                    <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$tech->image) }}" alt="">
                         
                     @endforeach
                         </div>

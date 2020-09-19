@@ -17,16 +17,16 @@ class CreateDireccionesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->string('nombreCompleto');
-            $table->string('pais');
-            $table->string('provincia');
-            $table->string('canton');
-            $table->longText('direccion');
+            $table->string('nombreCompleto')->nullable();
+            $table->string('pais')->nullable();
+            $table->string('provincia')->nullable();
+            $table->string('canton')->nullable();
+            $table->longText('direccion')->nullable();
             $table->string('infoAdicional')->nullable();
-            $table->char('prefix');
-            $table->char('phoneNumber');
-            $table->string('codigoPostal');
-            $table->tinyInteger('selected');
+            $table->char('prefix')->nullable();
+            $table->char('phoneNumber')->nullable();
+            $table->string('codigoPostal')->nullable();
+            $table->tinyInteger('selected')->nullable();
         });
     }
 

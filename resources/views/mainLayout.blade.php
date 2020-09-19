@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>myStore</title>
+        <title>BEST</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -27,7 +27,7 @@
         <div class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
             
             <a href="/" class="navbar-brand" >
-                XXXX
+                BESTNAMEEVER
             </a>
             
             <ul class="navbar-nav">
@@ -169,6 +169,7 @@
             @yield('myUserPage')
             @yield('addAddress')
             @yield('newAddressForm')
+            @yield('EditAddress')
             {{-- SEARCH INFO --}}
             @yield('mainSearch')
 
@@ -204,7 +205,7 @@
            
             @yield('mejoresEn')
             
-            @yield('mejoresEn')
+           
             
             @yield('productosMujer')
             

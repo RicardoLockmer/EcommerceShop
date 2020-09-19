@@ -18,7 +18,7 @@
               src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" 
               alt="{{$item->nombre}}">
           </a>
-        
+      
           
     
       </article>
@@ -146,7 +146,7 @@
           
 
 @if($item->Specs)
-<div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 3em 0 0 0.5em">
+<div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
   
     <div class="content">
 

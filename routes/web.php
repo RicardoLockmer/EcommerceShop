@@ -33,7 +33,11 @@ Route::get('/perfil/{user:name}/direcciones', 'DireccionesController@index')->mi
 Route::get('/perfil/{user:name}/direcciones/agregar', 'DireccionesController@create')->middleware('auth');
 
 Route::post('/NuevaDireccion', 'DireccionesController@store')->middleware('auth');
-
+// DELETE ADDRESS\
+Route::delete('/perfil/{direccion:id}/delete', 'DireccionesController@destroy')->middleware('auth');
+// UPDATE ADDRESS
+Route::get('/perfil/{direccion:id}/editar', 'DireccionesController@edit')->middleware('auth');
+Route::put('/perfil/{direccion:id}/update', 'DireccionesController@update')->middleware('auth');
 //CREAR NEGOCIO
 Route::get('/iniciar-mi-negocio', 'StoreController@create')->middleware('auth'); // crear negocio view
 Route::post('/iniciar-mi-negocio', 'StoreController@store')->middleware('auth'); // guardar info del negocio

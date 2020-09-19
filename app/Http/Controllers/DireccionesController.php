@@ -59,14 +59,14 @@ class DireccionesController extends Controller
           
         $myAddress = request()->validate([
             'nombreCompleto' => 'required|max:120',
-            'pais' => 'required',
-            'codigoPostal' => 'required',
-            'provincia' => 'required',
-            'canton' => 'required',
-            'dir' => 'required',
-            'prefix' => 'required',
-            'ntel' => 'required',
-            'primary' => 'required',
+            'pais'  => 'required',
+            'codigoPostal'  => 'required',
+            'provincia'  => 'required',
+            'canton'  => 'required',
+            'dir'  => 'required',
+            'prefix'  => 'required',
+            'ntel'  => 'required',
+            'primary'  => 'required',
             'infoAdicional' => 'nullable',
             'updated_at' => 'nullable',
             'created_at' => 'date',
@@ -107,9 +107,11 @@ class DireccionesController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(direcciones $direccion)
     {
-        //
+        return view('EditAddress', [
+            'address' => $direccion
+        ]);
     }
 
     /**
@@ -119,9 +121,67 @@ class DireccionesController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, direcciones $direccion)
     {
-        //
+        try {
+        $user = Auth::user();
+        $currentProvincia = $direccion->provincia;
+        if (Auth::user()->id === $direccion->user_id) {
+        $myAddress = request()->validate([
+            'nombreCompleto'=> 'nullable',
+            'pais' => 'nullable',
+            'codigoPostal'=> 'nullable',
+            'provincia'=> 'nullable',
+            'canton'=> 'nullable',
+            'dir'=> 'nullable',
+            'prefix'=> 'nullable',
+            'phoneNumber'=> 'nullable',
+            'selectedAddress'=> 'nullable',
+            'infoAdicional' => 'nullable',
+            'updated_at' => 'date',
+            'created_at' => 'nullable',
+            
+        ]);
+        $updateAddress = direcciones::find($direccion->id);
+        $updateAddress->nombreCompleto = $request->nombreCompleto;
+        $updateAddress->pais = $request->pais;
+        $updateAddress->codigoPostal = $request->codigoPostal;
+        if ($request->provincia != NULL) {
+            if($request->canton != NULL) {
+            $updateAddress->provincia = $request->provincia;
+            
+            }
+        } else {
+            $updateAddress->provincia = $currentProvincia;
+            $updateAddress->canton = $direccion->canton;
+        }
+       
+            if ($request->canton != NULL) {
+                $updateAddress->canton = $request->canton;
+            }
+        
+       
+        
+        $updateAddress->direccion = $request->dir;
+        $updateAddress->prefix = $request->prefix;
+        $updateAddress->phoneNumber = $request->phoneNumber;
+        
+        $updateAddress->infoAdicional = $request->infoAdicional;
+        if ($request->selectedAddress != NULL) {
+            $updateAddress->selected = 1;
+            
+            $updateSelected = direcciones::where('user_id', $user->id)->where('selected', 1)->firstOrFail();
+            $updateSelected->selected = 0;
+            $updateSelected->save();
+        }
+        $updateAddress->save();
+    } else {
+        abort(404);
+    }
+    return redirect('perfil/'.$user->name.'/direcciones');
+        } catch (\Illuminate\Database\QueryException $e) {
+    return back()->withErrors(['Algo no esta bien', 'The Message']);
+}
     }
 
     /**
@@ -130,8 +190,22 @@ class DireccionesController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(direcciones $direccion)
     {
-        //
+        if (Auth::user()->id == $direccion->user_id) {
+            
+            $direccion->delete();
+            
+
+            return back();
+            // return view('myItem', [
+            // 'items' => $myItems,
+            // 'store' => $myStore
+            // ]);
+        
+        } else {
+        abort(404);
+        }
     }
 }
+

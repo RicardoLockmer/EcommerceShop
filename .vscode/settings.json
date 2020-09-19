@@ -5,8 +5,7 @@
     "spellright.documentTypes": [
         "plaintext",
         "markdown",
-        "vue",
-        "blade"
+        "vue"
     ],
     "spellright.parserByClass": {
         "blade": {
