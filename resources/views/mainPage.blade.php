@@ -39,7 +39,7 @@
 <div class="container">
         <div class="row" style="text-align: center;">
             
-            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
+        <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
             <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                 Hombres
             </h1>

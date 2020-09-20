@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
  
 use App\Store;
 use App\Items;
+use App\Shipping;
 use App\User;
 use App\categortias;
 use Illuminate\Http\Request;
@@ -153,7 +154,7 @@ class StoreController extends Controller
 
     public function storeItem(Request $request) {
 
-         
+         try {
         $myItem =  request()->validate([
                     'nombre' => 'required|max:50',
                     'descripcion' => 'required|max:210',
@@ -177,7 +178,17 @@ class StoreController extends Controller
                     'image3' => 'image|required|max:2048',
                     'image4' => 'image|nullable|max:2048',
                     'image5' => 'image|nullable|max:2048',
-                    'image6' => 'image|nullable|max:2048'
+                    'image6' => 'image|nullable|max:2048',
+                    'empresa' => 'required',
+                    'provincia' => 'required',
+                    'restringidos' => 'nullable',
+                    'peso' => 'required',
+                    'dimensiones' => 'required',
+                    'precioEnvio' => 'required',
+                    
+                    'tiempoEntrega' => 'required',
+                    'etiquetas'=> 'nullable',
+                    'caja' => 'nullable'
 
                 ]);
         // FILEs 
@@ -251,11 +262,26 @@ class StoreController extends Controller
 
         //SAVE TO DATABASE
         $item->save();
+        $itemID = $item->id;
 
+        $newItemShipping = new Shipping();
+        $newItemShipping->item_id = $itemID;
+        $newItemShipping->empresa = $request->empresa;
+        $newItemShipping->provincia = $request->provincia;
+        $newItemShipping->restringidos = $request->restringidos;
+        $newItemShipping->peso = $request->peso;
+        $newItemShipping->dimensiones = $request->dimensiones;
+        $newItemShipping->precioEnvio = $request->precioEnvio;
         
+        $newItemShipping->tiempoEntrega = $request->tiempoEntrega;
 
-        // REDIRECT A LA PAGINA DE PRODUCTOS
+        $newItemShipping->save();
         return redirect('negocio/'.$request->store_name.'/'.'productos/');
+    } catch (\Illuminate\Database\QueryException $e) {
+        return back()->withErrors([$e, 'The Message']);
+    }
+        // REDIRECT A LA PAGINA DE PRODUCTOS
+        
     
     }
     /**

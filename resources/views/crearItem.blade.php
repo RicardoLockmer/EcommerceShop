@@ -9,6 +9,15 @@
     {{-- NEW ITEM FORM START --}}
         <form action="/negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST" class="forms" enctype="multipart/form-data" >
         @csrf
+        @if($errors->any())
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>
+            Parece que hay un problema!
+        </strong>
+           {{$errors->first()}}
+        </div>
+
+@endif
         @error('*')
             <div id="errores">
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -396,6 +405,7 @@
 
                 <div class="myEsp " style="text-decoration: none;">
                 </div>
+        {{-- INFORMACION DEL SHIPPING --}}
                 <br>
                 <span style="font-size: 26px;"> <strong>Informacion de Envios</strong></span>
                 <br>
@@ -403,10 +413,225 @@
                 <div>
                     <div class="newbiz" style="margin: 0 0 0 0;">
                     
-                        <label class="" for="nombre"><strong>Provincias de Envio</strong></label>
+                        <label class="" for="nombre"><strong>Empresa</strong></label>
+                        <a 
+                        class="text-muted" 
+                        data-toggle="tooltip" 
+                        data-placement="right" 
+                        title="Nombre de la Empresa con la que envia el Paquete, para incluir mas de una seperarlas con coma ' , '">
+                        <svg 
+                            width="1em" 
+                            height="1em" 
+                            viewBox="0 0 16 16" 
+                            class="bi bi-question-square" 
+                            fill="currentColor" 
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path 
+                                fill-rule="evenodd" 
+                                d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path 
+                                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                        </svg>
+                        </a>
                             <div class="control">
-                                <input class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text" placeholder="San Jose, Alajuela, Heredia..." value="{{old('nombre')}}">
+                                <input class="form-control @error('empresa') is-invalid @enderror" name="empresa" id="empresa" type="text" placeholder="Ej. Correos de Costa Rica" value="{{old('empresa')}}">
                             </div>    
+                    </div>
+                </div>
+                <br>
+                <div class='row' style="width: auto;">
+                    <div class="newbiz col" style="margin: 0 0 0 0;">
+                        <div class="control">
+                            <label class="label" for="provincia">
+                              <strong>  Provincias donde puede Enviar </strong>
+                            </label>
+                            <a 
+                        class="text-muted" 
+                        data-toggle="tooltip" 
+                        data-placement="right" 
+                        title="Lista de Provincias donde puede enviar el Paquete. Seperados por coma ','">
+                        <svg 
+                            width="1em" 
+                            height="1em" 
+                            viewBox="0 0 16 16" 
+                            class="bi bi-question-square" 
+                            fill="currentColor" 
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path 
+                                fill-rule="evenodd" 
+                                d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path 
+                                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                        </svg>
+                        </a>
+                            <input 
+                                class="form-control @error('provincia') is-invalid @enderror" 
+                                name="provincia" 
+                                id="provincia" 
+                                placeholder="Ej. San Jose, Heredia, Cartago" 
+                                value="{{old('provincia')}}">
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+        {{-- LUGARES A IGNORAR --}}
+        <div class='row' style="width: auto;">
+            <div class="newbiz col" style="margin: 0 0 0 0;">
+                <div class="control">
+                    <label class="label" for="restringidos">
+                      <strong>  Provincias y/o Cantones Restringidos <small class="text-muted">(opcional)</small> </strong>
+                    </label>
+                    <a 
+                class="text-muted" 
+                data-toggle="tooltip" 
+                data-placement="right" 
+                title="Lista de Provincias y/o Cantones donde NO envia este producto. Seperados por coma ','">
+                <svg 
+                    width="1em" 
+                    height="1em" 
+                    viewBox="0 0 16 16" 
+                    class="bi bi-question-square" 
+                    fill="currentColor" 
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                        fill-rule="evenodd" 
+                        d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path 
+                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                </svg>
+                </a>
+                    <input 
+                        class="form-control @error('restringidos') is-invalid @enderror" 
+                        name="restringidos" 
+                        id="restringidos" 
+                        placeholder="Ej. San Jose, Dota, Heredia, Cartago" 
+                        value="{{old('restringidos')}}">
+                </div>
+            </div>
+            </div>
+                <br>
+                <div class='row' style="width: auto;">
+                    <div class="newbiz col" style="margin: 0 0 0 0;">
+                        <div class="control">
+                            <label class="label" for="peso">
+                              <strong>  Peso </strong><small class="text-muted">(Kilogramos)</small>
+                            </label>
+                            <input 
+                                class="form-control @error('peso') is-invalid @enderror" 
+                                name="peso" 
+                                id="peso" 
+                                type="number"
+                                min="100"
+                                step="any" 
+                                placeholder="Ej. 250" 
+                                value="{{old('peso')}}">
+                        </div>
+                    </div>
+                    
+            {{-- dimensiones --}}
+                    <div class="newbiz col" style="margin: 0 0 0 0;">
+                        <div class="control">
+                            <label class="label" for="dimensiones">
+                               <strong> Dimensiones </strong><small class="text-muted">(centímetros)</small>
+                            </label>
+                            <a 
+                class="text-muted" 
+                data-toggle="tooltip" 
+                data-placement="right" 
+                title="Dimensiones del Paquete. Largo x Alto x Ancho">
+                <svg 
+                    width="1em" 
+                    height="1em" 
+                    viewBox="0 0 16 16" 
+                    class="bi bi-question-square" 
+                    fill="currentColor" 
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                        fill-rule="evenodd" 
+                        d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path 
+                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                </svg>
+                </a>
+                            <input 
+                                class="form-control @error('dimensiones') is-invalid @enderror" 
+                                name="dimensiones" 
+                                placeholder="Ej. 25x10x15" 
+                                value="{{old('dimensiones')}}">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class='row' style="width: auto;">
+                    <div class="newbiz col" style="margin: 0 0 0 0;">
+                        <div class="control">
+                            <label class="label" for="tiempoEntrega">
+                              <strong>  Tiempo de Envio </strong><small class="text-muted">(Días)</small>
+                            </label>
+                            <a 
+                class="text-muted" 
+                data-toggle="tooltip" 
+                data-placement="right" 
+                title="Tiempo estimado en que se entrega el Paquete.">
+                <svg 
+                    width="1em" 
+                    height="1em" 
+                    viewBox="0 0 16 16" 
+                    class="bi bi-question-square" 
+                    fill="currentColor" 
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                        fill-rule="evenodd" 
+                        d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path 
+                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                </svg>
+                </a>
+                            <input 
+                                class="form-control @error('tiempoEntrega') is-invalid @enderror" 
+                                name="tiempoEntrega" 
+                                id="tiempoEntrega" 
+                                type="number"
+                                min="1"
+                                step="any" 
+                                placeholder="Ej. 1" 
+                                value="{{old('tiempoEntrega')}}">
+                        </div>
+                    </div>
+                    
+            {{-- PRECIO ENVIO --}}
+                    <div class="newbiz col" style="margin: 0 0 0 0;">
+                        <div class="control">
+                            <label class="label" for="precioEnvio">
+                               <strong> Precio de Envio <small class="text-muted">(Gratis = 0)</small> </strong>
+                            </label>
+                            <a 
+                class="text-muted" 
+                data-toggle="tooltip" 
+                data-placement="right" 
+                title="Si el Envio es Gratis indicar 0">
+                <svg 
+                    width="1em" 
+                    height="1em" 
+                    viewBox="0 0 16 16" 
+                    class="bi bi-question-square" 
+                    fill="currentColor" 
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path 
+                        fill-rule="evenodd" 
+                        d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path 
+                        d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                </svg>
+                </a>
+                            <input 
+                                class="form-control @error('precioEnvio') is-invalid @enderror" 
+                                name="precioEnvio"
+                                type="number"
+                                min="0" 
+                                placeholder="Ej. 600" 
+                                value="{{old('precioEnvio')}}">
+                        </div>
                     </div>
                 </div>
                 <br>

@@ -36,7 +36,7 @@
             @guest
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('login') }}">
-                    {{ __('Iniciar Sesión') }}
+                    {{ __('Categorias') }}
                 </a>
             </li>
             <li class="nav-item">

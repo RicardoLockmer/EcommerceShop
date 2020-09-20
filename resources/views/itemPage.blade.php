@@ -216,7 +216,7 @@
       m.attach({
       thumb: '.mainImage',
       mode: 'inside',
-      zoom: 3,
+      zoom: 2,
       zoomable: false
       })
    
