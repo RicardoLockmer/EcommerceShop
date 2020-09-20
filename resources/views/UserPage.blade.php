@@ -88,7 +88,7 @@
                         </small>  
                     </p>
 
-                {{-- DIRECCION --}}
+                {{-- DIRECCION --}} 
                 
                     @if ($direccion != NULL)
                         <p>

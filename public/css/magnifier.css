@@ -12,8 +12,8 @@
     top: 0;
     left: 0;
     overflow: hidden;
-    width: 138px !important;
-    height: 108px !important;
+    width: 50px;
+    height: 50px;
 }
 
 .magnifier-loader {

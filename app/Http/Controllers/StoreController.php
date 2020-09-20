@@ -154,10 +154,10 @@ class StoreController extends Controller
 
     public function storeItem(Request $request) {
 
-         try {
+    try {
         $myItem =  request()->validate([
                     'nombre' => 'required|max:50',
-                    'descripcion' => 'required|max:210',
+                    'descripcion' => 'required|max:510',
                     'categoria' => 'required',
                     'subcategoria' => 'required',
                     'precio' => 'required',
@@ -265,9 +265,12 @@ class StoreController extends Controller
         $itemID = $item->id;
 
         $newItemShipping = new Shipping();
-        $newItemShipping->item_id = $itemID;
+        $newItemShipping->items_id = $itemID;
         $newItemShipping->empresa = $request->empresa;
+        
+        
         $newItemShipping->provincia = $request->provincia;
+
         $newItemShipping->restringidos = $request->restringidos;
         $newItemShipping->peso = $request->peso;
         $newItemShipping->dimensiones = $request->dimensiones;
@@ -276,7 +279,9 @@ class StoreController extends Controller
         $newItemShipping->tiempoEntrega = $request->tiempoEntrega;
 
         $newItemShipping->save();
+
         return redirect('negocio/'.$request->store_name.'/'.'productos/');
+        
     } catch (\Illuminate\Database\QueryException $e) {
         return back()->withErrors([$e, 'The Message']);
     }
@@ -298,6 +303,7 @@ class StoreController extends Controller
     {
     if (Auth::user()->id == $myStore->user_id) {
     $images = [$item->image, $item->image2, $item->image3, $item->image4, $item->image5, $item->image6];
+    
     return view('thisItem',[
     'item' => $item,
     'store' => $myStore,

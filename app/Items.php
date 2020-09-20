@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Items extends Model
 {
+    public function shipping(){
+        return $this->hasOne(Shipping::class, 'items_id');
+    }
     public function store() {
         return $this->belongsTo(Store::class, 'store_id', 'store_id');
     }
@@ -19,7 +22,6 @@ class Items extends Model
                 'cantidad',
                 'color',
                 'marca',
-                
                 'Specs',
                 'rep',
                 'karma',

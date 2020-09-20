@@ -11,7 +11,7 @@
           <a class="magnifier-thumb-wrapper">
             <img 
               class="img-thumbnail mainImage" 
-              style="height: auto; max-height: 95vh; width: 100%;" 
+              style="height: auto; max-height: 100vh; width: 100%;" 
               data-toggle="magnify" 
               id="thumb" 
               data-magnify-src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" 
@@ -26,6 +26,8 @@
         {{$item->nombre}}
       </p>
 
+      {{-- TERMINAN LAS FOTOS --}}
+      
       <div class="myFirstSectionInner scroll" style="margin-top: 8px;" >
         <div class="container is-fluid">
             <div class="noWrap"> 
@@ -84,7 +86,7 @@
         <p><strong>Color:</strong> {{$item->color}}</p>
         <p><strong>Tamaño:</strong> {{$item->size}}</p>
         
-
+        {{-- INFO PARA ENVIOS --}}
           <div id="ENVI" style="border: 1px solid rgb(197, 197, 197);" >
 
             <p class="card-text" style="position: aboslute; bottom:0; right:0;">
@@ -101,15 +103,17 @@
                   d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
               </svg>
 
-            @if (Auth::check())
-              @if(Auth::user()->direccion != NULL)
+            @if (Auth::check()) {{-- USER LOGGED IN --}}
+              @if($shipping != NULL){{-- SHIPPING ADDRESS EXISTS --}}
+                @if(in_array($selectedAddress->provincia, $provinciasEnvio))
               <small class="text-muted"> 
-                Envió a XXXX.
+                {{$selectedAddress->provincia}}
               </small>
+              @endif
                 
-              @else
+              @else {{-- ENDING IF SHIPPING ADDRESS EXISTS / ELSE NO SHIPPING ADDRESS FOUND --}}
                 <small class="text-muted"> 
-                  <a href="##">
+                  <a href="/perfil/{{$user->name}}/direcciones">
                     Seleccione una Direccion.
                   </a> 
                 </small>
@@ -213,7 +217,8 @@
   <script type="text/javascript">
   var evt = new Event()
       m = new Magnifier(evt);
-      m.attach({
+      m.attach({ 
+      largeWrapper: 'preview',
       thumb: '.mainImage',
       mode: 'inside',
       zoom: 2,
@@ -230,9 +235,10 @@
     
     $('.mainImage').attr("src", image);
     $('#thumb-large').attr("src", image);
+    
     })
     
-  
+    
 </script>
 @endsection
 

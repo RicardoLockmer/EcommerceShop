@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Items;
+use App\direcciones;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Store;
+
+function quitar_acentos($cadena){
+    $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿ';
+    $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyyby';
+    $cadena = utf8_decode($cadena);
+    $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
+    return utf8_encode($cadena);
+}
 class ItemsController extends Controller
+
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -56,12 +67,21 @@ class ItemsController extends Controller
             ->orWhere('marca', 'LIKE', '%'.$q.'%')
             ->limit(6)->get();
             }
+        $user =Auth::user();
+        $userAddressCurrent = direcciones::where('user_id', $user->id)->where('selected', 1)->firstOrFail();
         $images = [$item->image, $item->image2, $item->image3, $item->image4, $item->image5, $item->image6];
+        $shipping = $item->shipping;
+    
+      
+        $provinciaSep = explode(',', $shipping->provincia);
         return view('itemPage',[
         'item' => $item,
         'moreItems' => $moreitems,
-        'images' => $images
-        
+        'images' => $images,
+        'shipping' => $shipping,
+        'user' => $user,
+        'provinciasEnvio' => $provinciaSep,
+        'selectedAddress' => $userAddressCurrent
         ]);
         
     }
