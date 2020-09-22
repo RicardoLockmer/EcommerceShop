@@ -8,13 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Store;
 
-function quitar_acentos($cadena){
-    $originales = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿ';
-    $modificadas = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyyby';
-    $cadena = utf8_decode($cadena);
-    $cadena = strtr($cadena, utf8_decode($originales), $modificadas);
-    return utf8_encode($cadena);
-}
+
 class ItemsController extends Controller
 
 {
@@ -58,7 +52,9 @@ class ItemsController extends Controller
      */
     public function show(Items $item)
     {   
+        
         $terms = explode(" ", $item->descripcion);
+        
         foreach ($terms as $q) {
             $moreitems = Items::where( 'nombre', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
@@ -66,22 +62,42 @@ class ItemsController extends Controller
             ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
             ->orWhere('marca', 'LIKE', '%'.$q.'%')
             ->limit(6)->get();
+
+            
             }
+        if (Auth::user()){
+    // SHIPPING LOGIC
         $user =Auth::user();
-        $userAddressCurrent = direcciones::where('user_id', $user->id)->where('selected', 1)->firstOrFail();
+        $userAddressCurrent = direcciones::where('user_id', $user->id)->where('selected', 1)->first();
+        } else {
+            $user = Auth::guest();
+            $userAddressCurrent = false;
+        }
         $images = [$item->image, $item->image2, $item->image3, $item->image4, $item->image5, $item->image6];
         $shipping = $item->shipping;
-    
-      
-        $provinciaSep = explode(',', $shipping->provincia);
+        $decodeProvincia = json_decode($shipping->provincia);
+        
+
+    // DELIVER DATE LOGIC
+        
+        $string = $shipping->tiempoEntrega;
+        $day = '+'.$string.' day';
+        $startdate = strtotime($day);
+        $enddate = strtotime($day, $startdate);
+
+
+        $delivery = date("d M", $startdate);
+        $deliveLastDay = date('d M', $enddate);
         return view('itemPage',[
         'item' => $item,
         'moreItems' => $moreitems,
         'images' => $images,
         'shipping' => $shipping,
         'user' => $user,
-        'provinciasEnvio' => $provinciaSep,
-        'selectedAddress' => $userAddressCurrent
+        'provinciasEnvio' => $decodeProvincia,
+        'selectedAddress' => $userAddressCurrent,
+        'startDate' => $delivery,
+        'endDate' => $deliveLastDay
         ]);
         
     }

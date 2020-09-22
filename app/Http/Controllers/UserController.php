@@ -17,8 +17,8 @@ class UserController extends Controller
     public function index($user)
     {
         if (Auth::user()->name == $user){
-            $direccionPrimaria = direcciones::where('user_id', Auth::user()->id)->orderBy('selected', 'DESC')->firstOrFail();
-        return view('UserPage', [
+            $direccionPrimaria = direcciones::where('user_id', Auth::user()->id)->orderBy('selected', 'DESC')->first();
+            return view('UserPage', [
             'user' => Auth::user(),
             'direccion' => $direccionPrimaria
         ]);

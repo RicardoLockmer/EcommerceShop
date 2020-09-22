@@ -17,7 +17,7 @@
             </a>
  
             <a href="/negocio/{{$store->nombreNegocio}}/editar" class='column myProduct btn centerMyImages' style="border: 1px solid rgb(192, 192, 192);">
-                Editar Negocio
+                Editar Información
             </a>
 
             <a class='column myProduct btn centerMyImages'  href="/negocio/{{$store->nombreNegocio}}/productos/" style="border: 1px solid rgb(192, 192, 192);">

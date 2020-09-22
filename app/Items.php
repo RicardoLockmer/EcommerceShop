@@ -27,6 +27,7 @@ class Items extends Model
                 'karma',
                 'updateDate',
                 'store_id',
+                'nombreNegocio',
                 'user_id',
                 'updated_at',
                 'created_at',

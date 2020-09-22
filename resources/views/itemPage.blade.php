@@ -74,9 +74,17 @@
       <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
         &#8353; {{number_format($item->precio, 0, '.', ',')}} <small style="font-size: 14px;" class="text-muted">(no incluye iva) </small><small style="font-size: 13px;"><a href="##">Detalles</a></small>
       </p>
+      @if($item->shipping->precioEnvio > 0)
       <small class="text-muted"> 
-      Envio  +<strong>&#8353; {{number_format(900, 0, '.', ',')}}</strong>
-    </small>
+        Precio de Envió  +<strong>&#8353; {{number_format($item->shipping->precioEnvio, 0, '.', ',')}}</strong>
+      </small>
+      @else
+      <small class="text-muted"> 
+        Envió <strong>Gratis</strong>
+      </small>
+
+      @endif
+      
     <br>
     <br>
 
@@ -87,7 +95,7 @@
         <p><strong>Tamaño:</strong> {{$item->size}}</p>
         
         {{-- INFO PARA ENVIOS --}}
-          <div id="ENVI" style="border: 1px solid rgb(197, 197, 197);" >
+          <div id="ENVI" >
 
             <p class="card-text" style="position: aboslute; bottom:0; right:0;">
 
@@ -104,47 +112,94 @@
               </svg>
 
             @if (Auth::check()) {{-- USER LOGGED IN --}}
-              @if($shipping != NULL){{-- SHIPPING ADDRESS EXISTS --}}
-                @if(in_array($selectedAddress->provincia, $provinciasEnvio))
-              <small class="text-muted"> 
-                {{$selectedAddress->provincia}}
-              </small>
-              @endif
-                
-              @else {{-- ENDING IF SHIPPING ADDRESS EXISTS / ELSE NO SHIPPING ADDRESS FOUND --}}
-                <small class="text-muted"> 
-                  <a href="/perfil/{{$user->name}}/direcciones">
-                    Seleccione una Direccion.
-                  </a> 
-                </small>
-              @endif
-              
-            @else
-              <small class="text-muted"> 
-                Envió a <strong>LISTA DE PROVINCIAS</strong>.
-              </small>
-            @endif
-            </p>
             
-            <p>
-              <small class="text-muted"> 
-                El paquete llega entre 
-                  <strong>
-                    15-18 Septiembre
-                  </strong>.
-              </small>
-            </p>
+                  @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
 
-            <p>
-              <small class="text-muted"> 
-                El paquete se envia por 
-                  <strong>
-                    Correos de Costa Rica
-                  </strong>.
-              </small>
-            </p>
+                          @if(in_array($selectedAddress->provincia, $provinciasEnvio))
+                            <small > 
+                              <strong style="color: seagreen"> Si se envía a {{$selectedAddress->provincia}}</strong>
+                            </small>
+                            <p>
+                              <small class="text-muted"> 
+                                El paquete llega entre 
+                                  <strong>
+                                    {{$startDate}} - {{$endDate}}
+                                  </strong>
+                              </small>
+                            </p>
+                
+                            <p>
+                              <small class="text-muted"> 
+                                El paquete se envía por 
+                                  <strong>
+                                    {{$shipping->empresa}}
+                                  </strong>
+                              </small>
+                            </p>
+                          </div>
+                        </div>
+                          @else
+                          <small > 
+                          <strong style="color:rgb(145, 7, 7)"> No se Envía a  {{$selectedAddress->provincia}} </strong> 
+                          </small><small><a href="/perfil/{{Auth::user()->name}}/direcciones"> - Cambiar Dirección</a></small>
+                          <p>
+                            <small class="text-muted"> 
+                              Lo sentimos, este producto no se puede enviar a su dirección.
+                            </small>
+                          </p>
+              
+                          
+                        </div>
+                      </div>
+
+                          @endif
+                        
+                    @else {{-- ENDING IF SHIPPING ADDRESS EXISTS / ELSE NO SHIPPING ADDRESS FOUND --}}
+
+                        <small class="text-muted"> 
+                          <a href="/perfil/{{$user->name}}/direcciones">
+                            Seleccione una Dirección
+                          </a> 
+                        </small>
+                        <p>
+              
           </div>
         </div>
+
+                  @endif
+                  
+            @else
+
+                  <small class="text-muted"> 
+                  <a href="{{route('login')}}">Seleccione una Dirección</a>
+                  </small>
+
+            @endif
+          </p>
+    {{-- final de Shipping Address --}}
+
+  {{-- COMIENZO FECHA DE ENTREGA --}}
+            
+            
+            
+        @if($item->cantidad == 0)
+        <button type="button" class="btn btn-outline-secondary cardbtn" disabled>Agotado</button>
+      @else
+        <a class="btn btn-outline-success cardbtn" >Comprar</a>
+        
+        {{-- SHOPPING CART BUTTON --}}
+        <form action="/shoppingCart" method="POST" class="cardbtn" style="right: 115px;">
+          @csrf
+         
+        <input type="text" name="id" value="{{$item->id}}" hidden>
+          <button type="submit" class="btn btn-outline-success" >
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+            </svg>
+          </button>
+
+        </form>
+      @endif
 </article>
 </div>
           

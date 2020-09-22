@@ -180,12 +180,12 @@ class StoreController extends Controller
                     'image5' => 'image|nullable|max:2048',
                     'image6' => 'image|nullable|max:2048',
                     'empresa' => 'required',
-                    'provincia' => 'required',
+                    'provincia' => 'required|array',
                     'restringidos' => 'nullable',
                     'peso' => 'required',
                     'dimensiones' => 'required',
                     'precioEnvio' => 'required',
-                    
+                     
                     'tiempoEntrega' => 'required',
                     'etiquetas'=> 'nullable',
                     'caja' => 'nullable'
@@ -210,6 +210,7 @@ class StoreController extends Controller
         $item->updateDate = date("dmy");
         $item->store_id = $request->store_id;
         $item->user_id = Auth::user()->id;
+        $item->nombreNegocio = Auth::user()->nombreNegocio;
         $item->updated_at = NULL;
         $item->created_at = date("dmy");
         
@@ -268,8 +269,8 @@ class StoreController extends Controller
         $newItemShipping->items_id = $itemID;
         $newItemShipping->empresa = $request->empresa;
         
-        
-        $newItemShipping->provincia = $request->provincia;
+        $provinciaEncode = json_encode($request->provincia);
+        $newItemShipping->provincia = $provinciaEncode;
 
         $newItemShipping->restringidos = $request->restringidos;
         $newItemShipping->peso = $request->peso;
@@ -407,6 +408,11 @@ class StoreController extends Controller
        // UNIQUE INFORMACION OVERRIDE ERROR
 
         $newStore = Store::find($request->store_id);
+        $updateItemStore = Items::where('nombreNegocio', Auth::user()->nombreNegocio)->get();
+            foreach ($updateItemStore as $itemStore) {
+                $itemStore->nombreNegocio = $request->nombreNegocio;
+                $itemStore->save(); 
+            }
 
         if ($request->primerNombre != NULL) {
         $newStore->primerNombre = $request->primerNombre;

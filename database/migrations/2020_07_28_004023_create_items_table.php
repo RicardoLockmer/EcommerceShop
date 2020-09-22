@@ -28,7 +28,9 @@ class CreateItemsTable extends Migration
             $table->bigInteger('rep')->nullable();
             $table->bigInteger('karma')->nullable();
             $table->timestamp('updateDate')->nullable();
-            $table->unsignedBigInteger('store_id');
+            $table->string('nombreNegocio');
+            $table->longText('etiquetas')->nullable();
+           $table->json('caja')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamp('publicado')->nullable();
             $table->string('image');
