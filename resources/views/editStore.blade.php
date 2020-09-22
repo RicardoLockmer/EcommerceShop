@@ -43,7 +43,7 @@
                 
                     <label class="" for="primerNombre"><strong>Primer Nombre</strong></label>
                         <div class="control">
-                        <input class="form-control @error('primerNombre') is-danger @enderror" name="primerNombre" id="primerNombre" type="text" placeholder="{{$store->primerNombre}}" >
+                        <input class="form-control @error('primerNombre') is-invalid @enderror" name="primerNombre" id="primerNombre" type="text" placeholder="{{$store->primerNombre}}" >
                         </div>    
                 </div>  
             
@@ -51,7 +51,7 @@
                 
                         <div class="control">
                             <label class="label " for="segundoNombre"><strong>Segundo Nombre</strong></label>
-                            <input class="form-control @error('segundoNombre') is-danger @enderror" name="segundoNombre" id="segundoNombre" type="text" placeholder="{{$store->segundoNombre}}" >
+                            <input class="form-control @error('segundoNombre') is-invalid @enderror" name="segundoNombre" id="segundoNombre" type="text" placeholder="{{$store->segundoNombre}}" >
                         </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 
                     <label class="" for="primerApellido"><strong>Primer Apellido</strong></label>
                         <div class="control">
-                            <input class="form-control @error('primerApellido') is-danger @enderror" name="primerApellido" id="primerApellido" type="text" placeholder
+                            <input class="form-control @error('primerApellido') is-invalid @enderror" name="primerApellido" id="primerApellido" type="text" placeholder
                             ="{{$store->primerApellido}}" >
                         </div>    
                 </div>
@@ -72,7 +72,7 @@
                 
                         <div class="control">
                             <label class="" for="segundoApellido"><strong>Segundo Apellido</strong></label>
-                            <input class="form-control @error('segundoApellido') is-danger @enderror" name="segundoApellido" id="segundoApellido" type="text"  placeholder="{{$store->segundoApellido}}" >
+                            <input class="form-control @error('segundoApellido') is-invalid @enderror" name="segundoApellido" id="segundoApellido" type="text"  placeholder="{{$store->segundoApellido}}" >
                         </div>
                 </div>
             </div>
@@ -81,15 +81,15 @@
         <div class="newbiz ">
             <label class="" for="nombreNegocio"> <strong> Nombre del Negocio </strong></label>
                 <div class="control">
-                    <input class="form-control @error('nombreNegocio') is-danger @enderror" name="nombreNegocio" id="nombreNegocio" type="text" placeholder="{{$store->nombreNegocio}}">
-                </div>
+                    <input class="form-control @error('nombreNegocio') is-invalid @enderror" name="nombreNegocio" id="nombreNegocio" type="text" placeholder="{{$store->nombreNegocio}}">
+                </div> 
         </div>
         <br>
         {{-- CEDULA JURIDICA --}}
         <div class="newbiz ">
-            <label class="" for="CDJ"><strong>Cedula Jurídica</strong></label>
+            <label class="" for="cedulaJuridica"><strong>Cedula Jurídica</strong></label>
                 <div class="control">
-                    <input class="form-control @error('CDJ') is-invalid @enderror" name="CDJ" id="CDJ" type="text" placeholder="{{$store->cedulaJuridica}}" value="{{old('CDJ')}}">
+                <input class="form-control @error('cedulaJuridica') is-invalid @enderror" name="cedulaJuridica" id="cedulaJuridica" type="text" placeholder="{{$store->cedulaJuridica}}" maxlength="10" value="{{old('cedulaJuridica')}}">
                 </div>
         </div>
         <br>

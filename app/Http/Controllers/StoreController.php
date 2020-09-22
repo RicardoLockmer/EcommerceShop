@@ -21,7 +21,7 @@ class StoreController extends Controller
     {
         if (Auth::user()->id == $myStore->user_id) {
 
-            $myItems = Items::where('store_id', $myStore->store_id)->get();
+            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->get();
 
             return view('myStore', [
                 'store' => $myStore,
@@ -75,7 +75,7 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-           
+        try {
           $myStore = request()->validate([
                 'primerNombre' => 'required|max:50',
                 'segundoNombre' => 'required|max:50',
@@ -87,7 +87,7 @@ class StoreController extends Controller
                 'user_id' => 'required|unique:stores',
                 'usuario' => 'required|unique:stores|max:50',
                 'tipoNegocio' => 'required',
-                'cedulaJuridica' => 'required',
+                'cedulaJuridica' => 'required|max:10',
                 'provincia' => 'required',
                 'BizE' =>'nullable',
                 'canton' => 'required',
@@ -121,7 +121,7 @@ class StoreController extends Controller
             $newStore->phoneNumber = $request->ntel;
             $newStore->tyc = $request->tyc;
             $newStore->created_at = date('dmy');
-            $newStore->cedulaJuridica = $request->CDJ;
+            $newStore->cedulaJuridica = $request->cedulaJuridica;
             if($request->BizE != NULL) {
                 $newStore->email = $request->BizE;
             } else {
@@ -133,6 +133,9 @@ class StoreController extends Controller
             $newBiz->nombreNegocio = $newStore->nombreNegocio;
             $newBiz->save();
        return redirect('negocio/'.$newStore->nombreNegocio);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return back()->withErrors([$e, 'The Message']);
+        }
     }
 
     public function createItem(Store $myStore) {
@@ -154,7 +157,7 @@ class StoreController extends Controller
 
     public function storeItem(Request $request) {
 
-    try {
+   
         $myItem =  request()->validate([
                     'nombre' => 'required|max:50',
                     'descripcion' => 'required|max:510',
@@ -180,7 +183,7 @@ class StoreController extends Controller
                     'image5' => 'image|nullable|max:2048',
                     'image6' => 'image|nullable|max:2048',
                     'empresa' => 'required',
-                    'provincia' => 'required|array',
+                    'provincia' => 'required',
                     'restringidos' => 'nullable',
                     'peso' => 'required',
                     'dimensiones' => 'required',
@@ -260,7 +263,7 @@ class StoreController extends Controller
         } else {$item->image6 = NULL;} // ELSE IMAGE 6 NULL
 
 
-
+        
         //SAVE TO DATABASE
         $item->save();
         $itemID = $item->id;
@@ -281,11 +284,10 @@ class StoreController extends Controller
 
         $newItemShipping->save();
 
-        return redirect('negocio/'.$request->store_name.'/'.'productos/');
+        return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
         
-    } catch (\Illuminate\Database\QueryException $e) {
-        return back()->withErrors([$e, 'The Message']);
-    }
+        
+
         // REDIRECT A LA PAGINA DE PRODUCTOS
         
     
@@ -391,7 +393,7 @@ class StoreController extends Controller
         'user_id' => 'unique:stores',
         'usuario' => 'unique:stores|max:50',
         'tipoNegocio' => 'nullable',
-        'cedulaJuridica' => 'unique:stores',
+        'cedulaJuridica' => 'unique:stores|max:10',
         'provincia' => 'nullable',
         'canton' => 'nullable',
         'direccion' => 'nullable',
@@ -431,7 +433,10 @@ class StoreController extends Controller
         }
         if ($request->nombreNegocio != NULL) {
         $newStore->nombreNegocio = $request->nombreNegocio;
-        }
+        } 
+        if ($request->cedulaJuridica != NULL) {
+            $newStore->cedulaJuridica = $request->cedulaJuridica;
+            }
         if ($request->descripcion){
         $newStore->descripcion = $request->descripcion;
         }

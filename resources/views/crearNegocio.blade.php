@@ -9,12 +9,21 @@
     @csrf
                 <div style="text-align: center">
                     <h1 class="myFormTitle" >
-                        XXXX
+                        XXXX 
                     </h1>
                     <small class="text-muted">
                         Estas cerca de comenzar a vender tu producto con XXXX!
                     </small>
                 </div>
+                @if($errors->any())
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>
+            Parece que hay un problema!
+        </strong>
+           {{$errors->first()}}
+        </div>
+
+@endif
             <br>
             <div class="myForms" style="width: 35em; margin-left: 26%; border: 2px solid #007bff">
                 <div class="myFormData" >
@@ -99,9 +108,9 @@
         </div>
         <br>
         <div class="newbiz ">
-            <label class="" for="CDJ"><strong>Cedula Jurídica*</strong></label>
+            <label class="" for="cedulaJuridica"><strong>Cedula Jurídica*</strong></label>
                 <div class="control">
-                    <input class="form-control @error('CDJ') is-invalid @enderror" name="CDJ" id="CDJ" type="text" placeholder="# de Cedula Juridica" value="{{old('CDJ')}}">
+                    <input class="form-control @error('cedulaJuridica') is-invalid @enderror" name="cedulaJuridica" id="cedulaJuridica" maxlength="10" type="text" placeholder="# de Cedula Juridica" value="{{old('cedulaJuridica')}}">
                 </div>
         </div>
         <br>
