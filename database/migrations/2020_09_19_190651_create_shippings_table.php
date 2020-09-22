@@ -16,7 +16,7 @@ class CreateShippingsTable extends Migration
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('items_id');
             $table->string('empresa')->nullable();
             $table->json('provincia')->nullable();
             $table->string('restringidos')->nullable();
