@@ -13,15 +13,15 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        $myTech = Items::take(15)->where('categoria', 'Tecnologia')->latest()->get();
+        $myTech = Items::take(15)->where('subcategoria', 'Computadoras')->latest()->get();
         $destacados = Items::take(15)->where('rep', '>', 100)->orderBy('rep', 'desc')->get();
-        $paraMujer = Items::take(15)->where('categoria', 'Mujeres')->latest()->get();
+        $paraMujer = Items::take(15)->where('categoria', 'Ropa para Mujer')->latest()->get();
         return view('mainPage', [
             'techItems' => $myTech,
             'mejores' => $destacados,
             'mujerItems' => $paraMujer
         ]);
-    }
+    } 
 
     /**
      * Show the form for creating a new resource.

@@ -63,7 +63,7 @@ class ItemsController extends Controller
             ->orWhere('marca', 'LIKE', '%'.$q.'%')
             ->limit(6)->get();
 
-            
+             
             }
         if (Auth::user()){
     // SHIPPING LOGIC

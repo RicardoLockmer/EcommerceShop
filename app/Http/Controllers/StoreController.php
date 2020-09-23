@@ -159,8 +159,8 @@ class StoreController extends Controller
 
    
         $myItem =  request()->validate([
-                    'nombre' => 'required|max:50',
-                    'descripcion' => 'required|max:510',
+                    'nombre' => 'required|max:25',
+                    'descripcion' => 'required|max:255',
                     'categoria' => 'required',
                     'subcategoria' => 'required',
                     'precio' => 'required',

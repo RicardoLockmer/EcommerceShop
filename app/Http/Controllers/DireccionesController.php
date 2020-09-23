@@ -6,7 +6,7 @@ use App\User;
 use App\direcciones;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+ 
 class DireccionesController extends Controller
 {
     /**
@@ -208,4 +208,3 @@ class DireccionesController extends Controller
         }
     }
 }
-

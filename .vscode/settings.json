@@ -13,6 +13,9 @@
     },
     "prettier.vueIndentScriptAndStyle": true,
     "prettier.useTabs": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.defaultFormatter": "apility.beautify-blade",
+    "editor.formatOnSave": true,
+    "[blade]": {
+        "editor.defaultFormatter": "onecentlin.laravel-blade"
+    }
 }
