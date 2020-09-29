@@ -158,8 +158,8 @@ class ShoppingController extends Controller
          $dataNumber = \Cart::getTotal();
          
            
-        $data =  number_format($dataNumber, 0, '.', ',');
-        
+        $data[] =  number_format($dataNumber, 0, '.', ',');
+        $data[] = \Cart::getTotalQuantity();
         return response()->json($data);
         }
         
@@ -181,8 +181,8 @@ class ShoppingController extends Controller
         
          $dataNumber = \Cart::getTotal();
            
-        $data =  number_format($dataNumber, 0, '.', ',');
-      
+        $data[] =  number_format($dataNumber, 0, '.', ',');
+        $data[] = \Cart::getTotalQuantity();
         return response()->json($data);
         }
     }

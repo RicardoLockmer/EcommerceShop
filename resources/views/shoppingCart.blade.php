@@ -4,7 +4,7 @@
 
 <div class="container">
     <div style="margin: 2em 0 0 0;">
-        <h1>
+        <h1 id="CARTQTY">
             Mi Carrito
             @if(\Cart::getTotalQuantity() <= 1) <small class="text-muted" style="font-size: 24px;">
                 ({{\Cart::getTotalQuantity()}} Articulo)
@@ -51,7 +51,7 @@
 
                             {{-- PRECIO --}}
                             <div class="card-text CARTPR">
-                                <small> &#8353; </small>{{number_format($item->price, 0, '.', ',')}}
+                                <small> &#8353; </small>{{number_format($item->associatedModel->precio, 0, '.', ',')}}
 
                             </div>
                             @if ($item->associatedModel->cantidad >= 1)
@@ -149,8 +149,15 @@
                 , 'rowId': DTRID
             , }
             , success: function(data) {
-                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data + '  </h5></div>');
-
+                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data[0] + '  </h5></div>');
+                $('#CARTCOUNT').replaceWith('<span class="badge badge-light" id="CARTCOUNT">' + data[1] + '</span>');
+                if (data[1] == 0) {
+                    $('#CARTUP').replaceWith('<div style="padding: 6em 0 6em 0; border-bottom: 2px solid #007bff;" class="text-muted CARTIT">No tiene articulos en su carrito.</div>')
+                } else if (data[1] == 1) {
+                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulo)</small></h1>');
+                } else if (data[1] >= 2) {
+                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulos)</small></h1>')
+                }
             }
         });
     })
@@ -170,7 +177,17 @@
             }
             , success: function(data) {
                 $('#' + DTRID + '').remove();
-                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data + '  </h5></div>');
+                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data[0] + '  </h5></div>');
+                $('#CARTCOUNT').replaceWith('<span class="badge badge-light" id="CARTCOUNT">' + data[1] + '</span>');
+
+                if (data[1] == 0) {
+                    $('#CARTUP').replaceWith('<div style="padding: 6em 0 6em 0; border-bottom: 2px solid #007bff;" class="text-muted CARTIT">No tiene articulos en su carrito.</div>');
+                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulos)</small></h1>');
+                } else if (data[1] == 1) {
+                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulo)</small></h1>');
+                } else if (data[1] >= 2) {
+                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulos)</small></h1>')
+                }
             }
 
         })
