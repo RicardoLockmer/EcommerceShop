@@ -14,13 +14,37 @@ class ShoppingController extends Controller
      */
     public function index()
     {
-        $userID = Auth::user()->id;
-       $TotalSum = \Cart::session($userID)->getTotal();
-        $myCartItems = \Cart::session($userID)->getContent();
+        if (Auth::user()){
+            $userID = Auth::user()->id;
+            \Cart::session($userID);
+            $TotalSum = \Cart::getTotal();
+             $myCartItems = \Cart::getContent();
+            
+                foreach ($myCartItems as $item) {
+                    if(gettype($item->associatedModel->image) != 'array'){
+                    $item->associatedModel->image = json_decode($item->associatedModel->image);
+                }
+            }
+            foreach($myCartItems as $updateItems) {
+            $Items = Items::where('id', $updateItems->associatedModel->id)->first();
+           
+            
+            
+            \Cart::session($userID)->update($updateItems->id, array(
+                'name' => $Items->nombre,
+                'price' => $Items->precio,
+                'associatedModel' => $Items
+            ));
+            }
+      
         return view('shoppingCart', [
             'myCart' => $myCartItems,
-            'Total' => $TotalSum
+            'Total' => $TotalSum,
+            
         ]);
+    } else {
+        return back();
+    }
     }
 
     /**
@@ -41,35 +65,53 @@ class ShoppingController extends Controller
      */
     public function store(Request $request)
     {
-        $uniqueId = rand(0, 1000);
-        $newCartItem = Items::where('id', $request->id)->firstOrFail();
-        if ($newCartItem) {
-            $rowId = $uniqueId;
-            $userId = Auth::user()->id;
-            $itemId = $newCartItem->id;
-            $itemName = $newCartItem->nombre;
-            $itemColor = $newCartItem->color;
-            $itemSize = $newCartItem->size;
-            $itemPrice = $newCartItem->precio;
-            $itemQuantity = 1;
-            $itemImage = $newCartItem->image;
-            $itemDescription = $newCartItem->descripcion;
+        if(Auth::user()){
+        $userId = Auth::user()->id;
+        $uniqueId = 'DTRID'.$request->id;
+        $newCartItem = Items::where('id', $request->id)->first();
+        $cartExist = \Cart::session($userId)->getContent();
+            if($cartExist != NULL) {
+                $itemExist = \Cart::get($uniqueId);
+                if($itemExist !=null){
+                    $cart =  \Cart::session($userId)->update($uniqueId, array(
+                        'quantity' => 1
+                        
+                  ));
+                  return back();
+                }else {
+                    \Cart::session($userId)->add(array(
+                        'id' => $uniqueId,
+                        'name' => $newCartItem->nombre,
+                        'price' => $newCartItem->precio,
+                        'quantity' => 1,
+                        'associatedModel' => $newCartItem
+                    ));
+                  
+                    return back();
+                }
 
+            } else {
 
-                \Cart::session($userId)->add(array(
-                    'id' => $rowId,
-                    'name' => $itemName,
-                    'color' => $itemColor,
-                    'size' => $itemSize,
-                    'price' => $itemPrice,
-                    'quantity' => $itemQuantity,
-                    'image' => $itemImage,
-                    'description' => $itemDescription,
-                    'associatedModel' => $newCartItem
-                    
-                ));
+        
+            
+            
+            
+            \Cart::session($userId)->add(array(
+                'id' => $uniqueId,
+                'name' => $newCartItem->nombre,
+                'price' => $newCartItem->precio,
+                'quantity' => 1,
+                'associatedModel' => $newCartItem
+            ));
+          
             return back();
-        }
+        
+       
+    }
+    
+    } else {
+      return back();
+    }
     }
 
     /**
@@ -101,9 +143,26 @@ class ShoppingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if (Auth::user()){
+            $userID = Auth::user()->id;
+          $cart =  \Cart::session($userID)->update($request->rowId, array(
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $request->cantidad,
+                
+          )));
+          
+          
+         $dataNumber = \Cart::getTotal();
+         
+           
+        $data =  number_format($dataNumber, 0, '.', ',');
+        
+        return response()->json($data);
+        }
+        
     }
 
     /**
@@ -112,8 +171,19 @@ class ShoppingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        if (Auth::user()){
+            $userID = Auth::user()->id;
+          $cart =  \Cart::session($userID)->remove($request->DTRID
+          );
+          
+        
+         $dataNumber = \Cart::getTotal();
+           
+        $data =  number_format($dataNumber, 0, '.', ',');
+      
+        return response()->json($data);
+        }
     }
 }

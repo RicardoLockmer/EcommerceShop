@@ -35,11 +35,11 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->timestamp('publicado')->nullable();
             $table->string('image');
-            $table->string('image2');
-            $table->string('image3');
-            $table->string('image4')->nullable();
-            $table->string('image5')->nullable();
-            $table->string('image6')->nullable();
+            // $table->string('image2');
+            // $table->string('image3');
+            // $table->string('image4')->nullable();
+            // $table->string('image5')->nullable();
+            // $table->string('image6')->nullable();
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
         });

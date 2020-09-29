@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 use App\Items;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SearchController extends Controller
 {
     public function mySearch(Request $request) {
+        if(Auth::user()){
 
+            \Cart::session(Auth::user()->id);
+        }
         if($request->q === NULL) {
           return redirect('/');
         } else {
@@ -23,6 +27,9 @@ class SearchController extends Controller
             ->get();
 
             
+            }
+            foreach ($items as $item ) {
+                $item->image = json_decode($item->image);
             }
             
         return view('mySearch', [

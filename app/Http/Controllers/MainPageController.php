@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Items;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainPageController extends Controller
 {
@@ -16,6 +17,10 @@ class MainPageController extends Controller
         $myTech = Items::take(15)->where('subcategoria', 'Computadoras')->latest()->get();
         $destacados = Items::take(15)->where('rep', '>', 100)->orderBy('rep', 'desc')->get();
         $paraMujer = Items::take(15)->where('categoria', 'Ropa para Mujer')->latest()->get();
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         return view('mainPage', [
             'techItems' => $myTech,
             'mejores' => $destacados,

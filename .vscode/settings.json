@@ -17,5 +17,6 @@
     "editor.formatOnSave": true,
     "[blade]": {
         "editor.defaultFormatter": "amirmarmul.laravel-blade-vscode"
-    }
+    },
+    "editor.wordWrap": "on"
 }

@@ -10,11 +10,11 @@
         <div class="col " style="margin: 3em 0 0 1em; width: 100%;  ">
 
             <a class="magnifier-thumb-wrapper" id="sticky">
-                <img class="img-thumbnail mainImage" style="width: 100% ; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" src="{{ Storage::URL('storage/assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
+                <img class="img-thumbnail mainImage" style="width: 100% ; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
             </a>
         </div>
         {{-- COLUMNA DEL INFO --}}
-        <div class="col-6" style="margin: 3em 0 0 0;">
+        <div class="col-5" style="margin: 3em 0 0 6em;">
             <article style="margin: 0 0 1em 0">
 
                 <h1 style="font-size: 28px;margin-bottom: 0;">
@@ -169,24 +169,7 @@
 
 
 
-@if($item->cantidad == 0)
-<button type="button" class="btn btn-outline-secondary cardbtn" disabled>Agotado</button>
-@else
-<a class="btn btn-outline-success cardbtn">Comprar</a>
 
-{{-- SHOPPING CART BUTTON --}}
-<form action="/shoppingCart" method="POST" class="cardbtn" style="right: 115px;">
-    @csrf
-
-    <input type="text" name="id" value="{{$item->id}}" hidden>
-    <button type="submit" class="btn btn-outline-success">
-        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-        </svg>
-    </button>
-
-</form>
-@endif
 <br>
 <div class="myFirstSectionInner scroll" style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
     <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
@@ -195,7 +178,7 @@
             @foreach ($images as $image)
 
             @if($image != NULL)
-            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('storage/assetItems/'.$image) }}" alt="{{$item->nombre}}">
+            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
             @endif
 
             @endforeach
@@ -204,6 +187,43 @@
 
     </div>
 </div>
+<div style="text-align: right;">
+    @if($item->cantidad == 0)
+    <form action="/shoppingCart" method="POST" id="CARTBTN" class="cardbtn">
+        @csrf
+
+        <input type="text" name="id" value="{{$item->id}}" hidden>
+        <button type="submit" class="btn btn-outline-success cardbtn">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+            </svg>
+        </button>
+
+    </form>
+
+
+    <button type="button" class="btn btn-outline-secondary cardbtn" disabled>Agotado</button>
+    @else
+
+
+    {{-- SHOPPING CART BUTTON --}}
+    <form action="/shoppingCart" method="POST" id="CARTBTN" class="cardbtn">
+        @csrf
+
+
+        <button type="submit" class="btn btn-outline-success cardbtn">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+            </svg>
+        </button>
+        <input type="text" name="id" value="{{$item->id}}" hidden>
+    </form>
+    <form action="###" method="POST" id="CARTBTN" class="cardbtn">
+        <button class="btn btn-outline-success cardbtn">Comprar</button>
+    </form>
+    @endif
+</div>
+{{-- FINAL DE BUY CART BUTTONS --}}
 
 </div>
 
@@ -257,7 +277,7 @@
                                 <div class="myCards">
                                     <div class="card-block">
 
-                                        <a href="{{$moreitem->store->nombreNegocio}}/productos/{{$moreitem->id}}"><img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$moreitem->image) }}" alt=""></a>
+                                        <a href="{{$moreitem->store->nombreNegocio}}/productos/{{$moreitem->id}}"><img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$image[0]) }}" alt=""></a>
                                     </div>
                                 </div>
                                 @endforeach
@@ -299,4 +319,6 @@
     })
 
 </script>
+
+
 @endsection

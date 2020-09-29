@@ -32,10 +32,6 @@ class Items extends Model
                 'updated_at',
                 'created_at',
                 'image',
-                'image2',
-                'image3',
-                'image4',
-                'image5',
-                'image6'
+                
     ];
 }

@@ -16,7 +16,10 @@ class DireccionesController extends Controller
      */
     public function index($user)
     {
-        
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         if (Auth::user()->name === $user) {
         return view('addressForm', [
             'user' => Auth::user(),
@@ -36,6 +39,10 @@ class DireccionesController extends Controller
      */
     public function create($user)
     {
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         if (Auth::user()->name === $user) {
             return view('newAddressForm', [
                 'user' => Auth::user(),
@@ -109,6 +116,10 @@ class DireccionesController extends Controller
      */
     public function edit(direcciones $direccion)
     {
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         return view('EditAddress', [
             'address' => $direccion
         ]);

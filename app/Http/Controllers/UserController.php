@@ -16,6 +16,10 @@ class UserController extends Controller
      */
     public function index($user)
     {
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         if (Auth::user()->name == $user){
             $direccionPrimaria = direcciones::where('user_id', Auth::user()->id)->orderBy('selected', 'DESC')->first();
             return view('UserPage', [

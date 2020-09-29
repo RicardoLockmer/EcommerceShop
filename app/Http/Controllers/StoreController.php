@@ -19,16 +19,24 @@ class StoreController extends Controller
      */
     public function index(Store $myStore)
     {
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         if (Auth::user()->id == $myStore->user_id) {
 
             $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->get();
-
+           
+            foreach ($myItems as $items) {
+                $items->image = json_decode($items->image);
+            
+            }
             return view('myStore', [
                 'store' => $myStore,
                 'items' => $myItems
             ]);
         } else {
-            abort(404);
+            abort(404); 
         }
     }
 
@@ -60,7 +68,10 @@ class StoreController extends Controller
         'Herramientas de Trabajo',
         'Juguetes'
         ];
-      
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         sort($arr);
         return view('crearNegocio', [
             'myCategory' => $arr
@@ -139,7 +150,10 @@ class StoreController extends Controller
     }
 
     public function createItem(Store $myStore) {
+        if(Auth::user()){
 
+            \Cart::session(Auth::user()->id);
+        }
         if (Auth::user()->id == $myStore->user_id) {
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
             
@@ -176,12 +190,8 @@ class StoreController extends Controller
                     'store_id' => 'required',
                     'updated_at' => 'nullable',
                     'created_at' => 'nullable',
-                    'image' => 'image|required|max:2048',
-                    'image2' => 'image|required|max:2048',
-                    'image3' => 'image|required|max:2048',
-                    'image4' => 'image|nullable|max:2048',
-                    'image5' => 'image|nullable|max:2048',
-                    'image6' => 'image|nullable|max:2048',
+                    'image' => 'required|max:2048',
+                    'image.*' => 'mimes:jpg,jpeg,png',
                     'empresa' => 'required',
                     'provincia' => 'required',
                     'restringidos' => 'nullable',
@@ -219,48 +229,17 @@ class StoreController extends Controller
         
         
        // HANDLE IMAGES
-        if ($request->hasFile('image')) { // IMAGE 1
-            $file = $request->file('image');
+       foreach($request->file('image') as $file){
+        
+            
             $filename =$file->getClientOriginalName();
             $fileNewName = date('dmyhms').$filename;
-            $item->image = $fileNewName;
-            $path = $request->file('image')->storeAs('public/storage/assetItems/', $fileNewName);
-        }
-        if ($request->hasFile('image2')) { // IMAGE 2
-            $file2 = $request->file('image2');
-            $filename2 =$file2->getClientOriginalName();
-            $fileNewName2 = date('dmyhms').$filename2;
-            $item->image2 = $fileNewName2;
-            $path2 = $request->file('image2')->storeAs('public/storage/assetItems/', $fileNewName2);
-        } 
-        if ($request->hasFile('image3')) { // IMAGE 3
-            $file3 = $request->file('image3');
-            $filename3 =$file3->getClientOriginalName();
-            $fileNewName3 = date('dmyhms').$filename3;
-            $item->image3 = $fileNewName3;
-            $path3 = $request->file('image3')->storeAs('public/storage/assetItems/', $fileNewName3);
-        }
-        if ($request->hasFile('image4')) { // IMAGE 4
-            $file4 = $request->file('image4');
-            $filename4 =$file4->getClientOriginalName();
-            $fileNewName4 = date('dmyhms').$filename4;
-            $item->image4 = $fileNewName4;
-            $path4 = $request->file('image4')->storeAs('public/storage/assetItems/', $fileNewName4);
-        } else {$item->image4 = NULL;} // ELSE IMAGE 4 NULL
-        if ($request->hasFile('image5')) { // IMAGE 5
-            $file5 = $request->file('image5');
-            $filename5 =$file5->getClientOriginalName();
-            $fileNewName5 = date('dmyhms').$filename5;
-            $item->image5 = $fileNewName5;
-            $path5 = $request->file('image5')->storeAs('public/storage/assetItems/', $fileNewName5);
-        } else {$item->image5 = NULL;} // ELSE IMAGE 5 NULL
-        if ($request->hasFile('image6')) { // IMAGE 6
-            $file6 = $request->file('image6');
-            $filename6 =$file6->getClientOriginalName();
-            $fileNewName6 = date('dmyhms').$filename6;
-            $item->image6 = $fileNewName6;
-            $path6 = $request->file('image6')->storeAs('public/storage/assetItems/', $fileNewName6);
-        } else {$item->image6 = NULL;} // ELSE IMAGE 6 NULL
+            $data[] = $fileNewName; 
+            
+            $file->move(public_path().'/storage/assetItems/', $fileNewName);  
+       }
+        $item->image = json_encode($data);
+        
 
 
         
@@ -304,8 +283,12 @@ class StoreController extends Controller
     }
     public function thisItem(Store $myStore, Items $item)
     {
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
     if (Auth::user()->id == $myStore->user_id) {
-    $images = [$item->image, $item->image2, $item->image3, $item->image4, $item->image5, $item->image6];
+    $images = json_decode($item->image);
     
     return view('thisItem',[
     'item' => $item,
@@ -321,11 +304,21 @@ class StoreController extends Controller
     public function showItem(Store $myStore)
     {
         if (Auth::user()->id == $myStore->user_id) {
-        $myItems = Items::where('store_id', $myStore->store_id)->get();
+
+        $allItems = Items::where('store_id', $myStore->store_id)->get();
+        foreach ($allItems as $items) {
+            $items->image = json_decode($items->image);
         
+        }
+        
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         return view('myItem', [
-            'items' => $myItems,
-            'store' => $myStore
+            'items' => $allItems,
+            'store' => $myStore,
+            
             ]);
         } else {
             abort(404);
@@ -365,6 +358,10 @@ class StoreController extends Controller
         'Juguetes'
         ];
         sort($arr);
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         return view('editStore', [
             'store' => $myStore,
             'myCategory' => $arr
@@ -498,7 +495,10 @@ class StoreController extends Controller
 
 
     public function editItem(Store $myStore, Items $item) {
+        if(Auth::user()){
 
+            \Cart::session(Auth::user()->id);
+        }
     if (Auth::user()->id == $myStore->user_id) {
 
     return view('editarItem', [

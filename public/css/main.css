@@ -1,45 +1,52 @@
 /* MENU CSS */
-
+/* #007bff */
 #sticky {
     position: sticky;
     position: -webkit-sticky;
-  
-   
+
+
     top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    
-  }
+
+
+}
+
 .menu-container {
     border-bottom: 0.05em solid rgba(165, 165, 165, 0.658);
     box-shadow: 0.02em 0.1em #cccccca6;
     padding-bottom: 1.5em;
 
 }
+
 .mainPageImageTop {
-    width:100%;
-    max-height: 650px;     
-    z-index:-1; 
-    margin-bottom: -280px; 
+    width: 100%;
+    max-height: 650px;
+    z-index: -1;
+    margin-bottom: -280px;
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0));
 }
+
 .test-border {
     border: 1px solid red;
 }
+
 .containerForm {
     align-items: center;
 }
+
 .addAddress:hover {
     background-color: rgba(245, 245, 245, 0.87);
     text-decoration: none;
-    
-  }
-  .carousel-inner {
-      position: unset!important;
-      overflow: unset!important;
-  }
+
+}
+
+.carousel-inner {
+    position: unset !important;
+    overflow: unset !important;
+}
+
 .links>a {
 
     color: #636b6f;
@@ -51,10 +58,12 @@
     text-decoration: none;
     text-transform: uppercase;
 }
+
 .nav-link {
-    color: rgb(230, 230, 230)!important;
-    margin: 0 0.5em 0 0.5em!important;
+    color: rgb(230, 230, 230) !important;
+    margin: 0 0.5em 0 0.5em !important;
 }
+
 .title {
     display: inline-flex !important;
     font-size: 1.6em !important;
@@ -66,7 +75,7 @@
 /* MAIN BODY CSS LAYOUT */
 
 .main-container {
-    margin-bottom: 5em;
+    margin-bottom: 2em;
     background-color: white;
 }
 
@@ -110,21 +119,26 @@
 .searchItem:visited {
     color: black;
 }
-a:hover{
+
+a:hover {
     text-decoration: none;
 }
+
 /* mouse over link */
 .searchItem:hover {
     color: rgb(9, 9, 53);
     text-decoration: none;
 }
-.buttonHoverDEL:hover{
+
+.buttonHoverDEL:hover {
     color: red;
 
 }
+
 .buttonHoverEDIT:hover {
     color: #007bff;
 }
+
 /* selected link */
 .searchItem:active {
     color: rgb(9, 9, 53);
@@ -139,6 +153,7 @@ a:hover{
     margin: 0 1em 0 1em;
 
 }
+
 .sectionImage2 {
     height: 11em;
     width: auto;
@@ -146,6 +161,40 @@ a:hover{
     object-fit: fill;
     margin: 0.6em 1em 0 1em;
 
+}
+
+#CARTUP {
+    margin: 3em 0 0 0;
+}
+
+.CARTIT {
+    padding: 1em 1em 1em 1em !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid#007bff !important;
+    margin: 0 5em 0 5em;
+    position: relative;
+}
+
+.CARTIM {
+    min-height: 80px;
+    margin: 0 1.5em 0 1.5em;
+    max-height: auto
+}
+
+.CARTNM {
+    padding: 0 0 0 1em;
+}
+
+.CARTPR {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.CARTSEL {
+    height: 30px;
+    width: 60px;
+    padding: 0 0 0.4rem;
 }
 
 .card {
@@ -163,14 +212,14 @@ a:hover{
 }
 
 .cardContainer {
-    margin: 0 4em 4em 4em;
+    margin: 0 4em 1em 4em;
 
 }
 
 .cardbtn {
-    position: absolute;
-    top: 0px;
-    right: 15px;
+    display: inline;
+    margin: 1em 0 0 .3em;
+
 }
 
 .jumbotron-image {
@@ -240,11 +289,12 @@ a:hover{
     margin-top: 12px;
     ;
 }
+
 .addressBox {
-    width: 300px; 
-    height: 250px; 
+    width: 300px;
+    height: 250px;
     margin: 1em 1em 1em 1em;
-    
+
 }
 
 /* input[type="text"],

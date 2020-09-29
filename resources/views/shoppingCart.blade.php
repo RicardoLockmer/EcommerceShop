@@ -2,75 +2,180 @@
 
 @section('ShoppingCart')
 
-<h1>Mi Carrito</h1>
-
-@foreach($myCart as $item)
-
-<div class="card mb-1"
-    style="padding: 1em 1em 1em 1em; box-shadow:none; border-radius: 0; border-bottom: 2px solid rgba(184, 184, 184, 0.384)!important;">
-    <div class="row no-gutters">
-
-        {{-- FOTO DEL ITEM --}}
-
-        <div class="col-md-1 centerMyImages" style="min-height: 80px; margin: 0 1.5em 0 1.5em; max-height: auto">
-            <a href="/producto/{{$item->associatedModel->id}}">
-                <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;"
-                    src="{{Storage::URL('storage/assetItems/'.$item->associatedModel->image)}}"
-                    alt="{{$item->associatedModel->nombre}}">
-            </a>
-        </div>
-        {{-- ITEM NAME --}}
-        <div class="col-md-8">
-            <div class="card-body" style="padding: 0 0 0 1em;">
-                <a href="/producto/{{$item->associatedModel->id}}" class="searchItem">
-                    <h5 class="card-title" style="margin-bottom: 0!important;">
-                        {{$item->associatedModel->nombre}}
-                    </h5>
-                </a>
-
-
-
-                {{-- PRECIO --}}
-                <div class="card-text" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
-                    <small> &#8353; </small>{{number_format($item->associatedModel->precio, 0, '.', ',')}}
-
-                </div>
-                <small>
-                    Cantidad: x{{$item->quantity}}
+<div class="container">
+    <div style="margin: 2em 0 0 0;">
+        <h1>
+            Mi Carrito
+            @if(\Cart::getTotalQuantity() <= 1) <small class="text-muted" style="font-size: 24px;">
+                ({{\Cart::getTotalQuantity()}} Articulo)
                 </small>
+                @else
+                <small class="text-muted" style="font-size: 24px;">
+                    ({{\Cart::getTotalQuantity()}} Articulos)
+                </small>
+                @endif
+
+        </h1>
+    </div>
+    <div style="margin: 3em 0 0 0;">
+
+
+        @if(count($myCart) > 0)
+
+        <form action="/updateCart" method="POST" name="CARTUP" id="CARTUP" style="position: flex;">
+            @csrf
+
+            @foreach($myCart as $item)
+
+            <div class="  CARTIT" id="{{$item->id}}">
+                <div class="row no-gutters">
+
+                    {{-- FOTO DEL ITEM --}}
+
+                    <div class="col-md-1 centerMyImages CARTIM">
+                        <a href="/producto/{{$item->associatedModel->id}}">
+                            <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$item->associatedModel->image[0])}}" alt="{{$item->associatedModel->nombre}}">
+                        </a>
+                    </div>
+
+                    {{-- ITEM NAME --}}
+                    <div class="col-md-8">
+                        <div class="card-body CARTNM">
+                            <a href="/producto/{{$item->associatedModel->id}}" class="searchItem">
+                                <h5 class="card-title" style="margin-bottom: 0!important;">
+                                    {{$item->associatedModel->nombre}}
+                                </h5>
+                            </a>
 
 
 
+                            {{-- PRECIO --}}
+                            <div class="card-text CARTPR">
+                                <small> &#8353; </small>{{number_format($item->price, 0, '.', ',')}}
 
-                {{-- SHIPS TO PART --}}
+                            </div>
+                            @if ($item->associatedModel->cantidad >= 1)
 
 
-                <p class="card-text" style="position: aboslute; bottom:0; right:0;">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-seam text-muted"
-                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            Cantidad: x
+                            <select class="custom-select col-md-2 CARTSEL cantidad" name="cantidad" id="{{$item->id}}">
 
-                        <path fill-rule="evenodd"
-                            d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                                <option id="CARTSLTD" value="{{$item->quantity}}" selected>
+                                    {{$item->quantity}}
+                                </option>
+                                @for ($i = 1; $i <= $item->associatedModel->cantidad; $i++ )
+                                    <option value="{{$i}}">
+                                        {{$i}}
+                                    </option>
+                                    @endfor
+                            </select>
+                            <input type="text" name="DTRID" id="DTRID" value="{{$item->id}}" hidden>
 
-                    </svg>
-                    <small class="text-muted">
-                        Envió a todo Costa Rica.
-                    </small>
-                </p>
+                            @else
+                            <small style="color:red;">
+                                No disponible
+                            </small>
+                            @endif
+                            <br>
+                            <small>
+
+                                <a class="btn CARTDL buttonHoverDEL" style="font-size: 15px; margin-left: 0!important; padding-left: 0!important; padding-right: 5px!important;" name="cantidad" id="{{$item->id}}"> Eliminar</a>|<a href="/producto/{{$item->associatedModel->id}}" class="btn buttonHoverEDIT" style="font-size: 15px; margin-left: 0!important; padding-left: 5px!important;" name="cantidad" id="{{$item->id}}"> Ver </a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
 
 
             </div>
-        </div>
-        <form action="/DeletecartItem" method="POST"> {{-- FALTA CREAR EL ROUTE --}}
-            @csrf
-            <a style="position: absolute; top: 15px; right:25px;" class="btn btn-danger">Quitar</a>
+
+
+            @endforeach
 
         </form>
+        @else
+        <div style="padding: 6em 0 6em 0; border-bottom: 2px solid #007bff;" class="text-muted CARTIT">
+            No tiene articulos en su carrito.
+        </div>
+        @endif
+    </div>
+
+    <div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT">
+
+        <h5><strong>SubTotal:</strong>
+            &#8353; {{number_format($Total, 0, '.', ',')}}
+        </h5>
+    </div>
+    <div style="text-align: center; margin:75px 100px 45px 100px;">
+
+        <small class="text-muted">
+            El precio y la disponibilidad de los artículos en DeTodo.com están sujetos a cambios. El carrito es un lugar
+            temporal para almacenar una lista de sus artículos y refleja el precio más reciente de cada artículo.
+        </small><br>
+
+    </div>
+    <div style="text-align: center">
+        <small>
+            DeTodo.com
+        </small>
+        <p>Aqui deberia ir el FOOTER</p>
     </div>
 </div>
 
-@endforeach
 
-<h1>SubTotal: &#8353; {{number_format($Total, 0, '.', ',')}}</h1>
 
+@endsection
+
+
+
+
+
+
+
+
+@section('cartJQ')
+
+<script type="text/javascript">
+    $('select').on('change', function() {
+        var selectedValue = $(this).val();
+        var DTRID = $(this).attr('id');
+        var token = $('input[name=_token]').val();
+        $.ajax({
+            type: 'POST'
+            , url: '/updateCart'
+            , data: {
+                '_token': token
+                , 'cantidad': selectedValue
+                , 'rowId': DTRID
+            , }
+            , success: function(data) {
+                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data + '  </h5></div>');
+
+            }
+        });
+    })
+
+</script>
+<script type="text/javascript">
+    $('.CARTDL').on('click', function() {
+        var DTRID = $(this).attr('id');
+        var token = $('input[name=_token]').val();
+        $.ajax({
+            type: 'post'
+            , url: '/deleteCartItem'
+            , data: {
+                '_token': token
+                , 'DTRID': DTRID,
+
+            }
+            , success: function(data) {
+                $('#' + DTRID + '').remove();
+                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data + '  </h5></div>');
+            }
+
+        })
+
+    })
+
+</script>
 @endsection

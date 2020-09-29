@@ -12,18 +12,15 @@
 <div class='container'>
     <div class="centerMyImages">
 
-        <a class="column myProduct btn centerMyImages" style="border: 1px solid rgb(192, 192, 192);"
-            href="/negocio/{{$store->nombreNegocio}}/nuevo-producto">
+        <a class="column myProduct btn centerMyImages" style="border: 1px solid rgb(192, 192, 192);" href="/negocio/{{$store->nombreNegocio}}/nuevo-producto">
             agregar producto
         </a>
 
-        <a href="/negocio/{{$store->nombreNegocio}}/editar" class='column myProduct btn centerMyImages'
-            style="border: 1px solid rgb(192, 192, 192);">
+        <a href="/negocio/{{$store->nombreNegocio}}/editar" class='column myProduct btn centerMyImages' style="border: 1px solid rgb(192, 192, 192);">
             Editar Información
         </a>
 
-        <a class='column myProduct btn centerMyImages' href="/negocio/{{$store->nombreNegocio}}/productos/"
-            style="border: 1px solid rgb(192, 192, 192);">
+        <a class='column myProduct btn centerMyImages' href="/negocio/{{$store->nombreNegocio}}/productos/" style="border: 1px solid rgb(192, 192, 192);">
             mis productos
         </a>
 
@@ -42,8 +39,7 @@
                 <div class="myCards">
                     <div class="card-block">
 
-                        <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}"><img class="sectionImage2 "
-                                src="{{ Storage::URL('/storage/assetItems/'.$item->image) }}" alt=""></a>
+                        <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}"><img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt=""></a>
                     </div>
                 </div>
                 @endforeach

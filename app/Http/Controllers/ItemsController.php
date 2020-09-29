@@ -54,7 +54,10 @@ class ItemsController extends Controller
     {   
         
         $terms = explode(" ", $item->descripcion);
-        
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         foreach ($terms as $q) {
             $moreitems = Items::where( 'nombre', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
@@ -65,6 +68,9 @@ class ItemsController extends Controller
 
              
             }
+            foreach ($moreitems as $more) {
+                $more->image = json_decode($more->image);
+            }
         if (Auth::user()){
     // SHIPPING LOGIC
         $user =Auth::user();
@@ -73,7 +79,8 @@ class ItemsController extends Controller
             $user = Auth::guest();
             $userAddressCurrent = false;
         }
-        $images = [$item->image, $item->image2, $item->image3, $item->image4, $item->image5, $item->image6];
+        $images = json_decode($item->image);
+        $item->image = json_decode($item->image);
         $shipping = $item->shipping;
         $decodeProvincia = json_decode($shipping->provincia);
         

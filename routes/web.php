@@ -21,6 +21,8 @@ Route::get('producto/{item}', 'ItemsController@show');
 //CART ROUTES
 Route::get('/ShoppingCart', 'ShoppingController@index');
 Route::post('/shoppingCart', 'ShoppingController@store');
+Route::post('/updateCart', 'ShoppingController@update');
+Route::post('/deleteCartItem', 'ShoppingController@destroy');
 
 // MAIN ROUTES
 // MY STORE ROUTE
