@@ -6,14 +6,14 @@
     <div style="margin: 2em 0 0 0;">
         <h1 id="CARTQTY">
             Mi Carrito
-            @if(\Cart::getTotalQuantity() <= 1) <small class="text-muted" style="font-size: 24px;">
+            @if(\Cart::getTotalQuantity() == 1) <small class="text-muted" style="font-size: 24px;">
                 ({{\Cart::getTotalQuantity()}} Articulo)
-                </small>
-                @else
-                <small class="text-muted" style="font-size: 24px;">
-                    ({{\Cart::getTotalQuantity()}} Articulos)
-                </small>
-                @endif
+            </small>
+            @else
+            <small class="text-muted" style="font-size: 24px;">
+                ({{\Cart::getTotalQuantity()}} Articulos)
+            </small>
+            @endif
 
         </h1>
     </div>

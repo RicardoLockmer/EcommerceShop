@@ -13,10 +13,13 @@
                 <img class="img-thumbnail mainImage" style="width: 100% ; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
             </a>
         </div>
-        {{-- COLUMNA DEL INFO --}}
-        <div class="col-5" style="margin: 3em 0 0 6em;">
-            <article style="margin: 0 0 1em 0">
 
+        {{-- COLUMNA DEL INFO --}}
+        <div class="col-5" style="margin: 3em 0 0 1em;">
+            <article style="margin: 0 0 1em 0">
+                <div class="magnifier-preview " style=" height: 70vh;" id="preview">
+
+                </div>
                 <h1 style="font-size: 28px;margin-bottom: 0;">
                     {{$item->nombre}}
                 </h1>
@@ -302,7 +305,7 @@
     m.attach({
         largeWrapper: 'preview'
         , thumb: '.mainImage'
-        , mode: 'inside'
+        , mode: 'outside'
         , zoom: 2
         , zoomable: false
     })
@@ -319,6 +322,7 @@
     })
 
 </script>
+
 
 
 @endsection

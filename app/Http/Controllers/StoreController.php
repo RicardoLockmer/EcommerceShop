@@ -156,12 +156,13 @@ class StoreController extends Controller
         }
         if (Auth::user()->id == $myStore->user_id) {
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
-            
+            $units = ['Metros (mts)'=>'mts', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz'];
+            arsort($units);
             
             return view('crearItem', [
                 'store' => $myStore,
                 'categories' => $myCategories,
-               
+               'units' => $units,
             ]);
 
         } else {
@@ -178,7 +179,8 @@ class StoreController extends Controller
                     'categoria' => 'required',
                     'subcategoria' => 'required',
                     'precio' => 'required',
-                    'size' => 'required',
+                    'size' => 'nullable',
+                    'unit' => 'required',
                     'cantidad'=>'required',
                     'color' => 'required',
                     'marca' => 'required',
@@ -190,8 +192,8 @@ class StoreController extends Controller
                     'store_id' => 'required',
                     'updated_at' => 'nullable',
                     'created_at' => 'nullable',
-                    'image' => 'required|max:2048',
-                    'image.*' => 'mimes:jpg,jpeg,png',
+                    'image' => 'array|max:8|min:1|required',
+                    'image.*' => 'mimes:jpg,jpeg,png,webp|max:2048',
                     'empresa' => 'required',
                     'provincia' => 'required',
                     'restringidos' => 'nullable',
@@ -213,7 +215,12 @@ class StoreController extends Controller
         $item->categoria = $request->categoria;
         $item->subcategoria = $request->subcategoria;
         $item->precio = $request->precio;
-        $item->size = $request->size;
+        if ($request->size != null){
+            $item->size = $request->size.' '.$request->unit;
+
+        } else {
+            $item->size = $request->unit;
+        }
         $item->Specs = json_encode($request->Specs);
         $item->cantidad = $request->cantidad;
         $item->color = $request->color;

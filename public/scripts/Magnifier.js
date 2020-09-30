@@ -1,25 +1,25 @@
 /**
-* Magnifier.js is a Javascript library enabling magnifying glass effect on an images.
-*
-* Features
-*
-* Zoom in / out functionality using mouse wheel
-* Setting options via Javascript or data attributes
-* Magnified image can be displayed in the lens itself or outside of it in a wrapper
-* Attachment to multiple images with single call
-* Attachment of user defined functions for thumbnail entering, moving and leaving and image zooming events
-* Display loading text while the large image is being loaded, and switch to lens once its loaded
-*
-* Magnifier.js uses Event.js as a cross-browser event handling wrapper, which is available at
-* Github and JSClasses.org:
-*
-* Github - https://github.com/mark-rolich/Event.js
-* JS Classes - http://www.jsclasses.org/package/212-JavaScript-Handle-events-in-a-browser-independent-manner.html
-*
-* Works in Chrome, Firefox, Safari, IE 7, 8, 9 & 10.
-*
-* @author Mark Rolich <mark.rolich@gmail.com>
-*/
+ * Magnifier.js is a Javascript library enabling magnifying glass effect on an images.
+ *
+ * Features
+ *
+ * Zoom in / out functionality using mouse wheel
+ * Setting options via Javascript or data attributes
+ * Magnified image can be displayed in the lens itself or outside of it in a wrapper
+ * Attachment to multiple images with single call
+ * Attachment of user defined functions for thumbnail entering, moving and leaving and image zooming events
+ * Display loading text while the large image is being loaded, and switch to lens once its loaded
+ *
+ * Magnifier.js uses Event.js as a cross-browser event handling wrapper, which is available at
+ * Github and JSClasses.org:
+ *
+ * Github - https://github.com/mark-rolich/Event.js
+ * JS Classes - http://www.jsclasses.org/package/212-JavaScript-Handle-events-in-a-browser-independent-manner.html
+ *
+ * Works in Chrome, Firefox, Safari, IE 7, 8, 9 & 10.
+ *
+ * @author Mark Rolich <mark.rolich@gmail.com>
+ */
 var Magnifier = function (evt, options) {
     "use strict";
 
@@ -42,26 +42,26 @@ var Magnifier = function (evt, options) {
             zoomMin: 1.1,
             zoomMax: 5,
             mode: 'outside',
-            largeWrapperId: (gOptions.largeWrapper !== undefined)
-                ? (gOptions.largeWrapper.id || null)
-                : null,
+            largeWrapperId: (gOptions.largeWrapper !== undefined) ?
+                (gOptions.largeWrapper.id || null) :
+                null,
             status: 0,
             zoomAttached: false,
-            zoomable: (gOptions.zoomable !== undefined)
-                ? gOptions.zoomable
-                : false,
-            onthumbenter: (gOptions.onthumbenter !== undefined)
-                ? gOptions.onthumbenter
-                : null,
-            onthumbmove: (gOptions.onthumbmove !== undefined)
-                ? gOptions.onthumbmove
-                : null,
-            onthumbleave: (gOptions.onthumbleave !== undefined)
-                ? gOptions.onthumbleave
-                : null,
-            onzoom: (gOptions.onzoom !== undefined)
-                ? gOptions.onzoom
-                : null
+            zoomable: (gOptions.zoomable !== undefined) ?
+                gOptions.zoomable :
+                false,
+            onthumbenter: (gOptions.onthumbenter !== undefined) ?
+                gOptions.onthumbenter :
+                null,
+            onthumbmove: (gOptions.onthumbmove !== undefined) ?
+                gOptions.onthumbmove :
+                null,
+            onthumbleave: (gOptions.onthumbleave !== undefined) ?
+                gOptions.onthumbleave :
+                null,
+            onzoom: (gOptions.onzoom !== undefined) ?
+                gOptions.onzoom :
+                null
         },
         pos = {
             t: 0,
@@ -74,15 +74,15 @@ var Magnifier = function (evt, options) {
         curIdx = '',
         curLens = null,
         curLarge = null,
-        gZoom = (gOptions.zoom !== undefined)
-                    ? gOptions.zoom
-                    : curData.zoom,
-        gZoomMin = (gOptions.zoomMin !== undefined)
-                    ? gOptions.zoomMin
-                    : curData.zoomMin,
-        gZoomMax = (gOptions.zoomMax !== undefined)
-                    ? gOptions.zoomMax
-                    : curData.zoomMax,
+        gZoom = (gOptions.zoom !== undefined) ?
+        gOptions.zoom :
+        curData.zoom,
+        gZoomMin = (gOptions.zoomMin !== undefined) ?
+        gOptions.zoomMin :
+        curData.zoomMin,
+        gZoomMax = (gOptions.zoomMax !== undefined) ?
+        gOptions.zoomMax :
+        curData.zoomMax,
         gMode = gOptions.mode || curData.mode,
         data = {},
         inBounds = false,
@@ -123,12 +123,12 @@ var Magnifier = function (evt, options) {
 
             if (idx !== '') {
                 switch (type) {
-                case '#':
-                    result = document.getElementById(idx);
-                    break;
-                case '.':
-                    result = getElementsByClass(idx);
-                    break;
+                    case '#':
+                        result = document.getElementById(idx);
+                        break;
+                    case '.':
+                        result = getElementsByClass(idx);
+                        break;
                 }
             }
 
@@ -148,7 +148,7 @@ var Magnifier = function (evt, options) {
             curLens.style.width = curData.lensW + 'px';
             curLens.style.height = curData.lensH + 'px';
             curLens.style.backgroundPosition = '-' + curData.lensBgX + 'px -' +
-                                                curData.lensBgY + 'px';
+                curData.lensBgY + 'px';
 
             curLarge.style.left = '-' + curData.largeL + 'px';
             curLarge.style.top = '-' + curData.largeT + 'px';
@@ -169,7 +169,7 @@ var Magnifier = function (evt, options) {
             } else if (data[idx].status === 2) {
                 lens.className = 'magnifier-lens hidden';
                 lens.removeChild(lens.childNodes[0]);
-                lens.style.background = 'url(' + thumb.src + ') no-repeat 0 0 scroll';
+
 
                 large.id = idx + '-large';
                 large.style.width = data[idx].largeW + 'px';
@@ -189,17 +189,17 @@ var Magnifier = function (evt, options) {
         getMousePos = function () {
             var xPos = pos.x - curData.x,
                 yPos = pos.y - curData.y,
-                t    = 0,
-                l    = 0;
+                t = 0,
+                l = 0;
 
             inBounds = (
-                xPos < 0 ||
-                yPos < 0 ||
-                xPos > curData.w ||
-                yPos > curData.h
-            )
-                ? false
-                : true;
+                    xPos < 0 ||
+                    yPos < 0 ||
+                    xPos > curData.w ||
+                    yPos > curData.h
+                ) ?
+                false :
+                true;
 
             l = xPos - (curData.lensW / 2);
             t = yPos - (curData.lensH / 2);
@@ -359,8 +359,8 @@ var Magnifier = function (evt, options) {
                 curLens.style.left = pos.l + 'px';
                 curLens.style.top = pos.t + 'px';
                 curLens.style.backgroundPosition = '-' +
-                                                curData.lensBgX + 'px -' +
-                                                curData.lensBgY + 'px';
+                    curData.lensBgX + 'px -' +
+                    curData.lensBgY + 'px';
 
                 var handler = curData.onthumbmove;
 
@@ -407,7 +407,9 @@ var Magnifier = function (evt, options) {
             throw {
                 name: 'Magnifier error',
                 message: 'Please set thumbnail',
-                toString: function () {return this.name + ": " + this.message; }
+                toString: function () {
+                    return this.name + ": " + this.message;
+                }
             };
         }
 
@@ -435,12 +437,12 @@ var Magnifier = function (evt, options) {
             return false;
         }
 
-        var thumbObj    = new Image(),
-            largeObj    = new Image(),
-            thumb       = options.thumb,
-            idx         = thumb.id,
-            zoomable    = null,
-            largeUrl    = null,
+        var thumbObj = new Image(),
+            largeObj = new Image(),
+            thumb = options.thumb,
+            idx = thumb.id,
+            zoomable = null,
+            largeUrl = null,
             largeWrapper = (
                 $('#' + options.largeWrapper) ||
                 $('#' + thumb.getAttribute('data-large-img-wrapper')) ||
@@ -450,23 +452,23 @@ var Magnifier = function (evt, options) {
             zoomMin = options.zoomMin || thumb.getAttribute('data-zoom-min') || gZoomMin,
             zoomMax = options.zoomMax || thumb.getAttribute('data-zoom-max') || gZoomMax,
             mode = options.mode || thumb.getAttribute('data-mode') || gMode,
-            onthumbenter = (options.onthumbenter !== undefined)
-                        ? options.onthumbenter
-                        : curData.onthumbenter,
-            onthumbleave = (options.onthumbleave !== undefined)
-                        ? options.onthumbleave
-                        : curData.onthumbleave,
-            onthumbmove = (options.onthumbmove !== undefined)
-                        ? options.onthumbmove
-                        : curData.onthumbmove,
-            onzoom = (options.onzoom !== undefined)
-                        ? options.onzoom
-                        : curData.onzoom;
+            onthumbenter = (options.onthumbenter !== undefined) ?
+            options.onthumbenter :
+            curData.onthumbenter,
+            onthumbleave = (options.onthumbleave !== undefined) ?
+            options.onthumbleave :
+            curData.onthumbleave,
+            onthumbmove = (options.onthumbmove !== undefined) ?
+            options.onthumbmove :
+            curData.onthumbmove,
+            onzoom = (options.onzoom !== undefined) ?
+            options.onzoom :
+            curData.onzoom;
 
         if (options.large === undefined) {
-            largeUrl = (options.thumb.getAttribute('data-large-img-url') !== null)
-                            ? options.thumb.getAttribute('data-large-img-url')
-                            : options.thumb.src;
+            largeUrl = (options.thumb.getAttribute('data-large-img-url') !== null) ?
+                options.thumb.getAttribute('data-large-img-url') :
+                options.thumb.src;
         } else {
             largeUrl = options.large;
         }
@@ -475,7 +477,9 @@ var Magnifier = function (evt, options) {
             throw {
                 name: 'Magnifier error',
                 message: 'Please specify large image wrapper DOM element',
-                toString: function () {return this.name + ": " + this.message; }
+                toString: function () {
+                    return this.name + ": " + this.message;
+                }
             };
         }
 
