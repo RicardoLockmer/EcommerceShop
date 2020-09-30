@@ -43,25 +43,19 @@ var Magnifier = function (evt, options) {
             zoomMax: 5,
             mode: 'outside',
             largeWrapperId: (gOptions.largeWrapper !== undefined) ?
-                (gOptions.largeWrapper.id || null) :
-                null,
+                (gOptions.largeWrapper.id || null) : null,
             status: 0,
             zoomAttached: false,
             zoomable: (gOptions.zoomable !== undefined) ?
-                gOptions.zoomable :
-                false,
+                gOptions.zoomable : false,
             onthumbenter: (gOptions.onthumbenter !== undefined) ?
-                gOptions.onthumbenter :
-                null,
+                gOptions.onthumbenter : null,
             onthumbmove: (gOptions.onthumbmove !== undefined) ?
-                gOptions.onthumbmove :
-                null,
+                gOptions.onthumbmove : null,
             onthumbleave: (gOptions.onthumbleave !== undefined) ?
-                gOptions.onthumbleave :
-                null,
+                gOptions.onthumbleave : null,
             onzoom: (gOptions.onzoom !== undefined) ?
-                gOptions.onzoom :
-                null
+                gOptions.onzoom : null
         },
         pos = {
             t: 0,
@@ -164,12 +158,12 @@ var Magnifier = function (evt, options) {
                 textWrapper.className = 'magnifier-loader-text';
                 lens.className = 'magnifier-loader hidden';
 
-                textWrapper.appendChild(document.createTextNode('Loading...'));
+                textWrapper.appendChild(document.createTextNode(''));
                 lens.appendChild(textWrapper);
             } else if (data[idx].status === 2) {
                 lens.className = 'magnifier-lens hidden';
-                lens.removeChild(lens.childNodes[0]);
 
+                lens.style.background = '';
 
                 large.id = idx + '-large';
                 large.style.width = data[idx].largeW + 'px';

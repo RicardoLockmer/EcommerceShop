@@ -54,6 +54,7 @@
     height: 40vh;
     position: absolute;
     overflow: hidden !important;
+    background: transparent !important;
 }
 
 .magnifier-preview img {
