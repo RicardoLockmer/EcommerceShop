@@ -1,11 +1,20 @@
 <?php
 
 namespace App;
-
+ 
 use Illuminate\Database\Eloquent\Model;
 
 class Items extends Model
 {
+    public function itemColors() {
+        return $this->hasMany(itemColors::class);
+    }
+    public function itemSizes(){
+        return $this->hasMany(itemSizes::class);
+    }
+    public function itemCantidades(){
+        return $this->hasMany(itemCantidades::class);
+    }
     public function shipping(){
         return $this->hasOne(Shipping::class, 'items_id');
     }

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Items;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class MainPageController extends Controller
+use App\itemSizes;
+use Illuminate\Http\Request;
+
+class ItemSizesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,19 +14,8 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        $myTech = Items::take(15)->where('subcategoria', 'Computadoras')->latest()->get();
-        
-        $paraMujer = Items::take(15)->where('categoria', 'Ropa para Mujer')->latest()->get();
-        if(Auth::user()){
-
-            \Cart::session(Auth::user()->id);
-        }
-        return view('mainPage', [
-            'techItems' => $myTech,
-            
-            'mujerItems' => $paraMujer
-        ]);
-    } 
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -52,10 +41,10 @@ class MainPageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\itemSizes  $itemSizes
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(itemSizes $itemSizes)
     {
         //
     }
@@ -63,10 +52,10 @@ class MainPageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\itemSizes  $itemSizes
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(itemSizes $itemSizes)
     {
         //
     }
@@ -75,10 +64,10 @@ class MainPageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\itemSizes  $itemSizes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, itemSizes $itemSizes)
     {
         //
     }
@@ -86,10 +75,10 @@ class MainPageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\itemSizes  $itemSizes
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(itemSizes $itemSizes)
     {
         //
     }
