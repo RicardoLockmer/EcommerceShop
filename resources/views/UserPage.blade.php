@@ -40,7 +40,7 @@
             </a>
 
 
-            <a class='column myProduct btn centerMyImages' href="###" style="border: 1px solid rgb(192, 192, 192);">
+            <a class='column myProduct btn centerMyImages' href="{{route('comoVender')}}" style="border: 1px solid rgb(192, 192, 192);">
                 Como Vender
             </a>
 

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', 'MainPageController@index');
 Route::get('destacados/{item}', 'MainPageController@show');
 Route::get('producto/{item}', 'ItemsController@show');
+
  
 //CART ROUTES
 Route::get('/ShoppingCart', 'ShoppingController@index');
@@ -24,7 +25,11 @@ Route::post('/shoppingCart', 'ShoppingController@store');
 Route::post('/updateCart', 'ShoppingController@update');
 Route::post('/deleteCartItem', 'ShoppingController@destroy');
 
-// MAIN ROUTES
+// MAINPAGE ROUTES
+Route::get('/paraHombres', 'CategoryController@paraHombres');
+Route::get('/ComoVender', 'MainPageController@comoVender')->name('comoVender');
+Route::get('Categorias/{categoria}', 'CategoriasController@index')->name('categorias');
+
 // MY STORE ROUTE
 Route::get('/negocio/{myStore:nombreNegocio}', 'StoreController@index')->middleware('auth');
 

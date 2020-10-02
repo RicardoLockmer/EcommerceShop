@@ -3,30 +3,33 @@
 namespace App\Http\Controllers;
 use App\Items;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class MainPageController extends Controller
+class CategoriasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($categoria)
     {
-        $myTech = Items::take(15)->where('subcategoria', 'Computadoras')->latest()->get();
-        $destacados = Items::take(15)->where('rep', '>', 100)->orderBy('rep', 'desc')->get();
-        $paraMujer = Items::take(15)->where('categoria', 'Ropa para Mujer')->latest()->get();
-        if(Auth::user()){
+        $q = $categoria;
+        $items = Items::where ( 'nombre', 'LIKE', '%' . $q . '%' )
+            ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
+            ->orWhere('categoria', 'LIKE', '%'.$q.'%')
+            ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
+            ->orWhere('marca', 'LIKE', '%'.$q.'%')
+            ->orWhere('nombreNegocio', 'LIKE', '%'.$q.'%')
+            ->get();
 
-            \Cart::session(Auth::user()->id);
+        foreach ($items as $item ) {
+            $item->image = json_decode($item->image);
         }
-        return view('mainPage', [
-            'techItems' => $myTech,
-            'mejores' => $destacados,
-            'mujerItems' => $paraMujer
+
+        return view('Categorias', [
+            'items' => $items
         ]);
-    } 
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -92,8 +95,5 @@ class MainPageController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function comoVender(){
-        return view('comoVender');
     }
 }

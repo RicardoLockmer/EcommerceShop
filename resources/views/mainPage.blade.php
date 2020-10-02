@@ -39,20 +39,17 @@
     <div class="container">
         <div class="row" style="text-align: center;">
 
-            <a href="###" class="card col centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/hombre" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Hombres
                 </h1>
             </a>
-            <a href="###" class="card col centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/mujer" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Mujeres
                 </h1>
             </a>
-            <a href="###" class="card col centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/niño" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Niños
                 </h1>
@@ -73,8 +70,7 @@
                 <div class="noWrap">
                     @foreach($mejores as $mejor)
                     <a href="/producto/{{$mejor->id}}">
-                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}"
-                            alt="">
+                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}" alt="">
                     </a>
                     @endforeach
 
@@ -91,20 +87,17 @@
     <div class="container">
         <div class="row" style="text-align: center;">
 
-            <a href="###" class="card col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ban1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ban1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Baños
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ofi1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ofi1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Oficina
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Exterior
                 </h1>
@@ -114,20 +107,17 @@
         <br>
         <div class="row" style="text-align: center;">
 
-            <a href="###" class="card col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Hogar
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Habitación
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Decoración
                 </h1>
@@ -147,8 +137,7 @@
                 <div class="noWrap">
                     @foreach($mujerItems as $mujeres)
                     <a href="/producto/{{$mujeres->id}}">
-                        <img class="sectionImage2" src="{{ Storage::URL('/storage/assetItems/'.$mujeres->image) }}"
-                            alt="">
+                        <img class="sectionImage2" src="{{ Storage::URL('/storage/assetItems/'.$mujeres->image) }}" alt="">
                     </a>
                     @endforeach
                 </div>
@@ -167,8 +156,7 @@
                 <div class="noWrap">
                     @foreach($techItems as $tech)
                     <a href="/producto/{{$tech->id}}">
-                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$tech->image) }}"
-                            alt="">
+                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$tech->image) }}" alt="">
 
                         @endforeach
                 </div>

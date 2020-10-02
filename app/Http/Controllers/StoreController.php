@@ -133,11 +133,9 @@ class StoreController extends Controller
             $newStore->tyc = $request->tyc;
             $newStore->created_at = date('dmy');
             $newStore->cedulaJuridica = $request->cedulaJuridica;
-            if($request->BizE != NULL) {
+            
                 $newStore->email = $request->BizE;
-            } else {
-                $newStore->email = Auth::user()->email;
-            }
+             
             $newStore->save();
             
             $newBiz = User::find($newStore->user_id);
@@ -193,7 +191,7 @@ class StoreController extends Controller
                     'updated_at' => 'nullable',
                     'created_at' => 'nullable',
                     'image' => 'array|max:8|min:1|required',
-                    'image.*' => 'mimes:jpg,jpeg,png,webp|max:2048',
+                    'image.*' => 'mimes:jpg,jpeg,png|max:2048',
                     'empresa' => 'required',
                     'provincia' => 'required',
                     'restringidos' => 'nullable',

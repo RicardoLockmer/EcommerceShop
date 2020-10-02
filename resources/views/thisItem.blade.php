@@ -103,7 +103,7 @@
             </div>
         </div>
     </div>
-    @if($item->Specs)
+    @if($item->Specs != 'null')
     <div class="card mb-4 " style="padding-top: 1em;">
 
         <div class="col">

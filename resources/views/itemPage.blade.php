@@ -230,11 +230,8 @@
 {{-- FINAL DE BUY CART BUTTONS --}}
 
 </div>
-
 </div>
-
-
-@if($item->Specs)
+@if($item->Specs != 'null')
 <div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
 
     <div class="content">

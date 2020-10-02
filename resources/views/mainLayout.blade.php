@@ -41,7 +41,7 @@
 
             @guest
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">
+                <a class="nav-link" href="##">
                     {{ __('Categorias') }}
                 </a>
             </li>
@@ -60,7 +60,11 @@
             @endif
             @else
             @if(Auth::user()->nombreNegocio == NULL)
-
+            <li class="nav-item">
+                <a class="nav-link" href="##">
+                    {{ __('Categorias') }}
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/perfil/{{Auth::user()->name}}">
                     Hola, {{ Auth::user()->name }} <span></span>
@@ -131,7 +135,7 @@
 
             @else
             <li class="nav-item">
-                <a class="nav-link" href="/iniciar-mi-negocio" style="border: 1px solid rgb(192, 192, 192);  border-radius: 5px; ">
+                <a class="nav-link" href="{{route('comoVender')}}" style="border: 1px solid rgb(192, 192, 192);  border-radius: 5px; ">
                     Como Vender
                 </a>
             </li>
@@ -139,7 +143,7 @@
 
             @else
             <li class="nav-item">
-                <a class="nav-link" href="/iniciar-mi-negocio" style="border: 1px solid rgb(192, 192, 192);  border-radius: 5px; ">
+                <a class="nav-link" href="{{route('comoVender')}}" style="border: 1px solid rgb(192, 192, 192);  border-radius: 5px; ">
                     Como Vender
                 </a>
             </li>
@@ -154,13 +158,14 @@
     {{-- CONTENT --}}
     <div class="main-container">
         {{-- USER PAGE --}}
+
         @yield('myUserPage')
         @yield('addAddress')
         @yield('newAddressForm')
         @yield('EditAddress')
         {{-- SEARCH INFO --}}
         @yield('mainSearch')
-
+        @yield('categorias')
         {{-- ??? no me acuerdo --}}
         @yield('loginContent')
 
@@ -186,7 +191,7 @@
 
         {{-- Main Paige --}}
         @yield('jumbotron')
-
+        @yield('comoVender')
         @yield('cards')
 
         @yield('productosDestacados')
