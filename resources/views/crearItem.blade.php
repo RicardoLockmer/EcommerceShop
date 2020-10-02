@@ -78,8 +78,9 @@
 
                             <div class="control">
                                 <input class="form-control 
-                                            @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text"
-                                    placeholder="Nombre del Producto" value="{{ old('nombre') }}" maxlength="25">
+                                                @error('nombre') is-invalid @enderror" name="nombre" id="nombre"
+                                    type="text" placeholder="Nombre del Producto" value="{{ old('nombre') }}"
+                                    maxlength="25">
                             </div>
                         </div>
                     </div>
@@ -87,19 +88,15 @@
                     {{-- FINAL NOMBRE DEL PRODUCTO --}}
 
                     <br>
-                    {{-- IMAGENES 1-2 --}}
-                    <label class="" for="image"><strong>Imagenes</strong></label>
                     <div class='form-row' style="width: auto;">
 
                         <div class="newbiz col">
                             <div class="custom-file">
 
                                 <input class="custom-file-input 
-                                            @error('image[]') is-invalid @enderror" type="file" name="image[]"
-                                    onchange="document.getElementById('image[]').src = window.URL.createObjectURL(this.files[0])"
-                                    multiple>
+                                        @error('image[]') is-invalid @enderror" type="file" name="image[]"
+                                    id="gallery-photo-add" multiple>
                                 <label class="custom-file-label" for="image[]" data-browse="Elegir">Imagenes</label>
-
 
                             </div>
                         </div>
@@ -107,26 +104,8 @@
                     </div>
 
                     {{-- IMAGENES PREVIEW --}}
-                    <div class="form-row ">
-                        <span class="file-name col centerMyImages" style='height:100px; width: 70px; text-align:center;'>
-                            <img id="image" style='height:90px;' />
-                        </span>
-                        <span class="file-name col centerMyImages" style='height:100px; text-align:center;'>
-                            <img id="image2" style='height:90px;' />
-                        </span>
-                        <span class="file-name col centerMyImages" style='height:100px; text-align:center;'>
-                            <img id="image3" style='height:90px;' />
-                        </span>
-                        <span class="file-name col centerMyImages" style='height:100px; text-align:center;'>
-                            <img id="image4" style='height:90px;' />
-                        </span>
-                        <span class="file-name col centerMyImages" style='height:100px; text-align:center;'>
-                            <img id="image5" style='height:90px;' />
-                        </span>
-                        <span class="file-name col centerMyImages" style='height:100px; text-align:center;'>
-                            <img id="image6" style='height:90px;' />
-                        </span>
-                    </div>
+                    <div class="gallery" style="width: 100px; height:100px; display: inline;"></div>
+
                     {{-- DESCRIPCION --}}
                     <div class="newbiz" style="margin: 0 0 0 0;">
 
@@ -194,7 +173,7 @@
                                     </label>
 
                                     <select class="custom-select 
-                                    @error('categoria') is-invalid @enderror"
+                                        @error('categoria') is-invalid @enderror"
                                         onchange="otherCategoria(this.options[this.selectedIndex].value)"
                                         v-model="selected">
                                         <option disabled selected value>
@@ -220,7 +199,7 @@
                                         <strong>Subcategoría</strong>
                                     </label>
                                     <select name="subcategoria" class="custom-select 
-                                @error('subcategoria') is-invalid @enderror">
+                                    @error('subcategoria') is-invalid @enderror">
                                         <option disabled selected value>
                                             --
                                         </option>
