@@ -7,11 +7,15 @@
 <div class="container" style="margin-left:4%!important;">
     <div class="row">
         {{-- COLUMNA DE LA IMAGEN PRINCIPAL --}}
-        <div class="col " style="margin: 3em 0 0 1em; width: 100%;  ">
+        <div class="col " style="margin: 4.7% 0 0 1%; width: 100%;">
 
             <a class="magnifier-thumb-wrapper" id="sticky">
-                <img class="img-thumbnail mainImage" style="width: 100% ; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
+                <img class="img-thumbnail mainImage" style="width: 100% ; max-height: 655px; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
             </a>
+        </div>
+
+        <div class="magnifier-preview col-5" style=" height: 105%; width:100%; right: 6%; top: 17.5%; " id="preview">
+
         </div>
         {{-- COLUMNA DEL INFO --}}
         <div class="col-5" style="margin: 3em 0 0 6em;">
@@ -322,7 +326,7 @@
     m.attach({
         largeWrapper: 'preview'
         , thumb: '.mainImage'
-        , mode: 'inside'
+        , mode: 'outside'
         , zoom: 2
         , zoomable: false
     })
