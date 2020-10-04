@@ -97,7 +97,8 @@ class ItemsController extends Controller
            
         
         foreach($item->colors as $color){
-            $colores[] = $color->color;
+            $color->color = strtolower($color->color);
+            $colores[] = ucfirst($color->color);
         }
         $coloresResult = array_unique($colores);
         

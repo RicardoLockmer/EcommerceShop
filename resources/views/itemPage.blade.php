@@ -8,14 +8,7 @@
     <div class="row">
         {{-- COLUMNA DE LA IMAGEN PRINCIPAL --}}
         <div class="col " style="margin: 4.7% 0 0 1%; width: 100%;">
-            <div style="position:absolute; top: 0; right: 0;">
-                @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                    </svg><br>
-                    @endfor
-
-            </div>
             <a class="magnifier-thumb-wrapper" id="sticky">
                 <img class="img-thumbnail mainImage" style="width: 100% ; max-height: 655px; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
             </a>
@@ -23,12 +16,25 @@
 
         </div>
 
-        <div class="magnifier-preview col-5" style=" height: 105%; width:100%; right: 6%; top: 17.5%; " id="preview">
+        <div class="magnifier-preview col-5" style=" height: 100%; width:100%; right: 4%; top: 17.5%; " id="preview">
 
         </div>
         {{-- COLUMNA DEL INFO --}}
-        <div class="col-5" style="margin: 3em 0 0 1em;">
-            <article style="margin: 0 0 1em 0; ">
+        <div class="col-5" style="margin: 3em 0 0 2em;">
+            <div style="position:absolute; top: 0; left: -12px;">
+                @for($i = 1; $i <= 5; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg><br>
+                    @endfor
+                    <div style="position: absolute; left:-11px;">
+                        <small class="text-muted" style="font-size: 12px; left:-18px;">
+                            (1099)
+                        </small>
+
+                    </div>
+            </div>
+            <article style="margin: 0 0 1em 0;">
 
                 <h1 style="font-size: 28px;margin-bottom: 0;">
                     {{$item->nombre}}

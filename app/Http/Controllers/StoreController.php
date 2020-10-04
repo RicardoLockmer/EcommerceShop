@@ -177,21 +177,14 @@ class StoreController extends Controller
         $myItem =  request()->validate([
                     'nombre' => 'required|max:55',
                     'image' => 'required|max:4048',
-                    'image.*' => 'mimes:jpg,jpeg,png',
+                    'image.*' => 'mimes:jpg,jpeg,png,webp',
                     'descripcion' => 'required|max:255',
                     'categoria' => 'required',
                     'subcategoria' => 'required',
                     'precio' => 'required',
-<<<<<<< HEAD
-                    'size' => 'nullable',
-                    'unit' => 'required',
-                    'cantidad'=>'required',
-                    'color' => 'required',
-=======
-                    'size' => 'required|array',
-                    'cantidad'=>'required|array',
-                    'color' => 'required|array',
->>>>>>> NewItemDB
+                    'size' => 'min:1',
+                    'cantidad'=>'min:1',
+                    'color' => 'min:1',
                     'marca' => 'required',
                     'Specs' => 'nullable',
                     
@@ -200,11 +193,6 @@ class StoreController extends Controller
                     'store_id' => 'required',
                     'updated_at' => 'nullable',
                     'created_at' => 'nullable',
-<<<<<<< HEAD
-                    'image' => 'array|max:8|min:1|required',
-                    'image.*' => 'mimes:jpg,jpeg,png|max:2048',
-=======
->>>>>>> NewItemDB
                     'empresa' => 'required',
                     'provincia' => 'required',
                     'restringidos' => 'nullable',
@@ -225,15 +213,7 @@ class StoreController extends Controller
         $item->categoria = $request->categoria;
         $item->subcategoria = $request->subcategoria;
         $item->precio = $request->precio;
-<<<<<<< HEAD
-        if ($request->size != null){
-            $item->size = $request->size.' '.$request->unit;
-
-        } else {
-            $item->size = $request->unit;
-        }
-=======
->>>>>>> NewItemDB
+        
         $item->Specs = json_encode($request->Specs);
         $item->marca = $request->marca;
         $item->store_id = $request->store_id;
@@ -258,7 +238,7 @@ class StoreController extends Controller
         
 
        for($i = 0; $i < count($request->color); $i++){
-           
+           if ($request->color[$i] != NULL) {
         $colores = new itemColors();
         $colores->item_id = $item->id;
         $colorInitials = substr($request->color[$i], 0, 1);
@@ -282,24 +262,11 @@ class StoreController extends Controller
         $qty->sku = $colores->sku;
         $qty->quantity = $request->cantidad[$i];
         $qty->save();
-        
+           }
 
 
        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-       
-       
-        
-
-
         
         //SAVE TO DATABASE
        
