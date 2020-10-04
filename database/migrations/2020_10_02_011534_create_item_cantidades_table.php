@@ -15,7 +15,7 @@ class CreateItemCantidadesTable extends Migration
     {
         Schema::create('item_cantidades', function (Blueprint $table) {
             $table->id();
-            $table->string('uniqueId');
+            $table->string('sku');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('color_id');
             $table->unsignedBigInteger('size_id');

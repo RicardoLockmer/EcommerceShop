@@ -15,7 +15,7 @@ class CreateItemSizesTable extends Migration
     {
         Schema::create('item_sizes', function (Blueprint $table) {
             $table->id();
-            $table->string('uniqueId');
+            $table->string('sku');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('color_id');
             $table->string('size');

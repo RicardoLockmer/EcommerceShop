@@ -82,8 +82,28 @@
                     <div class="content">
 
                         <p>{{$item->descripcion}}</p>
-                        <p><strong>Color:</strong> {{$item->color}}</p>
-                        <p><strong>Tamaño:</strong> {{$item->size}}</p>
+
+                        <div style="display: inline;">
+
+                            <span for="provincia" class="">
+                                <strong> Color: </strong>
+                            </span>
+
+                            <span>
+                                <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-3" name="color" id="color">
+
+                                    @foreach ($colores as $color)
+                                    <option value="{{$color}}">{{$color}}</option>
+
+                                    @endforeach
+
+
+
+                                </select>
+                            </span>
+                        </div>
+
+                        <p style=" margin-top: 15px;"><strong>Tamaño:</strong> {{$item->size}}</p>
 
                         {{-- INFO PARA ENVIOS --}}
                         <div id="ENVI">

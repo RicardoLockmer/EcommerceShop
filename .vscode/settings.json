@@ -16,7 +16,7 @@
     "editor.defaultFormatter": "apility.beautify-blade",
     "editor.formatOnSave": true,
     "[blade]": {
-        "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+        "editor.defaultFormatter": "amirmarmul.laravel-blade-vscode"
     },
     "editor.wordWrap": "on"
 }

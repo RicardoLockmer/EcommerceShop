@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class itemCantidades extends Model
 {
-    public function itemSizes(){
+    public function sizes(){
         return $this->hasOne(itemSizes::class);
     }
 }

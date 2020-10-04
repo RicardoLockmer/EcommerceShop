@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class itemColors extends Model
 {
     public function items() {
-        return $this->belongsTo(Items::class,'items_id');
+        return $this->belongsTo(Items::class);
     }
     public function size(){
-        return $this->hasMany(itemSize::class, 'color_id');
+        return $this->hasMany(itemSizes::class, "item_id");
     }
-    public function itemCantidades(){
-        return $this->hasMany(itemCantidades::class, 'color_id');
+    public function cantidades(){
+        return $this->hasMany(itemCantidades::class, "color_id");
     }
+
+    protected $fillables = [
+        'item_id',
+        'sku',
+        'color'
+    ];
 }
