@@ -91,10 +91,17 @@ class ItemsController extends Controller
         $day = '+'.$string.' day';
         $startdate = strtotime($day);
         $enddate = strtotime($day, $startdate);
-
-
         $delivery = date("d M", $startdate);
         $deliveLastDay = date('d M', $enddate);
+        $colores= array();
+           
+        
+        foreach($item->colors as $color){
+            $colores[] = $color->color;
+        }
+        $coloresResult = array_unique($colores);
+        
+        
         return view('itemPage',[
         'item' => $item,
         'moreItems' => $moreitems,
@@ -104,7 +111,8 @@ class ItemsController extends Controller
         'provinciasEnvio' => $decodeProvincia,
         'selectedAddress' => $userAddressCurrent,
         'startDate' => $delivery,
-        'endDate' => $deliveLastDay
+        'endDate' => $deliveLastDay,
+        'colores' => $coloresResult
         ]);
         
     }

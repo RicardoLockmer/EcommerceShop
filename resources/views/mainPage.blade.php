@@ -39,17 +39,26 @@
     <div class="container">
         <div class="row" style="text-align: center;">
 
-            <a href="Categorias/hombre" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
+
+
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
+
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Hombres
                 </h1>
             </a>
-            <a href="Categorias/mujer" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
+
+
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
+
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Mujeres
                 </h1>
             </a>
-            <a href="Categorias/niño" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+
+
+            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Niños
                 </h1>
@@ -68,11 +77,14 @@
         <div class="myFirstSectionInner scroll">
             <div class="container-fluid">
                 <div class="noWrap">
-                    @foreach($mejores as $mejor)
+                    {{-- @foreach($mejores as $mejor)
                     <a href="/producto/{{$mejor->id}}">
-                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}" alt="">
+                    <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}" alt="">
                     </a>
-                    @endforeach
+                    @endforeach --}}
+
+
+
 
 
                 </div>

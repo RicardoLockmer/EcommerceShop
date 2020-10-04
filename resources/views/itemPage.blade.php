@@ -8,10 +8,19 @@
     <div class="row">
         {{-- COLUMNA DE LA IMAGEN PRINCIPAL --}}
         <div class="col " style="margin: 4.7% 0 0 1%; width: 100%;">
+            <div style="position:absolute; top: 0; right: 0;">
+                @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg><br>
+                    @endfor
+
+            </div>
             <a class="magnifier-thumb-wrapper" id="sticky">
                 <img class="img-thumbnail mainImage" style="width: 100% ; max-height: 655px; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
             </a>
+
+
         </div>
 
         <div class="magnifier-preview col-5" style=" height: 105%; width:100%; right: 6%; top: 17.5%; " id="preview">
@@ -38,102 +47,114 @@
                 </small>
                 <br>
 
-                @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                    </svg>
 
-                    @endfor
 
-                    <small class="text-muted">
-                        (1099)
+                <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
+                    &#8353; {{number_format($item->precio, 0, '.', ',')}}
+                    <small style="font-size: 14px;" class="text-muted">
+                        (no incluye iva)
                     </small>
-
-                    <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
-                        &#8353; {{number_format($item->precio, 0, '.', ',')}}
-                        <small style="font-size: 14px;" class="text-muted">
-                            (no incluye iva)
-                        </small>
-                        <small style="font-size: 13px;">
-                            <a href="##">
-                                Detalles
-                            </a>
-                        </small>
-                    </p>
-
-                    @if($item->shipping->precioEnvio > 0)
-
-                    <small class="text-muted">
-                        Precio de Envió +
-                        <strong>
-                            &#8353; {{number_format($item->shipping->precioEnvio, 0, '.', ',')}}
-                        </strong>
+                    <small style="font-size: 13px;">
+                        <a href="##">
+                            Detalles
+                        </a>
                     </small>
+                </p>
 
-                    @else
+                @if($item->shipping->precioEnvio > 0)
 
-                    <small class="text-muted">
-                        Envió
-                        <strong>
-                            Gratis
-                        </strong>
-                    </small>
+                <small class="text-muted">
+                    Precio de Envió +
+                    <strong>
+                        &#8353; {{number_format($item->shipping->precioEnvio, 0, '.', ',')}}
+                    </strong>
+                </small>
 
-                    @endif
+                @else
 
-                    <br>
-                    <br>
+                <small class="text-muted">
+                    Envió
+                    <strong>
+                        Gratis
+                    </strong>
+                </small>
 
-                    <div class="content">
+                @endif
 
-                        <p>{{$item->descripcion}}</p>
-                        <p><strong>Color:</strong> {{$item->color}}</p>
-                        <p><strong>Tamaño:</strong> {{$item->size}}</p>
+                <br>
+                <br>
 
-                        {{-- INFO PARA ENVIOS --}}
-                        <div id="ENVI">
+                <div class="content">
 
-                            <p class="card-text" style="position: aboslute; bottom:0; right:0;">
+                    <p>{{$item->descripcion}}</p>
 
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-seam text-muted" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
-                                </svg>
+                    <div style="display: inline;">
 
-                                @if (Auth::check()) {{-- USER LOGGED IN --}}
+                        <span for="provincia" class="">
+                            <strong> Color: </strong>
+                        </span>
 
-                                @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
+                        <span>
+                            <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-3" name="color" id="color">
 
-                                @if(in_array($selectedAddress->provincia, $provinciasEnvio))
-                                <small>
-                                    <strong style="color: seagreen"> Si se envía a {{$selectedAddress->provincia}}</strong>
-                                </small>
-                                <p>
-                                    <small class="text-muted">
-                                        El paquete llega entre
-                                        <strong>
-                                            {{$startDate}} - {{$endDate}}
-                                        </strong>
-                                    </small>
-                                </p>
+                                @foreach ($colores as $color)
+                                <option value="{{$color}}">{{$color}}</option>
 
-                                <p>
-                                    <small class="text-muted">
-                                        El paquete se envía por
-                                        <strong>
-                                            {{$shipping->empresa}}
-                                        </strong>
-                                    </small>
-                                </p>
-                        </div>
+                                @endforeach
+
+
+
+                            </select>
+                        </span>
                     </div>
-                    @else
-                    <small>
-                        <strong style="color:rgb(145, 7, 7)"> No se Envía a {{$selectedAddress->provincia}} </strong>
-                    </small><small><a href="/perfil/{{Auth::user()->name}}/direcciones"> - Cambiar Dirección</a></small>
-                    <p>
-                        <small class="text-muted">
-                            Lo sentimos, este producto no se puede enviar a su dirección.
-                        </small>
-                    </p>
+
+                    <p style=" margin-top: 15px;"><strong>Tamaño:</strong> {{$item->size}}</p>
+
+                    {{-- INFO PARA ENVIOS --}}
+                    <div id="ENVI">
+
+                        <p class="card-text" style="position: aboslute; bottom:0; right:0;">
+
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-seam text-muted" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
+                            </svg>
+
+                            @if (Auth::check()) {{-- USER LOGGED IN --}}
+
+                            @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
+
+                            @if(in_array($selectedAddress->provincia, $provinciasEnvio))
+                            <small>
+                                <strong style="color: seagreen"> Si se envía a {{$selectedAddress->provincia}}</strong>
+                            </small>
+                            <p>
+                                <small class="text-muted">
+                                    El paquete llega entre
+                                    <strong>
+                                        {{$startDate}} - {{$endDate}}
+                                    </strong>
+                                </small>
+                            </p>
+
+                            <p>
+                                <small class="text-muted">
+                                    El paquete se envía por
+                                    <strong>
+                                        {{$shipping->empresa}}
+                                    </strong>
+                                </small>
+                            </p>
+                    </div>
+                </div>
+                @else
+                <small>
+                    <strong style="color:rgb(145, 7, 7)"> No se Envía a {{$selectedAddress->provincia}} </strong>
+                </small><small><a href="/perfil/{{Auth::user()->name}}/direcciones"> - Cambiar Dirección</a></small>
+                <p>
+                    <small class="text-muted">
+                        Lo sentimos, este producto no se puede enviar a su dirección.
+                    </small>
+                </p>
 
 
 

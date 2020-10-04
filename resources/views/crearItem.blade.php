@@ -7,14 +7,14 @@
 <div class="container">
 
     {{-- NEW ITEM FORM START --}}
-    <form action="/negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST" class="forms" enctype="multipart/form-data">
+    <form action="/negocio/{{ $store->nombreNegocio }}/nuevo-producto" method="POST" class="forms" enctype="multipart/form-data">
         @csrf
-        @if($errors->any())
+        @if ($errors->any())
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>
                 Parece que hay un problema!
             </strong>
-            {{$errors->first()}}
+            {{ $errors->first() }}
         </div>
 
         @endif
@@ -37,7 +37,11 @@
 
         {{-- TITULO DEL FORMULARIO --}}
         <h1 class="myFormTitle" style="text-align: center">
+<<<<<<< HEAD
             AGREGAR PRODUCTO
+=======
+            {{ $store->nombreNegocio }}
+>>>>>>> NewItemDB
         </h1>
         <div class="myForms" style="width: 35em; margin-left: 26%; border: 2px solid #007bff">
             <div class="myFormData">
@@ -55,52 +59,93 @@
                 </div>
                 <br>
                 {{-- EXTRA --}}
-                <input type="text" value="{{$store->store_id}}" name="store_id" hidden>
-                <input type="text" value="{{$store->nombreNegocio}}" name="store_name" hidden>
-                <input type="text" value="{{Auth::user()->id}}" name="user_id" hidden>
+                <input type="text" value="{{ $store->store_id }}" name="store_id" hidden>
+                <input type="text" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
+                <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
+
                 {{-- NOMBRE DEL PRODUCTO --}}
+
                 <div>
                     <div class="newbiz" style="margin: 0 0 0 0;">
 
-                        <label class="" for="nombre"><strong>Nombre Producto</strong></label>
+                        <label class="" for="nombre">
+                            <strong>
+                                Nombre Producto
+                            </strong>
+                            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Nombre de su producto">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                                </svg>
+                            </a>
+                        </label>
+
                         <div class="control">
-                            <input class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text" placeholder="Nombre del Producto" value="{{old('nombre')}}" maxlength="25">
+                            <input class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text" placeholder="Nombre del Producto" value="{{ old('nombre') }}" maxlength="25">
                         </div>
                     </div>
                 </div>
-
-
                 <br>
+<<<<<<< HEAD
                 {{-- IMAGENES --}}
                 <label class="" for="image"><strong>Imagenes</strong> <small class="text-muted">(Maximo 8 imagenes)</small><a class="text-muted" data-toggle="tooltip" data-placement="right" title="Seleccione todas las imagenes al mismo tiempo.">
+=======
+                {{-- FINAL NOMBRE DEL PRODUCTO --}}
+                {{-- COMIENZAN LAS IMAGENES --}}
+
+                <label class="" for="image">
+                    <strong>
+                        Imagenes
+                    </strong>
+                    <small class="text-muted">
+                        (Maximo 8 imagenes)
+                    </small>
+                    <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Seleccione todas las imagenes al mismo tiempo. ">
+
+>>>>>>> NewItemDB
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                             <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
                         </svg>
+<<<<<<< HEAD
                     </a> </label>
+=======
+                    </a>
+                </label>
+>>>>>>> NewItemDB
                 <div class='form-row' style="width: auto;">
 
                     <div class="newbiz col">
                         <div class="custom-file">
 
                             <input class="custom-file-input 
+<<<<<<< HEAD
                                 @error('image[]') is-invalid @enderror" type="file" name="image[]" id="gallery-photo-add" multiple>
                             <label class="custom-file-label" for="image[]" data-browse="Elegir">Imagenes</label>
+=======
+                                   @error('image[]') is-invalid @enderror" type="file" name="image[]" id="gallery-photo-add" multiple>
+                            <label class="custom-file-label text-muted" for="image[]" data-browse="Elegir">.Jpg, .Jpeg, .Png</label>
+>>>>>>> NewItemDB
 
 
                         </div>
                     </div>
 
                 </div>
-
+                <br>
                 {{-- IMAGENES PREVIEW --}}
                 <div class="gallery" style="width: 100px; height:100px; display: inline;"></div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> NewItemDB
                 {{-- DESCRIPCION --}}
                 <div class="newbiz" style="margin: 20px 0 0 0;">
 
                     <div class="control">
                         <label class="label" for="descripcion"><strong>Descripción</strong></label>
-                        <textarea class="textarea form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="descripcion" type="text" placeholder="Describa su Producto" maxlength="255" value="{{old('descripcion')}}"></textarea>
+
+                        <textarea class="textarea form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="descripcion" type="text" placeholder="Describa su Producto" maxlength="255" value="{{ old('descripcion') }}"></textarea>
                     </div>
                 </div>
                 <br>
@@ -113,41 +158,106 @@
                                 <label class="label" for="marca">
                                     <strong> Marca </strong>
                                 </label>
-                                <input class="form-control @error('marca') is-invalid @enderror" name="marca" id="marca" type="text" placeholder="Marca del Producto" value="{{old('marca')}}">
-                            </div>
-                        </div>
-
-                        {{-- COLOR --}}
-                        <div id="colors" class="newbiz col" style="margin: 0 0 0 0;">
-                            <div class="control">
-                                <label for="color">
-                                    <strong> Color</strong>
-                                </label>
-
-                                <div class="select">
-                                    <select name="color" class="custom-select @error('color') is-invalid @enderror" onchange="otherColor(this.options[this.selectedIndex].value)">
-                                        <option disabled selected value>--</option>
-                                        <option value="Rojo">Rojo</option>
-                                        <option value="Verde">Verde</option>
-                                        <option value="Azul">Azul</option>
-                                        <option value="Amarillo">Amarillo</option>
-                                        <option value="Negro">Negro</option>
-                                        <option value="Blanco">Blanco</option>
-                                        <option id="Otro">Otro</option>
-
-                                    </select>
-
-                                    <br>
-
-                                    <div id="color" class="" style="margin: 1.3em 0 2em 0; width: 100%; ">
-
-                                    </div>
-
-
-                                </div>
+                                <input class="form-control @error('marca') is-invalid @enderror" name="marca" id="marca" type="text" placeholder="Marca del Producto" value="{{ old('marca') }}">
                             </div>
                         </div>
                     </div>
+                    {{-- COLOR --}}
+                    <div class='row' style="width: auto;">
+                        <div class="form-row">
+                            <div class="newbiz col">
+                                <label for="color"><strong>Colores</strong></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="newbiz col-4" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Color" type="text" value="{{ old('color') }}" name="color[]" class="form-control">
+
+                                </div>
+                            </div>
+                            <span style="padding-top: 5px;">=></span>
+                            <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
+                                </div>
+                            </div>
+                            <span style="padding-top: 5px;">=></span>
+                            <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class='row' style="width: auto;">
+                        <div class="form-row">
+                            <div class="newbiz col">
+                                <label for="color"><strong>Colores</strong></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="newbiz col-4" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Color" type="text" value="{{ old('color') }}" name="color[]" class="form-control">
+
+                                </div>
+                            </div>
+                            <span style="padding-top: 5px;">=></span>
+                            <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
+                                </div>
+                            </div>
+                            <span style="padding-top: 5px;">=></span>
+                            <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class='row' style="width: auto;">
+                        <div class="form-row">
+                            <div class="newbiz col">
+                                <label for="color"><strong>Colores</strong></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="newbiz col-4" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Color" type="text" value="{{ old('color') }}" name="color[]" class="form-control">
+
+                                </div>
+                            </div>
+                            <span style="padding-top: 5px;">=></span>
+                            <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
+                                </div>
+                            </div>
+                            <span style="padding-top: 5px;">=></span>
+                            <div class="newbiz col-3" style="margin: 0 0 1.5em 0;">
+                                <div class="control">
+
+                                    <input placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                     {{-- CATEGORIA --}}
                     <div class='row' style="width: auto;">
                         <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
@@ -157,13 +267,13 @@
                                 </label>
 
                                 <select class="custom-select 
-                        @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
+                                                                                                        @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
                                     <option disabled selected value>
                                         --
                                     </option>
 
                                     <option v-for="product in products" v-bind:value="{ id: product.id, text: product.name }">
-                                        @{{ product.id }}
+                                        @{{ product . id }}
                                     </option>
                                     <input type="hidden" name="categoria" :value="selected.id">
                                 </select>
@@ -180,12 +290,12 @@
                                     <strong>Subcategoría</strong>
                                 </label>
                                 <select name="subcategoria" class="custom-select 
-                    @error('subcategoria') is-invalid @enderror">
+                                                                                                    @error('subcategoria') is-invalid @enderror">
                                     <option disabled selected value>
                                         --
                                     </option>
                                     <option v-for='name in selected.text' v-bind:value="name">
-                                        @{{name}}
+                                        @{{ name }}
                                     </option>
                                 </select>
                             </div>
@@ -204,12 +314,17 @@
                             <label class="label" for="precio">
                                 <strong> Precio </strong><small class="text-muted">(&#8353; Colon Costarricense)</small>
                             </label>
+<<<<<<< HEAD
                             <input class="form-control @error('precio') is-invalid @enderror" name="precio" id="precio" type="number" min="100" step="any" placeholder="Ej. 5000" value="{{old('precio')}}">
+=======
+                            <input class="form-control @error('precio') is-invalid @enderror" name="precio" id="precio" type="number" min="100" step="any" placeholder="&#8353; Colón Costarricense" value="{{ old('precio') }}">
+>>>>>>> NewItemDB
                         </div>
                     </div>
 
                     {{-- CANTIDAD --}}
 
+<<<<<<< HEAD
                     <div class="newbiz col" style="margin: 0 0 0 0;">
                         <div class="control">
                             <label class="label" for="cantidad">
@@ -243,6 +358,23 @@
                                     @endforeach
                                 </select>
                             </div>
+=======
+                </div>
+                <br>
+                {{-- TAMAÑO --}}
+                {{-- <div class="newbiz" style="margin: 0 0 0 0;">
+                    <label class="label" for="size"><strong>Tamaño/Medidas</strong></label>
+                    <div class="control ">
+                        <div class="select">
+                            <select name="size" id="size" class="custom-select @error('size') is-invalid @enderror">
+                                <option disabled selected value>--</option>
+                                <option value="otro" style="color: green;">Otro</option>
+                                <option value="Pequeño (S)">Pequeño (S)</option>
+                                <option value="Mediano (M)">Mediano (M)</option>
+                                <option value="Grande (L)">Grande (L)</option>
+                                <option value="Extra Grande (XL)">Extra Grande (XL)</option>
+                            </select>
+>>>>>>> NewItemDB
                         </div>
                     </div>
                     <span style="padding-top: 5px;" id="SEPUNITS">=></span>
@@ -256,7 +388,7 @@
                     </div>
                 </div>
 
-                <div id="OS" class="" style="margin: 1.3em 0 2em 0"></div>
+                <div id="OS" class="" style="margin: 1.3em 0 2em 0"></div> --}}
 
                 {{-- ITEM SPECS --}}
                 <div class="form-row">
@@ -268,7 +400,7 @@
                     <div class="newbiz col-5" style="margin: 0 0 1.5em 0;">
                         <div class="control">
 
-                            <input class="form-control myspecKey @error('myspec') is-invalid @enderror" type="text" placeholder="ej. Modelo" value="{{old('myspec')}}">
+                            <input class="form-control myspecKey @error('myspec') is-invalid @enderror" type="text" placeholder="ej. Modelo" value="{{ old('myspec') }}">
 
                         </div>
                     </div>
@@ -276,7 +408,7 @@
                     <div class="newbiz col-5" style="margin: 0 0 1.5em 0;">
                         <div class="control">
 
-                            <input class="form-control myspecVal @error('myspec') is-invalid @enderror" type="text" placeholder="ej. Modelo 2020" value="{{old('myspec')}}">
+                            <input class="form-control myspecVal @error('myspec') is-invalid @enderror" type="text" placeholder="ej. Modelo 2020" value="{{ old('myspec') }}">
                         </div>
                     </div>
                     <div class="newbiz col " style="margin: 0 0 1.5em 0; padding-left: 0;">
@@ -303,7 +435,7 @@
                             </svg>
                         </a>
                         <div class="control">
-                            <input class="form-control @error('empresa') is-invalid @enderror" name="empresa" id="empresa" type="text" placeholder="Ej. Correos de Costa Rica" value="{{old('empresa')}}">
+                            <input class="form-control @error('empresa') is-invalid @enderror" name="empresa" id="empresa" type="text" placeholder="Ej. Correos de Costa Rica" value="{{ old('empresa') }}">
                         </div>
                     </div>
                 </div>
@@ -390,7 +522,7 @@
                             <label class="label" for="peso">
                                 <strong> Peso </strong><small class="text-muted">(Kilogramos)</small>
                             </label>
-                            <input class="form-control @error('peso') is-invalid @enderror" name="peso" id="peso" type="number" step="any" placeholder="Ej. 250" value="{{old('peso')}}">
+                            <input class="form-control @error('peso') is-invalid @enderror" name="peso" id="peso" type="number" step="any" placeholder="Ej. 250" value="{{ old('peso') }}">
                         </div>
                     </div>
 
@@ -406,7 +538,7 @@
                                     <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
                                 </svg>
                             </a>
-                            <input class="form-control @error('dimensiones') is-invalid @enderror" name="dimensiones" placeholder="Ej. 25x10x15" value="{{old('dimensiones')}}">
+                            <input class="form-control @error('dimensiones') is-invalid @enderror" name="dimensiones" placeholder="Ej. 25x10x15" value="{{ old('dimensiones') }}">
                         </div>
                     </div>
                 </div>
@@ -423,7 +555,7 @@
                                     <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
                                 </svg>
                             </a>
-                            <input class="form-control @error('tiempoEntrega') is-invalid @enderror" name="tiempoEntrega" id="tiempoEntrega" type="number" min="1" step="any" placeholder="Ej. 1" value="{{old('tiempoEntrega')}}">
+                            <input class="form-control @error('tiempoEntrega') is-invalid @enderror" name="tiempoEntrega" id="tiempoEntrega" type="number" min="1" step="any" placeholder="Ej. 1" value="{{ old('tiempoEntrega') }}">
                         </div>
                     </div>
 
@@ -439,7 +571,7 @@
                                     <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
                                 </svg>
                             </a>
-                            <input class="form-control @error('precioEnvio') is-invalid @enderror" name="precioEnvio" type="number" min="0" placeholder="Ej. 600" value="{{old('precioEnvio')}}">
+                            <input class="form-control @error('precioEnvio') is-invalid @enderror" name="precioEnvio" type="number" min="0" placeholder="Ej. 600" value="{{ old('precioEnvio') }}">
                         </div>
                     </div>
                 </div>
@@ -467,7 +599,14 @@
         var addVal = $('.myspecVal').val();
 
         if (addVar) {
-            $('.myEsp').append('<div class="row " id="' + counter + '"><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control" type="text" placeholder="' + addVar + '" disabled></div></div><span style="padding-top: 5px;">=></span><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control " type="text" name="Specs[' + addVar + ']" value="' + addVal + '" disabled></div></div><div onclick="remove(' + counter + ')" class="newbiz col" style="margin: 0 0 1.5em 0; padding-left: 0;"><span class="btn remove" style="color:red;"><strong>X</strong></span></div><input type="text" placeholder="' + addVar + '" hidden><input type="text" name="Specs[' + addVar + ']" value="' + addVal + '" hidden>');
+            $('.myEsp').append('<div class="row " id="' + counter +
+                '"><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control" type="text" placeholder="' +
+                addVar +
+                '" disabled></div></div><span style="padding-top: 5px;">=></span><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control " type="text" name="Specs[' +
+                addVar + ']" value="' + addVal + '" disabled></div></div><div onclick="remove(' + counter +
+                ')" class="newbiz col" style="margin: 0 0 1.5em 0; padding-left: 0;"><span class="btn remove" style="color:red;"><strong>X</strong></span></div><input type="text" placeholder="' +
+                addVar + '" hidden><input type="text" name="Specs[' + addVar + ']" value="' + addVal +
+                '" hidden>');
             counter++
 
         } else {
@@ -477,9 +616,32 @@
 
 </script>
 <script type="text/javascript">
-    function remove(id) {
-        document.getElementById(id).remove();
-    }
+    $(function() {
+        // Multiple images preview in browser
+        var imagesPreview = function(input, placeToInsertImagePreview) {
+
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(event) {
+                        $($.parseHTML(
+                            '<img style="width:100px; height: auto; margin: 14px 8px 10px 0" id="IMGPREVID">'
+                        )).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+
+        };
+
+        $('#gallery-photo-add').on('change', function() {
+            imagesPreview(this, 'div.gallery');
+        });
+    });
 
 </script>
 <script type="text/javascript">
@@ -509,6 +671,7 @@
     });
 
 </script>
+
 
 
 @endsection

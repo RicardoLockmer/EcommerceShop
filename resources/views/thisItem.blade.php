@@ -23,6 +23,10 @@
 @endsection
 
 @section('thisItem')
+
+
+
+
 <br>
 <div class="container" style="margin-top: 25px;">
     <div class="card mb-4 " style="padding-top: 1em;">
@@ -45,33 +49,27 @@
                             </strong>
                         </small>
                     </p>
+                    @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg>
 
-                    <p class="card-text" style="font-size: 18px;">
-                        &#8353; {{number_format($item->precio, 0, '.', ',')}}
-                    </p>
-
-                    <div class="card-text">
-                        <p>{{$item->descripcion}}</p>
-                        <p><strong>Categoría:</strong> {{$item->categoria}}</p>
-                        <p><strong>Color: </strong>{{$item->color}}</p>
-                        <p><strong> Tamaño:</strong> {{$item->size}} </p>
-
-                        @if ($item->cantidad == 0)
-                        <p style="color: red">
-                            <strong> Inventario:</strong> {{$item->cantidad}}
-                        </p>
-                        @else
-
-                        <p>
-                            <strong>
-                                Inventario:
-                            </strong>
-                            {{$item->cantidad}}
+                        @endfor
+                        <p class="card-text" style="font-size: 18px;">
+                            &#8353; {{number_format($item->precio, 0, '.', ',')}}
                         </p>
 
-                        @endif
+                        <div class="card-text">
+                            <p>{{$item->descripcion}}</p>
+                            <p><strong>Categoría:</strong> {{$item->categoria}}</p>
+                            <p><strong>Subcategoría:</strong> {{$item->subcategoria}}</p>
+                            <strong> SKU:</strong><br>
+                            @foreach($item->colors as $color)
+                            {{$color->sku}} <br>
+                            @endforeach
+                            </p>
 
-                    </div>
+
+                        </div>
 
                 </article>
 

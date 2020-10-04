@@ -6,6 +6,9 @@ use App\Store;
 use App\Items;
 use App\Shipping;
 use App\User;
+use App\itemColors;
+use App\itemSizes;
+use App\itemCantidades;
 use App\categortias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -172,33 +175,42 @@ class StoreController extends Controller
 
    
         $myItem =  request()->validate([
-                    'nombre' => 'required|max:25',
+                    'nombre' => 'required|max:55',
+                    'image' => 'required|max:4048',
+                    'image.*' => 'mimes:jpg,jpeg,png',
                     'descripcion' => 'required|max:255',
                     'categoria' => 'required',
                     'subcategoria' => 'required',
                     'precio' => 'required',
+<<<<<<< HEAD
                     'size' => 'nullable',
                     'unit' => 'required',
                     'cantidad'=>'required',
                     'color' => 'required',
+=======
+                    'size' => 'required|array',
+                    'cantidad'=>'required|array',
+                    'color' => 'required|array',
+>>>>>>> NewItemDB
                     'marca' => 'required',
                     'Specs' => 'nullable',
-                    'rep' =>'nullable',
-                    'karma' => 'nullable',
+                    
                     'updateDate' => 'nullable',
                     'user_id' => 'required',
                     'store_id' => 'required',
                     'updated_at' => 'nullable',
                     'created_at' => 'nullable',
+<<<<<<< HEAD
                     'image' => 'array|max:8|min:1|required',
                     'image.*' => 'mimes:jpg,jpeg,png|max:2048',
+=======
+>>>>>>> NewItemDB
                     'empresa' => 'required',
                     'provincia' => 'required',
                     'restringidos' => 'nullable',
                     'peso' => 'required',
                     'dimensiones' => 'required',
                     'precioEnvio' => 'required',
-                     
                     'tiempoEntrega' => 'required',
                     'etiquetas'=> 'nullable',
                     'caja' => 'nullable'
@@ -213,43 +225,84 @@ class StoreController extends Controller
         $item->categoria = $request->categoria;
         $item->subcategoria = $request->subcategoria;
         $item->precio = $request->precio;
+<<<<<<< HEAD
         if ($request->size != null){
             $item->size = $request->size.' '.$request->unit;
 
         } else {
             $item->size = $request->unit;
         }
+=======
+>>>>>>> NewItemDB
         $item->Specs = json_encode($request->Specs);
-        $item->cantidad = $request->cantidad;
-        $item->color = $request->color;
         $item->marca = $request->marca;
-        $item->rep = NULL;
-        $item->karma = NULL;
-        $item->updateDate = date("dmy");
         $item->store_id = $request->store_id;
         $item->user_id = Auth::user()->id;
         $item->nombreNegocio = Auth::user()->nombreNegocio;
         $item->updated_at = NULL;
         $item->created_at = date("dmy");
-        
-        
-       // HANDLE IMAGES
-       foreach($request->file('image') as $file){
-        
-            
+        $item->updateDate = date("dmy");
+        foreach($request->file('image') as $file){
             $filename =$file->getClientOriginalName();
             $fileNewName = date('dmyhms').$filename;
             $data[] = $fileNewName; 
-            
             $file->move(public_path().'/storage/assetItems/', $fileNewName);  
        }
         $item->image = json_encode($data);
+        $storeInitials = substr($item->nombreNegocio, 0, 3);
+        $nameInitials = substr($item->nombre, 0, 2);
+        $item->save();
+        // FINAL DE ITEM SAVE
+
+        $addDTID = Items::find($item->id);
+        
+
+       for($i = 0; $i < count($request->color); $i++){
+           
+        $colores = new itemColors();
+        $colores->item_id = $item->id;
+        $colorInitials = substr($request->color[$i], 0, 1);
+        $sizeInitials = substr($request->size[$i], 0 ,1);
+        $qtyInitials = substr($request->cantidad[$i], 0,1);
+        $colores->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
+        $colores->color = $request->color[$i];
+        $colores->save();
+
+        $sizes = new itemSizes();
+        $sizes->item_id = $item->id;
+        $sizes->color_id = $colores->id;
+        $sizes->sku = $colores->sku;
+        $sizes->size = $request->size[$i];
+        $sizes->save();
+
+        $qty = new itemCantidades();
+        $qty->item_id = $item->id;
+        $qty->color_id = $colores->id;
+        $qty->size_id = $sizes->id;
+        $qty->sku = $colores->sku;
+        $qty->quantity = $request->cantidad[$i];
+        $qty->save();
+        
+
+
+       }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+       
+       
         
 
 
         
         //SAVE TO DATABASE
-        $item->save();
+       
         $itemID = $item->id;
 
         $newItemShipping = new Shipping();
