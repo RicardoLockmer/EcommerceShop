@@ -9,12 +9,13 @@ use App\User;
 use App\itemColors;
 use App\itemSizes;
 use App\itemCantidades;
-use App\categortias;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -175,7 +176,7 @@ class StoreController extends Controller
 
    
         $myItem =  request()->validate([
-                    'nombre' => 'required|max:55',
+                    'nombre' => 'required|max:100',
                     'image' => 'required|max:4048',
                     'image.*' => 'mimes:jpg,jpeg,png,webp',
                     'descripcion' => 'required|max:255',

@@ -53,18 +53,15 @@ class ItemsController extends Controller
     public function show(Items $item)
     {   
         
-        $terms = explode(" ", $item->descripcion);
-        if(Auth::user()){
-
-            \Cart::session(Auth::user()->id);
-        }
+        $terms = explode(" ", $item->categoria);
+        
         foreach ($terms as $q) {
             $moreitems = Items::where( 'nombre', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
             ->orWhere('categoria', 'LIKE', '%'.$q.'%')
             ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
             ->orWhere('marca', 'LIKE', '%'.$q.'%')
-            ->limit(6)->get();
+            ->get();
 
              
             }
@@ -101,7 +98,7 @@ class ItemsController extends Controller
             $colores[] = ucfirst($color->color);
         }
         $coloresResult = array_unique($colores);
-        
+        sort($coloresResult);
         
         return view('itemPage',[
         'item' => $item,
@@ -113,7 +110,8 @@ class ItemsController extends Controller
         'selectedAddress' => $userAddressCurrent,
         'startDate' => $delivery,
         'endDate' => $deliveLastDay,
-        'colores' => $coloresResult
+        'colores' => $coloresResult,
+       
         ]);
         
     }

@@ -7,32 +7,28 @@
 <div class="container" style="margin-left:4%!important;">
     <div class="row">
         {{-- COLUMNA DE LA IMAGEN PRINCIPAL --}}
-        <div class="col " style="margin: 4.7% 0 0 1%; width: 100%;">
+        <div class="col" style="margin: 4.7% 0 0 1%; width: 100%;">
 
             <a class="magnifier-thumb-wrapper" id="sticky">
-                <img class="img-thumbnail mainImage" style="width: 100% ; max-height: 655px; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
+                <img class="img-thumbnail mainImage" style="width: 100% ; max-height: 850px; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
             </a>
 
 
         </div>
 
-        <div class="magnifier-preview col-5" style=" height: 100%; width:100%; right: 4%; top: 17.5%; " id="preview">
+        <div class="magnifier-preview col-5" style="display:run-in; height: 100%; width:100%; right: 7%; top: 17.5%;  " id="preview">
 
         </div>
         {{-- COLUMNA DEL INFO --}}
         <div class="col-5" style="margin: 3em 0 0 2em;">
+
             <div style="position:absolute; top: 0; left: -12px;">
                 @for($i = 1; $i <= 5; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                     </svg><br>
                     @endfor
-                    <div style="position: absolute; left:-11px;">
-                        <small class="text-muted" style="font-size: 12px; left:-18px;">
-                            (1099)
-                        </small>
 
-                    </div>
             </div>
             <article style="margin: 0 0 1em 0;">
 
@@ -53,7 +49,12 @@
                 </small>
                 <br>
 
+                <div>
+                    <small class="text-muted" style="font-size: 14px; left:-18px;">
+                        (1099) reseñas
+                    </small>
 
+                </div>
 
                 <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
                     &#8353; {{number_format($item->precio, 0, '.', ',')}}
@@ -266,7 +267,7 @@
         <div class="col" style="margin: 3em 0 0 0.5em">
 
             <table>
-                <h2>Especificaciones</h2><br>
+                <h2>Mas sobre el producto</h2><br>
                 <h4>{{$item->nombre}}</h4>
                 <p>
                     {{$item->descripcion}}
@@ -288,24 +289,24 @@
 </div>
 @endif
 
-@if($item->Specs)
+
 <div class=" form-row " style=" border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 3em 0 0 0.5em">
 
     <div class="content">
 
         <div class="col" style="margin: 3em 0 0 0.5em">
             <h3>Mas de lo mismo... Falta arreglar</h1>
-                <div class="myFirstSection ">
+                <div class="myFirstSection " style="border: none!important;">
                     <p class="div"> MASSSSSS</p>
-                    <div class="myFirstSectionInner scroll">
+                    <div class="myFirstSectionInner scroll" style="margin-top: 5px;">
                         <div class="container is-fluid">
                             <div class="noWrap">
 
                                 @foreach($moreItems as $moreitem)
                                 <div class="myCards">
-                                    <div class="card-block">
+                                    <div class="card-block" style="margin-right: 28px;">
 
-                                        <a href="{{$moreitem->store->nombreNegocio}}/productos/{{$moreitem->id}}"><img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$image[0]) }}" alt=""></a>
+                                        <a href="{{$moreitem->id}}"><img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$moreitem->image[0]) }}" alt=""></a>
                                     </div>
                                 </div>
                                 @endforeach
@@ -317,7 +318,7 @@
 
     </div>
 </div>
-@endif
+
 </div>
 
 

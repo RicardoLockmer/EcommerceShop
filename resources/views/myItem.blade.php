@@ -23,14 +23,15 @@
 @section('myItem')
 
 <div class="container">
-    <div class="columns row centerMyImages">
+    <div class="columns row ">
         @foreach($items as $item)
-        <div class='card col-3' style="text-align: initial; width: 18rem; margin: 3em 38px 0 38px; padding: 5px 5px 5px 5px; position: relative;">
+        <div class='card col-3 ' style="text-align: initial; width: auto; margin: 3em 38px 0 38px; padding: 10px 10px 10px 10px; ">
 
-            <div style="padding: 3px 3px 3px 3px; height: 37em;"><a href="/negocio/{{$store->nombreNegocio}}/productos/{{$item->id}}">
+            <div style="padding: 3px 20px 3px 20px; height: auto">
+                <a class="centerMyImages" href="/negocio/{{$store->nombreNegocio}}/productos/{{$item->id}}">
 
 
-                    <img class="myItems card-img-top myStore" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
+                    <img class="myItems  myStore" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
 
 
                 </a>
@@ -62,6 +63,9 @@
                         @endforeach
 
                     </div>
+                    <br>
+                    <br>
+                    <br>
                     <a href="/negocio/{{$store->nombreNegocio}}/{{$item->id}}/editar" type="submit" class="btn btn-outline-success btn-sm" style="margin: 0 1em 0 0; position: absolute; bottom:15px; right: 85px">
                         Editar
                     </a>

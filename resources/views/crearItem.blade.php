@@ -77,7 +77,7 @@
                         </label>
 
                         <div class="control">
-                            <input class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text" placeholder="Nombre del Producto" value="{{ old('nombre') }}" maxlength="25">
+                            <input class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text" placeholder="Nombre del Producto" value="{{ old('nombre') }}" maxlength="100">
                         </div>
                     </div>
                 </div>
@@ -537,20 +537,19 @@
         var addVal = $('.myspecVal').val();
 
         if (addVar) {
-            $('.myEsp').append('<div class="row " id="' + counter +
-                '"><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control" type="text" placeholder="' +
-                addVar +
-                '" disabled></div></div><span style="padding-top: 5px;">=></span><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control " type="text" name="Specs[' +
-                addVar + ']" value="' + addVal + '" disabled></div></div><div onclick="remove(' + counter +
-                ')" class="newbiz col" style="margin: 0 0 1.5em 0; padding-left: 0;"><span class="btn remove" style="color:red;"><strong>X</strong></span></div><input type="text" placeholder="' +
-                addVar + '" hidden><input type="text" name="Specs[' + addVar + ']" value="' + addVal +
-                '" hidden>');
+            $('.myEsp').append('<div class="row " id="' + counter + '"><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control" type="text" placeholder="' + addVar + '" disabled></div></div><span style="padding-top: 5px;">=></span><div class="newbiz col-5" style="margin: 0 0 1.5em 0;"><div class="control"><input class="form-control " type="text" name="Specs[' + addVar + ']" value="' + addVal + '" disabled></div></div><div onclick="remove(' + counter + ')" class="newbiz col" style="margin: 0 0 1.5em 0; padding-left: 0;"><span class="btn remove" style="color:red;"><strong>X</strong></span></div><input type="text" placeholder="' + addVar + '" hidden><input type="text" name="Specs[' + addVar + ']" value="' + addVal + '" hidden>');
             counter++
 
         } else {
             alert('Agregar Nombre para la Especificacion del Producto');
         }
     })
+
+</script>
+<script type="text/javascript">
+    function remove(id) {
+        document.getElementById(id).remove();
+    }
 
 </script>
 
