@@ -59,74 +59,7 @@
                 <input type="text" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
                 <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
 
-                {{-- NOMBRE DEL PRODUCTO --}}
-
-                <div>
-                    <div class="newbiz" style="margin: 0 0 0 0;">
-
-                        <label class="" for="nombre">
-                            <strong>
-                                Nombre Producto
-                            </strong>
-                            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Nombre de su producto">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                                </svg>
-                            </a>
-                        </label>
-
-                        <div class="control">
-                            <input class="form-control @error('nombre') is-invalid @enderror" name="nombre" id="nombre" type="text" placeholder="Nombre del Producto" value="{{ old('nombre') }}" maxlength="100">
-                        </div>
-                    </div>
-                </div>
-                <br>
-                {{-- FINAL NOMBRE DEL PRODUCTO --}}
-                {{-- COMIENZAN LAS IMAGENES --}}
-
-                <label class="" for="image">
-                    <strong>
-                        Imagenes
-                    </strong>
-                    <small class="text-muted">
-                        (Maximo 8 imagenes)
-                    </small>
-                    <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Seleccione todas las imagenes al mismo tiempo. ">
-
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                        </svg>
-                    </a>
-                </label>
-                <div class='form-row' style="width: auto;">
-
-                    <div class="newbiz col">
-                        <div class="custom-file">
-
-                            <input class="custom-file-input 
-                                   @error('image[]') is-invalid @enderror" type="file" name="image[]" id="gallery-photo-add" multiple>
-                            <label class="custom-file-label text-muted" for="image[]" data-browse="Elegir">.Jpg, .Jpeg, .Png</label>
-
-
-                        </div>
-                    </div>
-
-                </div>
-                <br>
-                {{-- IMAGENES PREVIEW --}}
-                <div class="gallery" style="width: 100px; height:100px; display: inline;"></div>
-                {{-- DESCRIPCION --}}
-                <div class="newbiz" style="margin: 20px 0 0 0;">
-
-                    <div class="control">
-                        <label class="label" for="descripcion"><strong>Descripción</strong></label>
-
-                        <textarea class="textarea form-control @error('descripcion') is-invalid @enderror" name="descripcion" id="descripcion" type="text" placeholder="Describa su Producto" maxlength="255" value="{{ old('descripcion') }}"></textarea>
-                    </div>
-                </div>
-                <br>
+                @livewire('item-multi-form')
                 {{-- COLORES - CATEORIA - PRECIO - CANTIDAD --}}
                 <div class="select" id="app">
                     <div class='row' style="width: auto;">
@@ -244,7 +177,7 @@
                                     <strong> Categoría</strong>
                                 </label>
 
-                                <select class="custom-select 
+                                <select class="custom-select
                                                                                                         @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
                                     <option disabled selected value>
                                         --
@@ -267,7 +200,7 @@
                                 <label class="label" for="categoria">
                                     <strong>Subcategoría</strong>
                                 </label>
-                                <select name="subcategoria" class="custom-select 
+                                <select name="subcategoria" class="custom-select
                                                                                                     @error('subcategoria') is-invalid @enderror">
                                     <option disabled selected value>
                                         --

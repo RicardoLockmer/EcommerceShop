@@ -18,13 +18,14 @@
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 
     <!-- Styles -->
+    @livewireStyles()
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
-    {{-- BOOTSTRAP CSS --}}
+    {{-- CSRF TOKEN --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
 <body>
@@ -157,6 +158,8 @@
 
     {{-- CONTENT --}}
     <div class="main-container">
+
+
         {{-- USER PAGE --}}
 
         @yield('myUserPage')
@@ -212,6 +215,8 @@
 
         @yield('mejoresEn')
 
+        {{-- LIVEWIRWE COMPONENTS --}}
+
 
     </div>
     {{-- CONTENT ENDING --}}
@@ -245,6 +250,8 @@
     <script src="/scripts/categoryOptions.vue"></script>
     <script src="/scripts/addressVue.vue"></script>
 
+
+    @livewireScripts()
     @yield('categoryOptions')
 
     @yield('magnifier')
