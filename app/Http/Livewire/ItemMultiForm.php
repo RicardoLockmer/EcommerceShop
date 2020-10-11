@@ -3,13 +3,15 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-
+use Livewire\WithFileUploads;
 class ItemMultiForm extends Component
 {
+    use WithFileUploads;
     public $step = 0;
+    public $image = [];
 
 
-    public function updatedStep()
+    public function updatedImage()
     {
         $this->validate([
 
@@ -17,6 +19,12 @@ class ItemMultiForm extends Component
         ]);
 
     }
+    public function remove($index) {
+      array_splice($this->image, $index, 1);
+
+    }
+
+
     public function nextStep(){
         $this->step++;
     }
