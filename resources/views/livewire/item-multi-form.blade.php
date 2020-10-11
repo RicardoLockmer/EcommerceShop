@@ -3,11 +3,11 @@
     @if ($step == 0)
 
     @livewire('item-form-nombre')
-    @livewire('item-form-images')
-    <button wire:click.prevent="nextStep">NEXT</button>
-    @elseif($step == 1)
-
     @livewire('counter')
+
+    <button class="btn btn-outline-primary" wire:click.prevent="nextStep">Seguir</button>
+    @elseif($step == 1)
+    @livewire('item-form-images')
     <div>
         {{-- COMIENZAN LAS IMAGENES --}}
 

@@ -59,7 +59,9 @@
                 <input type="text" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
                 <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
 
-                @livewire('item-multi-form')
+                @livewire('item-form-step1')
+
+
                 {{-- COLORES - CATEORIA - PRECIO - CANTIDAD --}}
                 <div class="select" id="app">
                     <div class='row' style="width: auto;">
