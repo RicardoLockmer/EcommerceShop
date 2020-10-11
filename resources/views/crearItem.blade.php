@@ -59,7 +59,7 @@
                 <input type="text" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
                 <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
 
-                @livewire('item-form-step1')
+                @livewire('item-multi-form')
 
 
                 {{-- COLORES - CATEORIA - PRECIO - CANTIDAD --}}
@@ -180,7 +180,7 @@
                                 </label>
 
                                 <select class="custom-select
-                                                                                                        @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
+                                    @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
                                     <option disabled selected value>
                                         --
                                     </option>
@@ -203,7 +203,7 @@
                                     <strong>Subcategoría</strong>
                                 </label>
                                 <select name="subcategoria" class="custom-select
-                                                                                                    @error('subcategoria') is-invalid @enderror">
+                                 @error('subcategoria') is-invalid @enderror">
                                     <option disabled selected value>
                                         --
                                     </option>
