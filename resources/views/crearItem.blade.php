@@ -4,7 +4,11 @@
 
 @section('crearItem')
 
-<form id="regForm" action="">
+<form action=" /negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST"  class="" id="regForm"  enctype="multipart/form-data">
+    @csrf
+
+
+
 
     <h1>Register:</h1>
 
