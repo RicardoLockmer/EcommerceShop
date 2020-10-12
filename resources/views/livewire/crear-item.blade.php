@@ -71,7 +71,7 @@
                         </a>
                     </div>
 
-                    <p><input class="form-control" placeholder="Nombre del producto" oninput="this.className = ''"></p>
+                    <p><input class="form-control" placeholder="Nombre del producto" oninput="this.className = ''" required></p>
 
                     {{-- FINAL NOMBRE --}}
 
@@ -89,7 +89,7 @@
                         </a>
                     </div>
 
-                    <p><input class="form-control" placeholder="Nombre del producto" oninput="this.className = ''"></p>
+                    <p><input class="form-control" placeholder="Nombre del producto" oninput="this.className = ''" required></p>
 
 
                     {{-- FINAL MARCA --}}
@@ -97,7 +97,7 @@
                     {{-- DESCRIPCION --}}
                     <div style="margin-bottom: 5px;">
                         <strong>
-                            Descripcion
+                            Descripción
                         </strong>
                         <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Describa su producto">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -106,8 +106,8 @@
                             </svg>
                         </a>
                     </div>
-                    <p><textarea class="form-control " style="width: 100%; " placeholder="Descripcion" id="textarea" oninput="this.className = ''" required></textarea></p>
-
+                    <textarea class="form-control char-textarea " style="width: 100%; " placeholder="Descripción" id="textarea" oninput="this.className = ''" data-length=0 value="{{ old('descripcion') }}" maxlength="250" required></textarea>
+                    <small class="text-muted"><span class="char-count">0</span>/250 </small>
                 </div>
                 {{-- FINAL TAB 1 --}}
 
@@ -238,5 +238,41 @@
     }
 
 </script>
+<script type="text/javascript">
+    $(".char-textarea").on("keyup", function(event) {
+        checkTextAreaMaxLength(this, event);
+    });
 
+    /*
+    Checks the MaxLength of the Textarea
+    -----------------------------------------------------
+    @prerequisite:	textBox = textarea dom element
+    				e = textarea event
+                    length = Max length of characters
+    */
+    function checkTextAreaMaxLength(textBox, e) {
+
+        var maxLength = parseInt($(textBox).data("length"));
+
+
+        if (!checkSpecialKeys(e)) {
+            if (textBox.value.length < maxLength + 1) textBox.value = textBox.value.substring(0, maxLength);
+        }
+        $(".char-count").html(maxLength + textBox.value.length);
+
+        return true;
+    }
+    /*
+    Checks if the keyCode pressed is inside special chars
+    -------------------------------------------------------
+    @prerequisite:	e = e.keyCode object for the key pressed
+    */
+    function checkSpecialKeys(e) {
+        if (e.keyCode != 8 && e.keyCode != 46 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40)
+            return false;
+        else
+            return true;
+    }
+
+</script>
 @endsection
