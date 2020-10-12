@@ -71,7 +71,7 @@
                         </a>
                     </div>
 
-                    <p><input placeholder="Nombre del producto" oninput="this.className = ''"></p>
+                    <p><input class="form-control" placeholder="Nombre del producto" oninput="this.className = ''"></p>
 
                     {{-- FINAL NOMBRE --}}
 
@@ -89,7 +89,7 @@
                         </a>
                     </div>
 
-                    <p><input placeholder="Nombre del producto" oninput="this.className = ''"></p>
+                    <p><input class="form-control" placeholder="Nombre del producto" oninput="this.className = ''"></p>
 
 
                     {{-- FINAL MARCA --}}
@@ -106,7 +106,7 @@
                             </svg>
                         </a>
                     </div>
-                    <p><textarea style="width: 100%;" placeholder=" Descripcion" oninput="this.className = ''"></textarea></p>
+                    <p><textarea class="form-control " style="width: 100%; " placeholder="Descripcion" id="textarea" oninput="this.className = ''" required></textarea></p>
 
                 </div>
                 {{-- FINAL TAB 1 --}}
@@ -196,9 +196,10 @@
 
     function validateForm() {
         // This function deals with validation of the form fields
-        var x, y, i, valid = true;
+        var x, y, i, z, valid = true;
         x = document.getElementsByClassName("tab");
         y = x[currentTab].getElementsByTagName("input");
+        z = x[currentTab].getElementsByTagName("textarea");
         // A loop that checks every input field in the current tab:
         for (i = 0; i < y.length; i++) {
             // If a field is empty...
@@ -208,6 +209,16 @@
                 // and set the current valid status to false:
                 valid = false;
             }
+        }
+        for (i = 0; i < z.length; i++) {
+            // If a field is empty...
+            if (z[i].value == "") {
+                // add an "invalid" class to the field:
+                z[i].className += " invalid";
+                // and set the current valid status to false:
+                valid = false;
+            }
+
         }
         // If the valid status is true, mark the step as finished and valid:
         if (valid) {
