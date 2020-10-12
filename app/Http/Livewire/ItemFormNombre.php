@@ -8,10 +8,12 @@ class ItemFormNombre extends Component
 {
 
     public $nameCounter = 0;
-    public $nameWords = '';
+    public $nameWords;
     public $nameMax = 90;
+
     public function nameCounter(){
       $this->nameCounter =  strlen($this->nameWords);
+
     }
 
 

@@ -11,6 +11,7 @@ class ItemMultiForm extends Component
 
 
     public function nextStep(){
+
         $this->step++;
     }
 
