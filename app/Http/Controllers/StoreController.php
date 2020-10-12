@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use App\Store;
 use App\Items;
 use App\Shipping;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -30,17 +30,17 @@ class StoreController extends Controller
         if (Auth::user()->id == $myStore->user_id) {
 
             $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->get();
-           
+
             foreach ($myItems as $items) {
                 $items->image = json_decode($items->image);
-            
+
             }
             return view('myStore', [
                 'store' => $myStore,
                 'items' => $myItems
             ]);
         } else {
-            abort(404); 
+            abort(404);
         }
     }
 
@@ -116,14 +116,14 @@ class StoreController extends Controller
                 'karma'=> 'nullable',
                 'updated_at' => 'nullable',
                 'created_at' => 'date',
-                'closeDate' => 'nullable', 
+                'closeDate' => 'nullable',
             ]);
             $newStore = new Store();
             $newStore->primerNombre = $request->primerNombre;
             $newStore->segundoNombre = $request->segundoNombre;
             $newStore->primerApellido = $request->primerApellido;
             $newStore->segundoApellido = $request->segundoApellido;
-            
+
             $newStore->nombreNegocio = $request->nombreNegocio;
             $newStore->descripcion = $request->descripcion;
             $newStore->user_id = Auth::user()->id;
@@ -137,11 +137,11 @@ class StoreController extends Controller
             $newStore->tyc = $request->tyc;
             $newStore->created_at = date('dmy');
             $newStore->cedulaJuridica = $request->cedulaJuridica;
-            
+
                 $newStore->email = $request->BizE;
-             
+
             $newStore->save();
-            
+
             $newBiz = User::find($newStore->user_id);
             $newBiz->nombreNegocio = $newStore->nombreNegocio;
             $newBiz->save();
@@ -160,8 +160,8 @@ class StoreController extends Controller
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
             $units = ['Metros (mts)'=>'mts', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz'];
             arsort($units);
-            
-            return view('crearItem', [
+
+            return view('livewire/crear-item', [
                 'store' => $myStore,
                 'categories' => $myCategories,
                'units' => $units,
@@ -174,7 +174,7 @@ class StoreController extends Controller
 
     public function storeItem(Request $request) {
 
-   
+
         $myItem =  request()->validate([
                     'nombre' => 'required|max:100',
                     'image' => 'required|max:4048',
@@ -188,7 +188,7 @@ class StoreController extends Controller
                     'color' => 'min:1',
                     'marca' => 'required',
                     'Specs' => 'nullable',
-                    
+
                     'updateDate' => 'nullable',
                     'user_id' => 'required',
                     'store_id' => 'required',
@@ -205,8 +205,8 @@ class StoreController extends Controller
                     'caja' => 'nullable'
 
                 ]);
-        // FILEs 
-        
+        // FILEs
+
         // CREATE NEW ITEM IN DATABASE
         $item = new Items();
         $item->nombre = $request->nombre;
@@ -214,7 +214,7 @@ class StoreController extends Controller
         $item->categoria = $request->categoria;
         $item->subcategoria = $request->subcategoria;
         $item->precio = $request->precio;
-        
+
         $item->Specs = json_encode($request->Specs);
         $item->marca = $request->marca;
         $item->store_id = $request->store_id;
@@ -226,8 +226,8 @@ class StoreController extends Controller
         foreach($request->file('image') as $file){
             $filename =$file->getClientOriginalName();
             $fileNewName = date('dmyhms').$filename;
-            $data[] = $fileNewName; 
-            $file->move(public_path().'/storage/assetItems/', $fileNewName);  
+            $data[] = $fileNewName;
+            $file->move(public_path().'/storage/assetItems/', $fileNewName);
        }
         $item->image = json_encode($data);
         $storeInitials = substr($item->nombreNegocio, 0, 3);
@@ -236,7 +236,7 @@ class StoreController extends Controller
         // FINAL DE ITEM SAVE
 
         $addDTID = Items::find($item->id);
-        
+
 
        for($i = 0; $i < count($request->color); $i++){
            if ($request->color[$i] != NULL) {
@@ -267,16 +267,16 @@ class StoreController extends Controller
 
 
        }
-        
-        
+
+
         //SAVE TO DATABASE
-       
+
         $itemID = $item->id;
 
         $newItemShipping = new Shipping();
         $newItemShipping->items_id = $itemID;
         $newItemShipping->empresa = $request->empresa;
-        
+
         $provinciaEncode = json_encode($request->provincia);
         $newItemShipping->provincia = $provinciaEncode;
 
@@ -284,18 +284,18 @@ class StoreController extends Controller
         $newItemShipping->peso = $request->peso;
         $newItemShipping->dimensiones = $request->dimensiones;
         $newItemShipping->precioEnvio = $request->precioEnvio;
-        
+
         $newItemShipping->tiempoEntrega = $request->tiempoEntrega;
 
         $newItemShipping->save();
 
         return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
-        
-        
+
+
 
         // REDIRECT A LA PAGINA DE PRODUCTOS
-        
-    
+
+
     }
     /**
      * Display the specified resource.
@@ -315,7 +315,7 @@ class StoreController extends Controller
         }
     if (Auth::user()->id == $myStore->user_id) {
     $images = json_decode($item->image);
-    
+
     return view('thisItem',[
     'item' => $item,
     'store' => $myStore,
@@ -334,9 +334,9 @@ class StoreController extends Controller
         $allItems = Items::where('store_id', $myStore->store_id)->get();
         foreach ($allItems as $items) {
             $items->image = json_decode($items->image);
-        
+
         }
-        
+
         if(Auth::user()){
 
             \Cart::session(Auth::user()->id);
@@ -344,14 +344,14 @@ class StoreController extends Controller
         return view('myItem', [
             'items' => $allItems,
             'store' => $myStore,
-            
+
             ]);
         } else {
             abort(404);
         }
         }
-        
-    
+
+
 
 
     /**
@@ -436,7 +436,7 @@ class StoreController extends Controller
         $updateItemStore = Items::where('nombreNegocio', Auth::user()->nombreNegocio)->get();
             foreach ($updateItemStore as $itemStore) {
                 $itemStore->nombreNegocio = $request->nombreNegocio;
-                $itemStore->save(); 
+                $itemStore->save();
             }
 
         if ($request->primerNombre != NULL) {
@@ -456,7 +456,7 @@ class StoreController extends Controller
         }
         if ($request->nombreNegocio != NULL) {
         $newStore->nombreNegocio = $request->nombreNegocio;
-        } 
+        }
         if ($request->cedulaJuridica != NULL) {
             $newStore->cedulaJuridica = $request->cedulaJuridica;
             }
@@ -497,7 +497,7 @@ class StoreController extends Controller
         $newStore->phoneNumber = $request->ntel;
         }
         $newStore->created_at = date('dmy');
-       
+
         $newStore->save();
         if ($newStore->nombreNegocio != NULL){
         $newBiz = User::find($newStore->user_id);
@@ -509,14 +509,14 @@ class StoreController extends Controller
     } catch (\Illuminate\Database\QueryException $e) {
          return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
     }
-        
-            
-            
-       
-           
-        
-        
-       
+
+
+
+
+
+
+
+
     }
 
 
@@ -636,7 +636,7 @@ class StoreController extends Controller
     } // ELSE IMAGE 6 NULL
 
 
-    
+
     //SAVE TO DATABASE
     $item->save();
 
@@ -660,16 +660,16 @@ class StoreController extends Controller
     public function destroyItem(Store $myStore, Items $item)
     {
         if (Auth::user()->id == $myStore->user_id) {
-            
+
             $item->delete();
-            
+
 
             return back();
             // return view('myItem', [
             // 'items' => $myItems,
             // 'store' => $myStore
             // ]);
-        
+
         } else {
         abort(404);
         }
