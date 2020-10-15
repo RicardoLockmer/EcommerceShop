@@ -348,6 +348,12 @@ textarea.invalid {
     background-color: #ffdddd;
 }
 
+.exceededLimit {
+
+    color: red !important;
+}
+
+
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
     background-color: #ffdddd;

@@ -175,123 +175,123 @@ class StoreController extends Controller
     public function storeItem(Request $request) {
 
 
-        $myItem =  request()->validate([
-                    'nombre' => 'required|max:100',
-                    'image' => 'required|max:4048',
-                    'image.*' => 'mimes:jpg,jpeg,png,webp',
-                    'descripcion' => 'required|max:255',
-                    'categoria' => 'required',
-                    'subcategoria' => 'required',
-                    'precio' => 'required',
-                    'size' => 'min:1',
-                    'cantidad'=>'min:1',
-                    'color' => 'min:1',
-                    'marca' => 'required',
-                    'Specs' => 'nullable',
+    //     $myItem =  request()->validate([
+    //                 'nombre' => 'required|max:100',
+    //                 'image' => 'required|max:4048',
+    //                 'image.*' => 'mimes:jpg,jpeg,png,webp',
+    //                 'descripcion' => 'required|max:255',
+    //                 'categoria' => 'required',
+    //                 'subcategoria' => 'required',
+    //                 'precio' => 'required',
+    //                 'size' => 'min:1',
+    //                 'cantidad'=>'min:1',
+    //                 'color' => 'min:1',
+    //                 'marca' => 'required',
+    //                 'Specs' => 'nullable',
 
-                    'updateDate' => 'nullable',
-                    'user_id' => 'required',
-                    'store_id' => 'required',
-                    'updated_at' => 'nullable',
-                    'created_at' => 'nullable',
-                    'empresa' => 'required',
-                    'provincia' => 'required',
-                    'restringidos' => 'nullable',
-                    'peso' => 'required',
-                    'dimensiones' => 'required',
-                    'precioEnvio' => 'required',
-                    'tiempoEntrega' => 'required',
-                    'etiquetas'=> 'nullable',
-                    'caja' => 'nullable'
+    //                 'updateDate' => 'nullable',
+    //                 'user_id' => 'required',
+    //                 'store_id' => 'required',
+    //                 'updated_at' => 'nullable',
+    //                 'created_at' => 'nullable',
+    //                 'empresa' => 'required',
+    //                 'provincia' => 'required',
+    //                 'restringidos' => 'nullable',
+    //                 'peso' => 'required',
+    //                 'dimensiones' => 'required',
+    //                 'precioEnvio' => 'required',
+    //                 'tiempoEntrega' => 'required',
+    //                 'etiquetas'=> 'nullable',
+    //                 'caja' => 'nullable'
 
-                ]);
-        // FILEs
+    //             ]);
+    //     // FILEs
 
-        // CREATE NEW ITEM IN DATABASE
-        $item = new Items();
-        $item->nombre = $request->nombre;
-        $item->descripcion = $request->descripcion;
-        $item->categoria = $request->categoria;
-        $item->subcategoria = $request->subcategoria;
-        $item->precio = $request->precio;
+    //     // CREATE NEW ITEM IN DATABASE
+    //     $item = new Items();
+    //     $item->nombre = $request->nombre;
+    //     $item->descripcion = $request->descripcion;
+    //     $item->categoria = $request->categoria;
+    //     $item->subcategoria = $request->subcategoria;
+    //     $item->precio = $request->precio;
 
-        $item->Specs = json_encode($request->Specs);
-        $item->marca = $request->marca;
-        $item->store_id = $request->store_id;
-        $item->user_id = Auth::user()->id;
-        $item->nombreNegocio = Auth::user()->nombreNegocio;
-        $item->updated_at = NULL;
-        $item->created_at = date("dmy");
-        $item->updateDate = date("dmy");
-        foreach($request->file('image') as $file){
-            $filename =$file->getClientOriginalName();
-            $fileNewName = date('dmyhms').$filename;
-            $data[] = $fileNewName;
-            $file->move(public_path().'/storage/assetItems/', $fileNewName);
-       }
-        $item->image = json_encode($data);
-        $storeInitials = substr($item->nombreNegocio, 0, 3);
-        $nameInitials = substr($item->nombre, 0, 2);
-        $item->save();
-        // FINAL DE ITEM SAVE
+    //     $item->Specs = json_encode($request->Specs);
+    //     $item->marca = $request->marca;
+    //     $item->store_id = $request->store_id;
+    //     $item->user_id = Auth::user()->id;
+    //     $item->nombreNegocio = Auth::user()->nombreNegocio;
+    //     $item->updated_at = NULL;
+    //     $item->created_at = date("dmy");
+    //     $item->updateDate = date("dmy");
+    //     foreach($request->file('image') as $file){
+    //         $filename =$file->getClientOriginalName();
+    //         $fileNewName = date('dmyhms').$filename;
+    //         $data[] = $fileNewName;
+    //         $file->move(public_path().'/storage/assetItems/', $fileNewName);
+    //    }
+    //     $item->image = json_encode($data);
+    //     $storeInitials = substr($item->nombreNegocio, 0, 3);
+    //     $nameInitials = substr($item->nombre, 0, 2);
+    //     $item->save();
+    //     // FINAL DE ITEM SAVE
 
-        $addDTID = Items::find($item->id);
-
-
-       for($i = 0; $i < count($request->color); $i++){
-           if ($request->color[$i] != NULL) {
-        $colores = new itemColors();
-        $colores->item_id = $item->id;
-        $colorInitials = substr($request->color[$i], 0, 1);
-        $sizeInitials = substr($request->size[$i], 0 ,1);
-        $qtyInitials = substr($request->cantidad[$i], 0,1);
-        $colores->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
-        $colores->color = $request->color[$i];
-        $colores->save();
-
-        $sizes = new itemSizes();
-        $sizes->item_id = $item->id;
-        $sizes->color_id = $colores->id;
-        $sizes->sku = $colores->sku;
-        $sizes->size = $request->size[$i];
-        $sizes->save();
-
-        $qty = new itemCantidades();
-        $qty->item_id = $item->id;
-        $qty->color_id = $colores->id;
-        $qty->size_id = $sizes->id;
-        $qty->sku = $colores->sku;
-        $qty->quantity = $request->cantidad[$i];
-        $qty->save();
-           }
+    //     $addDTID = Items::find($item->id);
 
 
-       }
+    //    for($i = 0; $i < count($request->color); $i++){
+    //        if ($request->color[$i] != NULL) {
+    //     $colores = new itemColors();
+    //     $colores->item_id = $item->id;
+    //     $colorInitials = substr($request->color[$i], 0, 1);
+    //     $sizeInitials = substr($request->size[$i], 0 ,1);
+    //     $qtyInitials = substr($request->cantidad[$i], 0,1);
+    //     $colores->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
+    //     $colores->color = $request->color[$i];
+    //     $colores->save();
+
+    //     $sizes = new itemSizes();
+    //     $sizes->item_id = $item->id;
+    //     $sizes->color_id = $colores->id;
+    //     $sizes->sku = $colores->sku;
+    //     $sizes->size = $request->size[$i];
+    //     $sizes->save();
+
+    //     $qty = new itemCantidades();
+    //     $qty->item_id = $item->id;
+    //     $qty->color_id = $colores->id;
+    //     $qty->size_id = $sizes->id;
+    //     $qty->sku = $colores->sku;
+    //     $qty->quantity = $request->cantidad[$i];
+    //     $qty->save();
+    //        }
 
 
-        //SAVE TO DATABASE
-
-        $itemID = $item->id;
-
-        $newItemShipping = new Shipping();
-        $newItemShipping->items_id = $itemID;
-        $newItemShipping->empresa = $request->empresa;
-
-        $provinciaEncode = json_encode($request->provincia);
-        $newItemShipping->provincia = $provinciaEncode;
-
-        $newItemShipping->restringidos = $request->restringidos;
-        $newItemShipping->peso = $request->peso;
-        $newItemShipping->dimensiones = $request->dimensiones;
-        $newItemShipping->precioEnvio = $request->precioEnvio;
-
-        $newItemShipping->tiempoEntrega = $request->tiempoEntrega;
-
-        $newItemShipping->save();
-
-        return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
+    //    }
 
 
+    //     //SAVE TO DATABASE
+
+    //     $itemID = $item->id;
+
+    //     $newItemShipping = new Shipping();
+    //     $newItemShipping->items_id = $itemID;
+    //     $newItemShipping->empresa = $request->empresa;
+
+    //     $provinciaEncode = json_encode($request->provincia);
+    //     $newItemShipping->provincia = $provinciaEncode;
+
+    //     $newItemShipping->restringidos = $request->restringidos;
+    //     $newItemShipping->peso = $request->peso;
+    //     $newItemShipping->dimensiones = $request->dimensiones;
+    //     $newItemShipping->precioEnvio = $request->precioEnvio;
+
+    //     $newItemShipping->tiempoEntrega = $request->tiempoEntrega;
+
+    //     $newItemShipping->save();
+
+    //     return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
+
+        dd(request()->all());
 
         // REDIRECT A LA PAGINA DE PRODUCTOS
 

@@ -7,6 +7,7 @@ class ItemFormImages extends Component
 {
     use WithFileUploads;
     public $image = [];
+    public $store;
 
 
     public function updatedImage()

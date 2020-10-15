@@ -8,7 +8,7 @@
         <small class="text-muted ">
             ({{ count($image) }} / 8)
         </small>
-        <a class="text-muted" data-toggle="tooltip" data-placement="right" data-original-title="Seleccione todas las imagenes al mismo tiempo. " title="Seleccione todas las imagenes al mismo tiempo. ">
+        <a class="text-muted" data-toggle="tooltip" data-placement="right" data-original-title="Seleccione todas las imagenes al mismo tiempo. ">
 
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -21,8 +21,8 @@
         <div class="newbiz col">
             <div class="custom-file">
 
-                <input class="custom-file-input
-                       @error('image.*') is-invalid @enderror" type="file" name="image[]" id="gallery-photo-add" wire:model="image" multiple>
+                <input id="myFiles" oninput="this.className = ''" class="custom-file-input
+                       @error('image.*') is-invalid @enderror" type="file" wire:name="image" id="gallery-photo-add" wire:model="image" multiple required>
                 <label class="custom-file-label text-muted" for="image[]" data-browse="Elegir">.Jpg, .Jpeg, .Png</label>
 
                 @if (count($image) > 8)
@@ -47,7 +47,7 @@
     </div>
     @if ($image)
 
-    <div class="row" style="width: auto;">
+    <div class="newbiz form-row" style="width: auto;">
         @foreach($image as $photo)
         <div style=" margin-right: 8px; margin-top: 4px; position: relative; display: inline-block;" wire:key='{{ $loop->index }}'>
 
