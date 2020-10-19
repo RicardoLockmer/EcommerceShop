@@ -115,8 +115,10 @@
                     </div>
                     {{-- FINAL TAB 1 --}}
 
+
+
                     {{-- TAB 2 --}}
-                    <div class="tab">
+                    <div style="width:auto;" class="tab">
 
                         {{-- Variaciones --}}
 
@@ -135,7 +137,13 @@
 
                             <div class="newbiz col">
 
-                                Imagen Principal
+                                <small>
+                                    <strong>
+
+                                        Imagen Principal
+                                    </strong>
+
+                                </small>
                                 <br>
 
                                 <label for="MIMG" style=" border: 2px dotted grey; width: 200px; height: 80px; text-align: center; padding-top:5%;">
@@ -145,69 +153,141 @@
                                     </svg>
                                 </label>
                                 <input name="image" @change="onFileChange" id="MIMG" ref="mainImage" type="file" class="custom-file-input" required hidden>
-                                {{-- @if (count($image) > 8)
-                                        <div class="alert alert-danger" style="margin-top: 8px;">
-                                            Excede la cantidad de imagenes.
-                                        </div>
-                                        @endif --}}
+
                             </div>
 
                         </div>
                         {{-- VARIACION COLORES TAMANOS QTY IMG --}}
 
-                        <div class='form-row' style="width: auto; margin-left:16px; margin-top:16px;">
 
 
 
-                            <div class="row">
 
-                                <div class="newbiz " style="margin: 0 0 1.5em 0;">
-                                    <div class="control">
-                                        Color
-                                        <input style="width: 100px;" placeholder="Color" type="text" value="{{ old('color') }}" name="color[]" class="form-control">
 
-                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <span class="btn btn-dark" style="margin-bottom:15px;margin-top:15px;" @click="addFind">Agregar Otra Variante +</span>
+
+                        <div style=" position:relative;" class="row" v-for="(variante, index) in variantes">
+                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
+                                <div class="control">
+                                    <strong>
+
+                                        @{{ index+1 }}.
+                                    </strong>
                                 </div>
-
-                                <div class="newbiz " style="margin: 0 0 1.5em 0;">
-
-                                    <div class="control">
-                                        Tamaño
-                                        <input style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
-                                    </div>
-
-                                </div>
-
-                                <div class="newbiz " style="margin: 0 0 1.5em 0;">
-                                    <div class="control">
-                                        Cantidad
-                                        <input style="width: 100px;" placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
-                                    </div>
-                                </div>
-
-                                <div class="newbiz " style="margin: 0 0 1.5em 0;">
-                                    <div class="custom-file">
-                                        imagen
-                                        <div>
-
-                                            <input id="cimagen" style="width: 100px;" id="customFileLang" lang="es" name="cimage[]" type="file" id="validatedCustomFile" multiple required hidden>
-
-                                            <label class="form-control" style="border: 3px dotted grey; text-align:center; " for="cimagen">
-
-                                                <svg style="vertical-align: baseline;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                                    <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                                                </svg>
-                                            </label>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <button @click="">Agregar Otra Variante</button>
                             </div>
+                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
+                                <div class="control">
+
+                                    <small>
+                                        <strong>
+
+                                            Color
+                                        </strong>
+
+                                    </small>
+                                    <input v-model="variante.color" style="width: 100px;" placeholder="Color" type="text" value="{{ old('color') }}" name="color[]" class="form-control">
+
+                                </div>
+                            </div>
+
+                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
+
+                                <div class="control">
+                                    <small>
+                                        <strong>
+
+                                            Tamaño
+                                        </strong>
+
+                                    </small>
+
+                                    <input v-model="variante.size" style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
+                                </div>
+
+                            </div>
+
+                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
+                                <div class="control">
+                                    <small>
+                                        <strong>
+
+                                            Cantidad
+                                        </strong>
+
+                                    </small>
+                                    <input v-model="variante.qty" style="width: 100px;" placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
+                                </div>
+                            </div>
+
+                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
+                                <div class="custom-file">
+                                    <small>
+                                        <strong>
+
+                                            Imagen
+                                        </strong>
+
+                                    </small>
+                                    <div>
+
+                                        <input id="cimagen" style="width: 130px; " id="customFileLang" lang="es" name="cimage[]" type="file" id="validatedCustomFile" multiple hidden>
+
+                                        <label class="form-control" style="border: 3px dotted grey; text-align:center; width: 80px; " for="cimagen">
+
+                                            <svg style="vertical-align: baseline;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                            </svg>
+                                        </label>
+
+
+                                        <span style="position: absolute; top:26px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger" @click="deleteFind(index)">
+                                            x
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         </div>
+
+
 
                         {{-- @if ($image)
 
@@ -390,6 +470,8 @@
                         <div class="content">
 
                             <div class="textarea" style="white-space: pre-line;">@{{ descripcion }}</div>
+                            <br>
+
 
                             <div style="display: inline;">
 
@@ -398,10 +480,10 @@
                                 </span>
 
                                 <span>
-                                    <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-3" name="color" id="color">
+                                    <select style=" height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="color" id="color">
 
                                         {{-- @foreach ($colores as $color) --}}
-                                        <option value="###">color</option>
+                                        <option v-for="variante in variantes" value="###"> @{{ variante.color }}</option>
 
                                         {{-- @endforeach --}}
 
@@ -410,8 +492,29 @@
                                     </select>
                                 </span>
                             </div>
+                            <br>
+                            <br>
+                            <div style="display: inline;">
 
-                            <p style=" margin-top: 15px;"><strong>Tamaño:</strong> TAMANO SELECT</p>
+                                <span for="provincia" class="">
+                                    <strong> Tamaño: </strong>
+                                </span>
+
+                                <span>
+                                    <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="color" id="color">
+
+                                        {{-- @foreach ($colores as $color) --}}
+                                        <option v-for="variante in variantes" value="###">@{{ variante.size }}</option>
+
+                                        {{-- @endforeach --}}
+
+
+
+                                    </select>
+                                </span>
+                            </div>
+                            <br>
+                            <br>
 
                             {{-- INFO PARA ENVIOS --}}
                             <div id="ENVI">
@@ -529,219 +632,19 @@
 @endsection
 
 @section('categoryOptions')
-<script type="text/javascript">
-    const itemLayout = {
-        data() {
-            return {
-                nombre: ''
-                , marca: ''
-                , descripcion: ''
-                , image: ''
-            }
-        }
-        , methods: {
-            onFileChange(e) {
-                var files = e.target.files || e.dataTransfer.files;
-                if (!files.length)
-                    return;
-                this.createImage(files[0]);
-            }
-            , createImage(file) {
 
-                var image = new Image();
-                var reader = new FileReader();
-                var vm = this;
+{{-- crearItemLogic Controla el Tab 2 de imagenes y variaciones --}}
+<script src="/scripts/crearItemLogic.js"></script>
 
-                reader.onload = (e) => {
-                    vm.image = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-            , removeImage: function(e) {
-                this.image = '';
-                const input = this.$refs.mainImage;
-                input.type = 'text';
-                input.type = 'file';
-            }
-        }
-    }
+{{-- crearItemTabControl controla los tabs en Multi-Step form para crear item page --}}
+<script src="/scripts/crearItemTabControl.js"></script>
 
-    Vue.createApp(itemLayout).mount('#itemLayout')
-
-</script>
-<script>
-    // Add the following code if you want the name of the file appear on select
-
-</script>
-<script>
-    var currentTab = 1;
-    showTab(currentTab);
-
-    function showTab(n) {
-
-        var x = document.getElementsByClassName("tab");
-        x[n].style.display = "block";
-
-        if (n == 0) {
-            document.getElementById("prevBtn").style.display = "none";
-            document.getElementById("nextBtn").style.display = "inline";
-        } else {
-            document.getElementById("prevBtn").style.display = "inline";
-        }
-        if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").style.display = "none";
-            document.getElementById("subBtn").style.display = "inline";
-        } else {
-            document.getElementById("nextBtn").innerHTML = "Siguiente";
-            document.getElementById("nextBtn").style.display = "inline";
-            document.getElementById("subBtn").style.display = "none";
-        }
-
-        fixStepIndicator(n)
-    }
-
-    function nextPrev(n) {
-
-        var x = document.getElementsByClassName("tab");
-
-        if (n == 1 && !validateForm()) return false;
-
-        x[currentTab].style.display = "none";
-
-        currentTab = currentTab + n;
-
-        if (currentTab >= x.length) {
-
-            document.getElementById("regForm").submit();
-            return false;
-        }
-
-        showTab(currentTab);
-    }
-
-    function validateForm() {
-
-        var x, y, i, z, f, xl, valid = true;
-        x = document.getElementsByClassName("tab");
-        y = x[currentTab].getElementsByTagName("input");
-        f = document.getElementById("myFiles");
-        xl = x[currentTab].getElementsByTagName("small");
-        z = x[currentTab].getElementsByTagName("textarea");
-
-        for (i = 0; i < y.length; i++) {
-
-            if (y[i].value == "") {
-
-                y[i].className += " is-invalid";
-
-                valid = false;
-            }
-
-
-        }
-        for (i = 0; i < z.length; i++) {
-
-            if (z[i].value == "") {
-
-                z[i].className += " is-invalid";
-
-
-                valid = false;
-            }
-            if (z[i].value.length > 250) {
-                valid = false;
-                xl[i].className += " exceededLimit";
-                z[i].className += " is-invalid";
-                alert('Excede los 250 caracteres.');
-            } else {
-                xl[i].className -= " exceededLimit";
-                xl[i].className = " text-muted";
-            }
-            // for (i = 0; i < f.length; i++) {
-
-            //     if (f[i].value == "") {
-
-            //         f[i].className += " is-invalid";
-
-            //         valid = false;
-            //     }
-
-            // }
-        }
-
-        if (valid) {
-            document.getElementsByClassName("step")[currentTab].className += " finish";
-        }
-        return valid; // return the valid status
-    }
-
-    function fixStepIndicator(n) {
-
-        var i, x = document.getElementsByClassName("step");
-        for (i = 0; i < x.length; i++) {
-            x[i].className = x[i].className.replace(" active", "");
-        }
-
-        x[n].className += " active";
-    }
-
-</script>
-<script type="text/javascript">
-    $(".char-textarea").on("keyup", function(event) {
-        checkTextAreaMaxLength(this, event);
-    });
+{{-- wordCount cuenta la cantidad de letras en text area Tab 1 crear item page --}}
+<script src="/scripts/wordCount.js"></script>
 
 
 
-    function checkTextAreaMaxLength(textBox, e) {
 
-        var maxLength = parseInt($(textBox).data("length"));
-
-
-        if (!checkSpecialKeys(e)) {
-            if (textBox.value.length < maxLength + 1) textBox.value = textBox.value.substring(0, maxLength);
-        }
-        $(".char-count").html(maxLength + textBox.value.length);
-
-        return true;
-    }
-
-    function checkSpecialKeys(e) {
-        if (e.keyCode != 8 && e.keyCode != 46 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40)
-            return false;
-        else
-            return true;
-    }
-
-</script>
-
-<script type="text/javascript">
-    $(function() {
-        // Multiple images preview in browser
-        var imagesPreview = function(input, placeToInsertImagePreview) {
-
-            if (input.files) {
-                var filesAmount = input.files.length;
-
-                for (i = 0; i < filesAmount; i++) {
-                    var reader = new FileReader();
-
-                    reader.onload = function(event) {
-                        $($.parseHTML('<img style="width:100px; height: auto; margin: 14px 8px 10px 0" id="IMGPREVID">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                    }
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-
-        };
-
-        $('#gallery-photo-add').on('change', function() {
-            imagesPreview(this, 'div.gallery');
-        });
-    });
-
-</script>
 
 
 @endsection
