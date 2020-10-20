@@ -108,7 +108,7 @@
                         <span class="step"></span>
                         <span class="step"></span>
                     </div>
-
+<br>
             </form>
         </div>
 
@@ -178,7 +178,7 @@
                         </div>
 
                         <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
-                            &#8353; PRECIO
+                            &#8353; @{{ selectedSize.precio }}
                             <small style="font-size: 14px;" class="text-muted">
                                 (no incluye iva)
                             </small>
@@ -246,10 +246,10 @@
                                 </span>
 
                                 <span>
-                                    <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="tamano" id="color">
+                                    <select v-model="selectedSize" style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="tamano" id="color">
 
 
-                                        <option v-for="value in selected.size" v-bind:value="size">@{{ value }}</option>
+                                        <option v-for="value in selected.size" v-bind:value="{ tamano: value.tamano, precio: value.precio, cantidad: value.cantidad }">@{{ value.tamano }}</option>
 
 
 
@@ -258,7 +258,9 @@
                                 </span>
                             </div>
                             <br>
+                                
                             <br>
+                           
 
                             {{-- INFO PARA ENVIOS --}}
                             <div id="ENVI">

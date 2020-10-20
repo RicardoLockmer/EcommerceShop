@@ -1,7 +1,7 @@
 <label class="newbiz" for="image">
     <h4>
         <strong>
-            Tamaño, Cantidad y Precio
+            Tamaños
         </strong>
     </h4>
 
@@ -11,21 +11,22 @@
 
 
 
-<div style=" position:relative;" v-for="(variante, index) in variantes">
-    <div class="row">
+<div style=" position:relative; border-bottom: 1px solid grey" class="form-row" v-for="(variante, mainIndex) in variantes">
+    <div class="">
 
         <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
             <div class="control">
                 <strong>
 
-                    @{{ index+1 }}. @{{ variante.color }}
+                    @{{ mainIndex+1 }}. @{{ variante.color }}
                 </strong>
+                <span class="btn btn-dark" style="margin-bottom:15px;margin-top:15px; margin-left:12px;" @click="addSize(mainIndex)">Agregar Otro Tamaño +</span>
             </div>
         </div>
     </div>
-    <span class="btn btn-dark" style="margin-bottom:15px;margin-top:15px;" @click="addSize(index)">Agregar Otro Tamaño +</span>
-    <div v-for="(size, index) in variante.sizes" class="row" style="margin: -15px 0 1.5em 0; margin-right: 8px; ">
-
+    <!-- <span class="btn btn-dark" style="margin-bottom:15px;margin-top:15px;" @click="addSize(mainIndex)">Agregar Otro Tamaño +</span> -->
+    <div v-for="(size, index) in variante.sizes" style=" position:relative; display:flex; flex-wrap:wrap;"  >
+    
 
         <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
 
@@ -37,7 +38,7 @@
 
                 </small>
 
-                <input v-model="variante.sizes[index]" style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
+                <input v-model="variante.sizes[index].tamano" style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
             </div>
 
         </div>
@@ -51,27 +52,26 @@
                     </strong>
 
                 </small>
-                <input style="width: 100px;" placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
+                <input v-model="variante.sizes[index].cantidad" style="width: 100px;" placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
             </div>
         </div>
-
         <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
-            <div class="custom-file">
 
-                <div>
+        <div class="control">
+            <small>
+                <strong>
+                    Precio
+                </strong>
 
+            </small>
 
-
-
-
-
-                    <span style="position: absolute; top:26px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger" @click="deleteFind(index)">
+            <input v-model="variante.sizes[index].precio" style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('precio') }}">
+            <span style="position: absolute; top:26px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger" @click="deleteSize(mainIndex, index)">
                         x
                     </span>
-
-                </div>
-            </div>
-            @{{ $data }}
         </div>
+      
+    </div>
     </div>
 </div>
+<br>

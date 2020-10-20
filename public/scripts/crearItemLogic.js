@@ -6,16 +6,19 @@ const itemLayout = {
             descripcion: '',
             image: '',
             selected: '',
-            variantes: [{
+            selectedSize: '',
+            variantes: [
+                {
                 color: "Rojo",
                 sizes: [
-
-                    ''
-
-
+                {
+                    tamano:'',
+                    cantidad: '',
+                    precio: '',
+                }
                 ],
-
-            }]
+                }
+            ]
         };
     },
     methods: {
@@ -23,7 +26,11 @@ const itemLayout = {
             this.variantes.push({
                 color: '',
                 sizes: [
-                    '',
+                    {
+                        tamano: '',
+                        cantidad: '',
+                        precio: '',
+                    }
 
                 ],
 
@@ -32,8 +39,13 @@ const itemLayout = {
         },
         addSize: function (index) {
             this.variantes[index].sizes.push(
+            {
+                tamano: '',
+                cantidad: '',
+                precio: '',
+            }
 
-                ''
+                
 
             );
         },
@@ -41,6 +53,11 @@ const itemLayout = {
             console.log(index);
             console.log(this.variantes);
             this.variantes.splice(index, 1);
+        },
+        deleteSize: function (mainIndex, index) {
+            console.log(index);
+            console.log(this.variantes);
+            this.variantes[mainIndex].sizes.splice(index, 1);
         },
         onFileChange(e) {
             var files = e.target.files || e.dataTransfer.files;
