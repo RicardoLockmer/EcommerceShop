@@ -202,6 +202,7 @@
                                 <label class="label" for="categoria">
                                     <strong>Subcategoría</strong>
                                 </label>
+
                                 <select name="subcategoria" class="custom-select
                                  @error('subcategoria') is-invalid @enderror">
                                     <option disabled selected value>

@@ -63,306 +63,51 @@
                     {{-- TAB 1 --}}
                     <!-- One "tab" for each step in the form: -->
                     <div class="tab">
-                        <div style="margin-bottom: 5px;">
-                            {{-- NOMBRE PRODUCTO --}}
-                            <strong>
-                                Nombre Producto
-                            </strong>
-                            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Nombre de su producto">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                                </svg>
-                            </a>
-                        </div>
-                        <p><input v-model="nombre" name="nombre" oninput="this.className = 'form-control'" class="form-control" placeholder="Nombre del producto" maxlength="44"></p>
-
-                        {{-- FINAL NOMBRE --}}
-
-                        {{-- MARCA --}}
-                        <div style="margin-bottom: 5px;">
-                            {{-- NOMBRE PRODUCTO --}}
-                            <strong>
-                                Marca
-                            </strong>
-                            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Marca del producto">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                                </svg>
-                            </a>
-                        </div>
-
-                        <p><input v-model="marca" class="form-control" oninput="this.className = 'form-control'" placeholder="Marca del producto" name="marca" maxlength="120"></p>
-
-
-                        {{-- FINAL MARCA --}}
-
-                        {{-- DESCRIPCION --}}
-                        <div style="margin-bottom: 5px;">
-                            <strong>
-                                Descripción
-                            </strong>
-                            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Describa su producto">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                                    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                                </svg>
-                            </a>
-                        </div>
-                        <textarea v-model="descripcion" oninput="this.className = 'form-control'" class="form-control char-textarea " style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0 value="{{ old('descripcion') }}" maxlength="250" name="descripcion"></textarea>
-                        <small class="text-muted"><span class="char-count myCount">0</span>/250 </small>
+                        @include('includeFiles/tab1')
                     </div>
-                    {{-- FINAL TAB 1 --}}
+
 
 
 
                     {{-- TAB 2 --}}
                     <div style="width:auto;" class="tab">
 
-                        {{-- Variaciones --}}
 
+                        @include('includeFiles/tab2')
 
-                        {{-- IMAGEN PRINCIPAL --}}
 
-                        <label class="newbiz" for="image">
-                            <h4>
-                                <strong>
-                                    Variaciones del producto
-                                </strong>
-                            </h4>
-
-                        </label>
-                        <div class='form-row' style="width: auto;">
-
-                            <div class="newbiz col">
-
-                                <small>
-                                    <strong>
-
-                                        Imagen Principal
-                                    </strong>
-
-                                </small>
-                                <br>
-
-                                <label for="MIMG" style=" border: 2px dotted grey; width: 200px; height: 80px; text-align: center; padding-top:5%;">
-                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                        <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                                    </svg>
-                                </label>
-                                <input name="image" @change="onFileChange" id="MIMG" ref="mainImage" type="file" class="custom-file-input" required hidden>
-
-                            </div>
-
-                        </div>
-                        {{-- VARIACION COLORES TAMANOS QTY IMG --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <span class="btn btn-dark" style="margin-bottom:15px;margin-top:15px;" @click="addFind">Agregar Otra Variante +</span>
-
-                        <div style=" position:relative;" class="row" v-for="(variante, index) in variantes">
-                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
-                                <div class="control">
-                                    <strong>
-
-                                        @{{ index+1 }}.
-                                    </strong>
-                                </div>
-                            </div>
-                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
-                                <div class="control">
-
-                                    <small>
-                                        <strong>
-
-                                            Color
-                                        </strong>
-
-                                    </small>
-                                    <input v-model="variante.color" style="width: 100px;" placeholder="Color" type="text" value="{{ old('color') }}" name="color[]" class="form-control">
-
-                                </div>
-                            </div>
-
-                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
-
-                                <div class="control">
-                                    <small>
-                                        <strong>
-
-                                            Tamaño
-                                        </strong>
-
-                                    </small>
-
-                                    <input v-model="variante.size" style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror" type="text" name="size[]" value="{{ old('size') }}">
-                                </div>
-
-                            </div>
-
-                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
-                                <div class="control">
-                                    <small>
-                                        <strong>
-
-                                            Cantidad
-                                        </strong>
-
-                                    </small>
-                                    <input v-model="variante.qty" style="width: 100px;" placeholder="Cantidad" class="form-control cantidad @error('cantidad[]') is-invalid @enderror" type="text" name="cantidad[]" value="{{ old('cantidad') }}">
-                                </div>
-                            </div>
-
-                            <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
-                                <div class="custom-file">
-                                    <small>
-                                        <strong>
-
-                                            Imagen
-                                        </strong>
-
-                                    </small>
-                                    <div>
-
-                                        <input id="cimagen" style="width: 130px; " id="customFileLang" lang="es" name="cimage[]" type="file" id="validatedCustomFile" multiple hidden>
-
-                                        <label class="form-control" style="border: 3px dotted grey; text-align:center; width: 80px; " for="cimagen">
-
-                                            <svg style="vertical-align: baseline;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                                <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                                            </svg>
-                                        </label>
-
-
-                                        <span style="position: absolute; top:26px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger" @click="deleteFind(index)">
-                                            x
-                                        </span>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        </div>
-
-
-
-                        {{-- @if ($image)
-
-                            < class="newbiz form-row" style="width: auto;">
-                                @foreach($image as $photo)
-                                <div style=" margin-right: 8px; margin-top: 4px; position: relative; display: inline-block;" wire:key='{{ $loop->index }}'>
-
-                        <svg wire:click="remove({{ $loop->index }})" style="color:red; position: absolute;right: 0;top: 0;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-
-                            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
-                            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                        </svg>
-
-                        <div class="flex">
-
-                            <img style="width: 100px; height:auto; max-height: 150px; " src="{{ $photo->temporaryUrl() }}">
-                        </div>
 
                     </div>
-                    @endforeach
-                    </>
-                    @endif --}}
 
-
-
-                    {{-- FINAL IMAGES --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                </div>
-
-                <div class="tab">Birthday:
-                    <p><input placeholder="dd" oninput="this.className = ''"></p>
-                    <p><input placeholder="mm" oninput="this.className = ''"></p>
-                    <p><input placeholder="yyyy" oninput="this.className = ''"></p>
-                </div>
-
-                <div class="tab">Login Info:
-                    <p><input placeholder="Username..." oninput="this.className = ''"></p>
-                    <p><input placeholder="Password..." oninput="this.className = ''"></p>
-                </div>
-
-                <div class="tab">LAST TAB:
-                    <p><input placeholder="Username..." oninput="this.className = ''"></p>
-                    <p><input placeholder="Password..." oninput="this.className = ''"></p>
-                </div>
-                <div style="overflow:auto;">
-                    <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-outline-primary">Anterior</button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-outline-primary">Siguiente</button>
-                        <button type="submit" id="subBtn" class="btn btn-outline-primary">Agregar</button>
+                    <div class="tab">
+                        @include('includeFiles/tab3')
                     </div>
-                </div>
 
-                <!-- Circles which indicates the steps of the form: -->
-                <div style="text-align:center;margin-top:40px;">
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                    <span class="step"></span>
-                </div>
+                    <div class="tab">Login Info:
+                        <p><input placeholder="Username..." oninput="this.className = ''"></p>
+                        <p><input placeholder="Password..." oninput="this.className = ''"></p>
+                    </div>
+
+                    <div class="tab">LAST TAB:
+                        <p><input placeholder="Username..." oninput="this.className = ''"></p>
+                        <p><input placeholder="Password..." oninput="this.className = ''"></p>
+                    </div>
+                    <div style="overflow:auto;">
+                        <div style="float:right;">
+                            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-outline-primary">Anterior</button>
+                            <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-outline-primary">Siguiente</button>
+                            <button type="submit" id="subBtn" class="btn btn-outline-primary">Agregar</button>
+                        </div>
+                    </div>
+
+                    <!-- Circles which indicates the steps of the form: -->
+                    <div style="text-align:center;margin-top:40px;">
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                    </div>
 
             </form>
         </div>
@@ -480,10 +225,10 @@
                                 </span>
 
                                 <span>
-                                    <select style=" height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="color" id="color">
+                                    <select style=" height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="color" id="color" v-model="selected">
 
                                         {{-- @foreach ($colores as $color) --}}
-                                        <option v-for="variante in variantes" value="###"> @{{ variante.color }}</option>
+                                        <option v-for="variante in variantes" v-bind:value="{ color: variante.color, size: variante.sizes }"> @{{ variante.color }}</option>
 
                                         {{-- @endforeach --}}
 
@@ -501,12 +246,11 @@
                                 </span>
 
                                 <span>
-                                    <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="color" id="color">
+                                    <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="tamano" id="color">
 
-                                        {{-- @foreach ($colores as $color) --}}
-                                        <option v-for="variante in variantes" value="###">@{{ variante.size }}</option>
 
-                                        {{-- @endforeach --}}
+                                        <option v-for="value in selected.size" v-bind:value="size">@{{ value }}</option>
+
 
 
 

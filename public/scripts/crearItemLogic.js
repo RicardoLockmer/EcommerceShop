@@ -5,21 +5,37 @@ const itemLayout = {
             marca: '',
             descripcion: '',
             image: '',
+            selected: '',
             variantes: [{
-                color: "",
-                size: "",
-                qty: ""
+                color: "Rojo",
+                sizes: [
+
+                    ''
+
+
+                ],
+
             }]
-        }
+        };
     },
     methods: {
         addFind: function () {
             this.variantes.push({
                 color: '',
-                size: '',
-                qty: ''
+                sizes: [
+                    '',
+
+                ],
+
 
             });
+        },
+        addSize: function (index) {
+            this.variantes[index].sizes.push(
+
+                ''
+
+            );
         },
         deleteFind: function (index) {
             console.log(index);
@@ -52,4 +68,4 @@ const itemLayout = {
     }
 }
 
-Vue.createApp(itemLayout).mount('#itemLayout')
+Vue.createApp(itemLayout).mount('#itemLayout');
