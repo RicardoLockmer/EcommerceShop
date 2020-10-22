@@ -8,7 +8,7 @@
 
     <div class="d-flex" style="margin-top: 14px;">
 
-        <div class="col" style=" height:auto; border: 2px solid #007bff; border-right: none;">
+        <div class="col" style=" height:auto;  border-right: 2px dotted grey;">
             <form style="display:block!important; top:15px!important;" action="/negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST" class="" id="sticky" enctype="multipart/form-data">
                 {{-- CSRF --}}
                 @csrf
@@ -114,15 +114,20 @@
 
 
     </div>
-    <div class="col " style="height: auto;  border: 2px solid #007bff; border-left: none;">
+    <div class="col " style="height: auto;   border-left: 2px dotted grey;">
         <div class="myFormData " style="margin-left: 0.3em!important;">
 
             {{-- vista previa titulo --}}
-            <span style="font-size: 26px;"> <strong>Vista Previa</strong></span>
-            <strong>
-
-
-            </strong>
+            <span style="font-size: 26px;"> <strong>Vista Previa</strong>
+            <small>
+            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Al agregar algo en el formulario se actualiza en la vista previa. Asi es como veria un comprador su producto">
+        <svg style="margin:0 0 0 8px; font-size: 22px; padding-bottom: 5px;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+        </svg>
+    </a>
+</small>
+    </span>
             {{-- START --}}
             <div class="row" style="margin-top: 26px;">
 
@@ -132,13 +137,13 @@
 
                     <div v-if="image">
                         <img style="width: 125px; height:auto;" :src="image" />
-                        <button @click="removeImage">Quitar</button>
+                        <button class="btn btn-outline-danger btn-sm btn-block" @click="removeImage">Quitar</button>
                     </div>
 
 
 
                 </div>
-
+                
 
                 {{-- COLUMNA DEL INFO --}}
                 <div class="col flex" style="margin-left: 20px;">
@@ -151,6 +156,7 @@
                             @endfor
 
                     </div>
+                   
                     <article style="margin: 0 0 1em 0;">
 
                         <h1 style="font-size: 28px;margin-bottom: 0;">
@@ -249,7 +255,7 @@
                                     <select v-model="selectedSize" style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="tamano" id="color">
 
 
-                                        <option v-for="value in selected.size" v-bind:value="{ tamano: value.tamano, precio: value.precio, cantidad: value.cantidad }">@{{ value.tamano }}</option>
+                                        <option v-for="value in selected.size" v-bind:value="{ tamano: value.tamano, precio: value.precio, cantidad: value.cantidad }">@{{ value.tamano }} @{{ value.unidad }}</option>
 
 
 
@@ -346,27 +352,20 @@
 {{-- final de Shipping Address --}}
 
 {{-- COMIENZO FECHA DE ENTREGA --}}
-
-
-</div>
-
-<br>
 <div class="myFirstSectionInner scroll" style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
     <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
-        <div class="noWrap">
-            {{-- IMAGE 1 --}}
-            {{-- @foreach ($images as $image) --}}
-
-            {{-- @if($image != NULL) --}}
-
-            {{-- @endif --}}
-
-            {{-- @endforeach --}}
+        <div class="noWrap" v-for="images in imageListed">
+            <img :src="images" alt="" style="width: 100px; height: 100px;">
         </div>
         <br>
 
     </div>
 </div>
+
+</div>
+
+<br>
+
 
 {{-- ENDING --}}
 

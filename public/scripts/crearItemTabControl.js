@@ -1,4 +1,4 @@
-var currentTab = 2;
+var currentTab = 1;
 showTab(currentTab);
 
 function showTab(n) {

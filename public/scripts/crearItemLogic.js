@@ -5,6 +5,8 @@ const itemLayout = {
             marca: '',
             descripcion: '',
             image: '',
+            imageListed: [],
+            
             selected: '',
             selectedSize: '',
             variantes: [
@@ -12,9 +14,11 @@ const itemLayout = {
                 color: "Rojo",
                 sizes: [
                 {
+                    unidad: '',
                     tamano:'',
                     cantidad: '',
                     precio: '',
+
                 }
                 ],
                 }
@@ -27,6 +31,7 @@ const itemLayout = {
                 color: '',
                 sizes: [
                     {
+                        unidad: '',
                         tamano: '',
                         cantidad: '',
                         precio: '',
@@ -40,6 +45,7 @@ const itemLayout = {
         addSize: function (index) {
             this.variantes[index].sizes.push(
             {
+                unidad: '',
                 tamano: '',
                 cantidad: '',
                 precio: '',
@@ -63,8 +69,10 @@ const itemLayout = {
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length)
                 return;
+                
             this.createImage(files[0]);
         },
+        
         createImage(file) {
 
             var image = new Image();
@@ -76,12 +84,27 @@ const itemLayout = {
             };
             reader.readAsDataURL(file);
         },
+        createImages(e) {
+              let imageList =  e.target.files || e.dataTransfer.files;
+              
+            for(var i = 0; i <= imageList.length; i++){
+            let reader = new FileReader();
+              reader.readAsDataURL(imageList[i]);
+              reader.onload = e => {
+               this.imageListed.push(e.target.result); 
+              }
+            }
+            
+            
+            
+        },
         removeImage: function (e) {
             this.image = '';
             const input = this.$refs.mainImage;
             input.type = 'text';
             input.type = 'file';
-        }
+        },
+       
     }
 }
 
