@@ -8,12 +8,12 @@ const itemLayout = {
             marca: '',
             descripcion: '',
             image: '',
-            imageListed: [],
             
             selected: '',
             selectedSize: '',
             variantes: [
                 {
+                imageListed: [],
                 color: "Rojo",
                 sizes: [
                 {
@@ -33,6 +33,7 @@ const itemLayout = {
         addFind: function () {
             this.variantes.push({
                 color: '',
+                imageListed: [],
                 sizes: [
                     {
                         unidad: '',
@@ -88,20 +89,28 @@ const itemLayout = {
             };
             reader.readAsDataURL(file);
         },
-        createImages(e) {
+        createImages(e, index) {
               let imageList =  e.target.files || e.dataTransfer.files;
-              
-            for(var i = 0; i <= imageList.length; i++){
-            let reader = new FileReader();
-              reader.readAsDataURL(imageList[i]);
-              reader.onload = e => {
-               this.imageListed.push(e.target.result); 
+              if (this.variantes[index].imageListed.length > 0){
+                  this.variantes[index].imageListed.splice(0, this.variantes[index].imageListed.length);
+
               }
-            }
+                    for(var i = 0; i <= imageList.length; i++){
+                        let reader = new FileReader();
+                        reader.readAsDataURL(imageList[i]);
+                        reader.onload = e => {
+                            
+                                this.variantes[index].imageListed.push(e.target.result); 
+                            
+                        }
+                    }
+                
+            },
+            
+        
             
             
-            
-        },
+        
         removeImage: function (e) {
             this.image = '';
             const input = this.$refs.mainImage;

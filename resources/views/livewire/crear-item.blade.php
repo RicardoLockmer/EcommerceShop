@@ -234,7 +234,7 @@
                                     <select style=" height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="color" id="color" v-model="selected">
 
                                         {{-- @foreach ($colores as $color) --}}
-                                        <option v-for="variante in variantes" v-bind:value="{ color: variante.color, size: variante.sizes }"> @{{ variante.color }}</option>
+                                        <option v-for="variante in variantes" v-bind:value="{ color: variante.color, size: variante.sizes, images: variante.variantImages }"> @{{ variante.color }}</option>
 
                                         {{-- @endforeach --}}
 
@@ -351,13 +351,14 @@
 
 {{-- final de Shipping Address --}}
 
-<div  class="myFirstSectionInner scrolled"  style="margin-left: 33% ;border-top: 1px solid grey; border-bottom: 1px solid grey; height: auto; width: 350px!important;">
+<div v-if="variantes"  class="myFirstSectionInner scrolled"  style="margin-left: 33% ;border-top: 1px solid grey; border-bottom: 1px solid grey; height: auto; width: 350px!important;scrollbar-width: initial;">
     <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
         <div class="noWrap">
             {{-- IMAGE 1 --}}
             
-            
-        <img v-for="images in imageListed" id="subimage" class="sectionImage subimage" :src="images" alt="##" style="width: 100px; height: auto; max-height:200px; object-fit: scale-down; padding-top: 5%">
+            <span v-for="(variante, imageIndex) in variantes">
+                <img v-for="image in variante.imageListed" id="subimage" class="sectionImage subimage" :src="image" alt="##" style="width: 100px; height: auto; max-height:200px; object-fit: scale-down; padding-top: 5%"> 
+            </span>
        
            
 
