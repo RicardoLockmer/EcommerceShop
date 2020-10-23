@@ -53,7 +53,7 @@
                 </strong>
 
             </small>
-            <input v-model="variante.color" style="width: 100px;" placeholder="Color" type="text" value="{{ old('color') }}" name="color[]" class="form-control">
+            <input v-model="variante.color" style="width: 100px;" placeholder="Color" type="text" name="color[]" class="form-control">
 
         </div>
     </div>

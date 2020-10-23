@@ -351,16 +351,24 @@
 
 {{-- final de Shipping Address --}}
 
-{{-- COMIENZO FECHA DE ENTREGA --}}
-<div class="myFirstSectionInner scroll" style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
+<div  class="myFirstSectionInner scrolled"  style="margin-left: 33% ;border-top: 1px solid grey; border-bottom: 1px solid grey; height: auto; width: 350px!important;">
     <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
-        <div class="noWrap" v-for="images in imageListed">
-            <img :src="images" alt="" style="width: 100px; height: 100px;">
+        <div class="noWrap">
+            {{-- IMAGE 1 --}}
+            
+            
+        <img v-for="images in imageListed" id="subimage" class="sectionImage subimage" :src="images" alt="##" style="width: 100px; height: auto; max-height:200px; object-fit: scale-down; padding-top: 5%">
+       
+           
+
+            
         </div>
         <br>
 
     </div>
 </div>
+{{-- COMIENZO FECHA DE ENTREGA --}}
+
 
 </div>
 
@@ -386,8 +394,6 @@
 
 {{-- wordCount cuenta la cantidad de letras en text area Tab 1 crear item page --}}
 <script src="/scripts/wordCount.js"></script>
-
-
 
 
 

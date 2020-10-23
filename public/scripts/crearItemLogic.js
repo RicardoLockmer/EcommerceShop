@@ -1,5 +1,8 @@
 const itemLayout = {
+
+    
     data() {
+        
         return {
             nombre: '',
             marca: '',
@@ -25,6 +28,7 @@ const itemLayout = {
             ]
         };
     },
+    
     methods: {
         addFind: function () {
             this.variantes.push({
@@ -104,8 +108,12 @@ const itemLayout = {
             input.type = 'text';
             input.type = 'file';
         },
+        
+
+
        
     }
+
 }
 
 Vue.createApp(itemLayout).mount('#itemLayout');

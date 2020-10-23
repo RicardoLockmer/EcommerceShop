@@ -1,6 +1,6 @@
 @extends('mainLayout')
 
-{{-- BUTING ITEM PAGE --}}
+{{-- BUYING ITEM PAGE --}}
 
 @section('thisItem')
 
