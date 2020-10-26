@@ -50,8 +50,8 @@
                             
                                 <select v-model="variante.sizes[index].unidad"  name="unit[]" id="size" class="custom-select" required>
                                     <option disabled selected value>--</option>
-                                    <option value="">Talla Camisa</option>
-                                    <option value="">Talla Pantalon</option>
+                                    <option value=" ">Talla Camisa</option>
+                                    <option value=" ">Talla Pantalon</option>
                                     <option value="US">Talla Zapatos (US)</option>
                                     <option value="UK">Talla Zapatos (UK)</option>
                                     @foreach($units as $unit => $abrv)

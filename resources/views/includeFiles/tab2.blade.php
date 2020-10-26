@@ -83,7 +83,7 @@
                     </svg>
                 </label>
 
-                <input name="imageList" @change="createImages($event, index)" v-bind:id="index" ref="listImage" type="file" class="custom-file-input" multiple required hidden>
+                <input name="imageList[]" @change="createImages($event, index)" v-bind:id="index" ref="listImage" type="file" class="custom-file-input" multiple required hidden>
                 <span style="position: absolute; top:26px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger" @click="deleteFind(index)">
                     x
                 </span>

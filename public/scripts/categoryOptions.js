@@ -1,6 +1,6 @@
-var app = new Vue({
-    el: '#app', 
-    data: {
+const categoriesApp = {
+    
+    data(){ return { 
         selected: '',
         products: [{
                 id: 'Electrónica',
@@ -73,6 +73,7 @@ var app = new Vue({
             }
 
         ]
-
     }
-})
+    }
+}
+Vue.createApp(categoriesApp).mount('#app');

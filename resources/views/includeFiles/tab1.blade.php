@@ -47,3 +47,48 @@
 </div>
 <textarea v-model="descripcion" oninput="this.className = 'form-control'" class="form-control char-textarea " style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="250" name="descripcion"></textarea>
 <small class="text-muted"><span class="char-count myCount">0</span>/250 </small>
+
+                    <div class='row' id="app" style="width: auto;">
+                        <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
+                            <div class="control">
+                                <label class="label" for="categoria">
+                                    <strong> Categoría</strong>
+                                </label>
+
+                                <select class="custom-select
+                                    @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
+                                    <option disabled selected value>
+                                        --
+                                    </option>
+
+                                    <option v-for="product in products" v-bind:value="{ id: product.id, text: product.name }">
+                                        @{{ product.id }}
+                                    </option>
+                                    <input type="hidden" name="categoria" :value="selected.id">
+                                </select>
+                            </div>
+                        </div>
+
+                        {{-- SUBCATEGORIA --}}
+
+                        <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
+                            <div class="control">
+                                <label class="label" for="categoria">
+                                    <strong>Subcategoría</strong>
+                                </label>
+
+                                <select name="subcategoria" class="custom-select
+                                 @error('subcategoria') is-invalid @enderror">
+                                    <option disabled selected value>
+                                        --
+                                    </option>
+                                    <option v-for='name in selected.text' v-bind:value="name">
+                                        @{{ name }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                
+@{{ $data }}
