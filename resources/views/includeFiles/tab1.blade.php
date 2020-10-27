@@ -48,26 +48,34 @@
 <textarea v-model="descripcion" oninput="this.className = 'form-control'" class="form-control char-textarea " style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="250" name="descripcion"></textarea>
 <small class="text-muted"><span class="char-count myCount">0</span>/250 </small>
 
-                    <div class='row' id="app" style="width: auto;">
+                    
+<div class="select">
+                    
+                    
+
+                    {{-- CATEGORIA --}}
+                    <div class='row' style="width: auto;">
                         <div class="newbiz col" style="margin: 0 0 0 0;" id="category">
                             <div class="control">
                                 <label class="label" for="categoria">
                                     <strong> Categoría</strong>
                                 </label>
 
-                                <select class="custom-select
-                                    @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
+                                <select v-model="categorySelected" class="custom-select
+                                    @error('categoria') is-invalid @enderror" >
                                     <option disabled selected value>
                                         --
-                                    </option>
+                                    </option> 
 
                                     <option v-for="product in products" v-bind:value="{ id: product.id, text: product.name }">
                                         @{{ product.id }}
                                     </option>
-                                    <input type="hidden" name="categoria" :value="selected.id">
+                                    <input type="hidden" name="categoria" :value="categorySelected.id">
                                 </select>
                             </div>
                         </div>
+
+
 
                         {{-- SUBCATEGORIA --}}
 
@@ -82,13 +90,16 @@
                                     <option disabled selected value>
                                         --
                                     </option>
-                                    <option v-for='name in selected.text' v-bind:value="name">
+                                    <option v-for='name in categorySelected.text' v-bind:value="name">
                                         @{{ name }}
                                     </option>
                                 </select>
                             </div>
                         </div>
 
+
+
                     </div>
+                </div>
+                <br>
                 
-@{{ $data }}

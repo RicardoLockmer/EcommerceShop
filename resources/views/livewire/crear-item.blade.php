@@ -62,7 +62,7 @@
 
                     {{-- TAB 1 --}}
                     <!-- One "tab" for each step in the form: -->
-                    <div class="tab">
+                    <div class="tab" >
                         @include('includeFiles/tab1')
                     </div>
 

@@ -180,15 +180,15 @@
                                 </label>
 
                                 <select class="custom-select
-                                    @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="selected">
+                                    @error('categoria') is-invalid @enderror" onchange="otherCategoria(this.options[this.selectedIndex].value)" v-model="categorySelected">
                                     <option disabled selected value>
                                         --
-                                    </option>
+                                    </option> 
 
                                     <option v-for="product in products" v-bind:value="{ id: product.id, text: product.name }">
-                                        @{{ product . id }}
+                                        @{{ product.id }}
                                     </option>
-                                    <input type="hidden" name="categoria" :value="selected.id">
+                                    <input type="hidden" name="categoria" :value="categorySelected.id">
                                 </select>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                                     <option disabled selected value>
                                         --
                                     </option>
-                                    <option v-for='name in selected.text' v-bind:value="name">
+                                    <option v-for='name in categorySelected.text' v-bind:value="name">
                                         @{{ name }}
                                     </option>
                                 </select>

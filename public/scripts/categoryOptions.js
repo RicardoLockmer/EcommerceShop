@@ -1,7 +1,7 @@
 const categoriesApp = {
     
     data(){ return { 
-        selected: '',
+        categorySelected: '',
         products: [{
                 id: 'Electrónica',
                 name: ['Accesorios', 'Cámara y Fotografía', 'Accesorios de Vehículo', 'Celulares y Accesorios', 'Computadoras y Accesorios', 'GPS y Navegación', 'Audífonos', 'Sistema de Audio', 'Oficina', 'Audio y Video Portátil', 'Seguridad y Vigilancia', 'Televisión y Video', 'Consolas y Accesorios', 'Proyectores', 'Tecnología Portátil'  ]
