@@ -1,11 +1,15 @@
 const itemLayout = {
-
+ 
+   
+    
     
     data() {
+        
         
         return {
             nombre: '',
             marca: '',
+            unit: '',
             descripcion: '',
             image: '',
             categorySelected: '',
@@ -101,7 +105,15 @@ const itemLayout = {
     },
     
     methods: {
+        returnIt: function() {
+           
+            axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((response) => {
+               
+               this.nombre = response.data.bpi;
+              })
+        },
         addFind: function () {
+            
             this.variantes.push({
                 color: '',
                 imageListed: [],

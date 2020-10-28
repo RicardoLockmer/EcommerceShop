@@ -48,7 +48,7 @@
     </a>
                             </small>
                             
-                                <select v-model="variante.sizes[index].unidad"  name="unit[]" id="size" class="custom-select" required>
+                                <select v-model="variante.sizes[index].unidad"  id="size" class="custom-select" required>
                                     <option disabled selected value>--</option>
                                     <option value=" ">Talla Camisa</option>
                                     <option value=" ">Talla Pantalon</option>
@@ -72,7 +72,7 @@
         </svg>
     </a>
                             </small>
-                        <input v-model="variante.sizes[index].tamano" style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror " type="text" name="size[]" >
+                        <input v-model="variante.sizes[index].tamano" style="width: 100px;" placeholder="Tamaño" class="form-control size @error('size[]') is-invalid @enderror " type="text"  >
                    
               
                     </div>
@@ -94,7 +94,7 @@
         </svg>
     </a>
                     </small>
-                    <input v-model="variante.sizes[index].cantidad" style="width: 85px;" placeholder="Inv." class="form-control cantidad @error('cantidad[]') is-invalid @enderror col" type="text" name="cantidad[]" >
+                    <input v-model="variante.sizes[index].cantidad" style="width: 85px;" placeholder="Inv." class="form-control cantidad @error('cantidad[]') is-invalid @enderror col" type="text"  >
                 
             </div>
             <div class="col" style="">
@@ -112,7 +112,7 @@
     </a>
                 </small>
 
-                <input v-model="variante.sizes[index].precio" placeholder="Precio" class="form-control size @error('size[]') is-invalid @enderror col" type="text" name="size[]" >
+                <input v-model="variante.sizes[index].precio" placeholder="Precio" class="form-control size @error('size[]') is-invalid @enderror col" type="text"  >
                 <span style="position: absolute; top:26px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger" @click="deleteSize(mainIndex, index)">
                             x
                         </span>

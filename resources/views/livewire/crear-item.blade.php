@@ -8,8 +8,8 @@
 
     <div class="d-flex" style="margin-top: 14px;">
 
-        <div class="col" style=" height:auto;  border-right: 2px dotted grey;">
-            <form style="display:block!important; top:15px!important;" action="/negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST" class="" id="sticky" enctype="multipart/form-data">
+        <div class="col" style=" height:auto; border-right: 2px dotted grey;">
+            <form @submit="" style="display:block!important; top:15px!important;" action="/negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST" class="" id="sticky" enctype="multipart/form-data">
                 {{-- CSRF --}}
                 @csrf
                 @if ($errors->any())
@@ -77,6 +77,8 @@
 
                     <div class="tab">
                         @include('includeFiles/tab4')
+                        <button @click="returnIt">EXTRA BOTTON</button>
+                        
                     </div>
 
                     <div class="tab">LAST TAB:
