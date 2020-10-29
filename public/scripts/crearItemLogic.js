@@ -11,6 +11,7 @@ const itemLayout = {
             marca: '',
             unit: '',
             descripcion: '',
+            mainImage: '',
             image: '',
             categorySelected: '',
             products: [{
@@ -86,6 +87,7 @@ const itemLayout = {
             ],
             selected: '',
             selectedSize: '',
+            selectedImage: null,
             variantes: [
                 {
                 imageListed: [],
@@ -105,12 +107,22 @@ const itemLayout = {
     },
     
     methods: {
-        returnIt: function() {
-           
-            axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then((response) => {
+        
+        saveData: function() {
+           let formData = new FormData();
+           formData.append('image', this.selectedImage, this.selectedImage.name);
+            axios.post('/nuevo-producto', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+            ).then( function (response) {
+                console.log(response);
+             })
+            //  .then((response) => {
                
-               this.nombre = response.data.bpi;
-              })
+            //    this.nombre = response.data.bpi;
+            //   })
         },
         addFind: function () {
             
@@ -154,11 +166,16 @@ const itemLayout = {
             this.variantes[mainIndex].sizes.splice(index, 1);
         },
         onFileChange(e) {
+            this.selectedImage = document.getElementById("MIMG").files[0];
             var files = e.target.files || e.dataTransfer.files;
+        
+            
+            console.log(this.selectedImage);
             if (!files.length)
                 return;
                 
             this.createImage(files[0]);
+         
         },
         
         createImage(file) {
@@ -166,10 +183,10 @@ const itemLayout = {
             var image = new Image();
             var reader = new FileReader();
             var vm = this;
-
             reader.onload = (e) => {
                 vm.image = e.target.result;
             };
+            
             reader.readAsDataURL(file);
         },
         createImages(e, index) {

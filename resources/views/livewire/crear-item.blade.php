@@ -9,7 +9,7 @@
     <div class="d-flex" style="margin-top: 14px;">
 
         <div class="col" style=" height:auto; border-right: 2px dotted grey;">
-            <form @submit="" style="display:block!important; top:15px!important;" action="/negocio/{{$store->nombreNegocio}}/nuevo-producto" method="POST" class="" id="sticky" enctype="multipart/form-data">
+            <form @submit.prevent="saveData" style="display:block!important; top:15px!important;"  class="" id="sticky" enctype="multipart/form-data">
                 {{-- CSRF --}}
                 @csrf
                 @if ($errors->any())
@@ -38,9 +38,10 @@
                 </div>
                 @enderror
                 {{-- EXTRA --}}
-                <input type="text" value="{{ $store->store_id }}" name="store_id" hidden>
+                <!-- <input type="text" value="{{ $store->store_id }}" name="store_id" hidden>
                 <input type="text" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
                 <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
+                 -->
 
                 {{-- FINAL CSRF Y EXTRA --}}
                 {{-- FORM DATA COMIENZA --}}
@@ -69,6 +70,7 @@
                     {{-- TAB 2 --}}
                     <div style="width:auto;" class="tab">
                         @include('includeFiles/tab2')
+                      
                     </div>
 
                     <div class="tab">
@@ -77,7 +79,7 @@
 
                     <div class="tab">
                         @include('includeFiles/tab4')
-                        <button @click="returnIt">EXTRA BOTTON</button>
+                        <button >EXTRA BOTTON</button>
                         
                     </div>
 
@@ -89,7 +91,7 @@
                         <div style="float:right;">
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-outline-primary">Anterior</button>
                             <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-outline-primary">Siguiente</button>
-                            <button type="submit" id="subBtn" class="btn btn-outline-primary">Agregar</button>
+                            <button type="submit" id="subBtn"  class="btn btn-outline-primary">Agregar</button>
                         </div>
                     </div>
 

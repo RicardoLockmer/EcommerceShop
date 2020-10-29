@@ -52,7 +52,7 @@ Route::post('/iniciar-mi-negocio', 'StoreController@store')->middleware('auth');
 
 //CREAR PRODUCTO
 Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem')->middleware('auth'); // crear view
-Route::post('/negocio/{myStore:nombreNegocio}/nuevo-producto',
+Route::post('/nuevo-producto',
 'StoreController@storeItem')->middleware('auth');//guardar
 Route::get('/negocio/{myStore:nombreNegocio}/productos/', 'StoreController@showItem')->middleware('auth');// items view
 Route::get('/negocio/{myStore:nombreNegocio}/productos/{item}', 'StoreController@thisItem')->middleware('auth'); // 1

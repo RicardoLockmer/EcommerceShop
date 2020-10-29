@@ -175,10 +175,10 @@ class StoreController extends Controller
     public function storeItem(Request $request) {
 
 
-    //     $myItem =  request()->validate([
+         $myItem =  request()->validate([
     //                 'nombre' => 'required|max:100',
-    //                 'image' => 'required|max:4048',
-    //                 'image.*' => 'mimes:jpg,jpeg,png,webp',
+                    'image' => 'required|max:4048',
+                    'image.*' => 'mimes:jpg,jpeg,png,webp',
     //                 'descripcion' => 'required|max:255',
     //                 'categoria' => 'required',
     //                 'subcategoria' => 'required',
@@ -204,7 +204,7 @@ class StoreController extends Controller
     //                 'etiquetas'=> 'nullable',
     //                 'caja' => 'nullable'
 
-    //             ]);
+                 ]);
     //     // FILEs
 
     //     // CREATE NEW ITEM IN DATABASE
@@ -223,12 +223,14 @@ class StoreController extends Controller
     //     $item->updated_at = NULL;
     //     $item->created_at = date("dmy");
     //     $item->updateDate = date("dmy");
-    //     foreach($request->file('image') as $file){
-    //         $filename =$file->getClientOriginalName();
-    //         $fileNewName = date('dmyhms').$filename;
-    //         $data[] = $fileNewName;
-    //         $file->move(public_path().'/storage/assetItems/', $fileNewName);
-    //    }
+    //  foreach($request->file('image') as $file){
+    //           $filename =$file->getClientOriginalName();
+    //           $fileNewName = date('dmyhms').$filename;
+    //          $data[] = $fileNewName;
+    //            $file->move(public_path().'/storage/assetItems/', $fileNewName);
+    //   }
+    
+    $request->file('image')->move(public_path().'/storage/assetItems/', 'myName.jpg');
     //     $item->image = json_encode($data);
     //     $storeInitials = substr($item->nombreNegocio, 0, 3);
     //     $nameInitials = substr($item->nombre, 0, 2);
@@ -290,8 +292,10 @@ class StoreController extends Controller
     //     $newItemShipping->save();
 
     //     return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
-
-        dd(request()->all());
+        
+    // return response()->json([
+    //     'message' => 'New post created'
+    // ]);
 
         // REDIRECT A LA PAGINA DE PRODUCTOS
 

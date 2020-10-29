@@ -10,7 +10,7 @@
         </svg>
     </a>
 </div>
-<p><input v-model="nombre" name="nombre" oninput="this.className = 'form-control'" class="form-control" placeholder="Nombre del producto" maxlength="44"></p>
+<p><input v-model="nombre"  oninput="this.className = 'form-control'"  class="form-control" placeholder="Nombre del producto" maxlength="44"></p>
 
 {{-- FINAL NOMBRE --}}
 
@@ -28,7 +28,7 @@
     </a>
 </div>
 
-<p><input v-model="marca" class="form-control" oninput="this.className = 'form-control'" placeholder="Marca del producto" name="marca" maxlength="120"></p>
+<p><input v-model="marca" class="form-control" oninput="this.className = 'form-control'" placeholder="Marca del producto"  maxlength="120"></p>
 
 
 {{-- FINAL MARCA --}}
@@ -45,7 +45,7 @@
         </svg>
     </a>
 </div>
-<textarea v-model="descripcion" oninput="this.className = 'form-control'" class="form-control char-textarea " style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="250" name="descripcion"></textarea>
+<textarea v-model="descripcion" oninput="this.className = 'form-control'" class="form-control char-textarea " style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="250" ></textarea>
 <small class="text-muted"><span class="char-count myCount">0</span>/250 </small>
 
                     
@@ -70,7 +70,7 @@
                                     <option v-for="product in products" v-bind:value="{ id: product.id, text: product.name }">
                                         @{{ product.id }}
                                     </option>
-                                    <input type="hidden" name="categoria" :value="categorySelected.id">
+                                    <input type="hidden" :value="categorySelected.id">
                                 </select>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                     <strong>Subcategoría</strong>
                                 </label>
 
-                                <select name="subcategoria" class="custom-select
+                                <select class="custom-select
                                  @error('subcategoria') is-invalid @enderror">
                                     <option disabled selected value>
                                         --
