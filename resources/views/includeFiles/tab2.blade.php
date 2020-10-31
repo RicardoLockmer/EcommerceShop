@@ -53,7 +53,7 @@
                 </strong>
 
             </small>
-            <input name="theimage" v-model="variante.color" style="width: 100px;" placeholder="Color" type="text"  class="form-control">
+            <input  v-model="variante.color" style="width: 100px;" placeholder="Color" type="text"  class="form-control">
 
         </div>
     </div>

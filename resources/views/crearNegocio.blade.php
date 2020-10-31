@@ -155,7 +155,7 @@
                     <div class='newbiz col'>
 
                         <label class="label" for="provincia">
-                            <strong> Provincia* </strong>
+                            <strong> Provincia* </strong> 
                         </label>
 
                         <select class="custom-select 

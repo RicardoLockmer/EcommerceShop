@@ -174,27 +174,37 @@ class StoreController extends Controller
 
     public function storeItem(Request $request) {
 
-
-         $myItem =  request()->validate([
-    //                 'nombre' => 'required|max:100',
-                    'image' => 'required|max:4048',
-                    'image.*' => 'mimes:jpg,jpeg,png,webp',
-    //                 'descripcion' => 'required|max:255',
-    //                 'categoria' => 'required',
-    //                 'subcategoria' => 'required',
-    //                 'precio' => 'required',
+            $data = json_decode($request->variantes);
+            foreach($data as $variante){
+                echo $variante->color;
+                }
+            
+        //   $myItem =  request()->validate([
+        //              'nombre' => 'required|max:100',
+        //              'image' => 'required|max:4048',
+        //              'image.*' => 'mimes:jpg,jpeg,png,webp',
+        //              'moreImages' => 'required|max:4048',
+        //              'moreImages.*' => 'mimes:jpg,jpeg,png,webp',
+        //              'descripcion' => 'required|max:255',
+        //              'categoria' => 'required',
+        //              'subcategoria' => 'required',
+        //              'data.*.color' => 'required',
+        //              'data.*.sizes.*.unidad' => 'required',
+        //              'data.*.sizes.*.tamano' => 'required',
+        //              'data.*.sizes.*.cantidad' => 'required',
+        //              'data.*.sizes.*.precio' => 'required',
     //                 'size' => 'min:1',
     //                 'cantidad'=>'min:1',
     //                 'color' => 'min:1',
     //                 'marca' => 'required',
     //                 'Specs' => 'nullable',
 
-    //                 'updateDate' => 'nullable',
-    //                 'user_id' => 'required',
-    //                 'store_id' => 'required',
-    //                 'updated_at' => 'nullable',
-    //                 'created_at' => 'nullable',
-    //                 'empresa' => 'required',
+                    //  'updateDate' => 'nullable',
+                    //  'user_id' => 'required',
+                    //  'store_id' => 'required',
+                    //  'updated_at' => 'nullable',
+       //              'created_at' => 'nullable',
+     //                'empresa' => 'required',
     //                 'provincia' => 'required',
     //                 'restringidos' => 'nullable',
     //                 'peso' => 'required',
@@ -204,47 +214,65 @@ class StoreController extends Controller
     //                 'etiquetas'=> 'nullable',
     //                 'caja' => 'nullable'
 
-                 ]);
-    //     // FILEs
+                //   ]);
+//     // FILE
 
-    //     // CREATE NEW ITEM IN DATABASE
-    //     $item = new Items();
-    //     $item->nombre = $request->nombre;
-    //     $item->descripcion = $request->descripcion;
-    //     $item->categoria = $request->categoria;
-    //     $item->subcategoria = $request->subcategoria;
-    //     $item->precio = $request->precio;
 
-    //     $item->Specs = json_encode($request->Specs);
-    //     $item->marca = $request->marca;
-    //     $item->store_id = $request->store_id;
-    //     $item->user_id = Auth::user()->id;
+
+        // CREATE NEW ITEM IN DATABASE
+
+
+
+    //       $item = new Items();
+    //      $item->nombre = $request->nombre;
+    //      $item->descripcion = $request->descripcion;
+    //      $item->categoria = $request->categoria;
+    //      $item->subcategoria = $request->subcategoria;
+    // //     $item->Specs = json_encode($request->Specs);
+    //      $item->marca = $request->marca;
+    //      $item->store_id = $request->store_id;
+    //      $item->user_id = Auth::user()->id;
+
+
+
     //     $item->nombreNegocio = Auth::user()->nombreNegocio;
     //     $item->updated_at = NULL;
     //     $item->created_at = date("dmy");
     //     $item->updateDate = date("dmy");
-    //  foreach($request->file('image') as $file){
-    //           $filename =$file->getClientOriginalName();
-    //           $fileNewName = date('dmyhms').$filename;
-    //          $data[] = $fileNewName;
-    //            $file->move(public_path().'/storage/assetItems/', $fileNewName);
-    //   }
-    
-    $request->file('image')->move(public_path().'/storage/assetItems/', 'myName.jpg');
-    //     $item->image = json_encode($data);
+    // if($request->moreImages > 0){
+    //    for($i = 0; $i < count($request->moreImagesNames); $i++){
+           
+    //         $newFileNames = date('dmyhms').$request->moreImagesNames[$i];       
+    //         $data[] = $newFileNames;
+    //         $request->moreImages[$i]->move(public_path().'/storage/assetItems/', $newFileNames);
+    //     }
+    // } else {
+    //     abort(404);
+    // }
+    // if($request->image > 0){
+    // $newFileName = date('dmyhms').$request->fileNamed;
+    //  $request->image->move(public_path().'/storage/assetItems/', $newFileName);
+    // } else {
+    //     abort(404);
+    // }
+    //      $item->image = json_encode($data);
     //     $storeInitials = substr($item->nombreNegocio, 0, 3);
     //     $nameInitials = substr($item->nombre, 0, 2);
-    //     $item->save();
+        //  $item->save();
     //     // FINAL DE ITEM SAVE
 
     //     $addDTID = Items::find($item->id);
 
+    // for($i = 0; $i < count($request->data); $i++){
+    //     $item->precio = $request->data[$i]->sizes->precio;
 
-    //    for($i = 0; $i < count($request->color); $i++){
-    //        if ($request->color[$i] != NULL) {
-    //     $colores = new itemColors();
-    //     $colores->item_id = $item->id;
-    //     $colorInitials = substr($request->color[$i], 0, 1);
+    // }
+
+        // for($i = 0; $i < count($request->color); $i++){
+        //     if ($request->color[$i] != NULL) {
+        //  $colores = new itemColors();
+        //  $colores->item_id = $item->id;
+        //  $colorInitials = substr($request->color[$i], 0, 1);
     //     $sizeInitials = substr($request->size[$i], 0 ,1);
     //     $qtyInitials = substr($request->cantidad[$i], 0,1);
     //     $colores->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);

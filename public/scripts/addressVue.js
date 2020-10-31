@@ -1,6 +1,6 @@
-var app = new Vue({
-    el: '#appAd',
-    data: {
+const provincias = {
+    
+    data() {return {
         addressSelected: '',
         addresses: [{
                 provincia: 'San José',
@@ -31,8 +31,9 @@ var app = new Vue({
             canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca','Matina', 'Guácimo']
         }
         ]
-
     }
+    }
+}
 
 
-})
+Vue.createApp(provincias).mount('#appAd');

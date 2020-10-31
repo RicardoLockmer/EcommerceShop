@@ -38,10 +38,10 @@
                 </div>
                 @enderror
                 {{-- EXTRA --}}
-                <!-- <input type="text" value="{{ $store->store_id }}" name="store_id" hidden>
-                <input type="text" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
-                <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
-                 -->
+                <input type="text" id="store_id" value="{{ $store->store_id }}" name="store_id" hidden>
+                <input type="text" id="store_name" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
+                <input type="text" id="user_id" value="{{ Auth::user()->id }}" name="user_id" hidden>
+               
 
                 {{-- FINAL CSRF Y EXTRA --}}
                 {{-- FORM DATA COMIENZA --}}
@@ -79,7 +79,7 @@
 
                     <div class="tab">
                         @include('includeFiles/tab4')
-                        <button >EXTRA BOTTON</button>
+                       
                         
                     </div>
 
@@ -132,7 +132,7 @@
 {{-- wordCount cuenta la cantidad de letras en text area Tab 1 crear item page --}}
 <script src="/scripts/wordCount.js"></script>
 
-<script src="/scripts/categoryOptions.js"></script>
+
 
 
 @endsection

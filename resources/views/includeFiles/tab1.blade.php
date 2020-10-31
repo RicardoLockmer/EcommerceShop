@@ -85,12 +85,12 @@
                                     <strong>Subcategoría</strong>
                                 </label>
 
-                                <select class="custom-select
+                                <select v-model="subCategorySelected" class="custom-select
                                  @error('subcategoria') is-invalid @enderror">
                                     <option disabled selected value>
                                         --
                                     </option>
-                                    <option v-for='name in categorySelected.text' v-bind:value="name">
+                                    <option v-for='name in categorySelected.text' v-bind:value="name" >
                                         @{{ name }}
                                     </option>
                                 </select>

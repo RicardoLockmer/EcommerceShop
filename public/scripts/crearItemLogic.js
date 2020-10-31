@@ -1,11 +1,6 @@
 const itemLayout = {
- 
-   
-    
-    
+
     data() {
-        
-        
         return {
             nombre: '',
             marca: '',
@@ -14,6 +9,7 @@ const itemLayout = {
             mainImage: '',
             image: '',
             categorySelected: '',
+            subCategorySelected: '',
             products: [{
                     id: 'Electrónica',
                     name: ['Accesorios', 'Cámara y Fotografía', 'Accesorios de Vehículo', 'Celulares y Accesorios', 'Computadoras y Accesorios', 'GPS y Navegación', 'Audífonos', 'Sistema de Audio', 'Oficina', 'Audio y Video Portátil', 'Seguridad y Vigilancia', 'Televisión y Video', 'Consolas y Accesorios', 'Proyectores', 'Tecnología Portátil'  ]
@@ -88,16 +84,18 @@ const itemLayout = {
             selected: '',
             selectedSize: '',
             selectedImage: null,
+            moreImages: [],
+            
             variantes: [
                 {
                 imageListed: [],
-                color: "Rojo",
+                color: "red",
                 sizes: [
                 {
-                    unidad: '',
-                    tamano:'',
-                    cantidad: '',
-                    precio: '',
+                    unidad: '23',
+                    tamano:'23',
+                    cantidad: '23',
+                    precio: '23',
 
                 }
                 ],
@@ -110,7 +108,28 @@ const itemLayout = {
         
         saveData: function() {
            let formData = new FormData();
+           let store_id = document.getElementById("store_id").value;
+           let store_name = document.getElementById("store_name").value;
+           let user_id = document.getElementById("user_id").value;
+           formData.append('nombre', this.nombre);
+           formData.append('marca', this.marca);
+           formData.append('descripcion', this.descripcion);
+           formData.append('categoria', this.categorySelected.id);
+           formData.append('store_id', store_id);
+           formData.append('store_name', store_name);
+           formData.append('user_id', user_id);
+           formData.append('subcategoria', this.subCategorySelected);
+            
+           formData.append('variantes', JSON.stringify(this.variantes));
            formData.append('image', this.selectedImage, this.selectedImage.name);
+           formData.append('fileNamed', this.selectedImage.name);
+
+           for(var i = 0; i < this.moreImages.length; i++){
+            formData.append('moreImages[]', this.moreImages[i], this.moreImages[i].name);
+
+               formData.append('moreImagesNames[]', this.moreImages[i].name)
+           }
+           
             axios.post('/nuevo-producto', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -191,11 +210,13 @@ const itemLayout = {
         },
         createImages(e, index) {
               let imageList =  e.target.files || e.dataTransfer.files;
+              this.moreImages = imageList;
+              console.log(this.moreImages);
               if (this.variantes[index].imageListed.length > 0){
                   this.variantes[index].imageListed.splice(0, this.variantes[index].imageListed.length);
 
               }
-                    for(var i = 0; i <= imageList.length; i++){
+                    for(var i = 0; i < imageList.length; i++){
                         let reader = new FileReader();
                         reader.readAsDataURL(imageList[i]);
                         reader.onload = e => {
