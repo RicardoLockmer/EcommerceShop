@@ -15,15 +15,11 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id('id')->uniqid();
-            
             $table->string('nombre');
-            
             $table->string('descripcion');
             $table->string('categoria');
             $table->string('subcategoria');
-            $table->bigInteger('precio');
             $table->string('marca');
-            $table->json('Specs');
             $table->timestamp('updateDate')->nullable();
             $table->integer('store_id');
             $table->string('nombreNegocio');

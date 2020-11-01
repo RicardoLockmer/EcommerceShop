@@ -18,7 +18,8 @@ class itemColors extends Model
 
     protected $fillables = [
         'item_id',
-        'sku',
-        'color'
+        
+        'color',
+        'colorImages'
     ];
 }

@@ -115,10 +115,10 @@ const itemLayout = {
            formData.append('marca', this.marca);
            formData.append('descripcion', this.descripcion);
            formData.append('categoria', this.categorySelected.id);
+           formData.append('subcategoria', this.subCategorySelected);
            formData.append('store_id', store_id);
            formData.append('store_name', store_name);
            formData.append('user_id', user_id);
-           formData.append('subcategoria', this.subCategorySelected);
             
            formData.append('variantes', JSON.stringify(this.variantes));
            formData.append('image', this.selectedImage, this.selectedImage.name);

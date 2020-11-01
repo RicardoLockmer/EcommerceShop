@@ -19,6 +19,8 @@ class CreateItemSizesTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('color_id');
             $table->string('size');
+            $table->bigInteger('quantity');
+            $table->bigInteger('precio');
             $table->timestamps();
         });
     }

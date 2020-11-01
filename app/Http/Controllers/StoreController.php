@@ -174,94 +174,124 @@ class StoreController extends Controller
 
     public function storeItem(Request $request) {
 
-            $data = json_decode($request->variantes);
-            foreach($data as $variante){
-                echo $variante->color;
-                }
-            
-        //   $myItem =  request()->validate([
-        //              'nombre' => 'required|max:100',
-        //              'image' => 'required|max:4048',
-        //              'image.*' => 'mimes:jpg,jpeg,png,webp',
-        //              'moreImages' => 'required|max:4048',
-        //              'moreImages.*' => 'mimes:jpg,jpeg,png,webp',
-        //              'descripcion' => 'required|max:255',
-        //              'categoria' => 'required',
-        //              'subcategoria' => 'required',
-        //              'data.*.color' => 'required',
-        //              'data.*.sizes.*.unidad' => 'required',
-        //              'data.*.sizes.*.tamano' => 'required',
-        //              'data.*.sizes.*.cantidad' => 'required',
-        //              'data.*.sizes.*.precio' => 'required',
-    //                 'size' => 'min:1',
-    //                 'cantidad'=>'min:1',
-    //                 'color' => 'min:1',
-    //                 'marca' => 'required',
-    //                 'Specs' => 'nullable',
+        $data = json_decode($request->variantes);    
+        $myItem =  request()->validate([
+                'nombre' => 'required|max:100',
+                'marca' => 'required|min:1',
+                'descripcion' => 'required|max:255',
+                'categoria' => 'required',
+                'subcategoria' => 'required',
+                'store_id' => 'required',
+                'store_name' => 'required',
+                'user_id' => 'required',
 
-                    //  'updateDate' => 'nullable',
-                    //  'user_id' => 'required',
-                    //  'store_id' => 'required',
-                    //  'updated_at' => 'nullable',
-       //              'created_at' => 'nullable',
-     //                'empresa' => 'required',
+                'data.*.color' => 'required',
+                'data.*.sizes.*.unidad' => 'required',
+                'data.*.sizes.*.tamano' => 'required',
+                'data.*.sizes.*.cantidad' => 'required',
+                'data.*.sizes.*.precio' => 'required',
+
+                'image' => 'required|max:4048',
+                'image.*' => 'mimes:jpg,jpeg,png,webp',
+                'moreImages' => 'required|max:4048',
+                'moreImages.*' => 'mimes:jpg,jpeg,png,webp',
+                        
+
+                'updateDate' => 'nullable',
+                'updated_at' => 'nullable',
+                'created_at' => 'nullable',
     //                 'provincia' => 'required',
     //                 'restringidos' => 'nullable',
     //                 'peso' => 'required',
     //                 'dimensiones' => 'required',
     //                 'precioEnvio' => 'required',
     //                 'tiempoEntrega' => 'required',
-    //                 'etiquetas'=> 'nullable',
+    //                'etiquetas'=> 'nullable',
     //                 'caja' => 'nullable'
 
-                //   ]);
+                   ]);
 //     // FILE
 
 
 
-        // CREATE NEW ITEM IN DATABASE
+    // CREATE NEW ITEM IN DATABASE
 
 
+try {
+    $item = new Items();
+    $item->nombre = $request->nombre;
+    $item->marca = $request->marca;
+    $item->descripcion = $request->descripcion;
+    $item->categoria = $request->categoria;
+    $item->subcategoria = $request->subcategoria;
+    $item->store_id = $request->store_id;
+    $item->nombreNegocio = Auth::user()->nombreNegocio;
+    $item->user_id = Auth::user()->id;
+    $item->updated_at = NULL;
+    $item->created_at = date("dmy");
+    $item->updateDate = date("dmy");
 
-    //       $item = new Items();
-    //      $item->nombre = $request->nombre;
-    //      $item->descripcion = $request->descripcion;
-    //      $item->categoria = $request->categoria;
-    //      $item->subcategoria = $request->subcategoria;
-    // //     $item->Specs = json_encode($request->Specs);
-    //      $item->marca = $request->marca;
-    //      $item->store_id = $request->store_id;
-    //      $item->user_id = Auth::user()->id;
+    if($request->image > 0){
+        $newFileName = date('dmyhms').$request->fileNamed;
+        $request->image->move(public_path().'/storage/assetItems/', $newFileName);
+        $item->image = $newFileName;
+    } else {
+        abort(404);
+    }
+    
+    $item->save(); // CREATE NEW ITEM
+    $addDTID = Items::find($item->id); // NEWLY CREATED ITEM ID
+    $storeInitials = substr($item->nombreNegocio, 0, 3);
+    $nameInitials = substr($item->nombre, 0, 2);
 
 
+    for($i = 0; $i < count($data); $i++){
+        $colorInitials = substr($data[$i]->color, 0, 1);
+        $itemVar = new itemColors();
+        $itemVar->item_id = $addDTID;
+        $itemVar->color = $data[$i]->color;
 
-    //     $item->nombreNegocio = Auth::user()->nombreNegocio;
-    //     $item->updated_at = NULL;
-    //     $item->created_at = date("dmy");
-    //     $item->updateDate = date("dmy");
-    // if($request->moreImages > 0){
-    //    for($i = 0; $i < count($request->moreImagesNames); $i++){
-           
-    //         $newFileNames = date('dmyhms').$request->moreImagesNames[$i];       
-    //         $data[] = $newFileNames;
-    //         $request->moreImages[$i]->move(public_path().'/storage/assetItems/', $newFileNames);
-    //     }
-    // } else {
-    //     abort(404);
-    // }
-    // if($request->image > 0){
-    // $newFileName = date('dmyhms').$request->fileNamed;
-    //  $request->image->move(public_path().'/storage/assetItems/', $newFileName);
-    // } else {
-    //     abort(404);
-    // }
-    //      $item->image = json_encode($data);
+
+        if($request->moreImages > 0){
+            for($e = 0; $e < count($request->moreImagesNames); $e++){
+               
+                 $newFileNames = date('dmyhms').$request->moreImagesNames[$e];       
+                 $itemVarImgs[] = $newFileNames;
+                 $request->moreImages[$e]->move(public_path().'/storage/assetItems/', $newFileNames);
+             }
+         } else {
+             abort(404);
+         }
+        $itemVar->colorImages = json_encode($itemVarImgs);
+
+        $itemVar->save();
+
+        foreach($data[$i]->sizes as $sizes){
+            $sizesVar = new itemSizes();
+            $sizesVar->item_id = $addDTID;
+            $sizesVar->color_id = $itemVar->id;
+            $sizeInitials = substr($sizes->tamano, 0 ,1);
+            $qtyInitials = substr($sizes->cantidad, 0,1);
+            $sizesVar->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
+            $sizesVar->size = $sizes->tamano.' '.$sizes->unidad;
+            $sizesVar->quantity = $sizes->cantidad;
+            $sizesVar->precio = $sizes->precio;
+            $sizesVar->save();
+
+
+        }
+
+
+    } 
+}catch (\Illuminate\Database\QueryException $e) {
+    echo $e;
+}
+    //      
     //     $storeInitials = substr($item->nombreNegocio, 0, 3);
     //     $nameInitials = substr($item->nombre, 0, 2);
-        //  $item->save();
     //     // FINAL DE ITEM SAVE
 
-    //     $addDTID = Items::find($item->id);
+    //     
 
     // for($i = 0; $i < count($request->data); $i++){
     //     $item->precio = $request->data[$i]->sizes->precio;
