@@ -13,5 +13,12 @@ class itemSizes extends Model
     public function items(){
         return $this->belongsTo(Items::class);
     }
-    
+    protected $fillables = [
+        'item_id',
+        'color_id',
+        'sku',
+        'size',
+        'quantity',
+        'precio'
+    ];
 }

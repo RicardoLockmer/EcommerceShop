@@ -70,7 +70,10 @@
                     {{-- TAB 2 --}}
                     <div style="width:auto;" class="tab">
                         @include('includeFiles/tab2')
-                      
+                        <div v-for="variante in variantes">
+                        @{{ variante.moreImages }}
+                        </div>
+                       
                     </div>
 
                     <div class="tab">

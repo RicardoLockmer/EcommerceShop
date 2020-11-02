@@ -31,10 +31,7 @@ class StoreController extends Controller
 
             $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->get();
 
-            foreach ($myItems as $items) {
-                $items->image = json_decode($items->image);
-
-            }
+            
             return view('myStore', [
                 'store' => $myStore,
                 'items' => $myItems
@@ -227,7 +224,7 @@ try {
     $item->store_id = $request->store_id;
     $item->nombreNegocio = Auth::user()->nombreNegocio;
     $item->user_id = Auth::user()->id;
-    $item->updated_at = NULL;
+    $item->updated_at = date("dmy");
     $item->created_at = date("dmy");
     $item->updateDate = date("dmy");
 
@@ -248,7 +245,7 @@ try {
     for($i = 0; $i < count($data); $i++){
         $colorInitials = substr($data[$i]->color, 0, 1);
         $itemVar = new itemColors();
-        $itemVar->item_id = $addDTID;
+        $itemVar->item_id = $item->id;
         $itemVar->color = $data[$i]->color;
 
 
@@ -262,13 +259,15 @@ try {
          } else {
              abort(404);
          }
-        $itemVar->colorImages = json_encode($itemVarImgs);
 
+        $itemVar->colorImages = json_encode($itemVarImgs);
+         $itemVar->created_at = date("dmy");
+         $itemVar->updated_at = date("dmy");
         $itemVar->save();
 
         foreach($data[$i]->sizes as $sizes){
             $sizesVar = new itemSizes();
-            $sizesVar->item_id = $addDTID;
+            $sizesVar->item_id = $item->id;
             $sizesVar->color_id = $itemVar->id;
             $sizeInitials = substr($sizes->tamano, 0 ,1);
             $qtyInitials = substr($sizes->cantidad, 0,1);
@@ -376,12 +375,18 @@ try {
             \Cart::session(Auth::user()->id);
         }
     if (Auth::user()->id == $myStore->user_id) {
-    $images = json_decode($item->image);
+     $colors = itemColors::where('item_id', $item->id)->get();
+     $sizes = itemSizes::where('item_id', $item->id)->get();
+     foreach($colors as $varImages){
+        $images = json_decode($varImages->colorImages);
+     }
 
     return view('thisItem',[
     'item' => $item,
     'store' => $myStore,
-    'images' => $images
+    'colors' => $colors,
+    'images' => $images,
+    'sizes' => $sizes
 
     ]);
     } else {
@@ -394,10 +399,8 @@ try {
         if (Auth::user()->id == $myStore->user_id) {
 
         $allItems = Items::where('store_id', $myStore->store_id)->get();
-        foreach ($allItems as $items) {
-            $items->image = json_decode($items->image);
-
-        }
+        
+        
 
         if(Auth::user()){
 

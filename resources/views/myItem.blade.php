@@ -31,9 +31,9 @@
                 <a class="centerMyImages" href="/negocio/{{$store->nombreNegocio}}/productos/{{$item->id}}">
 
 
-                    <img class="myItems  myStore" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
+                <img class="myItems  myStore" src="{{ Storage::URL('assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
 
-
+                    
                 </a>
 
                 <h1 style="margin: 8px 0 0 0; font-size: 2vw">
@@ -54,12 +54,12 @@
 
                     <br>
                     <span>
-                        &#8353;{{number_format($item->precio, 2, '.', ',')}}
+                        <!-- &#8353;{{number_format($item->precio, 2, '.', ',')}} -->
                     </span>
                     <br>
                     <div style="height: 65px; overflow:auto; scrollbar-width: none;">
-                        @foreach($item->colors as $color)
-                        <span>{{$color->sku}}</span><br>
+                        @foreach($item->sizes as $var)
+                        <span>{{$var->sku}}</span><br>
                         @endforeach
 
                     </div>

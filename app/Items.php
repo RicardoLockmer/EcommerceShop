@@ -12,9 +12,7 @@ class Items extends Model
     public function sizes(){
         return $this->hasMany(itemSizes::class, 'item_id');
     }
-    public function cantidades(){
-        return $this->hasMany(itemCantidades::class, 'item_id');
-    }
+    
     public function shipping(){
         return $this->hasOne(Shipping::class, 'items_id');
     }

@@ -14,7 +14,7 @@
 
                 <div class="col-md-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
                     <a href="/producto/{{$item->id}}">
-                        <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$item->image[0])}}" alt="{{$item->nombre}}">
+                        <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
                     </a>
                 </div>
                 {{-- ITEM NAME --}}
@@ -33,7 +33,7 @@
                             @endfor
                             {{-- PRECIO --}}
                             <p class="card-text" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
-                                <small> &#8353; </small>{{number_format($item->precio, 0, '.', ',')}}
+                                <small> &#8353; </small>{{number_format($item->sizes[0]->precio, 0, '.', ',')}}
                             </p>
                             {{-- DESCRIPCION --}}
                             <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">

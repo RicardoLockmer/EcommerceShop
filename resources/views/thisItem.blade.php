@@ -32,7 +32,7 @@
     <div class="card mb-4 " style="padding-top: 1em;">
         <div class="row no-gutters" style="">
             <div class="col centerMyImages" style="padding-left: 3em;">
-                <img class="card-img " style="height: auto; max-height: 85%;" src="{{ Storage::URL('assetItems/'.$images[0]) }}" alt="{{$item->nombre}}">
+                <img class="card-img " style="height: auto; max-height: 85%;" src="{{ Storage::URL('assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
             </div>
 
             <div class="col-md-6" style="margin-left: 5em;;">
@@ -54,18 +54,16 @@
                         </svg>
 
                         @endfor
-                        <p class="card-text" style="font-size: 18px;">
-                            &#8353; {{number_format($item->precio, 0, '.', ',')}}
-                        </p>
+                        
 
                         <div class="card-text">
                             <p>{{$item->descripcion}}</p>
                             <p><strong>Categoría:</strong> {{$item->categoria}}</p>
                             <p><strong>Subcategoría:</strong> {{$item->subcategoria}}</p>
                             <strong> SKU:</strong><br>
-                            @foreach($item->colors as $color)
-                            {{$color->sku}} <br>
-                            @endforeach
+                            @foreach($sizes as $var) 
+                             {{$var->sku}} <br> 
+                             @endforeach
                             </p>
 
 
@@ -89,9 +87,10 @@
                     <div class="noWrap">
                         <br>
 
-                        @foreach ($images as $image)
-                        @if($image != NULL)
+                      @foreach ($images as $image)
+                        @if($image != NULL) 
                         <img class="sectionImage" style="margin: 0 1em 0 0;" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                        
                         @endif
                         @endforeach
 
@@ -101,22 +100,17 @@
             </div>
         </div>
     </div>
-    @if($item->Specs != 'null')
+    
     <div class="card mb-4 " style="padding-top: 1em;">
 
         <div class="col">
             <h4 style="margin: 25px 0 25px 30px;"> <strong>Especificaciones</strong> </h4><br>
             <ul>
-                @foreach(json_decode($item->Specs) as $key => $value)
-                <li style="list-style: none;">
-                    <strong>{{$key}}:</strong> {{$value}}
-                </li>
-                <br>
-                @endforeach
+                
             </ul>
         </div>
     </div>
-    @endif
+  
 </div>
 
 

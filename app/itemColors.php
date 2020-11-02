@@ -12,9 +12,7 @@ class itemColors extends Model
     public function size(){
         return $this->hasMany(itemSizes::class, "item_id");
     }
-    public function cantidades(){
-        return $this->hasMany(itemCantidades::class, "color_id");
-    }
+    
 
     protected $fillables = [
         'item_id',

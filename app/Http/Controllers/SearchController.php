@@ -28,9 +28,7 @@ class SearchController extends Controller
 
             
             }
-            foreach ($items as $item ) {
-                $item->image = json_decode($item->image);
-            }
+            
             
         return view('mySearch', [
             'items' => $items,
