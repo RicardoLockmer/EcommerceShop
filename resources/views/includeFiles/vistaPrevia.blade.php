@@ -1,19 +1,24 @@
-
-
-<div class="col " style="height: auto;   border-left: 2px dotted grey;">
-        <div class="myFormData " style="margin-left: 0.3em!important;">
+<div style="position: absolute; right: 135px; top: 95px; z-index: 5;">
+<button v-if="vistaPrevia" class="btn btn-danger btn-sm" @click="quitarVistaPrevia" style="float:right;">Ocultar Vista Previa</button>
+<button v-if="!vistaPrevia" class="btn btn-primary btn-sm" @click="quitarVistaPrevia" style="float:right;">Ver Vista Previa</button>
+</div>
+<div v-if="vistaPrevia" class="col " style="height: auto;   border-left: 2px dotted grey;">
+        <div class="myFormData " style="margin-left: 0.6em!important;">
 
             {{-- vista previa titulo --}}
-            <span style="font-size: 26px;"> <strong>Vista Previa</strong>
+            <span style="font-size: 26px;"> <strong>Vista Previa</strong> 
             <small>
-            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Al agregar algo en el formulario se actualiza en la vista previa. Asi es como veria un comprador su producto">
+            <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Al agregar algo en el formulario se actualiza en la vista previa. ">
         <svg style="margin:0 0 0 8px; font-size: 22px; padding-bottom: 5px;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
             <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
         </svg>
     </a>
+
 </small>
-    </span>
+
+    </span> <br>
+<small class="text-muted">Asi es como veria un comprador su producto</small>
             {{-- START --}}
             <div class="row" style="margin-top: 26px;">
 
@@ -94,8 +99,9 @@
 
                         <small class="text-muted">
                             Envió
-                            <strong>
-                                Gratis
+                            &#8353;  
+                            <strong  style="color:red;">
+                                [Varia a la direccion del comprador]
                             </strong>
                         </small>
 
@@ -113,7 +119,7 @@
                             <div style="display: inline;">
 
                                 <span for="provincia" class="">
-                                    <strong> Color: </strong>
+                                    <strong> @{{ selectedType }}: </strong>
                                 </span>
 
                                 <span>
@@ -130,10 +136,11 @@
                                 </span>
                             </div>
                             <br>
+                            
                             <br>
-                            <div style="display: inline;">
+                            <div style="display: inline;" >
 
-                                <span for="provincia" class="">
+                                <span for="provincia" class="" >
                                     <strong> Tamaño: </strong>
                                 </span>
 
@@ -171,13 +178,14 @@
 
                                     {{-- @if(in_array($selectedAddress->provincia, $provinciasEnvio)) --}}
                                     <small>
-                                        <strong style="color: seagreen"> Si se envía a ENVIA PROVINCIA</strong>
+                                        <strong style="color: seagreen"> Si se envía a <span v-for="provincia in SelectedProv"> - @{{provincia}} </span></strong>
                                     </small>
                                     <p>
                                         <small class="text-muted">
                                             El paquete llega entre
-                                            <strong>
-                                                FECHA INICIO - FECHA FINAL
+                                            <strong style="color:red;">
+                                               [ Fecha Actual + Tiempo de Entrega ] - [ Fecha de Hoy + Tiempo de Entrega + Tiempo de Entrega ]
+                                               
                                             </strong>
                                         </small>
                                     </p>
@@ -186,7 +194,7 @@
                                         <small class="text-muted">
                                             El paquete se envía por
                                             <strong>
-                                                CORREOS DE CR
+                                                @{{ empresaEnvios }}
                                             </strong>
                                         </small>
                                     </p>
@@ -254,8 +262,33 @@
 
     </div>
 </div>
-{{-- COMIENZO FECHA DE ENTREGA --}}
+<br>
+<div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
 
+    <div class="content">
+
+        <div class="col" style="margin: 3em 0 0 0.5em">
+
+            <table>
+                <h2>Detalles de @{{nombre}}</h2><br>
+                
+                <p >
+                    @{{ descripcion }}
+                </p>
+                <br>
+
+                
+                <tr v-for="spec in specs" style="list-style: none; border-bottom: 1px solid rgb(197, 197, 197);border-top: 1px solid rgb(197, 197, 197);">
+                    <td style="background-color:rgba(236, 236, 236, 0.507); padding: 5px 5px; 5px 7px;width: 180px;"> @{{ spec.specName}}<strong></strong></td>
+                    <td style="padding: 5px 0 5px 7px; width: 200px;"> @{{spec.specValue}}</td>
+                </tr>
+
+                
+
+            </table>
+        </div>
+
+    </div>
 
 </div>
 

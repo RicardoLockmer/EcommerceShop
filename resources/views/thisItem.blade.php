@@ -60,13 +60,14 @@
                             <p>{{$item->descripcion}}</p>
                             <p><strong>Categoría:</strong> {{$item->categoria}}</p>
                             <p><strong>Subcategoría:</strong> {{$item->subcategoria}}</p>
+                            
                             <strong> SKU:</strong><br>
                             @foreach($sizes as $var) 
-                             {{$var->sku}} <br> 
+                             {{$var->sku}} - <small> &#8353; </small>{{number_format($var->precio, 0, '.', ',') }} - Inventario {{ $var->quantity }} <br> 
                              @endforeach
                             </p>
 
-
+                           
                         </div>
 
                 </article>
@@ -87,11 +88,14 @@
                     <div class="noWrap">
                         <br>
 
-                      @foreach ($images as $image)
-                        @if($image != NULL) 
-                        <img class="sectionImage" style="margin: 0 1em 0 0;" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                      @foreach ($colors as $color)
+                      @foreach(json_decode($color->colorImages) as $imgs)
+                        @if($imgs != NULL) 
+                        <img class="sectionImage" style="margin: 0 1em 0 0;" src="{{ Storage::URL('assetItems/'.$imgs) }}" alt="{{$item->nombre}}">
                         
                         @endif
+                        @endforeach
+
                         @endforeach
 
 
@@ -101,15 +105,33 @@
         </div>
     </div>
     
-    <div class="card mb-4 " style="padding-top: 1em;">
+    <div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
 
-        <div class="col">
-            <h4 style="margin: 25px 0 25px 30px;"> <strong>Especificaciones</strong> </h4><br>
-            <ul>
+    <div class="content">
+
+        <div class="col" style="margin: 3em 0 0 0.5em">
+
+            <table>
+                <h2>Detalles de {{$item->nombre}}</h2><br>
                 
-            </ul>
+                <p>
+                    {{$item->descripcion}}
+                </p>
+                <br>
+
+                @foreach(json_decode($item->specs) as $value)
+                <tr style="list-style: none; border-bottom: 1px solid rgb(197, 197, 197);border-top: 1px solid rgb(197, 197, 197); ">
+                    <td style="background-color:rgba(236, 236, 236, 0.507); padding: 5px 5px; 5px 7px;width: 180px;"> <strong>{{$value->specName}}</strong></td>
+                    <td style="padding: 5px 0 5px 7px; width: 200px;"> {{$value->specValue}}</td>
+                </tr>
+
+                @endforeach
+
+            </table>
         </div>
+
     </div>
+</div>
   
 </div>
 

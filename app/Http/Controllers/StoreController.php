@@ -87,6 +87,7 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
           $myStore = request()->validate([
                 'primerNombre' => 'required|max:50',
@@ -144,7 +145,7 @@ class StoreController extends Controller
             $newBiz->save();
        return redirect('negocio/'.$newStore->nombreNegocio);
         } catch (\Illuminate\Database\QueryException $e) {
-            return back()->withErrors([$e, 'The Message']);
+            echo $e;
         }
     }
 
@@ -155,7 +156,7 @@ class StoreController extends Controller
         }
         if (Auth::user()->id == $myStore->user_id) {
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
-            $units = ['Metros (mts)'=>'mts', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz'];
+            $units = ['Metros (mts)'=>'mts', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
             arsort($units);
 
             return view('livewire/crear-item', [
@@ -170,8 +171,10 @@ class StoreController extends Controller
     }
 
     public function storeItem(Request $request) {
-
-        $data = json_decode($request->variantes);    
+        $data = json_decode($request->variantes);
+        $provincias = json_decode($request->provincias);    
+        
+        
         $myItem =  request()->validate([
                 'nombre' => 'required|max:100',
                 'marca' => 'required|min:1',
@@ -181,7 +184,7 @@ class StoreController extends Controller
                 'store_id' => 'required',
                 'store_name' => 'required',
                 'user_id' => 'required',
-
+                'specs' => 'required',
                 'data.*.color' => 'required',
                 'data.*.sizes.*.unidad' => 'required',
                 'data.*.sizes.*.tamano' => 'required',
@@ -190,21 +193,15 @@ class StoreController extends Controller
 
                 'image' => 'required|max:4048',
                 'image.*' => 'mimes:jpg,jpeg,png,webp',
-                'moreImages' => 'required|max:4048',
-                'moreImages.*' => 'mimes:jpg,jpeg,png,webp',
+                
                         
 
                 'updateDate' => 'nullable',
                 'updated_at' => 'nullable',
                 'created_at' => 'nullable',
-    //                 'provincia' => 'required',
-    //                 'restringidos' => 'nullable',
-    //                 'peso' => 'required',
-    //                 'dimensiones' => 'required',
-    //                 'precioEnvio' => 'required',
-    //                 'tiempoEntrega' => 'required',
-    //                'etiquetas'=> 'nullable',
-    //                 'caja' => 'nullable'
+                
+                'peso' => 'required',
+                'dimensiones' => 'required',               
 
                    ]);
 //     // FILE
@@ -215,12 +212,16 @@ class StoreController extends Controller
 
 
 try {
+    // try adding everything to DB
+    // New Item in DB
     $item = new Items();
     $item->nombre = $request->nombre;
     $item->marca = $request->marca;
     $item->descripcion = $request->descripcion;
     $item->categoria = $request->categoria;
     $item->subcategoria = $request->subcategoria;
+    $item->tipoVariante = $request->tipoVariante;
+    $item->specs = $request->specs;
     $item->store_id = $request->store_id;
     $item->nombreNegocio = Auth::user()->nombreNegocio;
     $item->user_id = Auth::user()->id;
@@ -228,6 +229,7 @@ try {
     $item->created_at = date("dmy");
     $item->updateDate = date("dmy");
 
+    // New Images in DB
     if($request->image > 0){
         $newFileName = date('dmyhms').$request->fileNamed;
         $request->image->move(public_path().'/storage/assetItems/', $newFileName);
@@ -236,40 +238,42 @@ try {
         abort(404);
     }
     
-    $item->save(); // CREATE NEW ITEM
+    $item->save(); // SAVE NEW ITEM
     $addDTID = Items::find($item->id); // NEWLY CREATED ITEM ID
     $storeInitials = substr($item->nombreNegocio, 0, 3);
     $nameInitials = substr($item->nombre, 0, 2);
 
 
-    for($i = 0; $i < count($data); $i++){
-        $colorInitials = substr($data[$i]->color, 0, 1);
-        $itemVar = new itemColors();
-        $itemVar->item_id = $item->id;
-        $itemVar->color = $data[$i]->color;
-
-
-        if($request->moreImages > 0){
-            for($e = 0; $e < count($request->moreImagesNames); $e++){
-               
-                 $newFileNames = date('dmyhms').$request->moreImagesNames[$e];       
-                 $itemVarImgs[] = $newFileNames;
-                 $request->moreImages[$e]->move(public_path().'/storage/assetItems/', $newFileNames);
-             }
-         } else {
-             abort(404);
-         }
-
+    // New Colors for Item - AGREGA UN COLOR POR CADA COLOR DEL PRODUCTO
+        for($i = 0; $i < count($data); $i++){
+            $colorInitials = substr($data[$i]->color, 0, 1);
+            $itemVar = new itemColors();
+            $itemVar->item_id = $item->id;
+            $itemVar->color = $data[$i]->color;
+            $itemVarImgs = [];
+                foreach($request->moreImages[$i] as $imgs){ 
+                    // AGREGA IMAGENES DE CADA COLOR DEL PRODUCTO
+                    $filename = $imgs->getClientOriginalName();
+                        $newFileNames = date('dmyhms').$filename;       
+                        $itemVarImgs[] = $newFileNames;
+                        $imgs->move(public_path().'/storage/assetItems/', $newFileNames);
+                    }
+                    
+                    
+                    
+                 
+        // FOR LOOP DE LOS COLORES COMIENZA A SALVAR CADA ROW
         $itemVar->colorImages = json_encode($itemVarImgs);
-         $itemVar->created_at = date("dmy");
-         $itemVar->updated_at = date("dmy");
+        $itemVar->created_at = date("dmy");
+        $itemVar->updated_at = date("dmy");
         $itemVar->save();
-
+                    
         foreach($data[$i]->sizes as $sizes){
+            // FOREACH LOOP PARA AGREGAR CADA TAMANO Y PRECIO DE CADA VARIANTE 
             $sizesVar = new itemSizes();
             $sizesVar->item_id = $item->id;
             $sizesVar->color_id = $itemVar->id;
-            $sizeInitials = substr($sizes->tamano, 0 ,1);
+            $sizeInitials = substr($sizes->tamano, 0 ,3);
             $qtyInitials = substr($sizes->cantidad, 0,1);
             $sizesVar->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
             $sizesVar->size = $sizes->tamano.' '.$sizes->unidad;
@@ -281,72 +285,42 @@ try {
         }
 
 
-    } 
-}catch (\Illuminate\Database\QueryException $e) {
+        //AGREGAR CADA PROVINCIA A LA QUE SE PUEDE ENVIAR EL PRODUCTO
+        //AGREGA CADA PRECIO ENVIO, EMPRESA ENVIO, TIEMPOE ENTREGA, PESO, DIMENSIONES
+    }
+            foreach($provincias as $provincia){
+                if($provincia->tiempoEntrega > 0){
+                        $newItemShipping = new Shipping();
+                        $newItemShipping->items_id = $item->id;
+                        $newItemShipping->created_at = date("dmy");
+                        $newItemShipping->updated_at = date("dmy");
+                        $newItemShipping->empresa = $request->empresa;
+                        $newItemShipping->provincia = $provincia->provincia;
+                        $newItemShipping->tiempoEntrega = $provincia->tiempoEntrega;
+                        if ($provincia->gratis == true){
+                            $newItemShipping->precioEnvio = 0;
+                        } else if ($provincia->precioEnvio > 0){
+                            $newItemShipping->precioEnvio = $provincia->precioEnvio;
+                        }
+                        $newItemShipping->peso = $request->peso;
+                        $newItemShipping->dimensiones = $request->dimensiones;
+                        $newItemShipping->save();
+                        //SALVA CADA ROW DE CADA PROVINCIA CON SUSS DATOS
+                }
+                    
+                }
+         
+ 
+    } catch(\Illuminate\Database\QueryException $e) {
     echo $e;
 }
-    //      
-    //     $storeInitials = substr($item->nombreNegocio, 0, 3);
-    //     $nameInitials = substr($item->nombre, 0, 2);
-    //     // FINAL DE ITEM SAVE
-
-    //     
-
-    // for($i = 0; $i < count($request->data); $i++){
-    //     $item->precio = $request->data[$i]->sizes->precio;
-
-    // }
-
-        // for($i = 0; $i < count($request->color); $i++){
-        //     if ($request->color[$i] != NULL) {
-        //  $colores = new itemColors();
-        //  $colores->item_id = $item->id;
-        //  $colorInitials = substr($request->color[$i], 0, 1);
-    //     $sizeInitials = substr($request->size[$i], 0 ,1);
-    //     $qtyInitials = substr($request->cantidad[$i], 0,1);
-    //     $colores->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
-    //     $colores->color = $request->color[$i];
-    //     $colores->save();
-
-    //     $sizes = new itemSizes();
-    //     $sizes->item_id = $item->id;
-    //     $sizes->color_id = $colores->id;
-    //     $sizes->sku = $colores->sku;
-    //     $sizes->size = $request->size[$i];
-    //     $sizes->save();
-
-    //     $qty = new itemCantidades();
-    //     $qty->item_id = $item->id;
-    //     $qty->color_id = $colores->id;
-    //     $qty->size_id = $sizes->id;
-    //     $qty->sku = $colores->sku;
-    //     $qty->quantity = $request->cantidad[$i];
-    //     $qty->save();
-    //        }
+   
 
 
-    //    }
 
+    
 
-    //     //SAVE TO DATABASE
-
-    //     $itemID = $item->id;
-
-    //     $newItemShipping = new Shipping();
-    //     $newItemShipping->items_id = $itemID;
-    //     $newItemShipping->empresa = $request->empresa;
-
-    //     $provinciaEncode = json_encode($request->provincia);
-    //     $newItemShipping->provincia = $provinciaEncode;
-
-    //     $newItemShipping->restringidos = $request->restringidos;
-    //     $newItemShipping->peso = $request->peso;
-    //     $newItemShipping->dimensiones = $request->dimensiones;
-    //     $newItemShipping->precioEnvio = $request->precioEnvio;
-
-    //     $newItemShipping->tiempoEntrega = $request->tiempoEntrega;
-
-    //     $newItemShipping->save();
+    
 
     //     return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
         
@@ -377,15 +351,13 @@ try {
     if (Auth::user()->id == $myStore->user_id) {
      $colors = itemColors::where('item_id', $item->id)->get();
      $sizes = itemSizes::where('item_id', $item->id)->get();
-     foreach($colors as $varImages){
-        $images = json_decode($varImages->colorImages);
-     }
+     
 
     return view('thisItem',[
     'item' => $item,
     'store' => $myStore,
     'colors' => $colors,
-    'images' => $images,
+
     'sizes' => $sizes
 
     ]);
@@ -725,15 +697,23 @@ try {
     public function destroyItem(Store $myStore, Items $item)
     {
         if (Auth::user()->id == $myStore->user_id) {
-
+            $itemColors = itemColors::where('item_id', $item->id)->get();
+            foreach($itemColors as $colors){
+                $colors->delete();
+            }
+            $itemSizes = itemSizes::where('item_id', $item->id)->get();
+            foreach($itemSizes as $sizes){
+                $sizes->delete();
+            }
+            $itemShipping = Shipping::where('items_id', $item->id)->get();
+            foreach($itemShipping as $shipping){
+                $shipping->delete();
+            }
             $item->delete();
 
 
             return back();
-            // return view('myItem', [
-            // 'items' => $myItems,
-            // 'store' => $myStore
-            // ]);
+           
 
         } else {
         abort(404);

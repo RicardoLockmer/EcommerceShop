@@ -60,7 +60,7 @@
 }
 
 .nav-link {
-    color: rgb(230, 230, 230) !important;
+    color: #ffffff !important;
     margin: 0 0.5em 0 0.5em !important;
 }
 
@@ -210,7 +210,12 @@ a:hover {
     align-items: center;
 
 }
+.navBack {
+    
+    background-color: #00000c;
+    
 
+}
 .cardContainer {
     margin: 0 4em 1em 4em;
 
@@ -271,7 +276,28 @@ a:hover {
 .form-control {
     width: 100%;
 }
-
+.addressDiv {
+    width: 342px;
+}
+.addressSelDiv {
+    border-bottom: 1px solid grey; width: 342px;
+}
+.addressProv {
+    border: 1px solid rgba(190, 190, 190, 0.616); 
+    width: 130px; 
+    border-radius: 3px; 
+    margin-right: -19px; 
+    margin-bottom: 7px;
+}
+.addressProvSelected {
+    border: 1px solid #46eb4c8a; 
+    color: rgb(51, 51, 51);
+    width: 130px; 
+    border-radius: 5px; 
+    margin-right: -19px; 
+    margin-bottom: 13px;
+    background-color: #46eb4c8a;
+}
 .myForms {
     height: auto;
     width: 25em;
@@ -279,17 +305,53 @@ a:hover {
     border: 1px solid rgba(143, 143, 143, 0.267);
     border-radius: 5px;
 }
-
+.myItemForms {
+    height: auto;
+    width: 625px;
+    margin: 0 8% 0 23%;
+    /* border: 1px solid rgba(143, 143, 143, 0.267); */
+    border-radius: 5px;
+}
+.itemMainImg {
+    border: 2px dotted grey; 
+    width: 190px; 
+    height: 80px; 
+    text-align: center; 
+    padding-top:5%;
+}
+.itemWithImg {
+    border: 2px dotted green; 
+    background-color: #b1ffb4;
+    width: 190px; 
+    height: 80px; 
+    text-align: center; 
+    padding-top:5%;
+}
 .formitem {
     margin: 2.3em 0 0 0;
     display: flexbox;
 }
-
+.itemprev {
+    margin-top:-33px;
+    
+}
 .newbiz {
     margin-top: 12px;
-    ;
+    
 }
-
+.secondImages{
+    border: 3px dotted grey; 
+    text-align:center; 
+    width: 120px;
+     
+}
+.secondWithImages {
+    border: 3px dotted grey; 
+    text-align:center; 
+    width: 120px;
+    border: 2px dotted green; 
+    background-color: #b1ffb4; 
+}
 .addressBox {
     width: 300px;
     height: 250px;

@@ -48,8 +48,8 @@
 <textarea v-model="descripcion" oninput="this.className = 'form-control'" class="form-control char-textarea " style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="250" ></textarea>
 <small class="text-muted"><span class="char-count myCount">0</span>/250 </small>
 
-                    
-<div class="select">
+                  
+<div class="select" style="margin-top: 8px;">
                     
                     
 

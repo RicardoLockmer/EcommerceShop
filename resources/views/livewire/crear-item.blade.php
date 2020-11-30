@@ -6,9 +6,9 @@
 <div class="container" id="itemLayout">
 
 
-    <div class="d-flex" style="margin-top: 14px;">
+    <div class="d-flex" style="margin-top: 14px;" >
 
-        <div class="col" style=" height:auto; border-right: 2px dotted grey;">
+        <div :class="(vistaPrevia)? 'col' : 'myItemForms'" style=" height:auto;">
             <form @submit.prevent="saveData" style="display:block!important; top:15px!important;"  class="" id="sticky" enctype="multipart/form-data">
                 {{-- CSRF --}}
                 @csrf
@@ -70,9 +70,7 @@
                     {{-- TAB 2 --}}
                     <div style="width:auto;" class="tab">
                         @include('includeFiles/tab2')
-                        <div v-for="variante in variantes">
-                        @{{ variante.moreImages }}
-                        </div>
+                        
                        
                     </div>
 
@@ -82,13 +80,10 @@
 
                     <div class="tab">
                         @include('includeFiles/tab4')
-                       
-                        
                     </div>
 
-                    <div class="tab">LAST TAB:
-                        <p><input placeholder="Username..." oninput="this.className = ''"></p>
-                        <p><input placeholder="Password..." oninput="this.className = ''"></p>
+                    <div class="tab">
+                        @include('includeFiles/tab5')
                     </div>
                     <div style="overflow:auto;">
                         <div style="float:right;">

@@ -20,6 +20,8 @@ class CreateItemsTable extends Migration
             $table->string('categoria');
             $table->string('subcategoria');
             $table->string('marca');
+            $table->string('specs', 3000);
+            $table->string('tipoVariante');    
             $table->timestamp('updateDate')->nullable();
             $table->integer('store_id');
             $table->string('nombreNegocio');

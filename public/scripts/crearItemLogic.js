@@ -2,6 +2,8 @@ const itemLayout = {
 
     data() {
         return {
+            tutorial: false,
+            vistaPrevia: false,
             nombre: '',
             marca: '',
             unit: '',
@@ -13,6 +15,10 @@ const itemLayout = {
             products: [{
                     id: 'Electrónica',
                     name: ['Accesorios', 'Cámara y Fotografía', 'Accesorios de Vehículo', 'Celulares y Accesorios', 'Computadoras y Accesorios', 'GPS y Navegación', 'Audífonos', 'Sistema de Audio', 'Oficina', 'Audio y Video Portátil', 'Seguridad y Vigilancia', 'Televisión y Video', 'Consolas y Accesorios', 'Proyectores', 'Tecnología Portátil'  ]
+                },
+                {
+                    id: 'Oficina',
+                    name: ['Muebles', 'Accesorios', 'Papelería', 'Decoración', 'Escritura', 'Impresión', 'Electrónica']
                 },
                 {
                     id: 'Computadoras', 
@@ -35,28 +41,32 @@ const itemLayout = {
                     name: ['Actividad y Entretenimiento', 'Ropa y Accesorios', 'Juguetes para Bebe y Niños Pequeños', 'Cuidado del Bebe', 'Asiento de Automóvil y Accesorios', 'Cambio de Pañales', 'Alimentación', 'Regalos', 'Guardería', 'Entrenamiento para ir al Baño', 'Embarazo y Maternidad', 'Seguridad', 'Coches y Accesorios', 'Equipo de Viaje']
                 },
                 {
-                    id: 'Cosméticas y Cuidado Personal',
-                    name: ['Maquillaje', 'Protección de la Piel', 'Cuidado del Cabello', 'Fragancia', 'Cuidado de Pies, Manos y Uñas', 'Accesorios', 'Afeitado y Depilación', 'Cuidado Personal', 'Cuidado Bucal']
+                    id: 'Cosméticos y Cuidado Personal',
+                    name: ['Maquillaje', 'Protección de la Piel', 'Cuidado del Cabello', 'Fragancia', 'Cuidado de Pies, Manos y Uñas', 'Accesorios', 'Afeitado y Depilación', 'Cuidado Personal', 'Cuidado Bucal', 'Cuidado Femenino', 'Belleza']
                 },
                 {
-                    id: 'Ropa para Mujer',
-                    name: ['Ropa', 'Zapatos', 'Joyería', 'Relojes', 'Bolsos', 'Accesorios', 'Moda de Hombres', 'Moda para Niñas', 'Moda para Niños']
+                    id: 'Para Mujer',
+                    name: ['Ropa', 'Calzado', 'Joyería', 'Relojes', 'Bolsos', 'Accesorios y mas', 'Deporte', 'Ropa Interior', 'Maternidad', 'Ropa Verano']
                 },
                 {
-                    id: 'Ropa para Hombre',
-                    name: ['Ropa', 'Zapatos', 'Relojes', 'Accesorios', 'Moda para Mujeres', 'Moda para Niños', 'Moda para Niñas']
+                    id: 'Para Hombre',
+                    name: ['Ropa', 'Calzado', 'Relojes', 'Accesorios y mas', 'Deportes', 'Verano']
                 },
                 {
-                    id: 'Ropa para Niña',
-                    name: ['Ropa', 'Zapatos', 'Joyería', 'Relojes', 'Accesorios', 'Moda de Hombres', 'Moda para Niñas', 'Moda para Niños']
+                    id: 'Para Niña',
+                    name: ['Ropa', 'Calzado', 'Joyería', 'Relojes', 'Accesorios', 'Verano']
                 },
                 {
-                    id: 'Ropa para Niño',
-                    name: ['Ropa', 'Zapatos', 'Relojes', 'Accesorios', 'Moda para Mujeres', 'Moda para Niños', 'Moda para Niñas']
+                    id: 'Para Niño',
+                    name: ['Ropa', 'Calzado', 'Relojes', 'Accesorios', 'Verano']
                 },
                 {
                     id: 'Hogar y Cocina',
                     name: ['Electrodomésticos', 'Comedor y Cocina', 'Cama', 'Bañera', 'Mueble', 'Decoración', 'Mural', 'Iluminación', 'Ventilación', 'Refrigeración', 'Planchas y Vapores', 'Aspiradoras', 'Almacenamiento y Organización', 'Suministros de Limpieza']
+                },
+                {
+                    id: 'Patio y Jardin',
+                    name: ['Muebles de Jardin', 'Jardin', 'Patio', 'Decoraciones', 'Cobertizo', 'Almacenamiento', 'Iluminación', 'Plantas', 'Parrilla y Cocina Exterior']
                 },
                 {
                     id: 'Equipaje',
@@ -69,7 +79,7 @@ const itemLayout = {
                 },
                 {
                     id: 'Deportes y mas',
-                    name: ['Deportes', 'Recreativo', 'Fitness']
+                    name: ['Deportes', 'Recreativo', 'Fitness', 'Equipo y Maquinaria', 'Ejercicio']
                 },
                 {
                     id: 'Herramientas de Trabajo',
@@ -81,21 +91,76 @@ const itemLayout = {
                 }
 
             ],
+            allCRChecked: false,
+           
+            provincias: [
+                { 
+                    gratis: false,
+                    provincia: 'San José',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia:'Alajuela',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia:'Cartago',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia:'Heredia',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia:'Guanacaste',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia:'Puntarenas',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia:'Limón',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                }
+                    ],
+            SelectedProv: [],
+            myProvincias: [],
+            empresaEnvios: '',
             selected: '',
             selectedSize: '',
+            selectedType: '',
             selectedImage: null,
-            moreImages: [],
-            
+            peso: '',
+            dimensiones: '',
+            specs: [{
+                specName: 'Material',
+                specValue: 'Plastico'
+            }],
             variantes: [
                 {
+                moreImages: [],
                 imageListed: [],
-                color: "red",
+                color: "",
                 sizes: [
                 {
-                    unidad: '23',
-                    tamano:'23',
-                    cantidad: '23',
-                    precio: '23',
+                    unidad: '',
+                    tamano:'',
+                    cantidad: '',
+                    precio: '',
 
                 }
                 ],
@@ -105,12 +170,14 @@ const itemLayout = {
     },
     
     methods: {
-        
+       
         saveData: function() {
            let formData = new FormData();
            let store_id = document.getElementById("store_id").value;
            let store_name = document.getElementById("store_name").value;
            let user_id = document.getElementById("user_id").value;
+           formData.append('empresaEnvios', this.empresaEnvios);
+           formData.append('tipoVariante', this.selectedType);
            formData.append('nombre', this.nombre);
            formData.append('marca', this.marca);
            formData.append('descripcion', this.descripcion);
@@ -119,17 +186,29 @@ const itemLayout = {
            formData.append('store_id', store_id);
            formData.append('store_name', store_name);
            formData.append('user_id', user_id);
-            
+           formData.append('peso', this.peso);
+           formData.append('dimensiones', this.dimensiones);
+           formData.append('empresa', this.empresaEnvios);
+           formData.append('specs', JSON.stringify(this.specs));
            formData.append('variantes', JSON.stringify(this.variantes));
+           formData.append('provincias', JSON.stringify(this.provincias));
            formData.append('image', this.selectedImage, this.selectedImage.name);
            formData.append('fileNamed', this.selectedImage.name);
+            for(var i=0; i < this.variantes.length; i++){
+                let images = this.variantes[i].moreImages;
+                images.forEach(img => {
 
-           for(var i = 0; i < this.moreImages.length; i++){
-            formData.append('moreImages[]', this.moreImages[i], this.moreImages[i].name);
+                    formData.append("moreImages["+i+"][]", img)
 
-               formData.append('moreImagesNames[]', this.moreImages[i].name)
-           }
-           
+                    }
+                )
+               
+
+               
+            }
+        
+
+            
             axios.post('/nuevo-producto', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -143,9 +222,19 @@ const itemLayout = {
             //    this.nombre = response.data.bpi;
             //   })
         },
+        addSpec: function(){
+            this.specs.push(
+                {
+                    specName: '',
+                    specValue: ''
+                }
+            )
+        },
+        
         addFind: function () {
             
             this.variantes.push({
+                moreImages: [],
                 color: '',
                 imageListed: [],
                 sizes: [
@@ -184,6 +273,11 @@ const itemLayout = {
             console.log(this.variantes);
             this.variantes[mainIndex].sizes.splice(index, 1);
         },
+        deleteDetalle: function (index) {
+            console.log(index);
+            console.log(this.specs[index]);
+            this.specs.splice(index, 1);
+        },
         onFileChange(e) {
             this.selectedImage = document.getElementById("MIMG").files[0];
             var files = e.target.files || e.dataTransfer.files;
@@ -210,8 +304,15 @@ const itemLayout = {
         },
         createImages(e, index) {
               let imageList =  e.target.files || e.dataTransfer.files;
-              this.moreImages = imageList;
-              console.log(this.moreImages);
+              for(var i = 0; i < imageList.length; i++){
+                
+                    this.variantes[index].moreImages.push(imageList[i]);
+                
+            
+              }
+              for(var e = 0; e < this.variantes[index].moreImages.length; e++){
+              console.log(this.variantes[index].moreImages[e]);
+              }
               if (this.variantes[index].imageListed.length > 0){
                   this.variantes[index].imageListed.splice(0, this.variantes[index].imageListed.length);
 
@@ -227,19 +328,31 @@ const itemLayout = {
                     }
                 
             },
-            
-        
-            
-            
-        
         removeImage: function (e) {
             this.image = '';
             const input = this.$refs.mainImage;
             input.type = 'text';
             input.type = 'file';
         },
+        quitarVideo: function() {
+            this.tutorial = !this.tutorial;
+        },
+        quitarVistaPrevia: function(){
+            this.vistaPrevia = !this.vistaPrevia;
+        },
+        AllCR: function() {
+            if(!this.allCRChecked){
+            this.SelectedProv = [];
+            for(var x = 0; x < this.provincias.length; x++){
+            this.SelectedProv.push(this.provincias[x].provincia);
+            this.allCRChecked = true;
+            }
+            } else {
+                this.SelectedProv = [];
+                this.allCRChecked = false;
+            }
+        },
         
-
 
        
     }
@@ -247,3 +360,9 @@ const itemLayout = {
 }
 
 Vue.createApp(itemLayout).mount('#itemLayout');
+
+
+
+
+    
+

@@ -121,7 +121,7 @@
                             class="text-muted">(opcional)</small></label>
                     <div class="control">
                         <input class="form-control @error('BizE') is-invalid @enderror" name="BizE" id="BizE"
-                            type="text" placeholder="{{Auth::user()->email}}" value="{{old('BizE')}}">
+                            type="text" placeholder="{{Auth::user()->email}}" value="{{Auth::user()->email}}" required>
                         <small class="form-text text-muted">Puede utilizar el correo personal o agregar uno de
                             negocio.</small>
                     </div>

@@ -16,7 +16,7 @@ class itemColors extends Model
 
     protected $fillables = [
         'item_id',
-        
+        'specs',
         'color',
         'colorImages'
     ];
