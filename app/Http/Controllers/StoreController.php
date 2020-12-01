@@ -165,7 +165,7 @@ class StoreController extends Controller
                'units' => $units,
             ]);
 
-        } else {
+        } else { 
             abort(404);
         }
     }

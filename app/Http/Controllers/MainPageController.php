@@ -14,17 +14,17 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        $myTech = Items::take(15)->where('subcategoria', 'Computadoras')->latest()->get();
         
-        $paraMujer = Items::take(15)->where('categoria', 'Ropa para Mujer')->latest()->get();
+        
+      
         if(Auth::user()){
 
             \Cart::session(Auth::user()->id);
         }
         return view('mainPage', [
-            'techItems' => $myTech,
+           
             
-            'mujerItems' => $paraMujer
+           
         ]);
     } 
 

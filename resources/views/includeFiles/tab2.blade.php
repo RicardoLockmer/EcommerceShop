@@ -82,6 +82,7 @@ Your browser does not support the video tag.
                     </div>
 </div>
 <br>
+
 <div style=" position:relative; border-top: 1px solid rgba(143, 143, 143, 0.267); padding-top: 18px;" v-if="selectedType" class="row" v-for="(variante, index) in variantes">
     <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
         <div class="control">

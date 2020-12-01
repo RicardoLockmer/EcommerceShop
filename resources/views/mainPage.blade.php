@@ -78,12 +78,12 @@
         <div class="myFirstSectionInner scroll">
             <div class="container-fluid">
                 <div class="noWrap">
-                    {{-- @foreach($mejores as $mejor)
+                    <!-- {{-- @foreach($mejores as $mejor)
                     <a href="/producto/{{$mejor->id}}">
                     <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}" alt="">
                     </a>
                     @endforeach --}}
-
+  -->
 
 
 
@@ -148,11 +148,11 @@
         <div class="myFirstSectionInner scroll">
             <div class="container-fluid">
                 <div class="noWrap">
-                    @foreach($mujerItems as $mujeres)
-                    <a href="/producto/{{$mujeres->id}}">
-                        <img class="sectionImage2" src="{{ Storage::URL('/storage/assetItems/'.$mujeres->image) }}" alt="">
-                    </a>
-                    @endforeach
+                   
+                    
+                        <img class="sectionImage2" src="{{ Storage::URL('/storage/assetItems/') }}" alt="">
+                  
+                   
                 </div>
             </div>
         </div>
@@ -167,11 +167,7 @@
         <div class="myFirstSectionInner scroll">
             <div class="container is-fluid">
                 <div class="noWrap">
-                    @foreach($techItems as $tech)
-                    <a href="/producto/{{$tech->id}}">
-                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$tech->image) }}" alt="">
-
-                        @endforeach
+               
                 </div>
             </div>
         </div>

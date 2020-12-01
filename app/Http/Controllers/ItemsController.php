@@ -76,8 +76,7 @@ class ItemsController extends Controller
             $user = Auth::guest();
             $userAddressCurrent = false;
         }
-        $images = json_decode($item->image);
-        $item->image = json_decode($item->image);
+       
         $shipping = $item->shipping;
         $decodeProvincia = json_decode($shipping->provincia);
         
@@ -103,7 +102,7 @@ class ItemsController extends Controller
         return view('itemPage',[
         'item' => $item,
         'moreItems' => $moreitems,
-        'images' => $images,
+      
         'shipping' => $shipping,
         'user' => $user,
         'provinciasEnvio' => $decodeProvincia,

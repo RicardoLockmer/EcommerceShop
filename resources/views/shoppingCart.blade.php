@@ -116,7 +116,7 @@
     </div>
     <div style="text-align: center">
         <small>
-            DeTodo.com
+            TodoMarket.com
         </small>
         <p>Aqui deberia ir el FOOTER</p>
     </div>

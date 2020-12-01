@@ -34,8 +34,8 @@
     {{-- MENU --}}
     <div class="navbar navbar-expand-lg navbar-light justify-content-between navBack">
 
-        <a href="/" class="navbar-brand" style="color: #ffffff;">
-            DETODO.COM
+        <a href="/" class="navbar-brand" style="color: #ffffff; margin-left: 58px;">
+            TodoMarket
         </a>
 
         <ul class="navbar-nav">

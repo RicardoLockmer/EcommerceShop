@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Items;
+use App\itemColors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,11 +13,12 @@ class SearchController extends Controller
 
             \Cart::session(Auth::user()->id);
         }
+        
         if($request->q === NULL) {
           return redirect('/');
         } else {
             // $q = $request->q;
-            $terms = explode(" ", request('q'));
+            $terms = explode(' ', request('q'));
             foreach ($terms as $q) {
             $items = Items::where ( 'nombre', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
@@ -26,13 +28,18 @@ class SearchController extends Controller
             ->orWhere('nombreNegocio', 'LIKE', '%'.$q.'%')
             ->get();
 
+            foreach($terms as $word){
+                $itemVar = itemColors::where('color', 'LIKE', '%'.$word.'%')->get();
+            }
             
             }
             
             
         return view('mySearch', [
             'items' => $items,
-            'search' => $q
+            'itemsVar' => $itemVar,
+            'search' => $terms,
+            
         ]);
         }
         

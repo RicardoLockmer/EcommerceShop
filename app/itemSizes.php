@@ -8,7 +8,7 @@ class itemSizes extends Model
 { 
     
     public function colors(){
-        return $this->hasMany(itemColors::class, "item_id");
+        return $this->hasMany(itemColors::class, "id", "color_id");
     }
     public function items(){
         return $this->belongsTo(Items::class);

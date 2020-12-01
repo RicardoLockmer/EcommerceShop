@@ -10,10 +10,15 @@
         <div class="col" style="margin: 4.7% 0 0 1%; width: 100%;">
 
             <a class="magnifier-thumb-wrapper" id="sticky">
-                <img class="img-thumbnail mainImage" style="width: 100% ; max-height: 850px; margin-bottom: 15px; " data-toggle="magnify" id="thumb" data-magnify-src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" src="{{ Storage::URL('assetItems/'.$item->image[0]) }}" alt="{{$item->nombre}}">
+                <img class="img-thumbnail mainImage" 
+                style="width: 100% ; max-height: 850px; margin-bottom: 15px; " 
+                data-toggle="magnify" id="thumb" 
+                data-magnify-src="{{ Storage::URL('assetItems/'.$item->image) }}" 
+                src="{{ Storage::URL('assetItems/'.$item->image)}}" 
+                alt="{{$item->nombre}}">
             </a>
 
-
+ 
         </div>
 
         <div class="magnifier-preview col-5" style="display:run-in; height: 100%; width:100%; right: 7%; top: 17.5%;  " id="preview">
@@ -57,9 +62,10 @@
                 </div>
 
                 <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
-                    &#8353; {{number_format($item->precio, 0, '.', ',')}}
+                    
+                &#8353; {{number_format($item->sizes[0]->precio, 0, '.', ',')}}
                     <small style="font-size: 14px;" class="text-muted">
-                        (no incluye iva)
+                     (no incluye iva)
                     </small>
                     <small style="font-size: 13px;">
                         <a href="##">
@@ -98,7 +104,7 @@
                     <div style="display: inline;">
 
                         <span for="provincia" class="">
-                            <strong> Color: </strong>
+                            <strong> {{ $item->tipoVariante }}: </strong>
                         </span>
 
                         <span>
@@ -207,12 +213,12 @@
     <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
         <div class="noWrap">
             {{-- IMAGE 1 --}}
-            @foreach ($images as $image)
-
-            @if($image != NULL)
-            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
-            @endif
-
+            @foreach ($item->colors as $color)
+                    @foreach(json_decode($color->colorImages) as $image)
+                        @if($image != NULL)
+                        <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                        @endif
+                    @endforeach
             @endforeach
         </div>
         <br>
@@ -223,7 +229,7 @@
     @if($item->cantidad == 0)
     <form action="/shoppingCart" method="POST" id="CARTBTN" class="cardbtn">
         @csrf
-
+{{ metaphone("dad") }}
         <input type="text" name="id" value="{{$item->id}}" hidden>
         <button type="submit" class="btn btn-outline-success cardbtn">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -259,7 +265,7 @@
 
 </div>
 </div>
-@if($item->Specs != 'null')
+@if(json_decode($item->specs) != 'null')
 <div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
 
     <div class="content">
@@ -274,10 +280,10 @@
                 </p>
                 <br>
 
-                @foreach(json_decode($item->Specs) as $key => $value)
+                @foreach(json_decode($item->specs) as $value)
                 <tr style="list-style: none; border-bottom: 1px solid rgb(197, 197, 197);border-top: 1px solid rgb(197, 197, 197); ">
-                    <td style="background-color:rgba(236, 236, 236, 0.507); padding: 5px 5px; 5px 7px;width: 180px;"> <strong>{{$key}}</strong></td>
-                    <td style="padding: 5px 0 5px 7px; width: 200px;"> {{$value}}</td>
+                    <td style="background-color:rgba(236, 236, 236, 0.507); padding: 5px 5px; 5px 7px;width: 180px;"> <strong>{{$value->specName}}</strong></td>
+                    <td style="padding: 5px 0 5px 7px; width: 200px;"> {{$value->specValue}}</td>
                 </tr>
 
                 @endforeach
@@ -306,7 +312,7 @@
                                 <div class="myCards">
                                     <div class="card-block" style="margin-right: 28px;">
 
-                                        <a href="{{$moreitem->id}}"><img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$moreitem->image[0]) }}" alt=""></a>
+                                        <a href="{{$moreitem->id}}"><img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$moreitem->image) }}" alt=""></a>
                                     </div>
                                 </div>
                                 @endforeach

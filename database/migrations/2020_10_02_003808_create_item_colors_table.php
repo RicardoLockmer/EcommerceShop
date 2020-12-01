@@ -17,6 +17,8 @@ class CreateItemColorsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('item_id');
             $table->string('colorImages');
+            $table->string('metaWords');
+            $table->integer('index');
             $table->string('color');
             
             $table->timestamps();

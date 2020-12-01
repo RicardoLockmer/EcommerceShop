@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class itemColors extends Model
 {
     public function items() {
-        return $this->belongsTo(Items::class);
+        return $this->belongsTo(Items::class, 'item_id', 'id');
     }
     public function size(){
-        return $this->hasMany(itemSizes::class, "item_id");
-    }
+        return $this->hasMany(itemSizes::class, 'color_id', 'id');
+    } 
     
 
     protected $fillables = [
