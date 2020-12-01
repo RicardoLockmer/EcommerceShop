@@ -25,7 +25,6 @@ class SearchController extends Controller
             ->orWhere('categoria', 'LIKE', '%'.$q.'%')
             ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
             ->orWhere('marca', 'LIKE', '%'.$q.'%')
-            ->orWhere('nombreNegocio', 'LIKE', '%'.$q.'%')
             ->get();
 
             foreach($terms as $word){
