@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Items;
 use App\direcciones;
+use App\itemColors;
+use App\itemSizes;
+use App\Shipping;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Store;
@@ -50,9 +53,14 @@ class ItemsController extends Controller
      * @param  \App\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function show(Items $item)
+    public function show($varItem)
     {   
-        
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
+        $variante = itemColors::where('link', $varItem)->firstOrFail();
+        $item = Items::where('id', $variante->item_id)->firstOrFail();
         $terms = explode(" ", $item->categoria);
         
         foreach ($terms as $q) {
@@ -78,17 +86,33 @@ class ItemsController extends Controller
         }
        
         $shipping = $item->shipping;
-        $decodeProvincia = json_decode($shipping->provincia);
-        
+        foreach($shipping as $address){
+            $decodeProvincia[] = $address->provincia; 
+
+        }
 
     // DELIVER DATE LOGIC
-        
-        $string = $shipping->tiempoEntrega;
+        if(Auth::user()){
+        $provinciass = Shipping::where('items_id', $item->id)->where('provincia', $userAddressCurrent->provincia)->first();
+        if($provinciass){  
+        $string = $provinciass->tiempoEntrega;
         $day = '+'.$string.' day';
-        $startdate = strtotime($day);
-        $enddate = strtotime($day, $startdate);
-        $delivery = date("d M", $startdate);
-        $deliveLastDay = date('d M', $enddate);
+         $startdate = strtotime($day);
+         $enddate = strtotime($day, $startdate);
+         $delivery = date("d M", $startdate);
+         $deliveLastDay = date('d M', $enddate);
+    } else {
+        $delivery = false;
+        $deliveLastDay = "-";
+        $provinciass = '';
+    }
+        
+        } else {
+        $delivery = false;
+        $deliveLastDay = "-";
+        $provinciass = '';
+            
+        }
         $colores= array();
            
         
@@ -102,8 +126,8 @@ class ItemsController extends Controller
         return view('itemPage',[
         'item' => $item,
         'moreItems' => $moreitems,
-      
-        'shipping' => $shipping,
+        'searchedItem' => $variante,
+        'shipping' => $provinciass,
         'user' => $user,
         'provinciasEnvio' => $decodeProvincia,
         'selectedAddress' => $userAddressCurrent,
@@ -133,9 +157,17 @@ class ItemsController extends Controller
      * @param  \App\Items  $items
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Items $items)
-    {
-        //
+    public function update(Request $request)
+    { 
+        $dbSizes = itemSizes::where('id', $request->sizeId)->first();
+        $item = Items::where('id', $dbSizes->item_id)->first();
+        $newPrice = $dbSizes->precio;
+        $newQty = $dbSizes->quantity;
+        $x = [ number_format($newPrice, 0, '.', ','), $newQty];
+        // $newPriceSearch = itemSizes::where('item_id', $item->id)->get();
+        // $newPrice = $newPriceSearch->precio;
+
+        return $x;
     }
 
     /**

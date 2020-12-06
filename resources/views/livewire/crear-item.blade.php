@@ -3,7 +3,7 @@
 
 
 @section('crearItem')
-<div class="container" id="itemLayout">
+<div class="container" id="itemLayout" v-cloak>
 
 
     <div class="d-flex" style="margin-top: 14px;" >

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 // GUEST PAGES
 Route::get('/', 'MainPageController@index');
 Route::get('destacados/{item}', 'MainPageController@show');
-Route::get('producto/{item}', 'ItemsController@show');
+Route::get('producto/{varItem}', 'ItemsController@show');
 
  
 //CART ROUTES
@@ -48,7 +48,7 @@ Route::put('/perfil/{direccion:id}/update', 'DireccionesController@update')->mid
 //CREAR NEGOCIO
 Route::get('/iniciar-mi-negocio', 'StoreController@create')->middleware('auth'); // crear negocio view
 Route::post('/iniciar-mi-negocio', 'StoreController@store')->middleware('auth'); // guardar info del negocio
-
+Route::get('/cheese', 'ItemsController@update');
 
 //CREAR PRODUCTO
 Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem')->middleware('auth'); // crear view

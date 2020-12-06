@@ -27,23 +27,26 @@
 
             @foreach($myCart as $item)
 
-            <div class="  CARTIT" id="{{$item->id}}">
+            <div class="CARTIT" id="{{$item->id}}">
                 <div class="row no-gutters">
 
                     {{-- FOTO DEL ITEM --}}
 
                     <div class="col-md-1 centerMyImages CARTIM">
-                        <a href="/producto/{{$item->associatedModel->id}}">
-                            <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$item->associatedModel->image[0])}}" alt="{{$item->associatedModel->nombre}}">
+                        <a href="/producto/{{$item->associatedModel->colors->link}}">
+                        @foreach(json_decode($item->associatedModel->colors->colorImages) as $colorImage)
+                            <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$colorImage)}}" alt="{{$item->associatedModel->nombre}}">
+                            @break
+                            @endforeach
                         </a>
                     </div>
 
                     {{-- ITEM NAME --}}
                     <div class="col-md-8">
                         <div class="card-body CARTNM">
-                            <a href="/producto/{{$item->associatedModel->id}}" class="searchItem">
+                            <a href="/producto/{{$item->associatedModel->colors->link}}" class="searchItem">
                                 <h5 class="card-title" style="margin-bottom: 0!important;">
-                                    {{$item->associatedModel->nombre}}
+                                    {{$item->associatedModel->items->nombre}} {{ $item->associatedModel->colors->color }} {{ $item->associatedModel->size }}
                                 </h5>
                             </a>
 
@@ -54,16 +57,16 @@
                                 <small> &#8353; </small>{{number_format($item->associatedModel->precio, 0, '.', ',')}}
 
                             </div>
-                            @if ($item->associatedModel->cantidad >= 1)
+                            @if ($item->associatedModel->quantity >= 1)
 
 
                             Cantidad: x
                             <select class="custom-select col-md-2 CARTSEL cantidad" name="cantidad" id="{{$item->id}}">
 
-                                <option id="CARTSLTD" value="{{$item->quantity}}" selected>
-                                    {{$item->quantity}}
-                                </option>
-                                @for ($i = 1; $i <= $item->associatedModel->cantidad; $i++ )
+                            <option value="{{$item->quantity}}">
+                                        {{$item->quantity}}
+                                    </option>
+                                @for ($i = 1; $i <= $item->associatedModel->quantity; $i++ )
                                     <option value="{{$i}}">
                                         {{$i}}
                                     </option>
@@ -79,7 +82,7 @@
                             <br>
                             <small>
 
-                                <a class="btn CARTDL buttonHoverDEL" style="font-size: 15px; margin-left: 0!important; padding-left: 0!important; padding-right: 5px!important;" name="cantidad" id="{{$item->id}}"> Eliminar</a>|<a href="/producto/{{$item->associatedModel->id}}" class="btn buttonHoverEDIT" style="font-size: 15px; margin-left: 0!important; padding-left: 5px!important;" name="cantidad" id="{{$item->id}}"> Ver </a>
+                                <a class="btn CARTDL buttonHoverDEL" style="font-size: 15px; margin-left: 0!important; padding-left: 0!important; padding-right: 5px!important;" name="cantidad" id="{{$item->id}}"> Eliminar</a>|<a href="/producto/{{$item->associatedModel->colors->link}}" class="btn buttonHoverEDIT" style="font-size: 15px; margin-left: 0!important; padding-left: 5px!important;" name="cantidad" id="{{$item->id}}"> Ver </a>
                             </small>
                         </div>
                     </div>

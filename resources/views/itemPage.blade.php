@@ -4,28 +4,34 @@
 
 @section('thisItem')
 
-<div class="container" style="margin-left:4%!important;">
+<div class="container " style="margin-left:4%!important; " >
+
     <div class="row">
         {{-- COLUMNA DE LA IMAGEN PRINCIPAL --}}
-        <div class="col" style="margin: 4.7% 0 0 1%; width: 100%;">
+        <div class="col" style="margin: 4.7% 0 0 1%; width: 100%; ">
 
-            <a class="magnifier-thumb-wrapper" id="sticky">
+            <a class="magnifier-thumb-wrapper" style="width: 40vw; max-height: 140vh;" id="sticky">
+            @foreach(json_decode($searchedItem->colorImages) as $variante)
                 <img class="img-thumbnail mainImage" 
-                style="width: 100% ; max-height: 850px; margin-bottom: 15px; " 
+                style="width: 40vw; max-height: 140vh; margin-bottom: 15px; " 
                 data-toggle="magnify" id="thumb" 
-                data-magnify-src="{{ Storage::URL('assetItems/'.$item->image) }}" 
-                src="{{ Storage::URL('assetItems/'.$item->image)}}" 
+                data-magnify-src="{{ Storage::URL('assetItems/'.$variante) }}" 
+                src="{{ Storage::URL('assetItems/'.$variante)}}" 
                 alt="{{$item->nombre}}">
+            @break  
+            @endforeach
             </a>
 
  
         </div>
 
-        <div class="magnifier-preview col-5" style="display:run-in; height: 100%; width:100%; right: 7%; top: 17.5%;  " id="preview">
+        <div class="magnifier-preview col-6" style="display:run-in; height: 100%; width:100%; right: 2%; top: 17%;  " id="preview">
+
 
         </div>
         {{-- COLUMNA DEL INFO --}}
-        <div class="col-5" style="margin: 3em 0 0 2em;">
+        <div class="col-5" style="margin: 3em 0 0 2em;" >
+<div id="DTpageUp" v-cloak>
 
             <div style="position:absolute; top: 0; left: -12px;">
                 @for($i = 1; $i <= 5; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +39,7 @@
                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                     </svg><br>
                     @endfor
-
+                    
             </div>
             <article style="margin: 0 0 1em 0;">
 
@@ -61,9 +67,10 @@
 
                 </div>
 
-                <p class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
+                <p v-if="!price" class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
                     
-                &#8353; {{number_format($item->sizes[0]->precio, 0, '.', ',')}}
+                &#8353; {{number_format($searchedItem->size[0]->precio, 0, '.', ',')}}
+             
                     <small style="font-size: 14px;" class="text-muted">
                      (no incluye iva)
                     </small>
@@ -73,13 +80,26 @@
                         </a>
                     </small>
                 </p>
-
-                @if($item->shipping->precioEnvio > 0)
+                <p v-else class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">
+                    
+                &#8353; @{{ price }}
+             
+                    <small style="font-size: 14px;" class="text-muted">
+                     (no incluye iva)
+                    </small>
+                    <small style="font-size: 13px;">
+                        <a href="##">
+                            Detalles
+                        </a>
+                    </small>
+                </p>
+                @if($shipping)
+                @if($shipping->precioEnvio > 0)
 
                 <small class="text-muted">
                     Precio de Envió +
                     <strong>
-                        &#8353; {{number_format($item->shipping->precioEnvio, 0, '.', ',')}}
+                        &#8353; {{number_format($shipping->precioEnvio, 0, '.', ',')}}
                     </strong>
                 </small>
 
@@ -93,7 +113,7 @@
                 </small>
 
                 @endif
-
+                @endif
                 <br>
                 <br>
 
@@ -108,23 +128,88 @@
                         </span>
 
                         <span>
-                            <select style="height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-3" name="color" id="color">
+                            <select onchange="top.location.href = this.options[this.selectedIndex].value" style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" class="custom-select col-3" name="color" id="color">
+                                    <option value="{{$searchedItem->color}}"selected style="background-color: #0003;">{{$searchedItem->color}}</option>
+                                @foreach ($item->colors as $color)
+                                @if($searchedItem->color != ucfirst($color->color))
+                                <a href="#">
+                                <option  value="{{ url  ('producto/'.$color->link)  }}">{{ucfirst($color->color)}}</option>
+                                </a>
+                                @endif
+                                @endforeach
 
-                                @foreach ($colores as $color)
-                                <option value="{{$color}}">{{$color}}</option>
 
+                            </select>
+                        </span>
+                    </div>
+                    <br>
+                    
+                    <br>
+                    <div style="display: inline;">
+                    <span>
+                    <span style=" margin-top: 15px;"><strong>Tamaño:</strong> {{$item->size}}</span>
+                    
+                    <select @change="updateItem($event)" style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px;" class="custom-select col-3" name="color" id="color">
+                               
+                                @foreach ($searchedItem->size as $size)
+                                
+                                <option value="{{$size->id}}">{{$size->size}}</option>
+                              
                                 @endforeach
 
 
 
                             </select>
                         </span>
-                    </div>
+                        </div>
+                        <br>
+                        <br>
 
-                    <p style=" margin-top: 15px;"><strong>Tamaño:</strong> {{$item->size}}</p>
+                        @if($searchedItem->size[0]->quantity <= 0)
+                        <p v-if="qty <= 0" style="color: red;">Lo sentimos el Tamaño {{$searchedItem->size[0]->size}} se encuentra Agotado.</p>
+                        @endif
+
+                        @if($searchedItem->size[0]->quantity > 0)
+                        <div style="display: inline;">
+                    <span>
+                    <span style=" margin-top: 15px;"><strong>Cantidad:</strong></span>
+                    
+                    <select v-model="selectedQty" style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px;" class="custom-select col-3" name="color" id="color">
+                               
+                                @for ($i = 1; $i <= $searchedItem->size[0]->quantity; $i++)
+                                
+                                <option value="{{$i}}">{{$i}}</option>
+                              
+                                @endfor
+
+
+
+                            </select>
+                        </span>
+                        </div>
+                        @else
+                        <div v-if='qty > 0' style="display: inline;">
+                    <span>
+                    <span style=" margin-top: 15px;"><strong>Cantidad:</strong></span>
+                    
+                    <select v-model="selectedQty" style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px;" class="custom-select col-3" name="color" id="color">
+                               
+                                
+                                
+                                <option v-for="x in qty">@{{x}}</option>
+                              
+                              
+
+
+
+                            </select>
+                        </span>
+                        </div>
+                        @endif
+                   
 
                     {{-- INFO PARA ENVIOS --}}
-                    <div id="ENVI">
+                    <div id="ENVI" style="margin-top:18px;">
 
                         <p class="card-text" style="position: aboslute; bottom:0; right:0;">
 
@@ -132,11 +217,11 @@
                                 <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
                             </svg>
 
-                            @if (Auth::check()) {{-- USER LOGGED IN --}}
+                @if (Auth::check()) {{-- USER LOGGED IN --}}
 
-                            @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
+                    @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
 
-                            @if(in_array($selectedAddress->provincia, $provinciasEnvio))
+                        @if(in_array($selectedAddress->provincia, $provinciasEnvio))
                             <small>
                                 <strong style="color: seagreen"> Si se envía a {{$selectedAddress->provincia}}</strong>
                             </small>
@@ -157,58 +242,55 @@
                                     </strong>
                                 </small>
                             </p>
-                    </div>
-                </div>
-                @else
-                <small>
-                    <strong style="color:rgb(145, 7, 7)"> No se Envía a {{$selectedAddress->provincia}} </strong>
-                </small><small><a href="/perfil/{{Auth::user()->name}}/direcciones"> - Cambiar Dirección</a></small>
-                <p>
+                            </div>
+                            </div>
+                        @else
+                            <small>
+                            <strong style="color:rgb(145, 7, 7)"> No se Envía a {{$selectedAddress->provincia}} </strong>
+                            </small><small><a href="/perfil/{{Auth::user()->name}}/direcciones"> - Cambiar Dirección</a></small>
+                            <p>
+                            <small class="text-muted">
+                                Lo sentimos, este producto no se puede enviar a su dirección.
+                                </small>
+                            </p>
+
+                            </div>
+                            </div>
+
+                        @endif
+
+                @else {{-- ENDING IF SHIPPING ADDRESS EXISTS / ELSE NO SHIPPING ADDRESS FOUND --}}
+
                     <small class="text-muted">
-                        Lo sentimos, este producto no se puede enviar a su dirección.
+                        <a href="/perfil/{{$user->name}}/direcciones">
+                            Seleccione una Dirección
+                        </a>
                     </small>
-                </p>
+                    </div>
+                    </div>
+                @endif
 
+            @else
 
+            <small class="text-muted">
+                <a href="{{route('login')}}">Seleccione una Dirección</a>
+            </small>
+                </div>
+                </div>
 
-        </div>
-    </div>
-
-    @endif
-
-    @else {{-- ENDING IF SHIPPING ADDRESS EXISTS / ELSE NO SHIPPING ADDRESS FOUND --}}
-
-    <small class="text-muted">
-        <a href="/perfil/{{$user->name}}/direcciones">
-            Seleccione una Dirección
-        </a>
-    </small>
-
-
-
-</div>
-</div>
-
-
-@endif
-
-@else
-
-<small class="text-muted">
-    <a href="{{route('login')}}">Seleccione una Dirección</a>
-</small>
-</div>
-</div>
-@endif
+            @endif
 
 {{-- final de Shipping Address --}}
 
 {{-- COMIENZO FECHA DE ENTREGA --}}
 
 
+<div style="text-align: right;">
+    @include('BuyingCartButtons')
+</div>
+</div>
+    
 
-
-<br>
 <div class="myFirstSectionInner scroll" style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
     <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
         <div class="noWrap">
@@ -225,60 +307,36 @@
 
     </div>
 </div>
-<div style="text-align: right;">
-    @if($item->cantidad == 0)
-    <form action="/shoppingCart" method="POST" id="CARTBTN" class="cardbtn">
-        @csrf
-{{ metaphone("dad") }}
-        <input type="text" name="id" value="{{$item->id}}" hidden>
-        <button type="submit" class="btn btn-outline-success cardbtn">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-            </svg>
-        </button>
 
-    </form>
-
-
-    <button type="button" class="btn btn-outline-secondary cardbtn" disabled>Agotado</button>
-    @else
-
-
-    {{-- SHOPPING CART BUTTON --}}
-    <form action="/shoppingCart" method="POST" id="CARTBTN" class="cardbtn">
-        @csrf
-
-
-        <button type="submit" class="btn btn-outline-success cardbtn">
-            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-            </svg>
-        </button>
-        <input type="text" name="id" value="{{$item->id}}" hidden>
-    </form>
-    <form action="###" method="POST" id="CARTBTN" class="cardbtn">
-        <button class="btn btn-outline-success cardbtn">Comprar</button>
-    </form>
-    @endif
+<br>
+</div>
 </div>
 {{-- FINAL DE BUY CART BUTTONS --}}
-
+<br>
 </div>
 </div>
+<div class="container" style="margin-left:4%!important;">
+<div class="form-row " style=" width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
 @if(json_decode($item->specs) != 'null')
-<div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
 
     <div class="content">
 
-        <div class="col" style="margin: 3em 0 0 0.5em">
-
-            <table>
-                <h2>Mas sobre el producto</h2><br>
-                <h4>{{$item->nombre}}</h4>
+    <div class="form-row" style="margin: 3em 0 0 0.5em">
+                <h2>Mas sobre el producto {{$item->nombre}}</h2>
+                
+    </div>
+    <div class="form-row" style="margin: 0 0 0 0.5em">
                 <p>
                     {{$item->descripcion}}
                 </p>
                 <br>
+    </div>
+    <div class="form-row">
+    
+        <div class="col" style="margin: 1.5em 0 0 0.5em; margin-right: 20px;" >
+                
+
+            <table style="width:500px;">
 
                 @foreach(json_decode($item->specs) as $value)
                 <tr style="list-style: none; border-bottom: 1px solid rgb(197, 197, 197);border-top: 1px solid rgb(197, 197, 197); ">
@@ -289,12 +347,18 @@
                 @endforeach
 
             </table>
-        </div>
-
-    </div>
 </div>
+       
 @endif
 
+
+    <div class="col-6 centerMyImages" style="height:20%; width:auto;  margin: 1.5em 0 0 15px;" >
+                    <!-- <img src="{{ Storage::URL('assetItems/'.$variante)}}" style="height: 20%; width:90%; margin-left: 20px;"  alt=""> -->
+    </div>
+</div>
+    </div>
+</div>
+</div>
 
 <div class=" form-row " style=" border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 3em 0 0 0.5em">
 
@@ -326,7 +390,7 @@
 </div>
 
 </div>
-
+</div>
 
 @endsection
 
@@ -355,7 +419,6 @@
     })
 
 </script>
-
-
+<script src="/scripts/itemPage.js"></script>
 
 @endsection

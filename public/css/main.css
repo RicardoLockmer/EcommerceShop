@@ -1,5 +1,11 @@
 /* MENU CSS */
 /* #007bff */
+[v-cloak] {
+    display: none;
+}
+body{
+    background: rgba(241, 241, 241, 0.205);
+}
 #sticky {
     position: sticky;
     position: -webkit-sticky;

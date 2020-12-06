@@ -19,7 +19,7 @@ Resultados de
                 {{-- FOTO DEL ITEM --}}
 
                 <div class="col-md-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
-                    <a href="/producto/{{$item->id}}">
+                    <a href="/producto/{{$var->link}}">
                     @foreach(json_decode($var->colorImages) as $vImage)
                         <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$vImage)}}" alt="{{$item->nombre}}">
                         @break
@@ -29,9 +29,9 @@ Resultados de
                 {{-- ITEM NAME --}}
                 <div class="col-md-8">
                     <div class="card-body" style="padding: 0 0 0 1em;">
-                        <a href="/producto/{{$item->id}}" class="searchItem">
+                        <a href="/producto/{{$var->link}}" class="searchItem">
                             <h4 class="card-title" style="margin-bottom: 0!important;">
-                                {{$item->nombre}}
+                                {{$item->nombre}} - {{ $var->color }}
                             </h4>
                         </a>
 
@@ -68,7 +68,7 @@ Resultados de
 
                     </div>
                 </div>
-                <a style="position: absolute; bottom: 15px; right:25px;" class="btn btn-success">Ver Mas</a>
+                <a style="position: absolute; bottom: 15px; right:25px;" class="btn btn-dark">Ver Mas</a>
             </div>
         </div>
                             @endforeach
@@ -82,7 +82,7 @@ Resultados de
                 {{-- FOTO DEL ITEM --}}
 
                 <div class="col-md-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
-                    <a href="/producto/{{$itemVar->item_id}}">
+                    <a href="/producto/{{$itemVar->link}}">
                     @foreach(json_decode($itemVar->colorImages) as $img)
                         <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$img)}}" alt="{{$itemVar->items->nombre}}">
                         @break
@@ -93,9 +93,9 @@ Resultados de
                 {{-- ITEM NAME --}}
                 <div class="col-md-8">
                     <div class="card-body" style="padding: 0 0 0 1em;">
-                        <a href="/producto/{{$itemVar->item_id}}" class="searchItem">
+                        <a href="/producto/{{$itemVar->link}}" class="searchItem">
                             <h4 class="card-title" style="margin-bottom: 0!important;">
-                                {{$itemVar->items->nombre}}
+                                {{$itemVar->items->nombre}} - {{ $itemVar->color }}
                             </h4>
                         </a>
 
@@ -130,7 +130,7 @@ Resultados de
 
                     </div>
                 </div>
-                <a style="position: absolute; bottom: 15px; right:25px;" class="btn btn-success">Ver Mas</a>
+                <a style="position: absolute; bottom: 15px; right:25px;" class="">Ver Mas</a>
             </div>
         </div>
 

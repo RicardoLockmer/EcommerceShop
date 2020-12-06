@@ -250,6 +250,7 @@ try {
             $itemVar = new itemColors();
             $itemVar->item_id = $item->id;
             $itemVar->color = $data[$i]->color;
+            $itemVar->link = $storeInitials.'_'.'TM'.$item->id.$data[$i]->color.date("dmhis");
             $itemVarImgs = [];
                 foreach($request->moreImages[$i] as $imgs){ 
                     // AGREGA IMAGENES DE CADA COLOR DEL PRODUCTO
