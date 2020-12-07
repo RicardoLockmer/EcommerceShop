@@ -1,10 +1,10 @@
 @if($searchedItem->size[0]->quantity == 0)
-
+    @if(Auth::user())
     <form action="/shoppingCart" method="POST" id="CARTBTN" class="cardbtn">
     @csrf
 
         <input type="text" name="id" v-model="sizeId" hidden>
- <input type="text" name="qty" v-model="selectedQty"hidden>
+            <input type="text" name="qty" v-model="selectedQty"hidden>
         <button 
             v-if="cantidad == 0" 
             type="submit" 
@@ -23,7 +23,7 @@
             </svg>
         </button>
     </form>
-
+@endif
 
     <form action="###" method="POST" id="CARTBTN" class="cardbtn">
     @csrf
@@ -36,6 +36,7 @@
 
 
     {{-- SHOPPING CART BUTTON --}}
+    @if(Auth::user())
     <form action="/shoppingCart" method="POST" id="CARTBTN" class="cardbtn">
         @csrf
         <input v-if="sizeId" type="text" name="id" v-model="sizeId" hidden >
@@ -53,6 +54,7 @@
         </button>
        
     </form>
+    @endif
         <form action="###" method="POST" id="CARTBTN" class="cardbtn">
         @csrf
             <button v-if="cant > 0" class="btn btn-outline-success cardbtn">Comprar</button>

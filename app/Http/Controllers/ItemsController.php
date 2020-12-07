@@ -92,6 +92,7 @@ class ItemsController extends Controller
         }
 
     // DELIVER DATE LOGIC
+    if($userAddressCurrent != NULL){
         if(Auth::user()){
         $provinciass = Shipping::where('items_id', $item->id)->where('provincia', $userAddressCurrent->provincia)->first();
         if($provinciass){  
@@ -104,15 +105,20 @@ class ItemsController extends Controller
     } else {
         $delivery = false;
         $deliveLastDay = "-";
-        $provinciass = '';
+        $provinciass = false;
     }
         
         } else {
         $delivery = false;
         $deliveLastDay = "-";
-        $provinciass = '';
+        $provinciass = false;
             
         }
+    } else {
+        $delivery = false;
+        $deliveLastDay = false;
+        $provinciass = false;
+    }
         $colores= array();
            
         
