@@ -1,24 +1,64 @@
 @extends('mainLayout')
 
 @section('categorias')
+@if($misCategorias == 'Hombre' || $misCategorias == 'Mujer' || $misCategorias == 'Niños')
+<div>
+    
+        <div class="carousel-inner " style="width:100vw!important;height: 100vh!important;">
+            <div class="carousel-item active " style="width:100vw!important;height: 100vh!important;">
+                <img style="width:100vw!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/{{ $misCategorias }}.jpg" alt="First slide">
+            </div>
+            
+        </div>    
+</div>
+@else
+<div>
+    
+        <div class="carousel-inner " style="width:100vw!important;height: 100vh!important;">
+            <div class="carousel-item active " style="width:100vw!important;height: 100vh!important;">
+                <img style="width:100vw!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/Hogar.jpg" alt="First slide">
+            </div>
+            
+        </div>    
+</div>
+@endif
+<div class="form-row" style="margin-top:-98vh;">
 
-<div style="margin: 2.3em 0 0 0; border-bottom: 2px solid rgba(184, 184, 184, 0.384) ">
 
+
+    <div class="col-2" style="border-right: 1px solid rgba(255, 255, 255, 0.322); position: relative; ">
+    <div id="sticky" style="display: initial;">
+        <ul style="padding: 0 0 0 0;">
+        @for($i = 0; $i < 18; $i++)
+            <a class="nav-link" style="font-size: 18px;color: rgb(0, 0, 0)!important; margin: 0.5em 0 0.5em 0.5em!important;" href="">Filter {{$i}}</a>
+        @endfor
+        </ul>
+    </div>    
+    
+    </div>
+<div class="col-8" style="margin: 1em 0 0 1em; border-bottom: 2px solid rgba(184, 184, 184, 0.384) ">
+    <div style="margin: 0 0 1em 1em; color:rgb(0, 0, 0)">
+        <h1><strong>Comprando para {{$misCategorias}}</strong> </h1>
+        <p><small>{{count($items)}} resultados...</small></p>
+    </div>
+  
+@if(count($items) > 0)
+@foreach($items as $item)
     @foreach($items as $item)
-    <div class="card mb-3" style="padding: 1em 1em 1em 1em;box-shadow:none; border-radius: 0; border-top: 2px solid rgba(184, 184, 184, 0.384)!important;">
+    <div class="card mb-3" style="margin: 0 0 0 1em !important; padding: 1em 1em 1em 1em;box-shadow:none; border-radius: 0; border-top: 2px solid rgba(184, 184, 184, 0.384)!important;">
         <div class="row no-gutters">
 
             {{-- FOTO DEL ITEM --}}
 
             <div class="col-md-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
-                <a href="/producto/{{$item->id}}">
-                    <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$item->image[0])}}" alt="{{$item->nombre}}">
+                <a href="/producto/{{$item->colors[0]->link}}">
+                    <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
                 </a>
             </div>
             {{-- ITEM NAME --}}
             <div class="col-md-8">
                 <div class="card-body" style="padding: 0 0 0 1em;">
-                    <a href="/producto/{{$item->id}}" class="searchItem">
+                    <a href="/producto/{{$item->colors[0]->link}}" class="searchItem">
                         <h4 class="card-title" style="margin-bottom: 0!important;">
                             {{$item->nombre}}
                         </h4>
@@ -31,17 +71,17 @@
                         @endfor
                         {{-- PRECIO --}}
                         <p class="card-text" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
-                            <small> &#8353; </small>{{number_format($item->precio, 0, '.', ',')}}
+                            <small> &#8353; </small>{{number_format($item->sizes[0]->precio, 0, '.', ',')}}
                         </p>
                         {{-- DESCRIPCION --}}
-                        <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        <p class="card-text"  style="height: 70px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                             {{$item->descripcion}}
                         </p>
 
                         {{-- SHIPS TO PART --}}
 
 
-                        <p class="card-text" style="position: aboslute; bottom:0; right:0;">
+                        <!-- <p class="card-text" style="position: aboslute; bottom:0; right:0;">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-seam text-muted" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
                                 <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
@@ -50,22 +90,30 @@
                             <small class="text-muted">
                                 Envió a todo Costa Rica.
                             </small>
-                        </p>
+                        </p> -->
+                        <!-- @include('ShipLogic') -->
 
 
                 </div>
             </div>
-            <a style="position: absolute; bottom: 15px; right:25px;" class="btn btn-success">Ver Mas</a>
+           
+            <a style="position: absolute; bottom: 15px; right:25px;" href="/producto/{{$item->colors[0]->link}}" class="btn btn-dark">Ver Mas</a>
         </div>
     </div>
 
     @endforeach
+    @endforeach
+@else
+<p class="textmuted" style="text-align:center;">Lo sentimos aun no tenemos nada en esta categoria!</p>
 
-
-
-
+@endif
+           
 </div>
-
 </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+<p style="text-align: center;">TodoMarket.com</p>
 
 @endsection

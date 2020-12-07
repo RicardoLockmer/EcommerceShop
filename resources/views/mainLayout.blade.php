@@ -62,11 +62,7 @@
             @endif
             @else
             @if(Auth::user()->nombreNegocio == NULL)
-            <li class="nav-item">
-                <a class="nav-link" href="##">
-                    {{ __('Categorias') }}
-                </a>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="/perfil/{{Auth::user()->name}}">
                     Bienvenido, {{ Auth::user()->name }} <span></span>
@@ -169,7 +165,7 @@
         @yield('newAddressForm')
         @yield('EditAddress')
         {{-- SEARCH INFO --}}
-        @yield('mainSearch')
+        @yield('mainSearch') 
         @yield('categorias')
         {{-- ??? no me acuerdo --}}
         @yield('loginContent')

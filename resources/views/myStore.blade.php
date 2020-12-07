@@ -7,7 +7,7 @@
 
 @endsection
 
-@section('agregarProductos')
+@section('agregarProductos') 
 
 <div class='container'>
     <div class="centerMyImages">
@@ -40,7 +40,7 @@
                     <div class="card-block">
 
                         <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}">
-<img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$item->image)  }}" alt=""></a>
+                        <img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$item->image)  }}" alt=""></a>
                     </div>
                 </div>
                 @endforeach
@@ -54,7 +54,7 @@
 @else
 
 @section('errorStore')
-<h1 style="text-align: center; color: red; font-weight: 800; font-size: 40px;">ESTA NO ES LA PAGINA QUE BUSCAS!</h1>
+<h1 style="text-align: center; color: red; font-weight: 800; font-size: 40px;">ESTA NO ES LA PAGINA QUE ESTAS BUSCANDO!</h1>
 
 @endsection
 @endif

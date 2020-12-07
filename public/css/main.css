@@ -6,10 +6,11 @@
 body{
     background: rgba(241, 241, 241, 0.205);
 }
+
 #sticky {
     position: sticky;
     position: -webkit-sticky;
-
+    
 
     top: 70px;
     display: flex;

@@ -45,24 +45,24 @@ const itemLayout = {
                     name: ['Maquillaje', 'Protección de la Piel', 'Cuidado del Cabello', 'Fragancia', 'Cuidado de Pies, Manos y Uñas', 'Accesorios', 'Afeitado y Depilación', 'Cuidado Personal', 'Cuidado Bucal', 'Cuidado Femenino', 'Belleza']
                 },
                 {
-                    id: 'Para Mujer',
+                    id: 'Mujer',
                     name: ['Ropa', 'Calzado', 'Joyería', 'Relojes', 'Bolsos', 'Accesorios y mas', 'Deporte', 'Ropa Interior', 'Maternidad', 'Ropa Verano']
                 },
                 {
-                    id: 'Para Hombre',
+                    id: 'Hombre',
                     name: ['Ropa', 'Calzado', 'Relojes', 'Accesorios y mas', 'Deportes', 'Verano']
                 },
                 {
-                    id: 'Para Niña',
+                    id: 'Niña',
                     name: ['Ropa', 'Calzado', 'Joyería', 'Relojes', 'Accesorios', 'Verano']
                 },
                 {
-                    id: 'Para Niño',
+                    id: 'Niño',
                     name: ['Ropa', 'Calzado', 'Relojes', 'Accesorios', 'Verano']
                 },
                 {
                     id: 'Hogar y Cocina',
-                    name: ['Electrodomésticos', 'Comedor y Cocina', 'Cama', 'Bañera', 'Mueble', 'Decoración', 'Mural', 'Iluminación', 'Ventilación', 'Refrigeración', 'Planchas y Vapores', 'Aspiradoras', 'Almacenamiento y Organización', 'Suministros de Limpieza']
+                    name: ['Electrodomésticos','Baño', 'Comedor y Cocina', 'Cama', 'Bañera', 'Mueble', 'Decoración', 'Mural', 'Iluminación', 'Ventilación', 'Refrigeración', 'Planchas y Vapores', 'Aspiradoras', 'Almacenamiento y Organización', 'Suministros de Limpieza']
                 },
                 {
                     id: 'Patio y Jardin',

@@ -68,7 +68,7 @@ Resultados de
 
                     </div>
                 </div>
-                <a style="position: absolute; bottom: 15px; right:25px;" class="btn btn-dark">Ver Mas</a>
+                <a style="position: absolute; bottom: 15px; right:25px;" href="/producto/{{$var->link}}" class="btn btn-dark">Ver Mas</a>
             </div>
         </div>
                             @endforeach

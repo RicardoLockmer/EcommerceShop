@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Items;
+use App\direcciones;
+use App\itemColors;
+use App\itemSizes;
+use App\Shipping;
+use App\Store;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
@@ -13,24 +19,26 @@ class CategoriasController extends Controller
      */
     public function index($categoria)
     {
-        $q = $categoria;
-        $items = Items::where ( 'nombre', 'LIKE', '%' . $q . '%' )
-            ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
-            ->orWhere('categoria', 'LIKE', '%'.$q.'%')
-            ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
-            ->orWhere('marca', 'LIKE', '%'.$q.'%')
-            ->orWhere('nombreNegocio', 'LIKE', '%'.$q.'%')
-            ->get();
-
-        foreach ($items as $item ) {
-            $item->image = json_decode($item->image);
+        $myCategory = $categoria;
+        if($categoria == 'Niños'){
+            $categoria = 'Niño Niña';
         }
-
+        $words = explode(' ', $categoria);
+        foreach($words as $word){
+        $items = Items::where('categoria', 'LIKE', '%'.$word.'%')
+            ->orWhere('subcategoria', 'LIKE', '%'.$word.'%')
+            ->orderBy('created_at')
+            ->get();
+        }
+    
         return view('Categorias', [
-            'items' => $items
+            'items' => $items,
+            'misCategorias'=> $myCategory
+           
+            
         ]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

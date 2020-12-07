@@ -2,7 +2,7 @@
 
 @section('jumbotron')
 
-
+  
 <div>
     {{-- <img class="mainPageImageTop" src="dummy/big1.jpg" alt="First slide"> --}}
     <div id="carouselExampleControls " class="carousel slide" data-ride="carousel">
@@ -41,7 +41,7 @@
 
 
 
-            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Hombre" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
 
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Hombres
@@ -49,7 +49,7 @@
             </a>
 
 
-            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Mujer" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
 
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Mujeres
@@ -57,7 +57,7 @@
             </a>
 
 
-            <a href="###" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Niños" class="card col centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
 
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Niños
@@ -100,17 +100,17 @@
     <div class="container">
         <div class="row" style="text-align: center;">
 
-            <a href="###" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ban1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Baño" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ban1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Baños
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ofi1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Oficina" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ofi1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Oficina
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Exterior" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Exterior
                 </h1>
@@ -120,17 +120,17 @@
         <br>
         <div class="row" style="text-align: center;">
 
-            <a href="###" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Hogar" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Hogar
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Habitacion" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Habitación
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Decoracion" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Decoración
                 </h1>

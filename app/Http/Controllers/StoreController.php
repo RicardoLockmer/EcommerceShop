@@ -29,7 +29,7 @@ class StoreController extends Controller
         }
         if (Auth::user()->id == $myStore->user_id) {
 
-            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->get();
+            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->orderBy('id', 'desc')->get();
 
             
             return view('myStore', [
