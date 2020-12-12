@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Items extends Model
 {
     public function colors() {
-        return $this->hasMany(itemColors::class, 'item_id');
+        return $this->hasMany(itemColors::class, 'item_id', 'id');
     }
     public function sizes(){
-        return $this->hasMany(itemSizes::class, 'item_id');
+        return $this->hasMany(itemSizes::class, 'item_id', 'id');
     }
     
     public function shipping(){

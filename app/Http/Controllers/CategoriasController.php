@@ -19,21 +19,33 @@ class CategoriasController extends Controller
      */
     public function index($categoria)
     {
+        if(Auth::user()){
+
+            \Cart::session(Auth::user()->id);
+        }
         $myCategory = $categoria;
         if($categoria == 'Niños'){
-            $categoria = 'Niño Niña';
+            $categoria = 'Niño Niña Juguetes Juegos';
         }
+        if($categoria == 'Computadoras' || $categoria == 'Tecnologia'){
+            $categoria = 'Tecnologia Computadoras Electronica';
+        }
+        
         $words = explode(' ', $categoria);
-        foreach($words as $word){
-        $items = Items::where('categoria', 'LIKE', '%'.$word.'%')
-            ->orWhere('subcategoria', 'LIKE', '%'.$word.'%')
-            ->orderBy('created_at')
-            ->get();
-        }
-    
+        
+        
+        $items = Items::where(function($q) use($words) {
+            foreach($words as $word){
+               $q->orWhere('categoria', 'LIKE', '%'.$word.'%')->orWhere('subcategoria', 'LIKE', '%'.$word.'%')->join('item_sizes', 'item_sizes.item_id', '=', 'items.id')->orderBy('item_sizes.quantity','DESC');
+            }
+        })->get();
+        
+        
+        
+     
         return view('Categorias', [
             'items' => $items,
-            'misCategorias'=> $myCategory
+            'misCategorias'=> $myCategory,
            
             
         ]);

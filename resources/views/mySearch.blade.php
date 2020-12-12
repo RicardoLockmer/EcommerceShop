@@ -7,7 +7,7 @@
     <div style="margin: 2.3em 0 0 0; border-bottom: 2px solid rgba(184, 184, 184, 0.384) ">
 Resultados de 
 @foreach($search as $sitem)
-    ...{{ $sitem }}
+    ...{{ $sitem }} 
     @endforeach
     
 

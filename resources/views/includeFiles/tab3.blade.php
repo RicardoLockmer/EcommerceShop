@@ -18,7 +18,8 @@ Your browser does not support the video tag.
 
 
 
-<div style="position:relative; border-bottom: 1px solid grey; padding-bottom: 33px; margin-top: 10px;" class="form-row" v-for="(variante, mainIndex) in variantes">
+<div style="position:relative; border-bottom: 1px solid grey; padding-bottom: 33px; margin-top: 26px;" class="form-row" v-for="(variante, mainIndex) in variantes">
+
     <div class="">
 
         <div class="newbiz " style="margin: 0 8px 0 0;  ">
@@ -27,7 +28,8 @@ Your browser does not support the video tag.
 
                     @{{ mainIndex+1 }}. @{{ variante.color }}
                 </strong>
-                <span class="btn btn-warning btn-sm" style="margin-bottom:15px;margin-top:15px; margin-left:12px;" @click="addSize(mainIndex)"><strong>Agregar Otro Tamaño +</strong></span>
+                <span v-if="variante.sizes[0].unidad != 'NoAplica'" class="btn btn-warning btn-sm" style="margin-bottom:15px;margin-top:15px; margin-left:12px;" @click="addSize(mainIndex)"><strong>Agregar Otro Tamaño +</strong></span>
+                <span v-else   style="margin-bottom:15px;margin-top:18px; margin-left:12px; border: 1px solid green;border-radius: 3px; padding: 3px 6px 3px 6px">Especifique la Cantidad de Inventario y el Precio</span>
                 <a v-if="mainIndex == 0"  style="margin-left: 8px;" class="text-muted" title="Si tiene otro tamaño del mismo tipo agregar otra fila con Unidad, Tamaño, Cantidad y Precio para este color" data-toggle="tooltip" data-placement="right" data-original-title="Tamaño del producto en este color" >
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
@@ -55,8 +57,12 @@ Your browser does not support the video tag.
     </a>
                             </small>
                             
-                                <select v-model="variante.sizes[index].unidad"  id="size" class="custom-select" required>
+                                <select v-model="variante.sizes[index].unidad" @change="CHECKER(mainIndex, index)"  id="size" class="custom-select" required>
                                     <option disabled selected value>--</option>
+                                    <option value="NoAplica">No Aplica</option>
+                                    <option value="cm">Altura (cm)</option>
+                                    <option value="cm">Ancho (cm)</option>
+                                    <option value="cm">Largo (cm)</option>
                                     <option value=" ">Talla Camisa</option>
                                     <option value=" ">Talla Pantalon</option>
                                     <option value="US">Talla Zapatos (US)</option>
@@ -66,7 +72,7 @@ Your browser does not support the video tag.
                                     @endforeach
                                 </select>
                     </div>
-                    <div class="col" style="" id="UNITSIZE" >
+                    <div v-if="variante.sizes[index].unidad != 'NoAplica'" class="col" style="" id="UNITSIZE" >
                             
                             <small>
                                 <strong>
@@ -101,7 +107,7 @@ Your browser does not support the video tag.
         </svg>
     </a>
                     </small>
-                    <input v-model="variante.sizes[index].cantidad" style="width: 100%;" placeholder="Inv." class="form-control cantidad @error('cantidad[]') is-invalid @enderror col" type="text"  >
+                    <input v-model="variante.sizes[index].cantidad" style="width: 100%;" placeholder="Inventario" class="form-control cantidad @error('cantidad[]') is-invalid @enderror col" type="text"  >
                 
             </div>
             <div class="col" style="">

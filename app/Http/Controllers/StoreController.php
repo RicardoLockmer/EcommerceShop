@@ -171,6 +171,7 @@ class StoreController extends Controller
     }
 
     public function storeItem(Request $request) {
+        
         $data = json_decode($request->variantes);
         $provincias = json_decode($request->provincias);    
         
@@ -190,25 +191,15 @@ class StoreController extends Controller
                 'data.*.sizes.*.tamano' => 'required',
                 'data.*.sizes.*.cantidad' => 'required',
                 'data.*.sizes.*.precio' => 'required',
-
                 'image' => 'required|max:4048',
                 'image.*' => 'mimes:jpg,jpeg,png,webp',
-                
-                        
-
                 'updateDate' => 'nullable',
                 'updated_at' => 'nullable',
                 'created_at' => 'nullable',
-                
                 'peso' => 'required',
                 'dimensiones' => 'required',               
 
                    ]);
-//     // FILE
-
-
-
-    // CREATE NEW ITEM IN DATABASE
 
 
 try {
@@ -250,7 +241,8 @@ try {
             $itemVar = new itemColors();
             $itemVar->item_id = $item->id;
             $itemVar->color = $data[$i]->color;
-            $itemVar->link = $storeInitials.'_'.'TM'.$item->id.$data[$i]->color.date("dmhis");
+            $uniqueItemId = uniqid('DT');
+            $itemVar->link = $storeInitials.'_'.'TM'.$item->id.date("dmy").$uniqueItemId.date("his");
             $itemVarImgs = [];
                 foreach($request->moreImages[$i] as $imgs){ 
                     // AGREGA IMAGENES DE CADA COLOR DEL PRODUCTO

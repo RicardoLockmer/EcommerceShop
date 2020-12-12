@@ -5,6 +5,8 @@
 }
 body{
     background: rgba(241, 241, 241, 0.205);
+    /* font-family: 'Fira Sans', sans-serif; */
+    font-family: 'Istok Web', sans-serif;
 }
 
 #sticky {
@@ -111,7 +113,7 @@ body{
 
 .div {
     margin: 0 0 0 0.3em;
-    color: #20006b;
+    color: #000000;
     font-weight: 600;
     font-size: 18px;
     letter-spacing: .1rem;

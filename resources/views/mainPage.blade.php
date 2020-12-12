@@ -72,7 +72,7 @@
 
     @section('productosDestacados')
     <div class="myFirstSection ">
-        <p class="div text-muted">
+        <p class="div">
             Mas Vendidos
         </p>
         <div class="myFirstSectionInner scroll">
@@ -144,7 +144,7 @@
 
     @section('productosMujer')
     <div class="myFirstSection">
-        <p class="div text-muted"> para Mujeres</p>
+        <p class="div "> para Mujeres</p>
         <div class="myFirstSectionInner scroll">
             <div class="container-fluid">
                 <div class="noWrap">
@@ -163,9 +163,9 @@
 
     @section('productosTecnologia')
     <div class="myFirstSection">
-        <p class="div text-muted" style="color: rgb(59, 59, 59);"> Tecnología</p>
+        <p class="div " > Tecnología</p>
         <div class="myFirstSectionInner scroll">
-            <div class="container is-fluid">
+            <div class="container-fluid">
                 <div class="noWrap">
                
                 </div>
@@ -173,5 +173,64 @@
         </div>
     </div>
 
+    <br>
+    @endsection
+    @section('productosJuguetes')
+    <div class="myFirstSection">
+        <p class="div " > Juguetes</p>
+        <div class="myFirstSectionInner scroll">
+            <div class="container-fluid">
+                <div class="noWrap">
+               
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    @endsection
+    @section('mejoresEnDos')
+    <br>
+    <div class="container">
+        <div class="row" style="text-align: center;">
+
+            <a href="Categorias/Mascotas" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ban1.jpg); background-size: cover; background-repeat: no-repeat;">
+                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                    Mascotas
+                </h1>
+            </a>
+            <a href="Categorias/Cocina" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ofi1.jpg); background-size: cover; background-repeat: no-repeat;">
+                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                    Cocina
+                </h1>
+            </a>
+            <a href="Categorias/Automovil" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
+                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                    Automovil
+                </h1>
+            </a>
+
+        </div>
+        <br>
+        <div class="row" style="text-align: center;">
+
+            <a href="Categorias/Juguetes" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
+                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                    Juguetes
+                </h1>
+            </a>
+            <a href="Categorias/Accesorios" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
+                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                    Accesorios
+                </h1>
+            </a>
+            <a href="Categorias/Herramientas" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
+                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                    Herramientas
+                </h1>
+            </a>
+
+        </div>
+    </div>
     <br>
     @endsection

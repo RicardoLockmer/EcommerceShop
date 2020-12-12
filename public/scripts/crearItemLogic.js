@@ -46,11 +46,11 @@ const itemLayout = {
                 },
                 {
                     id: 'Mujer',
-                    name: ['Ropa', 'Calzado', 'Joyería', 'Relojes', 'Bolsos', 'Accesorios y mas', 'Deporte', 'Ropa Interior', 'Maternidad', 'Ropa Verano']
+                    name: ['Ropa', 'Calzado', 'Zapatos', 'Tacones', 'Flats', 'Tennis','Blusas', 'Vestidos', 'Formal', 'Etiqueta', 'Casual', 'Pantalones', 'Leggins',  'Joyería', 'Relojes', 'Bolsos', 'Accesorios', 'Deporte', 'Ropa Interior', 'Maternidad', 'Ropa Verano', 'Calcetines']
                 },
                 {
                     id: 'Hombre',
-                    name: ['Ropa', 'Calzado', 'Relojes', 'Accesorios y mas', 'Deportes', 'Verano']
+                    name: ['Ropa', 'Calzado Casual', 'Tennis', 'Zapatos', 'Ropa Formal', 'Ropa Casual', 'Pantalones', 'Billeteras', 'Ropa Interior', 'Calcetines', 'Relojes', 'Accesorios', 'Deportes', 'Verano']
                 },
                 {
                     id: 'Niña',
@@ -61,12 +61,24 @@ const itemLayout = {
                     name: ['Ropa', 'Calzado', 'Relojes', 'Accesorios', 'Verano']
                 },
                 {
-                    id: 'Hogar y Cocina',
-                    name: ['Electrodomésticos','Baño', 'Comedor y Cocina', 'Cama', 'Bañera', 'Mueble', 'Decoración', 'Mural', 'Iluminación', 'Ventilación', 'Refrigeración', 'Planchas y Vapores', 'Aspiradoras', 'Almacenamiento y Organización', 'Suministros de Limpieza']
+                    id: 'Hogar',
+                    name: ['Electrodomésticos','Utensilios', 'Comedor y Cocina', 'Cama', 'Bañera', 'Muebles', 'Decoración', 'Mural', 'Iluminación', 'Ventilación', 'Planchas y Vapores', 'Aspiradoras', 'Almacenamiento y Organización', 'Suministros de Limpieza','Alfombras', 'Cortinas','Escritorios','Lamparas de Piso','Mesas de Noche', 'Sillas']
+                },
+                {
+                    id: 'Lavanderia',
+                    name: ['Electrodomésticos','Utensilios', 'Suministros', 'Manteleria', 'Accesorios', 'Muebles', 'Decoración', 'Limpieza', 'Ventilación', 'Planchas y Vapores', 'Aspiradoras', 'Almacenamiento y Organización']
+                },
+                {
+                    id: 'Cocina',
+                    name: ['Cubiertos', 'Manteleria', 'Utensilios', 'Recipientes', 'Cristalería', 'Jarros y Botellas', 'Limpieza', 'Decoración', 'Refrigeración', 'Accesorios', 'Encimeras', 'Electrodomésticos','Almacenamiento']
+                },
+                {
+                    id: 'Cuarto de Baño',
+                    name: ['Bañera', 'Ducha', 'Papel Higienico', 'Decoraciones', 'Toallas', 'Jabonera', 'Escobillas', 'Equipo de Baño', 'Inodoros', 'Accesorios', 'Encimeras', 'Limpieza']
                 },
                 {
                     id: 'Patio y Jardin',
-                    name: ['Muebles de Jardin', 'Jardin', 'Patio', 'Decoraciones', 'Cobertizo', 'Almacenamiento', 'Iluminación', 'Plantas', 'Parrilla y Cocina Exterior']
+                    name: ['Muebles de Jardin', 'Jardin', 'Patio', 'Decoraciones', 'Cobertizo', 'Almacenamiento', 'Iluminación', 'Plantas', 'Parrilla y Cocina Exterior', 'Pergolas','Toldos','Sombrillas para Patio','Accesorios para Parrilla','Muebles para Exterior','Herramientas de Jardin', 'Riego', 'Mantenimiento', 'Piscinas', 'Suministros de Piscina', 'Limpieza']
                 },
                 {
                     id: 'Equipaje',
@@ -147,8 +159,8 @@ const itemLayout = {
             peso: '',
             dimensiones: '',
             specs: [{
-                specName: 'Material',
-                specValue: 'Plastico'
+                specName: '',
+                specValue: ''
             }],
             variantes: [
                 {
@@ -170,7 +182,24 @@ const itemLayout = {
     },
     
     methods: {
-       
+        CHECKER: function(main, index) {
+            if(this.variantes[main].sizes[index].unidad == 'NoAplica'){
+                for(var i=0; i < this.variantes.length; i++){
+                    for(var e=0; e < this.variantes[i].sizes.length; e++){
+                        this.variantes[i].sizes.splice(1, this.variantes[main].sizes.length);
+
+                        this.variantes[i].sizes[e].unidad = 'NoAplica';
+                    }
+                }
+            } else {
+                for(var i=0; i < this.variantes.length; i++){
+                    for(var e=0; e < this.variantes[i].sizes.length; e++){
+
+                        this.variantes[i].sizes[e].unidad = this.variantes[main].sizes[index].unidad;
+                    }
+                }
+            }
+        },
         saveData: function() {
            let formData = new FormData();
            let store_id = document.getElementById("store_id").value;

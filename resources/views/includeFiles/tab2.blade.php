@@ -71,14 +71,32 @@ Your browser does not support the video tag.
                                     <option disabled selected value>--</option>
                                     <option value="Color">Color</option>
                                     <option value="Sabor">Sabor</option>
+                                    <option value="Olor">Olor</option>
                                     <option value="Estilo">Estilo</option>
                                     <option value="Figura">Figura</option>
                                     <option value="Material">Material</option>
+                                    <option value="Memoria">Memoria</option>
+                                    <option value="Textura">Textura</option>
+                                    <option value="Tipo">Tipo</option>
+                                    <option value="Año">Año</option>
+                                    <option value="Modelo">Modelo</option>
+                                    <option value="Diseño">Diseño</option>
+                                    <option value="Dimensiones">Dimensiones</option>
+                                    <option value="NoAplica">No Aplica</option>
+                                   
                                     <!-- <option class="dropdown-item" value=""></option> -->
                                    
                                 </select>
 
-                    <span class="btn btn-warning btn-lg btn-block" v-if="selectedType" style="margin-bottom:15px;margin-top:15px;" @click="addFind">Agregar Otro @{{ selectedType }} +</span>
+                    <span  class="btn btn-warning btn-lg btn-block" v-if="selectedType" style="margin-bottom:15px;margin-top:15px;" @click="addFind">
+                    Agregar 
+                        <span v-if="selectedType != 'NoAplica'">
+                            Otro @{{ selectedType }} +
+                        </span>
+                        <span v-else>
+                            mas imagenes +
+                        </span>
+                    </span>
                     </div>
 </div>
 <br>
@@ -92,7 +110,7 @@ Your browser does not support the video tag.
             </strong>
         </div>
     </div>
-    <div class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
+    <div v-if="selectedType != 'NoAplica'" class="newbiz " style="margin: 0 0 1.5em 0; margin-right: 8px; ">
         <div class="control">
 
             <small>

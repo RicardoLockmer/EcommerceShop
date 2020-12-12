@@ -1,12 +1,13 @@
 @extends('mainLayout')
 
 @section('categorias')
+<div>
 @if($misCategorias == 'Hombre' || $misCategorias == 'Mujer' || $misCategorias == 'Niños')
 <div>
     
-        <div class="carousel-inner " style="width:100vw!important;height: 100vh!important;">
-            <div class="carousel-item active " style="width:100vw!important;height: 100vh!important;">
-                <img style="width:100vw!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/{{ $misCategorias }}.jpg" alt="First slide">
+        <div class="carousel-inner " style="width:100%!important;height: 100vh!important; overflow: hidden;">
+            <div class="carousel-item active " style="width:100%!important;height: 100vh!important;">
+                <img style=" overflow: hidden;width:100%!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/{{ $misCategorias }}.jpg" alt="First slide">
             </div>
             
         </div>    
@@ -14,22 +15,22 @@
 @else
 <div>
     
-        <div class="carousel-inner " style="width:100vw!important;height: 100vh!important;">
-            <div class="carousel-item active " style="width:100vw!important;height: 100vh!important;">
-                <img style="width:100vw!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/Hogar.jpg" alt="First slide">
+        <div class="carousel-inner " style="width:100%!important;height: 100vh!important; overflow: hidden;">
+            <div class="carousel-item active " style="width:100%!important;height: 100vh!important;">
+                <img style=" overflow: hidden; width:100%!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/Hogar.jpg" alt="First slide">
             </div>
             
         </div>    
 </div>
 @endif
-<div class="form-row" style="margin-top:-98vh;">
+<div class="form-row" style="margin-top:-98vh;margin-right: 0!important">
 
 
 
     <div class="col-2" style="border-right: 1px solid rgba(255, 255, 255, 0.322); position: relative; ">
     <div id="sticky" style="display: initial;">
         <ul style="padding: 0 0 0 0;">
-        @for($i = 0; $i < 18; $i++)
+        @for($i = 1; $i <= 18; $i++)
             <a class="nav-link" style="font-size: 18px;color: rgb(0, 0, 0)!important; margin: 0.5em 0 0.5em 0.5em!important;" href="">Filter {{$i}}</a>
         @endfor
         </ul>
@@ -39,28 +40,33 @@
 <div class="col-8" style="margin: 1em 0 0 1em; border-bottom: 2px solid rgba(184, 184, 184, 0.384) ">
     <div style="margin: 0 0 1em 1em; color:rgb(0, 0, 0)">
         <h1><strong>Comprando para {{$misCategorias}}</strong> </h1>
-        <p><small>{{count($items)}} resultados...</small></p>
+        
+       
     </div>
-  
+    
 @if(count($items) > 0)
 @foreach($items as $item)
-    @foreach($items as $item)
+    @foreach($item->colors as $colors)
+    
     <div class="card mb-3" style="margin: 0 0 0 1em !important; padding: 1em 1em 1em 1em;box-shadow:none; border-radius: 0; border-top: 2px solid rgba(184, 184, 184, 0.384)!important;">
         <div class="row no-gutters">
 
             {{-- FOTO DEL ITEM --}}
 
             <div class="col-md-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
-                <a href="/producto/{{$item->colors[0]->link}}">
-                    <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
+                <a href="/producto/{{$colors->link}}">
+                @foreach(json_decode($colors->colorImages) as $ColorImage)
+                    <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
+                @break
+                @endforeach
                 </a>
             </div>
             {{-- ITEM NAME --}}
             <div class="col-md-8">
                 <div class="card-body" style="padding: 0 0 0 1em;">
-                    <a href="/producto/{{$item->colors[0]->link}}" class="searchItem">
+                    <a href="/producto/{{$colors->link}}" class="searchItem">
                         <h4 class="card-title" style="margin-bottom: 0!important;">
-                            {{$item->nombre}}
+                            {{$item->nombre}} {{ $colors->color }}
                         </h4>
                     </a>
 
@@ -71,8 +77,11 @@
                         @endfor
                         {{-- PRECIO --}}
                         <p class="card-text" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
-                            <small> &#8353; </small>{{number_format($item->sizes[0]->precio, 0, '.', ',')}}
+                            <small> &#8353; </small>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
                         </p>
+                        
+                        
+                      
                         {{-- DESCRIPCION --}}
                         <p class="card-text"  style="height: 70px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                             {{$item->descripcion}}
@@ -97,14 +106,14 @@
                 </div>
             </div>
            
-            <a style="position: absolute; bottom: 15px; right:25px;" href="/producto/{{$item->colors[0]->link}}" class="btn btn-dark">Ver Mas</a>
+            <a style="position: absolute; bottom: 15px; right:25px;" href="/producto/{{$colors->link}}" class="btn btn-dark">Ver Mas</a>
         </div>
     </div>
 
     @endforeach
     @endforeach
 @else
-<p class="textmuted" style="text-align:center;">Lo sentimos aun no tenemos nada en esta categoria!</p>
+<p class="textmuted" style="text-align:center;">Lo sentimos aun no tenemos productos en esta categoria!</p>
 
 @endif
            
@@ -114,6 +123,6 @@
                     </div>
                     </div>
                     </div>
-<p style="text-align: center;">TodoMarket.com</p>
+                  
 
 @endsection

@@ -46,7 +46,10 @@
                         <div class="card-body CARTNM">
                             <a href="/producto/{{$item->associatedModel->colors->link}}" class="searchItem">
                                 <h5 class="card-title" style="margin-bottom: 0!important;">
-                                    {{$item->associatedModel->items->nombre}} {{ $item->associatedModel->colors->color }} {{ $item->associatedModel->size }}
+                                    {{$item->associatedModel->items->nombre}} {{ $item->associatedModel->colors->color }}
+                                    @if(trim($item->associatedModel->size) != "NoAplica")
+                                      {{ $item->associatedModel->size }}
+                                     @endif
                                 </h5>
                             </a>
 
