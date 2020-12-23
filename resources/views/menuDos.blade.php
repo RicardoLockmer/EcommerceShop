@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-lg navbar-light justify-content-between navBack" id="MCTG" style="background-color: #a3320b;" v-cloak>
+<div class="navbar navbar-expand-lg navbar-light justify-content-between navBack" id="MCTG" style="background-color: #F57C00;" v-cloak>
 
         
 

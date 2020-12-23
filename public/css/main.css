@@ -4,9 +4,9 @@
     display: none;
 }
 body{
-    background: rgba(241, 241, 241, 0.205);
+    background-color: rgba(241, 241, 241, 0.205);
     /* font-family: 'Fira Sans', sans-serif; */
-    font-family: 'Istok Web', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 #sticky {
@@ -85,16 +85,17 @@ body{
 
 .main-container {
     margin-bottom: 2em;
-    background-color: white;
+    
 }
 
 /* END MAIN LAYOUT CSS */
 
 /* MAINPAGE CSS */
 .myFirstSection {
-    height: 14em;
+    height: 15em;
+    
     margin: 4em 0 2em 0;
-    border-bottom: 0.5px solid rgba(126, 126, 126, 0.384);
+    border: 0.3px solid rgba(184, 183, 183, 0.212);
 
     background-color: white;
 }
@@ -457,5 +458,22 @@ input.invalid {
     background-color: #4CAF50;
 }
 
+
+
+
+  .rounded-lg {
+    border-radius: 1rem;
+   
+  }
+  
+  .nav-pills .nav-link {
+    color: rgb(0, 0, 0);
+  }
+  
+  .nav-pills .nav-link.active {
+    color: rgb(0, 0, 0);
+    background-color: #ff6702;
+  }
+  
 
 @media (min-width: 1025px) and (max-width: 1280px) {}

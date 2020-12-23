@@ -8,13 +8,13 @@
     <div id="carouselExampleControls " class="carousel slide" data-ride="carousel">
         <div class="carousel-inner ">
             <div class="carousel-item active ">
-                <img class="mainPageImageTop" src="dummy/big1.jpg" alt="First slide">
+                <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="mainPageImageTop" src="dummy/big2.png" alt="First slide">
+                <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="mainPageImageTop" src="dummy/big3.jpg" alt="First slide">
+                <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -36,7 +36,7 @@
 
     @section('cards')
     <br>
-    <div class="container">
+    <div class="container ">
         <div class="row" style="text-align: center;">
 
 

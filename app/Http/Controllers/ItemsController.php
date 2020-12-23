@@ -86,8 +86,9 @@ class ItemsController extends Controller
         }
        
         $shipping = $item->shipping;
+        $decodeProvincia[] ='';
         foreach($shipping as $address){
-            $decodeProvincia[] = $address->provincia; 
+            $decodeProvincia[] .= $address->provincia; 
 
         }
 

@@ -114,7 +114,7 @@ class ShoppingController extends Controller
     }
 
     } else {
-      return back();
+      return redirect('login');
     }
     }
 

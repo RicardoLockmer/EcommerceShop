@@ -22,7 +22,7 @@
             @endif
 
             <a class='column myProduct btn centerMyImages' href="###" style="border: 1px solid rgb(192, 192, 192);">
-                Editar Pagos
+                Tarjetas
             </a>
 
         </div>
@@ -36,7 +36,8 @@
             {{-- IF NEGOCIO --}}
 
             <a href="/perfil/{{$user->name}}/direcciones" class='column myProduct btn centerMyImages' style="border: 1px solid rgb(192, 192, 192);">
-                Editar Direcciones
+                Direcciones
+                
             </a>
 
 
@@ -46,6 +47,14 @@
 
         </div>
     </div>
+        @if($errors->any())
+        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center;">
+            <strong >
+            
+            {{$errors->first()}}
+            </strong>
+        </div>
+                @endif
     <div class="form-row " style="border-top: 2px solid #007bff; margin-top: 3em;border-bottom: 2px solid #007bff;">
         <div class="col" style="width: 45%; height: auto; margin: 1.9em 0 0 0; ">
             {{-- MI PERFIL --}}

@@ -5,23 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>TodoMarket</title>
+    <title>DetoShop</title>
 
     <!-- Fonts -->
     <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet"> -->
+
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Istok+Web&display=swap" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"> --}}
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
   
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script href="/scripts/jQuery.js"></script>
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 
     <!-- Styles -->
     @livewireStyles()
+    @yield('cdSAS')
+    <meta charset="UTF-8" />
+
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
     {{-- CSRF TOKEN --}}
@@ -38,8 +45,9 @@
     <!-- MENU 2 -->
 @include('menuDos')
     {{-- CONTENT --}}
+    
     <div class="main-container">
-
+   
 
         {{-- USER PAGE --}}
 
@@ -86,7 +94,7 @@
         @yield('productosTecnologia')
         @yield('productosJuguetes')
 
-       
+        @yield('buy')
 
         @yield('mejoresEnDos')
 
@@ -95,9 +103,9 @@
 
     </div>
     {{-- CONTENT ENDING --}}
-<div>
-<div style="text-align: center;">TodoMarket.com</div>
-Footer... 
+<div style="background-color: grey; display: flex; margin-top: 100px; ">
+<div style='align-self: center;  flex: 1; text-align: center;'>DetoShop.com</div>
+ 
 </div>
 
 
@@ -134,7 +142,7 @@ Footer...
 
     @livewireScripts()
 
-
+    @yield('bp')
     @yield('magnifier')
     @yield('cartJQ')
     @yield('addColorProp')

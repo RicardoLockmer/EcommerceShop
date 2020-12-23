@@ -1,7 +1,7 @@
-<div class="navbar navbar-expand-lg navbar-light justify-content-between navBack" style="background-color: #6b0504">
+<div class="navbar navbar-expand-lg navbar-light justify-content-between navBack" style="background-color: #FF9800">
 
         <a href="/" class="navbar-brand" style="color: #ffffff; margin-left: 58px;">
-            TodoMarket
+        <img src="/dummy/logoTest2.png" alt="" style="width:auto; height: 40px;">
         </a>
 
         <ul class="navbar-nav">
@@ -89,14 +89,14 @@
 
             @if(Auth::user()->nombreNegocio != NULL)
             <li class="nav-item">
-                <a class="nav-link" href="/negocio/{{Auth::user()->nombreNegocio}}" style="border: 1px solid rgb(192, 192, 192); border-radius: 5px; ">
+                <a class="nav-link" href="/negocio/{{Auth::user()->nombreNegocio}}" style="border: 1px solid #FFFFFF; border-radius: 5px; ">
                     Mi Negocio
                 </a>
             </li>
 
             @else
             <li class="nav-item">
-                <a class="nav-link" href="{{route('comoVender')}}" style="border: 1px solid rgb(192, 192, 192);  border-radius: 5px; ">
+                <a class="nav-link" href="{{route('comoVender')}}" style="border: 1.6px solid #FFFFFF;  border-radius: 5px; ">
                     Como Vender
                 </a>
             </li>
@@ -104,7 +104,7 @@
 
             @else
             <li class="nav-item">
-                <a class="nav-link" href="{{route('comoVender')}}" style="border: 1px solid rgb(192, 192, 192);  border-radius: 5px; ">
+                <a class="nav-link" href="{{route('comoVender')}}" style="border: 1px solid #FFFFFF;  border-radius: 5px; ">
                     Como Vender
                 </a>
             </li>

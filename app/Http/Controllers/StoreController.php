@@ -9,9 +9,9 @@ use App\User;
 use App\itemColors;
 use App\itemSizes;
 use App\itemCantidades;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {

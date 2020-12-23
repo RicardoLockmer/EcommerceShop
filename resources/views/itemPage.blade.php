@@ -218,7 +218,7 @@
                             <select v-model="selectedQty" 
                                 style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px;" class="custom-select col-3" 
                                 name="color" 
-                                id="color">
+                                id="qty">
                                     
                                 @for ($i = 1; $i <= $searchedItem->size[0]->quantity; $i++)
                                 

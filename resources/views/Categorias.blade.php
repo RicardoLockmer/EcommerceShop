@@ -2,8 +2,8 @@
 
 @section('categorias')
 <div>
-@if($misCategorias == 'Hombre' || $misCategorias == 'Mujer' || $misCategorias == 'Niños')
-<div>
+<!-- @if($misCategorias == 'Hombre' || $misCategorias == 'Mujer' || $misCategorias == 'Niños') -->
+<!-- <div>
     
         <div class="carousel-inner " style="width:100%!important;height: 100vh!important; overflow: hidden;">
             <div class="carousel-item active " style="width:100%!important;height: 100vh!important;">
@@ -11,8 +11,8 @@
             </div>
             
         </div>    
-</div>
-@else
+</div> -->
+<!-- @else
 <div>
     
         <div class="carousel-inner " style="width:100%!important;height: 100vh!important; overflow: hidden;">
@@ -22,8 +22,8 @@
             
         </div>    
 </div>
-@endif
-<div class="form-row" style="margin-top:-98vh;margin-right: 0!important">
+@endif -->
+<div class="form-row" style="margin-right: 0!important">
 
 
 

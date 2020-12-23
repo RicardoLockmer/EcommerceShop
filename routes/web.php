@@ -25,6 +25,12 @@ Route::post('/shoppingCart', 'ShoppingController@store');
 Route::post('/updateCart', 'ShoppingController@update');
 Route::post('/deleteCartItem', 'ShoppingController@destroy');
 
+//BUUY ROUTES
+Route::post('/comprar', 'BuyItemController@index');
+Route::get('/ADDR', 'BuyItemController@ADDR');
+Route::post('/newADDR', 'BuyItemController@newADDR');
+Route::get('/drumroll', 'BuyItemController@tryTransaction')->middleware('auth');
+
 // MAINPAGE ROUTES
 Route::get('/paraHombres', 'CategoryController@paraHombres');
 Route::get('/ComoVender', 'MainPageController@comoVender')->name('comoVender');
@@ -37,7 +43,7 @@ Route::get('/negocio/{myStore:nombreNegocio}', 'StoreController@index')->middlew
 Route::get('/perfil/{user:name}', 'UserController@index')->middleware('auth');
 Route::get('/prefil/{user:name}/update')->middleware('auth'); //inclompleto
 Route::get('/perfil/{user:name}/direcciones', 'DireccionesController@index')->middleware('auth');
-Route::get('/perfil/{user:name}/direcciones/agregar', 'DireccionesController@create')->middleware('auth');
+Route::get('/perfil/{user:name}/direcciones/agregar', 'DireccionesController@create')->name('direcciones')->middleware('auth');
 
 Route::post('/NuevaDireccion', 'DireccionesController@store')->middleware('auth');
 // DELETE ADDRESS\
