@@ -5,8 +5,8 @@
 @section('thisItem')
 
 <div class="container mt-4"  >
-    <div class="  grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6">
-        <div class="relative md:col-span-2 lg:col-span-3" >
+    <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6">
+        <div class=" md:col-span-2 lg:col-span-3" >
 
             <a class="magnifier-thumb-wrapper" id="sticky">
                 @foreach(json_decode($searchedItem->colorImages) as $variante)
@@ -22,7 +22,7 @@
 
  
         </div>
-    <div class="magnifier-preview top-0 right-0 w-1/2" id="preview"></div>
+    <div class="magnifier-preview col-start-4" id="preview"></div>
    
     
     
@@ -30,18 +30,7 @@
         
     <div class="col-start-1 md:col-start-3 md:col-end-6 lg:col-start-4 lg:col-end-7 mx-2 ml-4" >
         <div id="DTpageUp" v-cloak>
-            <div style="position:absolute; top: 0; left: -12px;">
-                @for($i = 1; $i <= 5; $i++) 
-                    <svg width="1em" 
-                        style="color: rgb(245, 210, 12); font-size: 12px; " 
-                        height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" 
-                        fill="currentColor" 
-                        xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                    </svg>
-                    <br>
-                @endfor        
-            </div>
+            
 
             <article style="margin: 0 0 1em 0;">
 
