@@ -1,12 +1,12 @@
-<div style="position: absolute; right: 135px; top: 95px; z-index: 5;">
-<button v-if="vistaPrevia" class="btn btn-danger btn-sm" @click="quitarVistaPrevia" style="float:right;">Ocultar Vista Previa</button>
-<button v-if="!vistaPrevia" class="btn btn-primary btn-sm" @click="quitarVistaPrevia" style="float:right;">Ver Vista Previa</button>
+<div class="absolute right-10">
+<button v-if="vistaPrevia" class="hidden lg:block btn btn-danger btn-sm" @click="quitarVistaPrevia" style="float:right;">Ocultar Vista Previa</button>
+<button v-if="!vistaPrevia" class="hidden lg:block btn btn-primary btn-sm" @click="quitarVistaPrevia" style="float:right;">Ver Vista Previa</button>
 </div>
-<div v-if="vistaPrevia" class="col " style="height: auto;   border-left: 2px dotted grey;">
-        <div class="myFormData " style="margin-left: 0.6em!important;">
+<div v-if="vistaPrevia" class="lg:ml-16 border-dotter border-l-4" >
+        <div class="h-auto pl-6">
 
             {{-- vista previa titulo --}}
-            <span style="font-size: 26px;"> <strong>Vista Previa</strong> 
+            <span style="font-size: 26px;" > <strong>Vista Previa</strong> 
             <small>
             <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Al agregar algo en el formulario se actualiza en la vista previa. ">
         <svg style="margin:0 0 0 8px; font-size: 22px; padding-bottom: 5px;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -263,7 +263,7 @@
     </div>
 </div>
 <br>
-<div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
+<div class="form-row ml-2 " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;">
 
     <div class="content">
 

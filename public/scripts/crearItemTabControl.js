@@ -1,6 +1,6 @@
 var currentTab = 0;
 showTab(currentTab);
-
+ 
 function showTab(n) {
 
     var x = document.getElementsByClassName("tab");
@@ -48,6 +48,7 @@ function validateForm() {
     var x, y, i, z, f, xl, valid = true;
     x = document.getElementsByClassName("tab");
     y = x[currentTab].getElementsByTagName("input");
+    select = x[currentTab].getElementsByTagName("select");
     f = document.getElementById("myFiles");
     xl = x[currentTab].getElementsByTagName("small");
     z = x[currentTab].getElementsByTagName("textarea");
@@ -60,8 +61,16 @@ function validateForm() {
 
             valid = false;
         }
+        
+        
 
 
+    }
+    for (i = 0; i < select.length; i++){
+        if(!select[i].value){
+            select[i].className += " is-invalid"
+            valid = false;
+        }
     }
     for (i = 0; i < z.length; i++) {
 

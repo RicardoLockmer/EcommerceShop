@@ -15,9 +15,9 @@ Your browser does not support the video tag.
 </video>  
 
 
-<div class='form-row' style="width: auto;">
+<div class='row h-auto md:w-1/2 lg:w-1/2 xl:w-1/2' >
 
-    <div class="newbiz col">
+    <div class="newbiz col ">
 
         <small>
             <strong>
@@ -28,8 +28,8 @@ Your browser does not support the video tag.
         </small>
         <br>
 
-        <label for="MIMG" :class="(image) ? 'itemWithImg' : 'itemMainImg'" >
-            <svg style="margin-top: 5px;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <label for="MIMG" :class="(image) ? 'bg-green-400 mr-1 flex grid grid-cols-1 border-4 p-6 border-dotted items-center place-items-center' : 'flex grid grid-cols-1 border-4 p-6 border-dotted items-center place-items-center' " >
+            <svg  width="2em" height="2em" viewBox="0 0 16 16" class="self-center place-self-center bi bi-upload justify-self-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
                 <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
             </svg>
@@ -40,7 +40,7 @@ Your browser does not support the video tag.
 
 
                     <div v-if="image">
-                        <img class="centerMyImages" style="width: 125px; height:90;" :src="image" />
+                        <img class="centerMyImages ml-2" style="width: 125px; height:90;" :src="image" />
                         <button class="btn btn-outline-danger btn-sm" style="width: 125px;margin-top:3px;" @click="removeImage">Quitar</button>
                     </div>
         </div>

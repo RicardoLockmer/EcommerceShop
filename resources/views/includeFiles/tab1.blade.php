@@ -1,7 +1,7 @@
 <div style="margin-bottom: 5px;">
     {{-- NOMBRE PRODUCTO --}}
     <strong>
-        Nombre Producto
+        Nombre Producto 
     </strong>
     <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Nombre de su producto">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@
                                 </label>
 
                                 <select v-model="categorySelected" class="custom-select
-                                    @error('categoria') is-invalid @enderror" >
+                                    @error('categoria') is-invalid @enderror " >
                                     <option disabled selected value>
                                         --
                                     </option> 

@@ -24,19 +24,45 @@ class CategoriasController extends Controller
             \Cart::session(Auth::user()->id);
         }
         $myCategory = $categoria;
-        if($categoria == 'Niños'){
-            $categoria = 'Niño Niña Juguetes Juegos';
+        if($categoria == 'Ropa para Niño'){
+            $categoria = 'Niño';
         }
-        if($categoria == 'Computadoras' || $categoria == 'Tecnologia'){
-            $categoria = 'Tecnologia Computadoras Electronica';
+        if($categoria == 'Ropa para Niña'){
+            $categoria = 'Niña';
         }
-        
+        if($categoria == 'Computadoras'){
+            $categoria = 'Computadoras';
+        }
+        if($categoria == 'Tecnologia'){
+            $categoria = 'Tecnologia Electronica';
+        }
+        if($categoria == 'Ropa para Hombre'){
+            $categoria = 'Hombre';
+        }
+        if($categoria == 'Ropa para Mujer'){
+            $categoria = 'Mujer';
+        }
+        if($categoria == 'Juguetes y Juegos'){
+            $categoria = 'Juguetes Juegos';
+        }
+        if($categoria == 'Deportes y mas'){
+            $categoria = 'Deporte';
+        }
+        if($categoria == 'Patio y Jardin'){
+            $categoria = 'Patio Jardin';
+        }
+        if($categoria == 'Cosméticos y Cuidado Personal'){
+            $categoria = 'Cosméticos Cuidado Personal';
+        }
+        if($categoria == 'Cuarto de Baño'){
+            $categoria = 'Baño';
+        }
         $words = explode(' ', $categoria);
         
         
         $items = Items::where(function($q) use($words) {
             foreach($words as $word){
-               $q->orWhere('categoria', 'LIKE', '%'.$word.'%')->orWhere('subcategoria', 'LIKE', '%'.$word.'%')->join('item_sizes', 'item_sizes.item_id', '=', 'items.id')->orderBy('item_sizes.quantity','DESC');
+               $q->orWhere('categoria', 'LIKE', '%'.$word.'%')->join('item_sizes', 'item_sizes.item_id', '=', 'items.id')->orderBy('item_sizes.quantity','DESC');
             }
         })->get();
         

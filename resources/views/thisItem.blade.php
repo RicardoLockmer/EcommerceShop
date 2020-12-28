@@ -3,18 +3,18 @@
 @section('topItems')
 
 <div class='container'>
-    <div class="centerMyImages">
+    <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-8 lg:pt-10 place-items-center">
 
-        <a class="column myProduct btn centerMyImages" style="border: 1px solid rgb(192, 192, 192);" href="/negocio/{{$store->nombreNegocio}}/nuevo-producto">
-            agregar producto
+        <a class="border-2 border-solid font-bold hover:bg-gray-500 rounded-full relative bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 lg: centerMyImages "  href="/negocio/{{$store->nombreNegocio}}/nuevo-producto">
+            Agregar Producto
         </a>
 
-        <a href="/negocio/{{$store->nombreNegocio}}/editar" class='column myProduct btn centerMyImages' style="border: 1px solid rgb(192, 192, 192);">
-            Editar Negocio
+        <a href="/negocio/{{$store->nombreNegocio}}/editar" class=' border-2 border-solid font-bold hover:bg-gray-100 rounded-full relative bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 lg: centerMyImages ' >
+            Editar Información
         </a>
 
-        <a class='column myProduct btn centerMyImages' href="/negocio/{{$store->nombreNegocio}}/productos/" style="border: 1px solid rgb(192, 192, 192);">
-            mis productos
+        <a class='border-2 border-solid font-bold hover:bg-gray-100 rounded-full relative md:col-start-1 md:col-span-2 shadow-md tablet:col-span-2 tablet:col-start-1 lg:col-span-1 bg-white h-16 w-80 md:w-96 lg:w-80 lg:h-20 centerMyImages' href="/negocio/{{$store->nombreNegocio}}/productos/">
+            Productos
         </a>
 
     </div>
@@ -28,48 +28,57 @@
 
 
 <br>
-<div class="container" style="margin-top: 25px;">
-    <div class="card mb-4 " style="padding-top: 1em;">
-        <div class="row no-gutters" style="">
-            <div class="col centerMyImages" style="padding-left: 3em;">
-                <img class="card-img " style="height: auto; max-height: 85%;" src="{{ Storage::URL('assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
+<div class="container mt-10 grid grid-cols-1" >
+    <div class="mb-4 shadow-md ">
+        <div class=" grid grid-cols-1 lg:grid-cols-6" style="">
+
+
+            <div class="centerMyImages  lg:col-start-2 lg:col-span-2" style="padding-left: 3em;">
+                <img class="card-img h-auto w-auto"  src="{{ Storage::URL('assetItems/'.$item->image) }}" alt="{{$item->nombre}}">
             </div>
 
-            <div class="col-md-6" style="margin-left: 5em;;">
-                <article class="card-body">
+            <div class="grid px-4  lg:grid-cols-4 lg:col-start-4 lg:col-end-6">
+                <article class="space-y-2 my-4 col-span-4">
 
-                    <h1 class="card-title" style="font-size: 28px; margin-bottom: 0;">
+                    <h1 class="font-bold" style="font-size: 28px; margin-bottom: 0;">
                         {{$item->nombre}}
                     </h1>
 
-                    <p style="margin: 0 0 0 0;">
+                   
                         <small class="text-muted">
                             <strong>
                                 {{$item->marca}}
                             </strong>
                         </small>
-                    </p>
-                    @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                   
+                    <div class="grid grid-cols-5 gap-1 w-16">
+                     @for($i = 1; $i < 6; $i++) 
+                    <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill flex" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                        </svg>
-
+                    </svg>
                         @endfor
+                    </div>
+                   
+
                         
 
-                        <div class="card-text">
+                        <div class="card-text space-y-2">
                             <p>{{$item->descripcion}}</p>
                             <p><strong>Categoría:</strong> {{$item->categoria}}</p>
                             <p><strong>Subcategoría:</strong> {{$item->subcategoria}}</p>
                             
-                            <strong> SKU:</strong><br>
-                            @foreach($sizes as $var) 
-                             {{$var->sku}} - <small> &#8353; </small>{{number_format($var->precio, 0, '.', ',') }} - Inventario {{ $var->quantity }} <br> 
-                             @endforeach
-                            </p>
+                        
 
                            
                         </div>
-
+                        <p class="text-sm"><a class="text-sm" href="###">Reporte</a><span> | </span><a class="text-sm" href="###">Inventario</a><span> | </span><a class="text-sm" href="/negocio/{{$store->nombreNegocio}}/productos/{{$item->id}}" >Editar</a></p>
+                    <form action="/negocio/{{$store->nombreNegocio}}/productos/{{$item->id}}" method="POST" class="grid grid-cols-4">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="hidden lg:block btn btn-outline-danger btn-sm col-start-4 col-end-5 mt-6"  onclick="return confirm('Esta a punto de Borrar {{$item->nombre}}?')">
+                            Borrar
+                        </button>
+                    </form> 
                 </article>
 
             </div>
@@ -84,8 +93,8 @@
             </p>
 
             <div class="myFirstSectionInner scroll" style="text-align:center;">
-                <div class="container-fluid">
-                    <div class="noWrap">
+                <div class="flex flex-nowrap ">
+                    <div class="flex flex-nowrap ">
                         <br>
 
                       @foreach ($colors as $color)
@@ -105,14 +114,14 @@
         </div>
     </div>
     
-    <div class="form-row " style="border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
+    <div class="form-row shadow-md mb-4" >
 
-    <div class="content">
+    <div class="content mb-4">
 
         <div class="col" style="margin: 3em 0 0 0.5em">
 
             <table>
-                <h2>Detalles de {{$item->nombre}}</h2><br>
+                <h1 class="font-bold text-size-16">Detalles de {{$item->nombre}}</h1><br>
                 
                 <p>
                     {{$item->descripcion}}

@@ -18,5 +18,8 @@
     "[blade]": {
         "editor.defaultFormatter": "amirmarmul.laravel-blade-vscode"
     },
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    }
 }

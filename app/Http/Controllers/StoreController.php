@@ -192,7 +192,7 @@ class StoreController extends Controller
                 'data.*.sizes.*.cantidad' => 'required',
                 'data.*.sizes.*.precio' => 'required',
                 'image' => 'required|max:4048',
-                'image.*' => 'mimes:jpg,jpeg,png,webp',
+                'image.*' => 'mimes:jpg,jpeg,png',
                 'updateDate' => 'nullable',
                 'updated_at' => 'nullable',
                 'created_at' => 'nullable',

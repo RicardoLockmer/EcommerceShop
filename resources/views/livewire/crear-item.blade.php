@@ -3,17 +3,17 @@
 
 
 @section('crearItem')
-<div class="container" id="itemLayout" v-cloak>
+<div class="container" id="itemLayout" >
 
 
-    <div class="d-flex" style="margin-top: 14px;" >
+    <div class="flex content-center md:content-center  lg:content-center" style="margin-top: 14px;" >
 
-        <div :class="(vistaPrevia)? 'col' : 'myItemForms'" style=" height:auto;">
-            <form @submit.prevent="saveData" style="display:block!important; top:15px!important;"  class="" id="sticky" enctype="multipart/form-data">
+        <div :class="(vistaPrevia)? 'ml-1 lg:ml-28 md:w-2/3 ' : 'ml-1 md:w-1/2 lg:ml-80 lg:w-1/2 md:w-2/3 '" style=" height:auto;">
+            <form class="" @submit.prevent="saveData" style="display:block!important; top:15px!important;"   id="sticky" enctype="multipart/form-data">
                 {{-- CSRF --}}
                 @csrf
                 @if ($errors->any())
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="alert alert-warning alert-dismissible fade show lg:ml-30 " role="alert">
                     <strong>
                         Parece que hay un problema!
                     </strong>
@@ -45,7 +45,7 @@
 
                 {{-- FINAL CSRF Y EXTRA --}}
                 {{-- FORM DATA COMIENZA --}}
-                <div class="myFormData">
+                <div class="lg:pl-8">
                     <div>
                         <span style="font-size: 26px;"> <strong>NUEVO PRODUCTO</strong></span>
                         <strong>

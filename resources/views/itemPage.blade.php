@@ -4,14 +4,14 @@
 
 @section('thisItem')
 
-<div class="container " style="margin-left:4%!important; " >
-    <div class="row">
-        <div class="col" style="margin: 4.7% 0 0 1%; width: 100%; ">
+<div class="container mt-4"  >
+    <div class="  grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6">
+        <div class="relative md:col-span-2 lg:col-span-3" >
 
-            <a class="magnifier-thumb-wrapper" style="width: 40vw; max-height: 140vh;" id="sticky">
+            <a class="magnifier-thumb-wrapper" id="sticky">
                 @foreach(json_decode($searchedItem->colorImages) as $variante)
                     <img class="img-thumbnail mainImage" 
-                            style="width: 40vw; max-height: 140vh; margin-bottom: 15px; " 
+                             
                             data-toggle="magnify" id="thumb" 
                             data-magnify-src="{{ Storage::URL('assetItems/'.$variante) }}" 
                             src="{{ Storage::URL('assetItems/'.$variante)}}" 
@@ -22,11 +22,13 @@
 
  
         </div>
-
-    <div class="magnifier-preview col-6" style="display:run-in; height: 100%; width:100%; right: 2%; top: 17%;  " id="preview"></div>
+    <div class="magnifier-preview top-0 right-0 w-1/2" id="preview"></div>
+   
+    
+    
 
         
-    <div class="col-5" style="margin: 3em 0 0 2em;" >
+    <div class="col-start-1 md:col-start-3 md:col-end-6 lg:col-start-4 lg:col-end-7 mx-2 ml-4" >
         <div id="DTpageUp" v-cloak>
             <div style="position:absolute; top: 0; left: -12px;">
                 @for($i = 1; $i <= 5; $i++) 
@@ -341,8 +343,8 @@
 
     <div class="myFirstSectionInner scroll" 
         style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
-        <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
-            <div class="noWrap">
+        <div class="flex flex-nowrap" style=" padding: 15px 0 15px 0;">
+            <div class="flex flex-nowrap">
                 
                 @foreach ($item->colors as $color)
                         @foreach(json_decode($color->colorImages) as $image)

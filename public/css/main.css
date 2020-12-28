@@ -1,12 +1,13 @@
 /* MENU CSS */
 /* #007bff */
 [v-cloak] {
-    display: none;
+    display: none!important;
 }
 body{
     background-color: rgba(241, 241, 241, 0.205);
     /* font-family: 'Fira Sans', sans-serif; */
     font-family: 'Roboto', sans-serif;
+    
 }
 
 #sticky {
@@ -84,7 +85,7 @@ body{
 /* MAIN BODY CSS LAYOUT */
 
 .main-container {
-    margin-bottom: 2em;
+    
     
 }
 
@@ -475,5 +476,71 @@ input.invalid {
     background-color: #ff6702;
   }
   
+  .mega-menu {
+    display: none;
+    left: 0;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    
+  }
+  .mega-menu::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+}
 
+
+  /* #hoverable Class Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .hoverable {
+    position: static;
+  }
+
+  .hoverable > a:after {
+    
+    font-size: 10px;
+    padding-left: 6px;
+    position: relative;
+    top: -1px;
+  }
+
+  .hoverable:hover .mega-menu {
+    display: block;
+  }
+
+
+  /* #toggle Class Styles
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+  .toggleable > label:after {
+    
+    font-size: 10px;
+    padding-left: 6px;
+    position: relative;
+    top: -1px;
+  }
+
+  .toggle-input {
+    display: none;
+  }
+  .toggle-input:not(checked) ~ .mega-menu {
+    display: none;
+  }
+
+  .toggle-input:checked ~ .mega-menu {
+    display: block;
+  }
+
+  .toggle-input:checked + label {
+    color: white;
+    
+  }
+
+  .toggle-input:checked ~ label:after {
+    
+    font-size: 10px;
+    padding-left: 6px;
+    position: relative;
+    top: -1px;
+  }
 @media (min-width: 1025px) and (max-width: 1280px) {}

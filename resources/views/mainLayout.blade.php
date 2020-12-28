@@ -28,9 +28,9 @@
 
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+   <link rel="stylesheet" href="/css/main.css">
+   <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
     {{-- CSRF TOKEN --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -38,7 +38,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </head>
 
-<body>
+<body class="antialiased">
 
     <!-- -- MENU 1 Principal Top -- -->
     @include('mainMenu')
@@ -46,7 +46,7 @@
 @include('menuDos')
     {{-- CONTENT --}}
     
-    <div class="main-container">
+    <div class="main-container md:mx-auto ">
    
 
         {{-- USER PAGE --}}
@@ -103,8 +103,8 @@
 
     </div>
     {{-- CONTENT ENDING --}}
-<div style="background-color: grey; display: flex; margin-top: 100px; ">
-<div style='align-self: center;  flex: 1; text-align: center;'>DetoShop.com</div>
+<div style="background-color: grey; display: block; margin-top: 100px; height: 100px;">
+        <div style='align-self: center;  flex: 1; text-align: center;'>DetoShop.com</div>
  
 </div>
 
