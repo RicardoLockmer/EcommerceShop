@@ -83,3 +83,4 @@ Route::put('/negocio/{myStore:nombreNegocio}/{item:id}/editar', 'StoreController
 
 // SEARCH
 Route::post ( '/search', 'SearchController@mySearch');
+Route::get('/negocio/compras/{negocio}', 'SearchController@masNegocio');

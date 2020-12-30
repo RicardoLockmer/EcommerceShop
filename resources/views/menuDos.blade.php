@@ -15,14 +15,14 @@
             <div class="border-b border-solid border-gray-400 lg:hidden">
 
                 @guest
-                  <div class="px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
+                  <div class="px-1 font-bold w-full sm:w-2/2  lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
                       <a class="block p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="{{ route('login') }}">
                           {{ __('Iniciar Sesión') }}
                       </a>
                   </div>
 
                 @if (Route::has('register'))
-                  <div class="px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
+                  <div class="px-1 font-bold w-full sm:w-2/2  lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
                   <a class="block p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="{{ route('register') }}">
                       {{ __('Registrarse') }}
                   </a>
@@ -31,12 +31,12 @@
                 @else
                   @if(Auth::user()->nombreNegocio == NULL)
 
-                    <div class="px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
+                    <div class="px-1 font-bold w-full sm:w-2/2  lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
                     <a class="block p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="/perfil/{{Auth::user()->name}}">
                         <!-- Bienvenido, {{ Auth::user()->name }}--> <span>Mi Cuenta</span> 
                     </a>
                     </div>
-                    <div class="px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
+                    <div class="px-1 font-bold w-full sm:w-2/2  lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
                     <a class="block p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
@@ -47,12 +47,12 @@
  
                   @else
 
-                  <div class="px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
+                  <div class="px-1 font-bold w-full sm:w-2/2  lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
                   <a class="block p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="/perfil/{{Auth::user()->name}}">
                       <!-- Bienvenido, {{ Auth::user()->name }} --> Mi Cuenta
                   </a>
                   </div>
-                  <div class="px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
+                  <div class="px-1 font-bold w-full sm:w-2/2  lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3">
                   <a class="block p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                       {{ __('Logout') }}
                   </a>
@@ -63,7 +63,7 @@
 
                 @endif
                 @endif
-                <div class="lg:hidden px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
+                <div class="lg:hidden px-1 font-bold w-full  sm:w-2/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
             <a class="inline-flex w-full p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="/ShoppingCart">
                 <svg style="color: black; font-size: 22px;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3 " fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
@@ -80,7 +80,7 @@
         </div>
         @if(Auth::user())
         @if(Auth::user()->nombreNegocio != NULL)
-        <div clas="lg:hidden px-1 font-bold w-full sm:w-1/2 lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
+        <div clas="lg:hidden px-1 font-bold w-full sm:w-2/2  lg:w-1/4 mb-0 lg:border-l lg:border-b-0 pb-0 pt-0 lg:pt-3" >
             <a class="font-bold block p-3 hover:bg-gray-100 text-gray-900 hover:text-black" href="/negocio/{{Auth::user()->nombreNegocio}}">
                 Mi Negocio
             </a>
@@ -92,7 +92,7 @@
         @endif
         @endif
                 </div>
-              <div v-for="productos in allCategories" class=" px-1 font-bold w-full sm:w-1/2 lg:w-1/4 lg:border-l lg:border-solid lg:border-b-0 lg:border-gray-400 lg:pt-3">
+              <div v-for="productos in allCategories" class=" px-1 font-bold w-full sm:w-2/2  lg:w-1/4 lg:border-l lg:border-solid lg:border-b-0 lg:border-gray-400 lg:pt-3">
                 
                 <div v-for="product in productos.products1">
                   <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-gray-100  text-gray-900 hover:text-black">
@@ -175,7 +175,7 @@
                </a> 
             
             <a 
-               class="flex h-10 hover:bg-yellow-200 hover:text-black col-start-10 col-end-13 m-2 md:col-span-1 md:col-start-11 md:col-span-2 lg:justify-center  items-center p-2 lg:col-end-13 lg:col-start-11 lg:p-2  text-gray-900 hover:text-black font-bold" 
+               class="flex h-10 hover:bg-yellow-200 hover:text-black col-start-10 col-end-13 m-2 md:col-span-1 md:col-start-11 md:col-span-2 lg:justify-center  items-center p-2 lg:col-end-13 lg:col-start-11 lg:p-2  text-white font-bold" 
                href="{{route('comoVender')}}" 
                style="border: 1px solid #FFFFFF;  border-radius: 5px; ">
                  

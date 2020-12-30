@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Items;
 use App\itemColors;
+use App\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,5 +43,14 @@ class SearchController extends Controller
         ]);
         }
         
+    }
+
+    public function masNegocio(Store $negocio){
+
+        // $neg = Store::where('store_id', $negocio)->get();
+
+        return view('masNegocio', [
+            'negocio' =>$negocio
+        ]);
     }
 }

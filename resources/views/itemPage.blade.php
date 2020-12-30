@@ -6,11 +6,12 @@
 
 <div class="container mt-4"  >
     <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6">
-        <div class=" md:col-span-2 lg:col-span-3" >
+
+        <div class="md:col-span-2 lg:col-span-3 mb-4" >
 
             <a class="magnifier-thumb-wrapper" id="sticky">
                 @foreach(json_decode($searchedItem->colorImages) as $variante)
-                    <img class="img-thumbnail mainImage" 
+                    <img class="img-thumbnail mainImage " 
                              
                             data-toggle="magnify" id="thumb" 
                             data-magnify-src="{{ Storage::URL('assetItems/'.$variante) }}" 
@@ -22,19 +23,19 @@
 
  
         </div>
-    <div class="magnifier-preview col-start-4" id="preview"></div>
+    
    
     
-    
+        <!-- <div class="magnifier-preview" id="preview"></div> -->
 
         
-    <div class="col-start-1 md:col-start-3 md:col-end-6 lg:col-start-4 lg:col-end-7 mx-2 ml-4" >
+    <div class="col-start-1 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-4 lg:col-end-7 lg:mx-2 lg:ml-4" >
         <div id="DTpageUp" v-cloak>
             
 
             <article style="margin: 0 0 1em 0;">
 
-                <h1 style="font-size: 28px;margin-bottom: 0;">
+                <h1 class="font-bold" style="font-size:28px;">
                     {{$item->nombre}}
                 </h1>
                 <p style="margin: 0 0 0 0;">
@@ -45,8 +46,8 @@
                     </small>
                 </p>
                 <small>
-                    <a href="##">
-                        Ver mas productos de {{$item->store->nombreNegocio}}
+                    <a href="/negocio/compras/{{$item->store->store_id}}" class="text-blue-600 hover:text-yellow-500">
+                        Ver productos de {{$item->store->nombreNegocio}}
                     </a>
                 </small>
                 <br>
@@ -64,7 +65,7 @@
                      (no incluye iva)
                     </small>
                     <small style="font-size: 13px;">
-                        <a href="##">
+                        <a href="##" class="text-blue-600 hover:text-yellow-500">
                             Detalles
                         </a>
                     </small>
@@ -100,10 +101,10 @@
                     @endif
                 @endif
                 <br>
-                <br>
+                
 
                 <div class="content">
-                    <p>{{$item->descripcion}}</p>
+                    <p class="mb-4 hidden lg:block">{{$item->descripcion}}</p>
                     <div style="display: inline;">
                     
                         @if(count($item->colors) > 1)
@@ -147,7 +148,7 @@
 
                         @endif
                         <br>
-                        <br>
+                      
                     </div>
                     <div style="display: inline;">
                         @if(count($searchedItem->size) > 1)
@@ -173,7 +174,7 @@
                                     </span>
                            
                                     <br>
-                                    <br>
+                                 
                                     
                         @else
                             @if(trim($searchedItem->size[0]->size) != "NoAplica")
@@ -186,7 +187,7 @@
 
                                 
                         <br>
-                        <br>
+                      
                             @endif
 
                         @endif
@@ -233,7 +234,8 @@
                     
                             <select v-model="selectedQty" 
                                 style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px" class="custom-select col-3" 
-                                name="color" 
+                                name="color"
+                                max="20" 
                                 id="color">
 
                                 <option v-for="x in qty">
@@ -246,12 +248,12 @@
                    <br>
 
                     
-                <div id="ENVI" style="margin-top:18px;">
-                    <p class="card-text" style="position: aboslute; bottom:0; right:0;">
-                        <svg width="1em" 
-                            height="1em" 
+                <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base">
+                    <p class="card-text flex" >
+                        <svg width="1.4em" 
+                            height="1.4em" 
                             viewBox="0 0 16 16" 
-                            class="bi bi-box-seam text-muted" 
+                            class="bi bi-box-seam text-muted mr-2" 
                             fill="currentColor" 
                             xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
@@ -262,12 +264,13 @@
                     @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
 
                         @if(in_array($selectedAddress->provincia, $provinciasEnvio))
-
+                            <p>
                             <small>
                                 <strong style="color: seagreen"> 
                                     Si se envía a {{$selectedAddress->provincia}}
                                 </strong>
                             </small>
+                            </p>
                             <p>
                                 <small class="text-muted">
                                     El paquete llega entre
@@ -303,9 +306,11 @@
                 @else {{-- ENDING IF SHIPPING ADDRESS EXISTS / ELSE NO SHIPPING ADDRESS FOUND --}}
 
                     <small class="text-muted">
-                        <a href="/perfil/{{$user->name}}/direcciones">
+                            Para mas información de Envio
+                        <a href="/perfil/{{$user->name}}/direcciones" class="text-blue-600 hover:text-yellow-500">
                             Seleccione una Dirección
                         </a>
+                        
                     </small>
                     
                 @endif
@@ -313,7 +318,10 @@
             @else
 
             <small class="text-muted">
-                <a href="{{route('login')}}">Seleccione una Dirección</a>
+                    Para mas información de Envio
+                <a href="{{route('login')}}" class="text-blue-600 hover:text-yellow-500">
+                    Iniciar Sesión
+                </a>
             </small>
                
 
@@ -357,28 +365,17 @@
     <br>
     </div>
     </div>
-    <div class="container" style="margin-left:4%!important;">
-        <div class="form-row " style=" width: 100%; height: auto; min-height: 250px;margin: 0 0 0 0.5em">
+    <div class="container mt-4" >
+        <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 content-start" >
             @if(json_decode($item->specs) != 'null')
-
-                <div class="content">
-
-                    <div class="form-row" style="margin: 3em 0 0 0.5em">
-                        <h2>Mas sobre el producto {{$item->nombre}}</h2>
+                <div class="grid grid-cols-1 mb-4 md:col-span-3 col-start-1 col-span-4 justify-self-start">
+                        <h2 class="font-bold">Mas sobre el producto {{$item->nombre}}</h2>
                 
-                    </div>
-                    <div class="form-row" style="margin: 0 0 0 0.5em">
-                        <p>
+                        <p class="mt-4 md:mt-0">
                             {{$item->descripcion}}
                         </p>
-                        <br>
-                    </div>
-                    <div class="form-row">
-    
-                        <div class="col" style="margin: 1.5em 0 0 0.5em; margin-right: 20px;" >
-                
-
-                            <table style="width:500px;">
+                        
+                        <table class="mt-4 px-4">
 
                             @foreach(json_decode($item->specs) as $value)
                                 <tr 
@@ -398,16 +395,24 @@
                             @endforeach
 
                             </table>
-                        </div>
+                    </div>
+        
+                    <div class=" col-span-3 centerMyImages p-4 md:p-4">
+    
+                        
+                        <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$variante)}}" >
+                       
+                    </div>
+
+                </div>
+                            
+                        
        
             @endif
 
 
-    <div class="col-6 centerMyImages" style="height:20%; width:auto;  margin: 1.5em 0 0 15px;" >
-                    <!-- <img src="{{ Storage::URL('assetItems/'.$variante)}}" style="height: 20%; width:90%; margin-left: 20px;"  alt=""> -->
-            </div>
-        </div>
-    </div>
+        
+    
 </div>
 </div>
 

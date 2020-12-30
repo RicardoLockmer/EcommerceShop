@@ -18,7 +18,7 @@
     <script href="/scripts/jQuery.js"></script>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
 
     <!-- Styles -->
@@ -30,12 +30,12 @@
 
    <link rel="stylesheet" href="/css/main.css">
    <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
-   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- CSRF TOKEN --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body class="antialiased">
@@ -47,7 +47,7 @@
     {{-- CONTENT --}}
     
     <div class="main-container md:mx-auto ">
-   
+        @yield('masNegocio')
 
         {{-- USER PAGE --}}
 

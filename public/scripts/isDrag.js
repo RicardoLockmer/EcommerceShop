@@ -2,8 +2,8 @@ let isDown = false;
 let startX;
 let scrollLeft;
 
-$('.scroll').on('mouseenter',function () {
-    
+$('.scroll').on('mouseenter', function () {
+
     this.addEventListener("mousedown", e => {
         isDown = true;
         this.classList.add("active");
@@ -26,7 +26,7 @@ $('.scroll').on('mouseenter',function () {
         this.scrollLeft = scrollLeft - walk;
     });
 
-} 
+}
 );
 
 
