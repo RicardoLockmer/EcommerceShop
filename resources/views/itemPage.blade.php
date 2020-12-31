@@ -400,7 +400,7 @@
                     <div class=" col-span-3 centerMyImages p-4 md:p-4">
     
                         
-                        <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$variante)}}" >
+                        <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$item->image)}}" >
                        
                     </div>
 

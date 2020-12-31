@@ -222,7 +222,9 @@ try {
 
     // New Images in DB
     if($request->image > 0){
-        $newFileName = date('dmyhms').$request->fileNamed;
+        $ext = pathinfo($request->fileNamed, PATHINFO_EXTENSION);
+        $un = uniqid('DM');
+        $newFileName = date('dmyhms').$un.'.'.$ext;
         $request->image->move(public_path().'/storage/assetItems/', $newFileName);
         $item->image = $newFileName;
     } else {
@@ -247,7 +249,9 @@ try {
                 foreach($request->moreImages[$i] as $imgs){ 
                     // AGREGA IMAGENES DE CADA COLOR DEL PRODUCTO
                     $filename = $imgs->getClientOriginalName();
-                        $newFileNames = date('dmyhms').$filename;       
+                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                    $un = uniqid('DM');
+                    $newFileNames = date('dmyhms').$un.'.'.$ext;       
                         $itemVarImgs[] = $newFileNames;
                         $imgs->move(public_path().'/storage/assetItems/', $newFileNames);
                     }

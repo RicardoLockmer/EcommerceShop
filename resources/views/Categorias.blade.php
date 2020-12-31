@@ -1,7 +1,7 @@
 @extends('mainLayout')
 
 @section('categorias')
-<div>
+
 <!-- @if($misCategorias == 'Hombre' || $misCategorias == 'Mujer' || $misCategorias == 'Niños') -->
 <!-- <div>
     
@@ -23,37 +23,37 @@
         </div>    
 </div>
 @endif -->
-<div class="form-row" style="margin-right: 0!important">
+<div class="grid my-4 lg:grid-cols-8" >
 
 
 
-    <div class="col-2" style="border-right: 1px solid rgba(255, 255, 255, 0.322); position: relative; ">
-    <div id="sticky" style="display: initial;">
-        <ul style="padding: 0 0 0 0;">
-        @for($i = 1; $i <= 18; $i++)
+<div class="hidden lg:block md:block col-start-1 col-span-1 h-screen block h-auto" >
+    <div class="sticky top-10">
+        <ul >
+        @for($i = 1; $i <= 8; $i++)
             <a class="nav-link" style="font-size: 18px;color: rgb(0, 0, 0)!important; margin: 0.5em 0 0.5em 0.5em!important;" href="">Filter {{$i}}</a>
         @endfor
         </ul>
     </div>    
     
-    </div>
-<div class="col-8" style="margin: 1em 0 0 1em; border-bottom: 2px solid rgba(184, 184, 184, 0.384) ">
-    <div style="margin: 0 0 1em 1em; color:rgb(0, 0, 0)">
+</div>
+<div class="grid grid-cols-6 lg:grid-cols-8 col-start-2 col-span-7 my-4 " >
+    <div class="col-span-6 mb-4 mx-4">
         <h1><strong>Comprando para {{$misCategorias}}</strong> </h1>
         
        
     </div>
     
 @if(count($items) > 0)
-@foreach($items as $item)
-    @foreach($item->colors as $colors)
+    @foreach($items as $item)
+        @foreach($item->colors as $colors)
     
-    <div class="card mb-3" style="margin: 0 0 0 1em !important; padding: 1em 1em 1em 1em;box-shadow:none; border-radius: 0; border-top: 2px solid rgba(184, 184, 184, 0.384)!important;">
-        <div class="row no-gutters">
+    <div class="grid grid-cols-1 col-span-6 md:grid-cols-6 lg:col-span-8 lg:grid-cols-6 lg:grid-cols-8 mx-4 mb-4 shadow-md py-4">
+        
 
             {{-- FOTO DEL ITEM --}}
 
-            <div class="col-md-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
+            <div class="col-start-1 col-span-1 md:col-span-3 lg:col-span-2 lg:col-span-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
                 <a href="/producto/{{$colors->link}}">
                 @foreach(json_decode($colors->colorImages) as $ColorImage)
                     <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
@@ -62,8 +62,8 @@
                 </a>
             </div>
             {{-- ITEM NAME --}}
-            <div class="col-md-8">
-                <div class="card-body" style="padding: 0 0 0 1em;">
+            <div class="grid grid-cols-8 col-span-3 lg:col-span-5">
+                <div class="col-span-7 ml-2 mt-4" style="padding: 0 0 0 1em;">
                     <a href="/producto/{{$colors->link}}" class="searchItem">
                         <h4 class="card-title" style="margin-bottom: 0!important;">
                             {{$item->nombre}} {{ $colors->color }}
@@ -104,10 +104,10 @@
 
 
                 </div>
+            <a href="/producto/{{$colors->link}}" class="col-start-3 col-span-4 lg:col-start-7 lg:col-span-1  btn btn-dark">Ver Mas</a>
             </div>
            
-            <a style="position: absolute; bottom: 15px; right:25px;" href="/producto/{{$colors->link}}" class="btn btn-dark">Ver Mas</a>
-        </div>
+        
     </div>
 
     @endforeach
@@ -122,7 +122,7 @@
                     </div>
                     </div>
                     </div>
-                    </div>
+                   
                   
 
 @endsection
