@@ -4,10 +4,10 @@
 
 @section('thisItem')
 
-<div class="container mt-4"  >
-    <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-6">
+<div class="container grid grid-cols-1 mt-4"  >
+    <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-8">
 
-        <div class="md:col-span-2 lg:col-span-3 mb-4" >
+        <div class="md:col-span-2 lg:col-span-4 mb-4" >
 
             <a class="magnifier-thumb-wrapper" id="sticky">
                 @foreach(json_decode($searchedItem->colorImages) as $variante)
@@ -29,7 +29,7 @@
         <!-- <div class="magnifier-preview" id="preview"></div> -->
 
         
-    <div class="col-start-1 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-4 lg:col-end-7 lg:mx-2 lg:ml-4" >
+    <div class="col-start-1 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-5 lg:col-end-8 lg:mx-2 lg:ml-4 lg:pl-4" >
         <div id="DTpageUp" v-cloak>
             
 
@@ -105,11 +105,11 @@
 
                 <div class="content">
                     <p class="mb-4 hidden lg:block">{{$item->descripcion}}</p>
-                    <div style="display: inline;">
+                    <div class="mb-3" >
                     
                         @if(count($item->colors) > 1)
 
-                            <span for="provincia" class="">
+                            <span for="provincia" >
                                 <strong> {{ $item->tipoVariante }}: </strong>
                             </span>
 
@@ -147,10 +147,11 @@
                             @endif
 
                         @endif
-                        <br>
+                  
                       
                     </div>
-                    <div style="display: inline;">
+       
+                    <div class="mb-3">
                         @if(count($searchedItem->size) > 1)
                             
                             <span>
@@ -158,7 +159,7 @@
                                     
                                     <select 
                                         @change="updateItem($event)" 
-                                        style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px;" class="custom-select col-3" 
+                                        class="custom-select col-3" 
                                         name="color" 
                                         id="color">
                                             
@@ -173,8 +174,7 @@
                                         </select>
                                     </span>
                            
-                                    <br>
-                                 
+                                
                                     
                         @else
                             @if(trim($searchedItem->size[0]->size) != "NoAplica")
@@ -186,7 +186,7 @@
                                 </span>
 
                                 
-                        <br>
+                    
                       
                             @endif
 
@@ -362,19 +362,22 @@
     </div>
     
 {{-- FINAL DE BUY CART BUTTONS --}}
-    <br>
+   
     </div>
     </div>
-    <div class="container mt-4" >
+
+    <div class="container mt-4 py-4 shadow-sm" >
         <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 content-start" >
             @if(json_decode($item->specs) != 'null')
-                <div class="grid grid-cols-1 mb-4 md:col-span-3 col-start-1 col-span-4 justify-self-start">
-                        <h2 class="font-bold">Mas sobre el producto {{$item->nombre}}</h2>
-                
+                <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-3 col-start-1 col-span-4 justify-self-start">
+                        <div class="pt-10">
+                        <h3 class="font-bold">
+                        Mas sobre el producto {{$item->nombre}}
+                        </h3>
                         <p class="mt-4 md:mt-0">
                             {{$item->descripcion}}
                         </p>
-                        
+                        </div>
                         <table class="mt-4 px-4">
 
                             @foreach(json_decode($item->specs) as $value)
@@ -395,6 +398,8 @@
                             @endforeach
 
                             </table>
+                
+                        
                     </div>
         
                     <div class=" col-span-3 centerMyImages p-4 md:p-4">

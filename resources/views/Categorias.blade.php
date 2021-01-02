@@ -29,11 +29,11 @@
 
 <div class="hidden lg:block md:block col-start-1 col-span-1 h-screen block h-auto" >
     <div class="sticky top-10">
-        <ul >
+        
         @for($i = 1; $i <= 8; $i++)
-            <a class="nav-link" style="font-size: 18px;color: rgb(0, 0, 0)!important; margin: 0.5em 0 0.5em 0.5em!important;" href="">Filter {{$i}}</a>
+            <a class="block text-blue-600 hover:text-yellow-500" style="font-size: 18px;color: rgb(0, 0, 0)!important; margin: 0.5em 0 0.5em 0.5em!important;" href="">Filter {{$i}}</a>
         @endfor
-        </ul>
+        
     </div>    
     
 </div>
@@ -53,28 +53,34 @@
 
             {{-- FOTO DEL ITEM --}}
 
-            <div class="col-start-1 col-span-1 md:col-span-3 lg:col-span-2 lg:col-span-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
+            <div class="col-start-1 col-span-1 md:col-span-2 lg:col-span-2 lg:col-span-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
                 <a href="/producto/{{$colors->link}}">
                 @foreach(json_decode($colors->colorImages) as $ColorImage)
+
                     <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
                 @break
                 @endforeach
                 </a>
             </div>
+  
             {{-- ITEM NAME --}}
             <div class="grid grid-cols-8 col-span-3 lg:col-span-5">
-                <div class="col-span-7 ml-2 mt-4" style="padding: 0 0 0 1em;">
+                <div class="col-span-7 ml-2 " style="padding: 0 0 0 1em;">
                     <a href="/producto/{{$colors->link}}" class="searchItem">
-                        <h4 class="card-title" style="margin-bottom: 0!important;">
+                        <h4 class="font-bold text-2xl" style="margin-bottom: 0!important;">
                             {{$item->nombre}} {{ $colors->color }}
                         </h4>
                     </a>
-
+                    <a href="###" class="searchItem">
+                        <h4 class="text-muted text-base">
+                          <strong>{{$item->marca}}</strong>  
+                        </h4>
+                    </a>
                     {{-- STAR RATING LOOP --}}
-                    @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                         </svg>
-                        @endfor
+                        @endfor -->
                         {{-- PRECIO --}}
                         <p class="card-text" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
                             <small> &#8353; </small>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
@@ -88,8 +94,7 @@
                         </p>
 
                         {{-- SHIPS TO PART --}}
-
-
+                       
                         <!-- <p class="card-text" style="position: aboslute; bottom:0; right:0;">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-seam text-muted" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 
@@ -102,13 +107,14 @@
                         </p> -->
                         <!-- @include('ShipLogic') -->
 
-
-                </div>
-            <a href="/producto/{{$colors->link}}" class="col-start-3 col-span-4 lg:col-start-7 lg:col-span-1  btn btn-dark">Ver Mas</a>
+            <div class="grid grid-cols-8 ml-4 mt-10">
+                <a href="/producto/{{$colors->link}}" class="grid grid-col-8 col-start-3 col-span-4 lg:col-start-7 lg:col-span-2  btn btn-dark">Ver Mas</a>
             </div>
-           
+                </div>
+            </div>
         
     </div>
+           
 
     @endforeach
     @endforeach

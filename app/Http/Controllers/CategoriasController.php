@@ -62,9 +62,9 @@ class CategoriasController extends Controller
         
         $items = Items::where(function($q) use($words) {
             foreach($words as $word){
-               $q->orWhere('categoria', 'LIKE', '%'.$word.'%')->join('item_sizes', 'item_sizes.item_id', '=', 'items.id')->orderBy('item_sizes.quantity','DESC');
+               $q->orWhere('categoria', 'LIKE', '%'.$word.'%')->join('item_sizes', 'item_sizes.item_id', '=', 'items.id')->orderBy('created_at','DESC');
             }
-        })->get();
+        })->orderBy('created_at','ASC')->get();
         
         
         

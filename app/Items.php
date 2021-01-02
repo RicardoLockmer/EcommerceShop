@@ -14,7 +14,7 @@ class Items extends Model
     }
     
     public function shipping(){
-        return $this->hasMany(Shipping::class, 'items_id');
+        return $this->hasMany(Shipping::class, 'items_id')->select(['provincia']);;
     }
     public function store() {
         return $this->belongsTo(Store::class, 'store_id', 'store_id');

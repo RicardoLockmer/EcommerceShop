@@ -46,7 +46,7 @@
 @include('menuDos')
     {{-- CONTENT --}}
     
-    <div class="main-container md:mx-auto ">
+    <div class="main-container md:mx-auto grid grid-cols-1">
         @yield('masNegocio')
 
         {{-- USER PAGE --}}

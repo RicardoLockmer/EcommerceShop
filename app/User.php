@@ -14,6 +14,7 @@ class User extends Authenticatable
     public function direcciones(){
         return $this->hasMany(direcciones::class)->orderBy('selected', 'DESC');
     }
+    
     use Notifiable;
 
     /**
