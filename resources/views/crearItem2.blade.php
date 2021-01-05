@@ -42,6 +42,7 @@
         <div class="myForms" style="width: 35em; margin-left: 26%; border: 2px solid #007bff">
             <div class="myFormData">
                 <div>
+                <img class="mx-auto h-12 w-auto" src="/dummy/logoTest.png" alt="Workflow">
                     <span style="font-size: 26px;"> <strong>NUEVO PRODUCTO</strong></span>
                     <strong>
 

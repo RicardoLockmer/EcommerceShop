@@ -2,96 +2,81 @@
 
 @section('categorias')
 
-<!-- @if($misCategorias == 'Hombre' || $misCategorias == 'Mujer' || $misCategorias == 'Niños') -->
-<!-- <div>
-    
-        <div class="carousel-inner " style="width:100%!important;height: 100vh!important; overflow: hidden;">
-            <div class="carousel-item active " style="width:100%!important;height: 100vh!important;">
-                <img style=" overflow: hidden;width:100%!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/{{ $misCategorias }}.jpg" alt="First slide">
-            </div>
+
+<div class="grid my-4 lg:grid-cols-8 " >
+
+
+
+    <div class="hidden lg:block md:block col-start-1 col-span-1 h-screen block h-auto " >
+        <div class="sticky top-10">
+            
+            @for($i = 1; $i <= 8; $i++)
+                <a class="block text-blue-600 hover:text-yellow-500" style="font-size: 18px;color: rgb(0, 0, 0)!important; margin: 0.5em 0 0.5em 0.5em!important;" href="">Filter {{$i}}</a>
+            @endfor
             
         </div>    
-</div> -->
-<!-- @else
-<div>
-    
-        <div class="carousel-inner " style="width:100%!important;height: 100vh!important; overflow: hidden;">
-            <div class="carousel-item active " style="width:100%!important;height: 100vh!important;">
-                <img style=" overflow: hidden; width:100%!important; height: 100vh!important;" class="mainPageImageTop" src="/dummy/Hogar.jpg" alt="First slide">
-            </div>
-            
-        </div>    
-</div>
-@endif -->
-<div class="grid my-4 lg:grid-cols-8" >
-
-
-
-<div class="hidden lg:block md:block col-start-1 col-span-1 h-screen block h-auto" >
-    <div class="sticky top-10">
         
-        @for($i = 1; $i <= 8; $i++)
-            <a class="block text-blue-600 hover:text-yellow-500" style="font-size: 18px;color: rgb(0, 0, 0)!important; margin: 0.5em 0 0.5em 0.5em!important;" href="">Filter {{$i}}</a>
-        @endfor
-        
-    </div>    
-    
-</div>
-<div class="grid grid-cols-6 lg:grid-cols-8 col-start-2 col-span-7 my-4 " >
-    <div class="col-span-6 mb-4 mx-4">
-        <h1><strong>Comprando para {{$misCategorias}}</strong> </h1>
-        
-       
     </div>
+
+
+        <div class="grid grid-cols-12 lg:grid-cols-12 col-start-2 col-span-7 my-4 " >
+           
     
-@if(count($items) > 0)
-    @foreach($items as $item)
-        @foreach($item->colors as $colors)
-    
-    <div class="grid grid-cols-1 col-span-6 md:grid-cols-6 lg:col-span-8 lg:grid-cols-6 lg:grid-cols-8 mx-4 mb-4 shadow-md py-4">
-        
+            @if(count($items) > 0)
+                @foreach($items as $item)
+                    @foreach($item->colors as $colors)
+                <!-- ITEM BOX -->
+            <div class="grid grid-cols-4 p-1 grid-rows-1 my-2  col-span-6 md:grid-cols-6 md:my-4 lg:pb-4 border-solid border-gray-200  lg:col-span-4 lg:grid-cols-8   mx-1  lg:mx-4 lg:mb-4  shadow-sm ">
 
-            {{-- FOTO DEL ITEM --}}
+                <!-- IMAGE BOX -->
+                <div class="grid col-start-1 row-span-1  col-span-6 md:col-span-3 lg:col-start-2 lg:col-span-6 centerMyImages " style="min-height: 160px;">
+                    <a href="/producto/{{$colors->link}}">
+                        @foreach(json_decode($colors->colorImages) as $ColorImage)
 
-            <div class="col-start-1 col-span-1 md:col-span-2 lg:col-span-2 lg:col-span-2 centerMyImages" style="min-height: 160px; margin: 0 1.5em 0 1.5em; max-height: auto">
-                <a href="/producto/{{$colors->link}}">
-                @foreach(json_decode($colors->colorImages) as $ColorImage)
-
-                    <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
-                @break
-                @endforeach
-                </a>
-            </div>
+                            <img class="img-fluid card-img centerMyImages mt-2 lg:h-auto max-h-80 lg:max-h-96" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
+                        @break
+                        @endforeach
+                    </a>
+                </div>
   
             {{-- ITEM NAME --}}
-            <div class="grid grid-cols-8 col-span-3 lg:col-span-5">
-                <div class="col-span-7 ml-2 " style="padding: 0 0 0 1em;">
-                    <a href="/producto/{{$colors->link}}" class="searchItem">
-                        <h4 class="font-bold text-2xl" style="margin-bottom: 0!important;">
+            <div class="grid grid-col-12 grid-rows-1 my-2 lg:grid-cols-8 col-span-3 lg:col-span-8">
+
+
+                <div class="col-span-7 md:pl-4 max-h-72 lg:col-span-8 lg:items-end" >
+
+
+                    <a href="/producto/{{$colors->link}}" class="searchItem  lg:items-end">
+                        <h4 class="font-bold  text-lg lg:text-2xl" style="">
                             {{$item->nombre}} {{ $colors->color }}
                         </h4>
                     </a>
-                    <a href="###" class="searchItem">
-                        <h4 class="text-muted text-base">
-                          <strong>{{$item->marca}}</strong>  
-                        </h4>
-                    </a>
+                    <div class="col-span-8  max-h-72 lg:col-span-6 h-24">
+                        <a href="###" class="searchItem">
+                            <h4 class="text-muted text-sm lg:text-base">
+                            <strong>{{$item->marca}}</strong>  
+                            </h4>
+                        </a>
                     {{-- STAR RATING LOOP --}}
                     <!-- @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
                         </svg>
                         @endfor -->
                         {{-- PRECIO --}}
-                        <p class="card-text" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
-                            <small> &#8353; </small>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
+                        <div class="">
+                        <p class="font-bold text-green-700" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
+                            <span> &#8353; </span>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
                         </p>
+                        </div>
                         
                         
                       
                         {{-- DESCRIPCION --}}
-                        <p class="card-text"  style="height: 70px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            {{$item->descripcion}}
-                        </p>
+                        <div class="w-44 lg:w-72" >
+                            <p class="w-26"  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                {{$item->descripcion}}
+                            </p>
+                        </div>
 
                         {{-- SHIPS TO PART --}}
                        
@@ -107,11 +92,24 @@
                         </p> -->
                         <!-- @include('ShipLogic') -->
 
-            <div class="grid grid-cols-8 ml-4 mt-10">
-                <a href="/producto/{{$colors->link}}" class="grid grid-col-8 col-start-3 col-span-4 lg:col-start-7 lg:col-span-2  btn btn-dark">Ver Mas</a>
-            </div>
+
+
                 </div>
-            </div>
+                </div>
+                <div class=" col-start-2 col-span-5 lg:col-start-3 lg:col-span-4">
+                <div class="">
+                    
+                    <a href="/producto/{{$colors->link}}" 
+                        class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+        
+                            
+                        </span>
+                        {{ __('Ver Mas') }}
+                    </a>
+                </div>
+                </div>
+        </div>
         
     </div>
            
