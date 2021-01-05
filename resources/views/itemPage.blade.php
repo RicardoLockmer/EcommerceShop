@@ -4,10 +4,10 @@
 
 @section('thisItem')
 
-<div class="container grid grid-cols-1 mt-4"  >
+<div class="container  grid grid-cols-1 mt-4"  >
     <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-8">
 
-        <div class="md:col-span-2 lg:col-span-4 mb-4" >
+        <div class="col-start-2 md:col-span-2 md:col-start-1 lg:col-start-1 lg:col-span-3 mb-4" >
 
             <a class="magnifier-thumb-wrapper" id="sticky">
                 @foreach(json_decode($searchedItem->colorImages) as $variante)
@@ -29,7 +29,7 @@
         <!-- <div class="magnifier-preview" id="preview"></div> -->
 
         
-    <div class="col-start-1 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-5 lg:col-end-8 lg:mx-2 lg:ml-4 lg:pl-4" >
+    <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-4 lg:col-end-8 lg:mx-2 lg:ml-4 lg:pl-4 " >
         <div id="DTpageUp" v-cloak>
             
 
@@ -317,7 +317,7 @@
 
             @else
 
-            <small class="text-muted">
+            <small class="text-muted text-base">
                     Para mas información de Envio
                 <a href="{{route('login')}}" class="text-blue-600 hover:text-yellow-500">
                     Iniciar Sesión
@@ -366,18 +366,21 @@
     </div>
     </div>
 
-    <div class="container mt-4 py-4 shadow-sm" >
-        <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 content-start" >
+    <div class="container grid grid-rows-1 mt-4 py-4 shadow-sm  " >
+        <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-10 content-start" >
+
             @if(json_decode($item->specs) != 'null')
-                <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-3 col-start-1 col-span-4 justify-self-start">
-                        <div class="pt-10">
+                <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-3 col-start-1 col-span-4  justify-self-start">
+                    <div class="pt-10">
                         <h3 class="font-bold">
                         Mas sobre el producto {{$item->nombre}}
                         </h3>
                         <p class="mt-4 md:mt-0">
                             {{$item->descripcion}}
                         </p>
-                        </div>
+                    </div>
+                
+                    <div>
                         <table class="mt-4 px-4">
 
                             @foreach(json_decode($item->specs) as $value)
@@ -397,19 +400,48 @@
 
                             @endforeach
 
-                            </table>
-                
+                        </table>
+                    </div>
+                        
+                </div>
+        
+                <div class="col-span-3 lg:col-span-4  centerMyImages p-4 md:p-4">
+                    <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$item->image)}}" >
+                </div>
+                <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
+                    <div class="pt-10">
+                        <h3 class="font-bold">
+                        Comentarios
+                        </h3>
+                        <p class="mt-4 md:mt-0">
+                            COMENTARIOS DEL PRODUCTO
+                        </p>
                         
                     </div>
-        
-                    <div class=" col-span-3 centerMyImages p-4 md:p-4">
-    
-                        
-                        <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$item->image)}}" >
-                       
+                    <div >
+                        <div class="my-4">
+                            <p>Persona con Comentario #2</p>
+                            <p><small class="text-gray-600">Comentario #2</small></p>
+                        </div>
+                        <div class="my-4">
+                            <p>Persona con Comentario #3</p>
+                            <p><small class="text-gray-600">Comentario #3</small></p>
+                        </div>
+                        <div class="my-4">
+                            <p>Persona con Comentario #4</p>
+                            <p><small class="text-gray-600">Comentario #4</small></p>
+                        </div>
+                        <div class="my-4">
+                            <p>Persona con Comentario #5</p>
+                            <p><small class="text-gray-600">Comentario #5</small></p>
+                        </div>
                     </div>
 
+                    
+                        
                 </div>
+
+            </div>
                             
                         
        
