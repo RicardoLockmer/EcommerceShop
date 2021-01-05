@@ -29,7 +29,7 @@
         <!-- <div class="magnifier-preview" id="preview"></div> -->
 
         
-    <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-4 lg:col-end-8 lg:mx-2 lg:ml-4 lg:pl-4 " >
+    <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-4 lg:col-end-9 lg:mx-2 lg:ml-4 lg:pl-4 " >
         <div id="DTpageUp" v-cloak>
             
 
@@ -344,11 +344,25 @@
             <div class="flex flex-nowrap">
                 
                 @foreach ($item->colors as $color)
+                        @if(count($item->colors) > 1)
                         @foreach(json_decode($color->colorImages) as $image)
                             @if($image != NULL)
+                            <a href="{{$color->link}}">
                             <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                            
+                            </a>
                             @endif
                         @endforeach
+                        @else 
+                        @foreach(json_decode($color->colorImages) as $image)
+                            @if($image != NULL)
+                            
+                            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                            
+                          
+                            @endif
+                        @endforeach
+                        @endif
                 @endforeach
 
             </div>
@@ -405,7 +419,7 @@
                         
                 </div>
         
-                <div class="col-span-3 lg:col-span-4  centerMyImages p-4 md:p-4">
+                <div class="col-span-4 lg:col-span-4  centerMyImages p-4 md:p-4">
                     <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$item->image)}}" >
                 </div>
                 <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
