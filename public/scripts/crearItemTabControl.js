@@ -1,6 +1,6 @@
-var currentTab = 0;
+var currentTab = 2;
 showTab(currentTab);
- 
+
 function showTab(n) {
 
     var x = document.getElementsByClassName("tab");
@@ -61,13 +61,13 @@ function validateForm() {
 
             valid = false;
         }
-        
-        
+
+
 
 
     }
-    for (i = 0; i < select.length; i++){
-        if(!select[i].value){
+    for (i = 0; i < select.length; i++) {
+        if (!select[i].value) {
             select[i].className += " is-invalid"
             valid = false;
         }
@@ -81,11 +81,11 @@ function validateForm() {
 
             valid = false;
         }
-        if (z[i].value.length > 250) {
+        if (z[i].value.length > 450) {
             valid = false;
             xl[i].className += " exceededLimit";
             z[i].className += " is-invalid";
-            alert('Excede los 250 caracteres.');
+            alert('Excede los 450 caracteres.');
         } else {
             xl[i].className -= " exceededLimit";
             xl[i].className = " text-muted";

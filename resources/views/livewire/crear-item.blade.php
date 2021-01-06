@@ -3,15 +3,16 @@
 
 
 @section('crearItem')
-<div class="container grid grid-cols-2" id="itemLayout" >
+<div class="container grid grid-cols-9 border-4" id="itemLayout" >
 
 
-    <div class="" style="margin-top: 14px;" >
+    <div :class="(vistaPrevia)? 'grid grid-cols-12 col-start-2 col-end-12 border-red-600 ' : 'grid grid-cols-12 col-start-1 col-end-11 lg:col-start-3 lg:col-end-8 '" style="margin-top: 14px;" >
 
-        <div :class="(vistaPrevia)? 'ml-1 lg:ml-28 md:w-2/3 ' : 'ml-1 md:w-1/2 lg:ml-80 lg:w-1/2 md:w-2/3 '" style=" height:auto;">
+        <div :class="(vistaPrevia)? ' border-red-600 col-span-5 ' : 'col-span-12'" style=" height:auto;">
             <form class="" @submit.prevent="saveData" style="display:block!important; top:15px!important;"   id="sticky" enctype="multipart/form-data">
                 {{-- CSRF --}}
                 @csrf
+                
                 @if ($errors->any())
                 <div class="alert alert-warning alert-dismissible fade show lg:ml-30 " role="alert">
                     <strong>
@@ -49,7 +50,17 @@
                     <div class="grid">
                     <img class="mx-auto h-12 w-auto  " src="/dummy/logoTest.png" alt="Workflow">
                         <span class="mx-auto h-12  w-auto text-xl"> <strong>NUEVO PRODUCTO</strong></span>
-                        
+                        <div class="lg:mx-auto w-auto mb-4">
+                            <button v-if="vistaPrevia" class="hidden  lg:block btn btn-danger btn-sm" @click="quitarVistaPrevia">Ocultar Vista Previa</button>
+                            <button v-if="!vistaPrevia" class="hidden  lg:block btn btn-primary btn-sm" @click="quitarVistaPrevia">Ver Vista Previa</button>
+                        </div>
+                        <div  style="text-align:center;">
+                        <span class="step mx-2"></span>
+                        <span class="step mx-2"></span>
+                        <span class="step mx-2"></span>
+                        <span class="step mx-2"></span>
+                        <span class="step mx-2"></span>
+                        </div>
                     </div>
                     <br>
 
@@ -61,10 +72,8 @@
                     </div>
 
                     {{-- TAB 2 --}}
-                    <div style="width:auto;" class="tab">
+                    <div class="tab">
                         @include('includeFiles/tab2')
-                        
-                       
                     </div>
 
                     <div class="tab">
@@ -78,22 +87,16 @@
                     <div class="tab">
                         @include('includeFiles/tab5')
                     </div>
-                    <div style="overflow:auto;">
+                    <div class="my-4" style="overflow:auto;">
                         <div style="float:right;">
-                            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-outline-primary">Anterior</button>
+                            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-outline-primary mx-2">Anterior</button>
                             <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-outline-primary">Siguiente</button>
                             <button type="submit" id="subBtn"  class="btn btn-outline-primary">Agregar</button>
                         </div>
                     </div>
 
                     <!-- Circles which indicates the steps of the form: -->
-                    <div style="text-align:center;margin-top:40px;">
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                    </div>
+                    
 <br>
             </form>
         </div>

@@ -1,8 +1,7 @@
-<div class="absolute right-10">
-<button v-if="vistaPrevia" class="hidden lg:block btn btn-danger btn-sm" @click="quitarVistaPrevia" style="float:right;">Ocultar Vista Previa</button>
-<button v-if="!vistaPrevia" class="hidden lg:block btn btn-primary btn-sm" @click="quitarVistaPrevia" style="float:right;">Ver Vista Previa</button>
-</div>
-<div v-if="vistaPrevia" class="lg:ml-16 border-dotter border-l-4" >
+
+
+
+<div v-if="vistaPrevia" class="border-l border-gray-300 ml-8 pl-8 col-start-6 col-end-12 " >
         <div class="h-auto pl-6">
 
             {{-- vista previa titulo --}}
