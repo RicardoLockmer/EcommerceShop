@@ -50,7 +50,7 @@
             </svg>
         </a>
     </div>
-    <textarea v-model="descripcion" oninput="this.className = 'form-control'" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mt-2" style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="250" ></textarea>
+    <textarea v-model="descripcion" oninput="this.className = 'form-control'" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mt-2" style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="450" ></textarea>
     <small class="text-muted"><span class="char-count myCount mb-2">0</span>/450 </small>
 
                   

@@ -244,13 +244,13 @@
 
 {{-- final de Shipping Address --}}
 
-<div v-if="variantes"  class="myFirstSectionInner scrolled"  style="margin-left: 33% ;border-top: 1px solid grey; border-bottom: 1px solid grey; height: auto; width: 350px!important;scrollbar-width: initial;">
-    <div class="container is-fluid" style=" padding: 15px 0 15px 0;">
-        <div class="noWrap">
+<div v-if="variantes"  class="myFirstSectionInner scrolled  "  style="margin-left: 33% ;border-top: 1px solid grey; border-bottom: 1px solid grey; height: auto; width: 350px!important;scrollbar-width: initial;">
+    <div class="container is-fluid " style=" padding: 15px 0 0 0;">
+        <div class="flex flex-nowrap overflow-y-auto">
             {{-- IMAGE 1 --}}
             
-            <span v-for="(variante, imageIndex) in variantes">
-                <img v-for="image in variante.imageListed" id="subimage" class="sectionImage subimage" :src="image" alt="##" style="width: 100px; height: auto; max-height:200px; object-fit: scale-down; padding-top: 5%"> 
+            <span v-for="(variante, imageIndex) in variantes" class="flex flex-nowrap">
+                <img v-for="image in variante.imageListed" style="max-width: initial!important;" id="subimage" class="sectionImage subimage" :src="image" alt="##" > 
             </span>
        
            

@@ -158,6 +158,7 @@ const itemLayout = {
             otro: '',
             selectedImage: null,
             peso: '',
+            myImageError: '',
             dimensiones: '',
             specs: [{
                 specName: '',
@@ -166,6 +167,7 @@ const itemLayout = {
             variantes: [
                 {
                     moreImages: [],
+                    myImagesError: '',
                     imageListed: [],
                     color: "",
                     sizes: [
@@ -265,6 +267,7 @@ const itemLayout = {
 
             this.variantes.push({
                 moreImages: [],
+                myImagesError: '',
                 color: '',
                 imageListed: [],
                 sizes: [
@@ -310,14 +313,21 @@ const itemLayout = {
         },
         onFileChange(e) {
             this.selectedImage = document.getElementById("MIMG").files[0];
+
+            var filename = document.getElementById("MIMG").files[0].name;
+            var ext = filename.split('.').pop();
             var files = e.target.files || e.dataTransfer.files;
 
-
             console.log(this.selectedImage);
-            if (!files.length)
-                return;
 
-            this.createImage(files[0]);
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
+                this.myImageError = '';
+                this.createImage(files[0]);
+            } else {
+                document.getElementById('MIMG').value = "";
+                this.myImageError = "El Archivo no es .jpg, .jpeg o .png";
+
+            }
 
         },
 
@@ -334,28 +344,46 @@ const itemLayout = {
         },
         createImages(e, index) {
             let imageList = e.target.files || e.dataTransfer.files;
-            for (var i = 0; i < imageList.length; i++) {
-
-                this.variantes[index].moreImages.push(imageList[i]);
-
-
-            }
-            for (var e = 0; e < this.variantes[index].moreImages.length; e++) {
-                console.log(this.variantes[index].moreImages[e]);
-            }
             if (this.variantes[index].imageListed.length > 0) {
-                this.variantes[index].imageListed.splice(0, this.variantes[index].imageListed.length);
+
+                this.variantes[index].imageListed = [];
+                this.variantes[index].moreImages = [];
 
             }
+
             for (var i = 0; i < imageList.length; i++) {
-                let reader = new FileReader();
-                reader.readAsDataURL(imageList[i]);
-                reader.onload = e => {
+                var filename = imageList[i].name;
+                var ext = filename.split('.').pop();
+                if (ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
+                    this.variantes[index].myImagesError = "";
+                    for (var e = 0; e < this.variantes[index].moreImages.length; e++) {
+                        console.log(this.variantes[index].moreImages[e]);
+                    }
 
-                    this.variantes[index].imageListed.push(e.target.result);
+                    for (var i = 0; i < imageList.length; i++) {
+                        let reader = new FileReader();
+                        this.variantes[index].moreImages.push(imageList[i]);
+                        reader.readAsDataURL(imageList[i]);
+                        reader.onload = e => {
+                            this.variantes[index].imageListed.push(e.target.result);
 
+
+                        }
+                        console.log(imageList.length);
+                        console.log(this.variantes[index].moreImages.length);
+                    }
+
+                } else {
+                    this.variantes[index].imageListed.splice(0, this.variantes[index].imageListed.length);
+                    this.variantes[index].moreImages.splice(0, this.variantes[index].moreImages.length);
+                    this.variantes[index].myImagesError = "El Archivo no es .jpg, .jpeg o .png";
+                    console.log(imageList.length);
+                    console.log(this.variantes[index].moreImages.length);
                 }
+
+
             }
+
 
         },
         removeImage: function (e) {
@@ -382,6 +410,7 @@ const itemLayout = {
                 this.allCRChecked = false;
             }
         },
+
 
 
 
