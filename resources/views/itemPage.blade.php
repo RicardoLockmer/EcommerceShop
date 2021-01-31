@@ -3,33 +3,33 @@
 {{-- BUYING ITEM PAGE --}}
 
 @section('thisItem')
-
+{{-- <div class="magnifier-preview" id="preview" ></div> --}}
 <div class="container  grid grid-cols-1 mt-4"  >
-    <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-8">
+    <div class=" grid grid-rows-1 grid-cols-1 md:grid-cols-5 lg:grid-cols-12 ">
 
-        <div class="col-start-2 md:col-span-2 md:col-start-1 lg:col-start-1 lg:col-span-3 mb-4" >
-
-            <a class="magnifier-thumb-wrapper" id="sticky">
-                @foreach(json_decode($searchedItem->colorImages) as $variante)
-                    <img class="img-thumbnail mainImage " 
-                             
-                            data-toggle="magnify" id="thumb" 
-                            data-magnify-src="{{ Storage::URL('assetItems/'.$variante) }}" 
-                            src="{{ Storage::URL('assetItems/'.$variante)}}" 
-                            alt="{{$item->nombre}}">
-                @break  
-                @endforeach
-            </a>
-
- 
-        </div>
     
    
     
-        <!-- <div class="magnifier-preview" id="preview"></div> -->
+        
+        <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:h-auto lg:ml-10 mb-4" >
+
+                @foreach(json_decode($searchedItem->colorImages) as $variante)
+                <div class="w-full h-full">
+            <a  id="sticky">
+                    <img class="mainImage w-full h-1/4"  
+                            src="{{ Storage::URL('assetItems/'.$variante)}}" 
+                            alt="{{$item->nombre}}">
+
+            </a>
+                </div>
+                @break  
+                @endforeach
+
+ 
+        </div>
 
         
-    <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-4 lg:col-end-9 lg:mx-2 lg:ml-4 lg:pl-4 " >
+    <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 " >
         <div id="DTpageUp" v-cloak>
             
 
@@ -337,18 +337,19 @@
 </div>
 </div>
     <br>
-
+<br>
+<br>
     <div class="myFirstSectionInner scroll" 
         style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
-        <div class="flex flex-nowrap" style=" padding: 15px 0 15px 0;">
-            <div class="flex flex-nowrap">
+        <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
+            <div class="flex nowrap">
                 
                 @foreach ($item->colors as $color)
                         @if(count($item->colors) > 1)
                         @foreach(json_decode($color->colorImages) as $image)
                             @if($image != NULL)
-                            <a href="{{$color->link}}">
-                            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                            <a href="{{$color->link}}" class="ml-4">
+                            <img id="subimage" class="sectionImage subimage " src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}" style="max-width:initial;">
                             
                             </a>
                             @endif
@@ -385,7 +386,7 @@
 
             @if(json_decode($item->specs) != 'null')
                 <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-3 col-start-1 col-span-4  justify-self-start">
-                    <div class="pt-10">
+                    <div class="">
                         <h3 class="font-bold">
                         Mas sobre el producto {{$item->nombre}}
                         </h3>
@@ -419,11 +420,11 @@
                         
                 </div>
         
-                <div class="col-span-4 lg:col-span-4  centerMyImages p-4 md:p-4">
+                <div class="col-span-4 lg:col-span-4   p-4 md:p-4">
                     <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$item->image)}}" >
                 </div>
                 <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
-                    <div class="pt-10">
+                    <div class="">
                         <h3 class="font-bold">
                         Comentarios
                         </h3>
@@ -503,18 +504,18 @@
 
 @section('magnifier')
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     var evt = new Event()
     m = new Magnifier(evt);
     m.attach({
         largeWrapper: 'preview'
-        , thumb: '.mainImage'
+        , thumb: '#thumb'
         , mode: 'outside'
         , zoom: 2
         , zoomable: false
     })
 
-</script>
+</script> --}}
 <script type="text/javascript">
     $('img').mouseenter(function() {
 
@@ -526,6 +527,40 @@
     })
 
 </script>
+
 <script src="/scripts/itemPage.js"></script>
+
+@endsection
+ @section('clock')
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Apr 1, 2021 09:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "D " + hours + "H "
+  + minutes + "M " + seconds + "s";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</scrip>
 
 @endsection

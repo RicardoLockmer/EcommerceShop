@@ -1,4 +1,4 @@
-var currentTab = 1;
+var currentTab = 4;
 showTab(currentTab);
 
 function showTab(n) {
@@ -49,7 +49,7 @@ function validateForm() {
     x = document.getElementsByClassName("tab");
     y = x[currentTab].getElementsByTagName("input");
     select = x[currentTab].getElementsByTagName("select");
-    f = document.getElementById("myFiles");
+    f = x[currentTab].getElementsByTagName("label");
     xl = x[currentTab].getElementsByTagName("small");
     z = x[currentTab].getElementsByTagName("textarea");
 
@@ -88,18 +88,18 @@ function validateForm() {
             xl[i].className -= " exceededLimit";
             xl[i].className = " text-muted";
         }
-        // for (i = 0; i < f.length; i++) {
 
-        //     if (f[i].value == "") {
-
-        //         f[i].className += " is-invalid";
-
-        //         valid = false;
-        //     }
-
-        // }
     }
+    for (i = 0; i < f.length; i++) {
 
+        if (f[i].value == "") {
+
+            f[i].className += " is-invalid";
+
+            valid = false;
+        }
+
+    }
     if (valid) {
         document.getElementsByClassName("step")[currentTab].className += " finish";
     }

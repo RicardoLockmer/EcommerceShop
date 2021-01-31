@@ -3,12 +3,12 @@
 @section('jumbotron')
 
   
-<div>
+<div class="">
     
-    <div id="carouselExampleControls " class="carousel slide z-1" data-ride="carousel">
+    <div id="carouselExampleControls " class="carousel  slide z-1" data-ride="carousel">
         <div class="carousel-inner ">
             <div class="carousel-item active ">
-                <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
+                <img class="mainPageImageTop h-60 lg:h-96" src="dummy/cs.gif" alt="First slide">
             </div>
             <!-- <div class="carousel-item">
                 <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
@@ -16,8 +16,23 @@
             <div class="carousel-item">
                 <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
             </div> -->
+            <div class="grid bg-yellow-200 bg-opacity-40 sm:mt-0 lg:-mt-1/2  justify-items-center relative" style="z-index:5;">
+                <p class="font-bold text-gray-600">Muy Pronto...</p>
+                <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-600" ></p>
+               
+             </div>
+                
         </div>
-        
+        <div data-aos="zoom-in" data-aos-duration="2000" class="grid h-auto  my-32 block font-bold  my-4 justify-center " style="z-index:100;">
+            <a href="###" class="justify-self-center " style="z-index:100;">
+            <div class="grid h-14 w-60 border-4 border-indigo-900 items-center rounded-full">
+                <div class="justify-self-center font-bold text-gray-600 text-xl">
+                        Registre un Negocio
+                </div>
+            </div> 
+            </a>
+                <p class="justify-self-center font-light text-gray-700 py-2 font-bold" style="z-index:111;">Totalmente Gratis!</p>
+        </div>   
     </div>
 </div>
 
@@ -31,9 +46,9 @@
     
     
 
-    <div class="container ">
+    <div class="container -mt-0 lg:mt-10">
 
-        <div class=" grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-36 lg:pt-10 place-items-center">
+        <div class=" grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-4 lg:pt-4 place-items-center">
             
     
     
@@ -239,3 +254,38 @@
         </div>
         <br>
     @endsection
+
+
+    @section('clock')
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Apr 1, 2021 09:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "D " + hours + "H "
+  + minutes + "M " + seconds + "s";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+@endsection

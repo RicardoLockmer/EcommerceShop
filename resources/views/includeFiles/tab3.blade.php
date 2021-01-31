@@ -8,7 +8,6 @@
 </label>
 
 
-<div  class="grid grid-cols-1 " v-for="(variante, mainIndex) in variantes">
     <div class="my-4">
         <button v-if="tutorial" class="btn btn-danger btn-sm" @click="quitarVideo">
             Ocultar Video
@@ -23,6 +22,7 @@
             Your browser does not support the video tag.
         </video>  
     </div>
+<div  class="grid grid-cols-1 " v-for="(variante, mainIndex) in variantes">
     <div >
 
         <div class="newbiz " style="margin: 0 8px 0 0;  ">
@@ -31,7 +31,7 @@
 
                     @{{ mainIndex+1 }}. @{{ variante.color }}
                 </strong>
-                <span v-if="variante.sizes[0].unidad != 'NoAplica'" class=" ml-2 group cursor-pointer relative lg:w-2/3 flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"  @click="addSize(mainIndex)"><strong>Agregar Otro Tamaño +</strong></span>
+                <span v-if="variante.sizes[0].unidad != 'NoAplica'" class=" ml-2 group cursor-pointer relative lg:w-2/3 flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"  @click="addSize(mainIndex)"><strong>Agregar Otro Tamaño </strong></span>
                 <span v-else   style="margin-bottom:15px;margin-top:18px; margin-left:12px; border: 1px solid green;border-radius: 3px; padding: 3px 6px 3px 6px">Especifique la Cantidad de Inventario y el Precio</span>
                 <a v-if="mainIndex == 0"  
                     style="margin-left: 8px;" 
@@ -88,7 +88,7 @@
 
 
 
-            <div v-if="variante.sizes[index].unidad != 'NoAplica'" class="col-span-3" style="" id="UNITSIZE" >
+            <div v-if="variantes[0].sizes[0].unidad != 'NoAplica'" class="col-span-3" style="" id="UNITSIZE" >
                             
                 <small class="flex items-center text-sm font-medium text-gray-700">
                     <strong>

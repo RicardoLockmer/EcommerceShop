@@ -125,7 +125,7 @@
                                     <select style=" height: 35px; padding: 0 0 0 .75rem;" class="custom-select col-4" name="color" id="color" v-model="selected">
 
                                         {{-- @foreach ($colores as $color) --}}
-                                        <option v-for="variante in variantes" v-bind:value="{ color: variante.color, size: variante.sizes, images: variante.variantImages }"> @{{ variante.color }}</option>
+                                        <option v-for="(variante, index) in variantes" v-bind:value="{ color: variante.color, size: variante.sizes, images: variante.variantImages }"> @{{ variante.color }}</option>
 
                                         {{-- @endforeach --}}
 
@@ -137,8 +137,8 @@
                             <br>
                             
                             <br>
-                            <div style="display: inline;" >
-
+                            <div v-if="selectedSize.tamano != 'NoAplica'" style="display: inline;" >
+@{{ selectedSize }}
                                 <span for="provincia" class="" >
                                     <strong> Tamaño: </strong>
                                 </span>
@@ -155,6 +155,7 @@
                                     </select>
                                 </span>
                             </div>
+
                             <br>
                                 
                             <br>
@@ -183,7 +184,7 @@
                                         <small class="text-muted">
                                             El paquete llega entre
                                             <strong style="color:red;">
-                                               [ Fecha Actual + Tiempo de Entrega ] - [ Fecha de Hoy + Tiempo de Entrega + Tiempo de Entrega ]
+                                               [ Fecha Actual + Tiempo de Entrega ]
                                                
                                             </strong>
                                         </small>

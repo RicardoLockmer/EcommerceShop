@@ -1,25 +1,3 @@
-/**
- * Magnifier.js is a Javascript library enabling magnifying glass effect on an images.
- *
- * Features
- *
- * Zoom in / out functionality using mouse wheel
- * Setting options via Javascript or data attributes
- * Magnified image can be displayed in the lens itself or outside of it in a wrapper
- * Attachment to multiple images with single call
- * Attachment of user defined functions for thumbnail entering, moving and leaving and image zooming events
- * Display loading text while the large image is being loaded, and switch to lens once its loaded
- *
- * Magnifier.js uses Event.js as a cross-browser event handling wrapper, which is available at
- * Github and JSClasses.org:
- *
- * Github - https://github.com/mark-rolich/Event.js
- * JS Classes - http://www.jsclasses.org/package/212-JavaScript-Handle-events-in-a-browser-independent-manner.html
- *
- * Works in Chrome, Firefox, Safari, IE 7, 8, 9 & 10.
- *
- * @author Mark Rolich <mark.rolich@gmail.com>
- */
 var Magnifier = function (evt, options) {
     "use strict";
 
@@ -42,20 +20,26 @@ var Magnifier = function (evt, options) {
             zoomMin: 1.1,
             zoomMax: 5,
             mode: 'outside',
-            largeWrapperId: (gOptions.largeWrapper !== undefined) ?
-                (gOptions.largeWrapper.id || null) : null,
+            largeWrapperId: (gOptions.largeWrapper !== undefined)
+                ? (gOptions.largeWrapper.id || null)
+                : null,
             status: 0,
             zoomAttached: false,
-            zoomable: (gOptions.zoomable !== undefined) ?
-                gOptions.zoomable : false,
-            onthumbenter: (gOptions.onthumbenter !== undefined) ?
-                gOptions.onthumbenter : null,
-            onthumbmove: (gOptions.onthumbmove !== undefined) ?
-                gOptions.onthumbmove : null,
-            onthumbleave: (gOptions.onthumbleave !== undefined) ?
-                gOptions.onthumbleave : null,
-            onzoom: (gOptions.onzoom !== undefined) ?
-                gOptions.onzoom : null
+            zoomable: (gOptions.zoomable !== undefined)
+                ? gOptions.zoomable
+                : false,
+            onthumbenter: (gOptions.onthumbenter !== undefined)
+                ? gOptions.onthumbenter
+                : null,
+            onthumbmove: (gOptions.onthumbmove !== undefined)
+                ? gOptions.onthumbmove
+                : null,
+            onthumbleave: (gOptions.onthumbleave !== undefined)
+                ? gOptions.onthumbleave
+                : null,
+            onzoom: (gOptions.onzoom !== undefined)
+                ? gOptions.onzoom
+                : null
         },
         pos = {
             t: 0,
@@ -68,15 +52,15 @@ var Magnifier = function (evt, options) {
         curIdx = '',
         curLens = null,
         curLarge = null,
-        gZoom = (gOptions.zoom !== undefined) ?
-        gOptions.zoom :
-        curData.zoom,
-        gZoomMin = (gOptions.zoomMin !== undefined) ?
-        gOptions.zoomMin :
-        curData.zoomMin,
-        gZoomMax = (gOptions.zoomMax !== undefined) ?
-        gOptions.zoomMax :
-        curData.zoomMax,
+        gZoom = (gOptions.zoom !== undefined)
+            ? gOptions.zoom
+            : curData.zoom,
+        gZoomMin = (gOptions.zoomMin !== undefined)
+            ? gOptions.zoomMin
+            : curData.zoomMin,
+        gZoomMax = (gOptions.zoomMax !== undefined)
+            ? gOptions.zoomMax
+            : curData.zoomMax,
         gMode = gOptions.mode || curData.mode,
         data = {},
         inBounds = false,
@@ -158,12 +142,12 @@ var Magnifier = function (evt, options) {
                 textWrapper.className = 'magnifier-loader-text';
                 lens.className = 'magnifier-loader hidden';
 
-                textWrapper.appendChild(document.createTextNode(''));
+                textWrapper.appendChild(document.createTextNode('Loading...'));
                 lens.appendChild(textWrapper);
             } else if (data[idx].status === 2) {
                 lens.className = 'magnifier-lens hidden';
-
-                lens.style.background = '';
+                lens.removeChild(lens.childNodes[0]);
+                lens.style.background = 'url(' + thumb.src + ') no-repeat 0 0 scroll';
 
                 large.id = idx + '-large';
                 large.style.width = data[idx].largeW + 'px';
@@ -187,13 +171,13 @@ var Magnifier = function (evt, options) {
                 l = 0;
 
             inBounds = (
-                    xPos < 0 ||
-                    yPos < 0 ||
-                    xPos > curData.w ||
-                    yPos > curData.h
-                ) ?
-                false :
-                true;
+                xPos < 0 ||
+                yPos < 0 ||
+                xPos > curData.w ||
+                yPos > curData.h
+            )
+                ? false
+                : true;
 
             l = xPos - (curData.lensW / 2);
             t = yPos - (curData.lensH / 2);
@@ -401,9 +385,7 @@ var Magnifier = function (evt, options) {
             throw {
                 name: 'Magnifier error',
                 message: 'Please set thumbnail',
-                toString: function () {
-                    return this.name + ": " + this.message;
-                }
+                toString: function () { return this.name + ": " + this.message; }
             };
         }
 
@@ -446,23 +428,23 @@ var Magnifier = function (evt, options) {
             zoomMin = options.zoomMin || thumb.getAttribute('data-zoom-min') || gZoomMin,
             zoomMax = options.zoomMax || thumb.getAttribute('data-zoom-max') || gZoomMax,
             mode = options.mode || thumb.getAttribute('data-mode') || gMode,
-            onthumbenter = (options.onthumbenter !== undefined) ?
-            options.onthumbenter :
-            curData.onthumbenter,
-            onthumbleave = (options.onthumbleave !== undefined) ?
-            options.onthumbleave :
-            curData.onthumbleave,
-            onthumbmove = (options.onthumbmove !== undefined) ?
-            options.onthumbmove :
-            curData.onthumbmove,
-            onzoom = (options.onzoom !== undefined) ?
-            options.onzoom :
-            curData.onzoom;
+            onthumbenter = (options.onthumbenter !== undefined)
+                ? options.onthumbenter
+                : curData.onthumbenter,
+            onthumbleave = (options.onthumbleave !== undefined)
+                ? options.onthumbleave
+                : curData.onthumbleave,
+            onthumbmove = (options.onthumbmove !== undefined)
+                ? options.onthumbmove
+                : curData.onthumbmove,
+            onzoom = (options.onzoom !== undefined)
+                ? options.onzoom
+                : curData.onzoom;
 
         if (options.large === undefined) {
-            largeUrl = (options.thumb.getAttribute('data-large-img-url') !== null) ?
-                options.thumb.getAttribute('data-large-img-url') :
-                options.thumb.src;
+            largeUrl = (options.thumb.getAttribute('data-large-img-url') !== null)
+                ? options.thumb.getAttribute('data-large-img-url')
+                : options.thumb.src;
         } else {
             largeUrl = options.large;
         }
@@ -471,9 +453,7 @@ var Magnifier = function (evt, options) {
             throw {
                 name: 'Magnifier error',
                 message: 'Please specify large image wrapper DOM element',
-                toString: function () {
-                    return this.name + ": " + this.message;
-                }
+                toString: function () { return this.name + ": " + this.message; }
             };
         }
 

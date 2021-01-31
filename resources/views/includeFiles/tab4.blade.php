@@ -10,7 +10,6 @@
 
     </div>
 
-    <div  class="grid grid-cols-1 " v-for="(variante, mainIndex) in variantes">
     <div class="my-4">
         <button v-if="tutorial" class="btn btn-danger btn-sm" @click="quitarVideo">
             Ocultar Video
@@ -27,9 +26,10 @@
     </div>
     <div class=" col " style="margin: 0 0 1.5em 0; padding-left: 0;">
         <span @click="addSpec" class=" group cursor-pointer relative lg:w-2/3 flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 add">
-            <strong>Agregar mas detalles/espcificaciones +</strong>
+            <strong>Agregar mas detalles/espcificaciones </strong>
         </span>
     </div>
+    <div  class="grid grid-cols-1 " >
     <div v-for="(spec, specIndex) in specs" class="flex ">
         <div class=" col-5 py-2 bg-gray-200 border-t border-b border-gray-400">
             <div class="control">

@@ -10,7 +10,7 @@
             <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
          </svg>
 </label>
-          <div role="toggle" class=" rounded-r mt-0 border-r border-gray-400 border-solid overflow-y-auto z-40 bg-gray-200 w-1/2 md:w-1/3 h-screen lg:h-1/2 lg:w-full pt-0 pl-1 mega-menu mb-16 sm:mb-0 ">
+          <div role="toggle" class=" rounded-r mt-0 border-r border-gray-400 border-solid overflow-y-auto bg-gray-200 w-1/2 md:w-1/3 h-screen lg:h-1/2 lg:w-full pt-0 pl-1 mega-menu mb-16 sm:mb-0 " style="z-index:9999;">
             <div class="container mx-2 w-full flex-nowrap lg:flex lg:flex-nowrap justify-between mx-2 ">
             <div class="border-b border-solid border-gray-400 lg:hidden">
 
@@ -168,17 +168,19 @@
             </div>
           </li>
 
-               <a v-for="menuCat in category" class=" text-white hover:text-black" :href="'/Categorias/' + menuCat.value" style="padding: 0 0 0 0;">
+               <a v-for="menuCat in category" class="hidden md:block lg:block text-white hover:text-black" :href="'/Categorias/' + menuCat.value" style="padding: 0 0 0 0;">
             <div class="grid font-bold hidden lg:ransition lg:duration-300 lg:ease-in-out  lg:transform hover:-translate-y-1 hover:scale-110 lg:inline-flex lg:justify-items-center" style="padding-left: 20px; padding-right: 20px; ">
                 @{{  menuCat.key  }} 
             </div>
                </a> 
             
             <a 
-               class="flex h-10 hover:bg-yellow-200 hover:text-black col-start-10 col-end-13 m-2 md:col-span-1 md:col-start-11 md:col-span-2 lg:justify-center  items-center p-2 lg:col-end-13 lg:col-start-11 lg:p-2  text-white font-bold" 
+               class="flex border justify-center rounded-full h-10 hover:bg-yellow-200 hover:text-black col-start-8  m-2 col-span-5 md:col-span-1 md:col-start-11 md:col-span-2 lg:justify-center  items-center p-2 lg:col-end-13 lg:col-start-11 lg:p-2  text-white font-bold" 
                href="{{route('comoVender')}}" 
-               style="border: 1px solid #FFFFFF;  border-radius: 5px; ">
-                 
+               style="">
+               <svg class="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+</svg>
                      COMO VENDER
                 
             </a>

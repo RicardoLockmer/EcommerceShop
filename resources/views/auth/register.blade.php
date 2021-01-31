@@ -96,7 +96,8 @@
                         placeholder="Confirmar Contraseña" 
                         autocomplete="new-password">
                 </div>
-    <br>
+    
+   
                 <div class="">
                     <div>
                         <button type="submit" class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
@@ -110,7 +111,17 @@
                         </button>
                     </div>
                 </div>
-
+                <div class="flex items-center my-4 justify-between">
+                    
+                    @if (Route::has('login'))
+                    <div class="text-sm">
+                    Ya esta registrado?
+                    <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-yellow-500">
+                    {{ __('Iniciar Sesión') }}
+                    </a>
+                    </div>
+                    @endif
+                </div>
                         </div>
 
                     </div>

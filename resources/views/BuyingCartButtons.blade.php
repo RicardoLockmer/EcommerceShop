@@ -51,7 +51,7 @@
         <input type="text" name="stid" id="STID" value="{{$item->store->store_id}}" hidden>
 
         <button v-if="cantidad == 0"  type="button" class="btn btn-outline-danger cardbtn" disabled>Agotado</button>
-        <button v-else class="btn btn-outline-success cardbtn">Comprar</button>
+        <button v-else class="btn btn-outline-success cardbtn"><button v-if="cant > 0" class="btn btn-outline-success cardbtn" disabled><p id="demo" class=" justify-center font-bold text-2xl lg:text-sm text-gray-600" ></p></button></button>
         
     </form>
     
@@ -101,7 +101,7 @@
         <input type="text" name="stid" id="STID" value="{{$item->store->store_id}}" hidden>
 
 
-            <button v-if="cant > 0" class="btn btn-outline-success cardbtn">Comprar</button>
+            <button v-if="cant > 0" class="btn btn-outline-success cardbtn" disabled><p id="demo" class=" justify-center font-bold text-2xl lg:text-sm text-gray-600" ></p></button>
             <button v-else class="btn btn-outline-danger cardbtn" disabled>Agotado</button>
         </form>
         

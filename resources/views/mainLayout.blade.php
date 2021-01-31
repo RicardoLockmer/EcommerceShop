@@ -35,6 +35,7 @@
 
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
@@ -47,6 +48,7 @@
     {{-- CONTENT --}}
     
     <div class="main-container md:mx-auto grid grid-cols-1">
+    
         @yield('masNegocio')
 
         {{-- USER PAGE --}}
@@ -152,6 +154,7 @@
         })
 
     </script>
+    @yield('clock')
 
 </body>
 

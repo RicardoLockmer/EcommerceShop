@@ -104,7 +104,7 @@ const itemLayout = {
 
             ],
             allCRChecked: false,
-
+            todoGratis: false,
             provincias: [
                 {
                     gratis: false,
@@ -229,17 +229,10 @@ const itemLayout = {
             for (var i = 0; i < this.variantes.length; i++) {
                 let images = this.variantes[i].moreImages;
                 images.forEach(img => {
-
                     formData.append("moreImages[" + i + "][]", img)
-
                 }
                 )
-
-
-
             }
-
-
 
             axios.post('/nuevo-producto', formData, {
                 headers: {
@@ -410,6 +403,21 @@ const itemLayout = {
                 this.allCRChecked = false;
             }
         },
+        EnvioGratis: function () {
+            if (!this.todoGratis) {
+
+                for (var x = 0; x < this.provincias.length; x++) {
+                    this.provincias[x].gratis = true;
+                    this.todoGratis = true;
+                }
+            } else {
+                for (var x = 0; x < this.provincias.length; x++) {
+                    this.provincias[x].gratis = false;
+
+                }
+                this.todoGratis = false;
+            }
+        }
 
 
 

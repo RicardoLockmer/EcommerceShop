@@ -18,10 +18,13 @@
         
     </div>
 
-
-        <div class="grid grid-cols-12 lg:grid-cols-12 col-start-2 col-span-7 my-4 " >
+        <div class="grid grid-cols-12 lg:grid-cols-12 col-start-2 col-span-7 mb-4 " >
+    <div class="grid col-start-1 col-span-12 h-28  bg-yellow-200 bg-opacity-40 sm:mt-0 lg:-mt-1/2  justify-items-center relative " style="z-index:5;">
+                <p class="font-bold text-gray-600">Muy Pronto...</p>
+                    <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-600" ></p>
+                </div>
            
-    
+        
             @if(count($items) > 0)
                 @foreach($items as $item)
                     @foreach($item->colors as $colors)
@@ -39,41 +42,41 @@
                     </a>
                 </div>
   
-            {{-- ITEM NAME --}}
-            <div class="grid grid-col-12 grid-rows-1 my-2 lg:grid-cols-8 col-span-3 lg:col-span-8">
+            
+            <div class="grid grid-col-12 grid-rows-1 my-2 lg:grid-cols-8 col-span-3 px-2 lg:col-span-8">
 
 
-                <div class="col-span-7 md:pl-4 max-h-72 lg:col-span-8 lg:items-end" >
+                <div class="  col-span-9 md:pl-4 max-h-72 lg:col-span-8 lg:items-end" >
 
 
                     <a href="/producto/{{$colors->link}}" class="searchItem  lg:items-end">
-                        <h4 class="font-bold  text-lg lg:text-2xl" style="">
+                        <h4 class="font-bold  text-md lg:text-2xl w-36 md:w-40 lg:w-full " style="overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2;">
                             {{$item->nombre}} {{ $colors->color }}
                         </h4>
                     </a>
-                    <div class="col-span-8  max-h-72 lg:col-span-6 h-24">
+                    <div class=" col-span-9  max-h-72 lg:col-span-6 h-24">
                         <a href="###" class="searchItem">
-                            <h4 class="text-muted text-sm lg:text-base">
+                            <h4 class="text-gray-400 text-sm lg:text-base">
                             <strong>{{$item->marca}}</strong>  
                             </h4>
                         </a>
-                    {{-- STAR RATING LOOP --}}
-                    <!-- @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                        </svg>
-                        @endfor -->
+                        {{-- STAR RATING LOOP --}}
+                        <!-- @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                            </svg>
+                            @endfor -->
                         {{-- PRECIO --}}
                         <div class="">
-                        <p class="font-bold text-green-700" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
-                            <span> &#8353; </span>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
-                        </p>
+                            <p class="font-bold text-green-700" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
+                                <span> &#8353; </span>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
+                            </p>
                         </div>
                         
                         
                       
                         {{-- DESCRIPCION --}}
-                        <div class="w-44 lg:w-72" >
-                            <p class="w-26"  style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        <div class="text-gray-400 " >
+                            <p class="" style="overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 3;" >
                                 {{$item->descripcion}}
                             </p>
                         </div>
@@ -94,10 +97,9 @@
 
 
 
-                </div>
-                </div>
-                <div class=" col-start-2 col-span-5 lg:col-start-3 lg:col-span-4">
-                <div class="">
+                    </div>
+            <div class=" grid mt-4 justify-items-center">
+                <div class="grid  w-full lg:w-1/2 border-red-400">
                     
                     <a href="/producto/{{$colors->link}}" 
                         class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
@@ -108,7 +110,8 @@
                         {{ __('Ver Mas') }}
                     </a>
                 </div>
-                </div>
+            </div>
+            </div>
         </div>
         
     </div>
@@ -128,5 +131,40 @@
                     </div>
                    
                   
+
+@endsection
+
+
+@section('clock')
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Apr 1, 2021 09:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "D " + hours + "H "
+  + minutes + "M " + seconds + "s";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
 
 @endsection

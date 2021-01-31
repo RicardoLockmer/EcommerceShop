@@ -32,21 +32,21 @@
                 @endif
 <div class="bg-white shadow overflow-hidden sm:rounded-lg my-4">
     <div class="grid grid-cols-6">
-        <div class="px-4 py-5 sm:px-6 col-start-1 col-span-4">
+        <div class="px-4 py-5 sm:px-6 col-start-1 col-span-6 md:col-span-4 lg:col-span-4">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
             Información de su Cuenta
             </h3>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
             Dato Personales
             </p>
-        </div>
-        <div  class="flex col-start-5 md:col-start-6 lg:col-start-6 col-span-1 my-5 cols-start-2 border-2 border-solid font-bold hover:bg-gray-500 rounded-full  bg-white shadow-md h-10 w-32    centerMyImages items-center relative">
+        <div  class="flex md:col-start-6 lg:col-start-6 mt-4 justify-center border-2 border-solid font-bold hover:bg-gray-500 rounded-full  bg-white shadow-md h-10 w-32    centerMyImages items-center relative">
         <a class="w-28 h-6 flex centerMyImages" href="###">
         <svg class="flex -ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
         </svg>
         Editar
         </a>
+        </div>
         </div>
     </div>
   <div class="border-t border-gray-200">

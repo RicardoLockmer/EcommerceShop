@@ -100,7 +100,7 @@ class StoreController extends Controller
                 'user_id' => 'required|unique:stores',
                 'usuario' => 'required|unique:stores|max:50',
                 'tipoNegocio' => 'required',
-                'cedulaJuridica' => 'required|max:10',
+                'cedulaJuridica' => 'nullable|max:10',
                 'provincia' => 'required',
                 'BizE' =>'nullable',
                 'canton' => 'required',
@@ -166,43 +166,40 @@ class StoreController extends Controller
             ]);
 
         } else { 
-            abort(404);
+            abort(404, 'Este no es el negocio que esta buscando!');
         }
     }
-
+    
     public function storeItem(Request $request) {
         
         $data = json_decode($request->variantes);
-        $provincias = json_decode($request->provincias);    
-        
-        
+        $provincias = json_decode($request->provincias);           
         $myItem =  request()->validate([
-                'nombre' => 'required|max:100',
-                'marca' => 'required|min:1',
-                'descripcion' => 'required|max:255',
-                'categoria' => 'required',
-                'subcategoria' => 'required',
-                'store_id' => 'required',
-                'store_name' => 'required',
-                'user_id' => 'required',
-                'specs' => 'required',
-                'data.*.color' => 'required',
-                'data.*.sizes.*.unidad' => 'required',
-                'data.*.sizes.*.tamano' => 'required',
-                'data.*.sizes.*.cantidad' => 'required',
-                'data.*.sizes.*.precio' => 'required',
-                'image' => 'required|max:4048',
-                'image.*' => 'mimes:jpg,jpeg,png',
-                'updateDate' => 'nullable',
-                'updated_at' => 'nullable',
-                'created_at' => 'nullable',
-                'peso' => 'required',
-                'dimensiones' => 'required',               
-
-                   ]);
-
-
-try {
+            'nombre' => 'required|max:100',
+            'marca' => 'required|min:1',
+            'descripcion' => 'required|max:450',
+            'categoria' => 'required',
+            'subcategoria' => 'required',
+            'store_id' => 'required',
+            'store_name' => 'required',
+            'user_id' => 'required',
+            'specs' => 'required',
+            'data.*.color' => 'required',
+            'data.*.sizes.*.unidad' => 'required',
+            'data.*.sizes.*.tamano' => 'required',
+            'data.*.sizes.*.cantidad' => 'required',
+            'data.*.sizes.*.precio' => 'required',
+            'image' => 'required|max:4048',
+            'image.*' => 'mimes:jpg,jpeg,png',
+            'updateDate' => 'nullable',
+            'updated_at' => 'nullable',
+            'created_at' => 'nullable',
+            'peso' => 'nullable',
+            'dimensiones' => 'nullable',               
+            ]);
+            
+    try {
+    $allowedExtensions = ['jpg', 'jpeg', 'png'];
     // try adding everything to DB
     // New Item in DB
     $item = new Items();
@@ -244,21 +241,23 @@ try {
             $itemVar->item_id = $item->id;
             $itemVar->color = $data[$i]->color;
             $uniqueItemId = uniqid('DT');
-            $itemVar->link = $storeInitials.'_'.'TM'.$item->id.date("dmy").$uniqueItemId.date("his");
+            $itemVar->link = $storeInitials.'TM'.$item->id.date("dmy").$uniqueItemId.date("his");
             $itemVarImgs = [];
                 foreach($request->moreImages[$i] as $imgs){ 
                     // AGREGA IMAGENES DE CADA COLOR DEL PRODUCTO
                     $filename = $imgs->getClientOriginalName();
                     $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                    $un = uniqid('DM');
-                    $newFileNames = date('dmyhms').$un.'.'.$ext;       
-                        $itemVarImgs[] = $newFileNames;
-                        $imgs->move(public_path().'/storage/assetItems/', $newFileNames);
+                    if(in_array($ext, $allowedExtensions)){
+                        $un = uniqid('DM');
+                        $newFileNames = date('dmyhms').$un.'.'.$ext;       
+                            $itemVarImgs[] = $newFileNames;
+                            $imgs->move(public_path().'/storage/assetItems/', $newFileNames);
+
+                    } else {
+                        return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
                     }
-                    
-                    
-                    
-                 
+                }
+             
         // FOR LOOP DE LOS COLORES COMIENZA A SALVAR CADA ROW
         $itemVar->colorImages = json_encode($itemVarImgs);
         $itemVar->created_at = date("dmy");
@@ -309,7 +308,7 @@ try {
          
  
     } catch(\Illuminate\Database\QueryException $e) {
-    echo $e;
+    return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
 }
    
 

@@ -95,6 +95,17 @@
                         {{ __('Iniciar Sesión') }}
                     </button>
                 </div>
+                <div class="flex items-center my-2 justify-between">
+                    
+                    @if (Route::has('register'))
+                    <div class="text-sm">
+                    No se ha registrado?
+                    <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-yellow-500">
+                    {{ __('Registrarse') }}
+                    </a>
+                    </div>
+                    @endif
+                </div>
                
             </div>
         
