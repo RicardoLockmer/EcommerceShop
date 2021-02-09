@@ -16,7 +16,9 @@
             
                 <div class="w-full h-full">
                     <a  id="sticky">
-                        <img class="mainImage w-full h-1/4"  
+                        <img class="img-thumbnail mainImage w-full h-1/4"  
+                        data-toggle="magnify" id="thumb" 
+                        data-magnify-src="{{ Storage::URL('assetItems/'.$searchedItem->colorImages[0]) }}"
                             src="{{ Storage::URL('assetItems/'.$searchedItem->colorImages[0])}}" 
                             alt="{{$item->nombre}}">
 
