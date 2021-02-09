@@ -89,8 +89,8 @@
                     </div>
                     <div class="my-4" style="overflow:auto;">
                         <div style="float:right;">
-                            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-outline-primary mx-2">Anterior</button>
-                            <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-outline-primary">Siguiente</button>
+                            <button type="button" id="prevBtn" @click="nextPrev(-1)" class="btn btn-outline-primary mx-2">Anterior</button>
+                            <button type="button" id="nextBtn" @click="nextPrev(1)" class="btn btn-outline-primary">Siguiente</button>
                             <button type="submit" id="subBtn"  class="btn btn-outline-primary">Agregar</button>
                         </div>
                     </div>

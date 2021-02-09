@@ -41,7 +41,7 @@ Resultados de
                             </svg>
                             @endfor
                             {{-- PRECIO --}}
-                            <p class="card-text" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
+                            <p class="font-bold text-green-700" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
                             
                                 <small> &#8353; </small>{{number_format($var->size[0]->precio, 0, '.', ',')}}
                                 

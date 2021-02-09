@@ -1,3 +1,4 @@
+
 const itemLayout = {
 
     data() {
@@ -154,6 +155,7 @@ const itemLayout = {
             empresaEnvios: '',
             selected: '',
             selectedSize: '',
+            currentTab: 4,
             selectedType: '',
             otro: '',
             selectedImage: null,
@@ -183,8 +185,122 @@ const itemLayout = {
             ]
         };
     },
-
+    mounted() {
+        var currentTab = 4;
+        this.showTab(this.currentTab);
+    },
     methods: {
+        showTab: function (n) {
+
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+                document.getElementById("nextBtn").style.display = "inline";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").style.display = "none";
+                document.getElementById("subBtn").style.display = "inline";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Siguiente";
+                document.getElementById("nextBtn").style.display = "inline";
+                document.getElementById("subBtn").style.display = "none";
+            }
+
+            this.fixStepIndicator(n)
+        },
+        nextPrev: function (n) {
+
+            var x = document.getElementsByClassName("tab");
+
+            if (n == 1 && !this.validateForm()) return false;
+
+            x[this.currentTab].style.display = "none";
+
+            this.currentTab = this.currentTab + n;
+
+            if (this.currentTab >= x.length) {
+
+                document.getElementById("regForm").submit();
+                return false;
+            }
+
+            this.showTab(this.currentTab);
+        },
+        validateForm: function () {
+
+            var x, y, i, z, f, xl, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[this.currentTab].getElementsByTagName("input");
+            select = x[this.currentTab].getElementsByTagName("select");
+            f = x[this.currentTab].getElementsByTagName("label");
+            xl = x[this.currentTab].getElementsByTagName("small");
+            z = x[this.currentTab].getElementsByTagName("textarea");
+
+            for (i = 0; i < y.length; i++) {
+
+                if (y[i].value == "") {
+
+                    y[i].className += " is-invalid";
+
+                    valid = false;
+                }
+
+
+            }
+            for (i = 0; i < select.length; i++) {
+                if (!select[i].value) {
+                    select[i].className += " is-invalid"
+                    valid = false;
+                }
+            }
+            for (i = 0; i < z.length; i++) {
+
+                if (z[i].value == "") {
+
+                    z[i].className += " is-invalid";
+
+
+                    valid = false;
+                }
+                if (z[i].value.length > 450) {
+                    valid = false;
+                    xl[i].className += " exceededLimit";
+                    z[i].className += " is-invalid";
+                    alert('Excede los 450 caracteres.');
+                } else {
+                    xl[i].className -= " exceededLimit";
+                    xl[i].className = " text-muted";
+                }
+
+            }
+            for (i = 0; i < f.length; i++) {
+
+                if (f[i].value == "") {
+
+                    f[i].className += " is-invalid";
+
+                    valid = false;
+                }
+
+            }
+            if (valid) {
+                document.getElementsByClassName("step")[this.currentTab].className += " finish";
+            }
+            return valid; // return the valid status
+        },
+        fixStepIndicator: function (n) {
+
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+
+            x[n].className += " active";
+        },
         CHECKER: function (main, index) {
             if (this.variantes[main].sizes[index].unidad == 'NoAplica') {
                 for (var i = 0; i < this.variantes.length; i++) {
@@ -233,7 +349,6 @@ const itemLayout = {
                 }
                 )
             }
-
             axios.post('/nuevo-producto', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -242,10 +357,6 @@ const itemLayout = {
             ).then(function (response) {
                 console.log(response);
             })
-            //  .then((response) => {
-
-            //    this.nombre = response.data.bpi;
-            //   })
         },
         addSpec: function () {
             this.specs.push(
@@ -257,7 +368,6 @@ const itemLayout = {
         },
 
         addFind: function () {
-
             this.variantes.push({
                 moreImages: [],
                 myImagesError: '',
@@ -270,10 +380,7 @@ const itemLayout = {
                         cantidad: '',
                         precio: '',
                     }
-
                 ],
-
-
             });
         },
         addSize: function (index) {
@@ -284,9 +391,6 @@ const itemLayout = {
                     cantidad: '',
                     precio: '',
                 }
-
-
-
             );
         },
         deleteFind: function (index) {

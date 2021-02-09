@@ -129,7 +129,7 @@ class ItemsController extends Controller
         }
         $coloresResult = array_unique($colores);
         sort($coloresResult);
-        
+        $variante->colorImages = json_decode($variante->colorImages);
         return view('itemPage',[
         'item' => $item,
         'moreItems' => $moreitems,

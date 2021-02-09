@@ -11,7 +11,7 @@
         </a>
     </div>
     <p class="my-2">
-    <input v-model="nombre"  oninput="this.className = 'form-control'"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control" placeholder="Nombre del producto" maxlength="44">
+    <input v-model="nombre"  oninput="this.className = 'form-control'"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control" placeholder="Nombre del producto" maxlength="100">
     </p>
 
 {{-- FINAL NOMBRE --}}

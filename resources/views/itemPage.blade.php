@@ -13,17 +13,16 @@
         
         <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:h-auto lg:ml-10 mb-4" >
 
-                @foreach(json_decode($searchedItem->colorImages) as $variante)
+            
                 <div class="w-full h-full">
-            <a  id="sticky">
-                    <img class="mainImage w-full h-1/4"  
-                            src="{{ Storage::URL('assetItems/'.$variante)}}" 
+                    <a  id="sticky">
+                        <img class="mainImage w-full h-1/4"  
+                            src="{{ Storage::URL('assetItems/'.$searchedItem->colorImages[0])}}" 
                             alt="{{$item->nombre}}">
 
-            </a>
+                    </a>
                 </div>
-                @break  
-                @endforeach
+           
 
  
         </div>
@@ -58,7 +57,7 @@
 
                 </div>
 
-                <p v-if="!price" class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">    
+                <p v-if="!price" class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;">    
                     &#8353; {{number_format($searchedItem->size[0]->precio, 0, '.', ',')}}
              
                     <small style="font-size: 14px;" class="text-muted">
@@ -484,7 +483,7 @@
                                 <div class="myCards">
                                     <div class="card-block" style="margin-right: 28px;">
 
-                                        <a href="{{$moreitem->id}}"><img class="sectionImage2 " src="{{ Storage::URL('assetItems/'.$moreitem->image) }}" alt=""></a>
+                                        
                                     </div>
                                 </div>
                                 @endforeach
