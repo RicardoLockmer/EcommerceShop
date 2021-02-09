@@ -29,14 +29,14 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
    <link rel="stylesheet" href="/css/main.css">
-   <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
-    {{-- CSRF TOKEN --}}
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    
+   {{-- CSRF TOKEN --}}
+   <meta name="csrf-token" content="{{ csrf_token() }}">
+   
+   
+   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+   
    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
 </head>
 
 <body class="antialiased">

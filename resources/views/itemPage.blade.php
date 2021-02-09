@@ -505,18 +505,18 @@
 
 @section('magnifier')
 
-{{-- <script type="text/javascript">
-    var evt = new Event()
+ <script type="text/javascript">
+     var evt = new Event()
     m = new Magnifier(evt);
     m.attach({
         largeWrapper: 'preview'
-        , thumb: '#thumb'
+        , thumb: '.mainImage'
         , mode: 'outside'
         , zoom: 2
         , zoomable: false
     })
 
-</script> --}}
+</script> 
 <script type="text/javascript">
     $('img').mouseenter(function() {
 
