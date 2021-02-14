@@ -16,22 +16,22 @@
             <div class="carousel-item">
                 <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
             </div> -->
-            <div class="grid bg-yellow-200 bg-opacity-40 sm:mt-0 lg:-mt-1/2  justify-items-center relative" style="z-index:5;">
-                <p class="font-bold text-gray-600">Muy Pronto...</p>
-                <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-600" ></p>
+            <div class="grid sm:mt-0 lg:-mt-1/2  justify-items-center relative" style="z-index:5;">
+                <p class="font-bold text-gray-600 pt-10">Muy Pronto...</p>
+                <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-700" ></p>
                
              </div>
                 
         </div>
         <div data-aos="zoom-in" data-aos-duration="2000" class="grid h-auto  my-32 block font-bold  my-4 justify-center " style="z-index:100;">
             <a href="###" class="justify-self-center " style="z-index:100;">
-            <div class="grid h-14 w-60 border-4 border-indigo-900 items-center rounded-full">
-                <div class="justify-self-center font-bold text-gray-600 text-xl">
-                        Registre un Negocio
+            <div class="grid h-14 w-72 border-2 hover:shadow-lg border-yellow-500 bg-yellow-400 items-center rounded-full">
+                <div class="justify-self-center font-bold  text-xl text-white">
+                    COMENZAR A VENDER
                 </div>
             </div> 
             </a>
-                <p class="justify-self-center font-light text-gray-700 py-2 font-bold" style="z-index:111;">Totalmente Gratis!</p>
+                
         </div>   
     </div>
 </div>
@@ -52,17 +52,17 @@
             
     
     
-            <div class="relative bg-white shadow-lg">
-                <a href="Categorias/Hombre" class="bg-white rounded h-32 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-80 lg: centerMyImages " style=" background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <div class="relative bg-white shadow-md lg:rounded-md">
+                <a href="Categorias/Hombre" class="bg-white rounded-md h-32 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-80 lg: centerMyImages " style=" background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
     
                     <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                         Hombres
                     </h1>
                 </a>
             </div>
-            <div class="relative bg-white">
+            <div class="relative bg-white shadow-md lg:rounded-md">
     
-                <a href="Categorias/Mujer" class="bg-white rounded h-32 w-80 md:w-72 tablet:col-span-2 tablet:col-start-1 lg:h-80 lg:w-80 centerMyImages" style=" background-image: url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
+                <a href="Categorias/Mujer" class="bg-white rounded-md h-32 w-80 md:w-72 tablet:col-span-2 tablet:col-start-1 lg:h-80 lg:w-80 centerMyImages" style=" background-image: url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
                 
                     <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                         Mujeres
@@ -70,9 +70,9 @@
                 </a>
             </div>
     
-            <div class="relative md:col-start-1 md:col-span-2 tablet:col-span-2 tablet:col-start-1 lg:col-span-1 bg-white">
+            <div class="relative md:col-start-1 lg:rounded-md md:col-span-2 tablet:col-span-2 tablet:col-start-1 lg:col-span-1 bg-white shadow-md">
     
-                <a href="Categorias/Niños" class="bg-white rounded h-32 w-80 md:w-96 lg:w-80 lg:h-80 centerMyImages " style="background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+                <a href="Categorias/Niños" class="bg-white rounded-md h-32 w-80 md:w-96 lg:w-80 lg:h-80 centerMyImages " style="background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
                 
                     <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                         Niños

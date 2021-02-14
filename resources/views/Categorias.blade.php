@@ -3,7 +3,7 @@
 @section('categorias')
 
 
-<div class="grid my-4 lg:grid-cols-8 " >
+<div class="grid my-4 lg:grid-cols-12 " >
 
 
 
@@ -18,7 +18,7 @@
         
     </div>
 
-        <div class="grid grid-cols-12 lg:grid-cols-12 col-start-2 col-span-7 mb-4 " >
+        <div class="grid grid-cols-12 lg:grid-cols-12 col-start-2 col-span-10 mb-4 " >
     <div class="grid col-start-1 col-span-12 h-28  bg-yellow-200 bg-opacity-40 sm:mt-0 lg:-mt-1/2  justify-items-center relative " style="z-index:5;">
                 <p class="font-bold text-gray-600">Muy Pronto...</p>
                     <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-600" ></p>
@@ -29,14 +29,14 @@
                 @foreach($items as $item)
                     @foreach($item->colors as $colors)
                 <!-- ITEM BOX -->
-            <div class="grid grid-cols-4 p-1 grid-rows-1 my-2  col-span-6 md:grid-cols-6 md:my-4 lg:pb-4 border-solid border-gray-200  lg:col-span-4 lg:grid-cols-8   mx-1  lg:mx-4 lg:mb-4  shadow-sm ">
+            <div class="grid grid-cols-4 p-1 grid-rows-1 my-2  col-span-6 md:grid-cols-6 md:my-4 lg:pb-4 border-solid border-gray-200  lg:col-span-4 lg:grid-cols-8 mx-1 lg:mx-4 lg:mb-4  shadow-md ">
 
                 <!-- IMAGE BOX -->
                 <div class="grid col-start-1 row-span-1  col-span-6 md:col-span-3 lg:col-start-2 lg:col-span-6 centerMyImages " style="min-height: 160px;">
                     <a href="/producto/{{$colors->link}}">
                         @foreach(json_decode($colors->colorImages) as $ColorImage)
 
-                            <img class="img-fluid card-img centerMyImages mt-2 lg:h-auto max-h-80 lg:max-h-96" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
+                            <img class="img-fluid object-contain card-img centerMyImages mt-2 lg:h-auto max-h-80 lg:max-h-96" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
                         @break
                         @endforeach
                     </a>
@@ -46,7 +46,7 @@
             <div class="grid grid-col-12 grid-rows-1 my-2 lg:grid-cols-8 col-span-3 px-2 lg:col-span-8">
 
 
-                <div class="  col-span-9 md:pl-4 max-h-72 lg:col-span-8 lg:items-end" >
+                <div class="col-span-9 md:pl-4 max-h-72 lg:col-span-8 lg:items-end" >
 
 
                     <a href="/producto/{{$colors->link}}" class="searchItem  lg:items-end">

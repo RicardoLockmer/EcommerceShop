@@ -15,28 +15,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
   
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script href="/scripts/jQuery.js"></script>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+    
+    <script href="/scripts/jQuery.js"></script>
 
-    <!-- Styles -->
-    @livewireStyles()
-    @yield('cdSAS')
-    <meta charset="UTF-8" />
+    {{-- CSRF TOKEN --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    
+    
+    
 
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-   <link rel="stylesheet" href="/css/main.css">
-   {{-- CSRF TOKEN --}}
-   <meta name="csrf-token" content="{{ csrf_token() }}">
-   
-   
-   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-   
-   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="/css/magnifier.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="/css/app.css" rel="stylesheet">
 </head>
 
 <body class="antialiased">
@@ -135,19 +128,18 @@
     <script src="/scripts/addColor.js"></script>
     <script src="/scripts/alerts.js"></script>
     <script src="/scripts/isOther.js"></script>
-    <script src="/scripts/Event.js"></script>
-    <script src="/scripts/Magnifier.js"></script>
     <script src="/scripts/categoryOptions.js"></script>
     <script src="/scripts/addressVue.js"></script>
     <script src="/scripts/MenuCategory.js"></script>
     @yield('categoryOptions')
-
+    
     @livewireScripts()
-
+    
     @yield('bp')
-    @yield('magnifier')
     @yield('cartJQ')
     @yield('addColorProp')
+    
+    @yield('magnifier')
     <script type="text/javascript">
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()

@@ -3,22 +3,23 @@
 {{-- BUYING ITEM PAGE --}}
 
 @section('thisItem')
-{{-- <div class="magnifier-preview" id="preview" ></div> --}}
 <div class="container  grid grid-cols-1 mt-4"  >
+    
+
+
+
     <div class=" grid grid-rows-1 grid-cols-1 md:grid-cols-5 lg:grid-cols-12 ">
 
     
    
     
         
-        <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:h-auto lg:ml-10 mb-4" >
+        <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-1 lg:col-end-4 lg:w-full lg:ml-10 mb-4" >
 
             
                 <div class="w-full h-full">
                     <a  id="sticky">
-                        <img class="img-thumbnail mainImage w-full h-1/4"  
-                        data-toggle="magnify" id="thumb" 
-                        data-magnify-src="{{ Storage::URL('assetItems/'.$searchedItem->colorImages[0]) }}"
+                        <img class="mainImage object-fit w-full h-4/4"  
                             src="{{ Storage::URL('assetItems/'.$searchedItem->colorImages[0])}}" 
                             alt="{{$item->nombre}}">
 
@@ -28,9 +29,36 @@
 
  
         </div>
+        <!-- <div class="myFirstSectionInner scroll mb-10" 
+        style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
+        <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
+            <div class="flex nowrap">
+                
+                @foreach ($item->colors as $color)
+                        @if(count($item->colors) > 1)
+                        @foreach(json_decode($color->colorImages) as $image)
+                            @if($image != NULL)
+                            <a href="{{$color->link}}" class="ml-4">
+                            <img id="subimage" class="sectionImage subimage " src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}" style="max-width:initial;">
+                            
+                            </a>
+                            @endif
+                        @endforeach
+                        @else 
+                        @foreach(json_decode($color->colorImages) as $image)
+                            @if($image != NULL)
+                            
+                            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                            
+                          
+                            @endif
+                        @endforeach
+                        @endif
+                @endforeach
 
+            </div> -->
         
-    <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 " >
+        <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 ">
         <div id="DTpageUp" v-cloak>
             
 
@@ -337,37 +365,8 @@
 
 </div>
 </div>
-    <br>
-<br>
-<br>
-    <div class="myFirstSectionInner scroll" 
-        style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
-        <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
-            <div class="flex nowrap">
-                
-                @foreach ($item->colors as $color)
-                        @if(count($item->colors) > 1)
-                        @foreach(json_decode($color->colorImages) as $image)
-                            @if($image != NULL)
-                            <a href="{{$color->link}}" class="ml-4">
-                            <img id="subimage" class="sectionImage subimage " src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}" style="max-width:initial;">
-                            
-                            </a>
-                            @endif
-                        @endforeach
-                        @else 
-                        @foreach(json_decode($color->colorImages) as $image)
-                            @if($image != NULL)
-                            
-                            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
-                            
-                          
-                            @endif
-                        @endforeach
-                        @endif
-                @endforeach
-
-            </div>
+   
+    
             <br>
 
         </div>
@@ -386,7 +385,7 @@
         <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-10 content-start" >
 
             @if(json_decode($item->specs) != 'null')
-                <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-3 col-start-1 col-span-4  justify-self-start">
+                <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-5 col-start-1 col-span-4  justify-self-start">
                     <div class="">
                         <h3 class="font-bold">
                         Mas sobre el producto {{$item->nombre}}
@@ -421,9 +420,7 @@
                         
                 </div>
         
-                <div class="col-span-4 lg:col-span-4   p-4 md:p-4">
-                    <img class="centerMyImages" src="{{ Storage::URL('assetItems/'.$item->image)}}" >
-                </div>
+                
                 <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
                     <div class="">
                         <h3 class="font-bold">
@@ -505,18 +502,18 @@
 
 @section('magnifier')
 
- <script type="text/javascript">
-     var evt = new Event()
+{{-- <script type="text/javascript">
+    var evt = new Event()
     m = new Magnifier(evt);
     m.attach({
         largeWrapper: 'preview'
-        , thumb: '.mainImage'
+        , thumb: '#thumb'
         , mode: 'outside'
         , zoom: 2
         , zoomable: false
     })
 
-</script> 
+</script> --}}
 <script type="text/javascript">
     $('img').mouseenter(function() {
 
