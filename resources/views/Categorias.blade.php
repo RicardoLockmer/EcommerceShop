@@ -54,28 +54,38 @@
                             {{$item->nombre}} {{ $colors->color }}
                         </h4>
                     </a>
-                    <div class=" col-span-9  max-h-72 lg:col-span-6 h-24">
-                        <a href="###" class="searchItem">
+                    <div class=" col-span-9 lg:mt-2 max-h-72 lg:col-span-6 h-24">
+                        <!-- <a href="###" class="searchItem">
                             <h4 class="text-gray-400 text-sm lg:text-base">
                             <strong>{{$item->marca}}</strong>  
                             </h4>
-                        </a>
-                        {{-- STAR RATING LOOP --}}
-                        <!-- @for($i = 1; $i < 6; $i++) <svg width="1em" style="color: rgb(245, 210, 12); font-size: 12px; " height="1em" viewBox="0 0 16 16" class="bi bi-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                            </svg>
-                            @endfor -->
+                        </a> -->
                         {{-- PRECIO --}}
                         <div class="">
                             <p class="font-bold text-green-700" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
                                 <span> &#8353; </span>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
                             </p>
                         </div>
+                        {{-- STAR RATING LOOP --}}
+                        <div class="">
+                    <small class="text-muted flex items-center " style="font-size: 14px; left:-18px;">
+                    <div class="mr-2 flex">
+                    @for($i = 0; $i <= 5; $i++)
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="color:#d6d300ef;" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    @endfor
+                    </div>
+                       
+                    </small>
+
+                </div>
+                        
                         
                         
                       
                         {{-- DESCRIPCION --}}
-                        <div class="text-gray-400 " >
+                        <div class="text-gray-500 " >
                             <p class="" style="overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 3;" >
                                 {{$item->descripcion}}
                             </p>

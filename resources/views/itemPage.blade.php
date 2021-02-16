@@ -14,12 +14,12 @@
    
     
         
-        <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-1 lg:col-end-4 lg:w-full lg:ml-10 mb-4" >
+        <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:ml-10 mb-4" >
 
             
                 <div class="w-full h-full">
                     <a  id="sticky">
-                        <img class="mainImage object-fit w-full h-4/4"  
+                        <img class="mainImage object-contain object-scale-down w-full"  
                             src="{{ Storage::URL('assetItems/'.$searchedItem->colorImages[0])}}" 
                             alt="{{$item->nombre}}">
 
@@ -29,34 +29,7 @@
 
  
         </div>
-        <!-- <div class="myFirstSectionInner scroll mb-10" 
-        style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
-        <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
-            <div class="flex nowrap">
-                
-                @foreach ($item->colors as $color)
-                        @if(count($item->colors) > 1)
-                        @foreach(json_decode($color->colorImages) as $image)
-                            @if($image != NULL)
-                            <a href="{{$color->link}}" class="ml-4">
-                            <img id="subimage" class="sectionImage subimage " src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}" style="max-width:initial;">
-                            
-                            </a>
-                            @endif
-                        @endforeach
-                        @else 
-                        @foreach(json_decode($color->colorImages) as $image)
-                            @if($image != NULL)
-                            
-                            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
-                            
-                          
-                            @endif
-                        @endforeach
-                        @endif
-                @endforeach
-
-            </div> -->
+        
         
         <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 ">
         <div id="DTpageUp" v-cloak>
@@ -68,7 +41,7 @@
                     {{$item->nombre}}
                 </h1>
                 <p style="margin: 0 0 0 0;">
-                    <small class="text-muted">
+                    <small class="text-muted text-base">
                         <strong>
                             {{$item->marca}}
                         </strong>
@@ -80,12 +53,7 @@
                     </a>
                 </small>
                 <br>
-                <div>
-                    <small class="text-muted" style="font-size: 14px; left:-18px;">
-                        (1099) reseñas
-                    </small>
-
-                </div>
+                
 
                 <p v-if="!price" class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;">    
                     &#8353; {{number_format($searchedItem->size[0]->precio, 0, '.', ',')}}
@@ -99,7 +67,7 @@
                         </a>
                     </small>
                 </p>
-                <p v-else class="subtitle" style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">                    
+                <p v-else class="subtitle " style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">                    
                     &#8353; @{{ price }}
                     <small style="font-size: 14px;" class="text-muted">
                         (no incluye iva)
@@ -130,10 +98,22 @@
                     @endif
                 @endif
                 <br>
-                
+                <div class="mt-2">
+                    <small class="text-muted flex items-center " style="font-size: 14px; left:-18px;">
+                    <div class="mr-2 flex">
+                    @for($i = 0; $i <= 5; $i++)
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="color:#d6d300ef;" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    @endfor
+                    </div>
+                        (1099) reseñas
+                    </small>
+
+                </div>
 
                 <div class="content">
-                    <p class="mb-4 hidden lg:block">{{$item->descripcion}}</p>
+                    <p class="mb-4 mt-4 hidden lg:block">{{$item->descripcion}}</p>
                     <div class="mb-3" >
                     
                         @if(count($item->colors) > 1)
@@ -277,12 +257,12 @@
                    <br>
 
                     
-                <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base">
+                <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base border">
                     <p class="card-text flex" >
                         <svg width="1.4em" 
                             height="1.4em" 
                             viewBox="0 0 16 16" 
-                            class="bi bi-box-seam text-muted mr-2" 
+                            class="bi bi-box-seam text-muted mr-2 flex" 
                             fill="currentColor" 
                             xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
@@ -293,14 +273,14 @@
                     @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
 
                         @if(in_array($selectedAddress->provincia, $provinciasEnvio))
-                            <p>
+                            
                             <small>
                                 <strong style="color: seagreen"> 
                                     Si se envía a {{$selectedAddress->provincia}}
                                 </strong>
                             </small>
-                            </p>
-                            <p>
+                           </p>
+                          
                                 <small class="text-muted">
                                     El paquete llega entre
                                     <strong>
@@ -368,7 +348,34 @@
    
     
             <br>
+            <div class="myFirstSectionInner scroll mb-10" 
+        style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
+        <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
+            <div class="flex nowrap">
+                
+                @foreach ($item->colors as $color)
+                        @if(count($item->colors) > 1)
+                        @foreach(json_decode($color->colorImages) as $image)
+                            @if($image != NULL)
+                            <a href="{{$color->link}}" class="ml-4">
+                            <img id="subimage" class="sectionImage subimage " src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}" style="max-width:initial;">
+                            
+                            </a>
+                            @endif
+                        @endforeach
+                        @else 
+                        @foreach(json_decode($color->colorImages) as $image)
+                            @if($image != NULL)
+                            
+                            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                            
+                          
+                            @endif
+                        @endforeach
+                        @endif
+                @endforeach
 
+            </div>
         </div>
     </div>
 
@@ -376,19 +383,19 @@
     </div>
     </div>
     
-{{-- FINAL DE BUY CART BUTTONS --}}
+
    
     </div>
     </div>
 
-    <div class="container grid grid-rows-1 mt-4 py-4 shadow-sm  " >
+    <div class="container grid grid-rows-1 mt-4 py-4  border-t border-gray-200" >
         <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-10 content-start" >
 
             @if(json_decode($item->specs) != 'null')
                 <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-5 col-start-1 col-span-4  justify-self-start">
                     <div class="">
-                        <h3 class="font-bold">
-                        Mas sobre el producto {{$item->nombre}}
+                        <h3 class="font-bold text-2xl">
+                         {{$item->nombre}}
                         </h3>
                         <p class="mt-4 md:mt-0">
                             {{$item->descripcion}}
@@ -396,7 +403,7 @@
                     </div>
                 
                     <div>
-                        <table class="mt-4 px-4">
+                        <table class="mt-4 px-4 w-full">
 
                             @foreach(json_decode($item->specs) as $value)
                                 <tr 
@@ -559,6 +566,6 @@ var x = setInterval(function() {
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
 }, 1000);
-</scrip>
+</script>
 
 @endsection

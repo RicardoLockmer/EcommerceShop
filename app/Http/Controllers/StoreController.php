@@ -176,7 +176,7 @@ class StoreController extends Controller
         $provincias = json_decode($request->provincias);           
         $myItem =  request()->validate([
             'nombre' => 'required|max:100',
-            'marca' => 'required|max:100',
+            'marca' => 'required|max:20',
             'descripcion' => 'required|max:450',
             'categoria' => 'required',
             'subcategoria' => 'required',

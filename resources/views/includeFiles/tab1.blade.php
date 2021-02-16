@@ -11,7 +11,7 @@
         </a>
     </div>
     <p class="my-2">
-    <input v-model="nombre"  oninput="this.className = 'form-control'"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control" placeholder="Nombre del producto" maxlength="100">
+    <input v-model="nombre"  oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control'"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control" placeholder="Nombre del producto" maxlength="100">
     </p>
 
 {{-- FINAL NOMBRE --}}
@@ -31,7 +31,7 @@
     </div>
 
     <p class="my-2">
-    <input v-model="marca" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control" oninput="this.className = 'form-control'" placeholder="Marca del producto"  maxlength="120">
+    <input v-model="marca" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" placeholder="Marca del producto"  maxlength="20">
     </p>
 
 
@@ -50,7 +50,7 @@
             </svg>
         </a>
     </div>
-    <textarea v-model="descripcion" oninput="this.className = 'form-control'" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mt-2" style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="450" ></textarea>
+    <textarea v-model="descripcion" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mt-2'" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mt-2" style="width: 100%; " placeholder="Descripción" id="textarea" data-length=0  maxlength="450" ></textarea>
     <small class="text-muted"><span class="char-count myCount mb-2">0</span>/450 </small>
 
                   
@@ -66,8 +66,7 @@
                                         <strong> Categoría</strong>
                                     </label>
 
-                                    <select v-model="categorySelected" class="my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control
-                                        @error('categoria') is-invalid @enderror " >
+                                    <select v-model="categorySelected" oninput="this.className = 'my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control @error('categoria') is-invalid @enderror " >
                                         <option disabled selected value>
                                             --
                                         </option> 
@@ -90,7 +89,7 @@
                                         <strong>Subcategoría</strong>
                                     </label>
 
-                                    <select v-model="subCategorySelected" class="my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control
+                                    <select v-model="subCategorySelected" oninput="this.className = 'my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control
                                     @error('subcategoria') is-invalid @enderror">
                                         <option disabled selected value>
                                             --

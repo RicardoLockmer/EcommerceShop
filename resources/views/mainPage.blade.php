@@ -24,13 +24,13 @@
                 
         </div>
         <div data-aos="zoom-in" data-aos-duration="2000" class="grid h-auto  my-32 block font-bold  my-4 justify-center " style="z-index:100;">
-            <a href="###" class="justify-self-center " style="z-index:100;">
-            <div class="grid h-14 w-72 border-2 hover:shadow-lg border-yellow-500 bg-yellow-400 items-center rounded-full">
+            <!-- <a href="###" class="justify-self-center " style="z-index:100;">
+            <div class="grid h-14 w-72 border-2 hover:shadow-lg border-yellow-500  items-center rounded-md" style="background-color: #FF9800">
                 <div class="justify-self-center font-bold  text-xl text-white">
                     COMENZAR A VENDER
                 </div>
             </div> 
-            </a>
+            </a> -->
                 
         </div>   
     </div>
@@ -174,13 +174,15 @@
 
     @section('productosMujer')
     <div class="myFirstSection">
-        <p class="div "> para Mujeres</p>
+        <p class="div ">Mas sobre DetoShop</p>
         <div class="myFirstSectionInner scroll">
             <div class="container-fluid">
                 <div class="noWrap">
                    
                     
-                        <img class="sectionImage2" src="{{ Storage::URL('/storage/assetItems/') }}" alt="">
+                       <div>DETOSHOP GRATIS</div>
+                       <div>DETOSHOP GRATIS</div>
+                       <div>DETOSHOP GRATIS</div>
                   
                    
                 </div>

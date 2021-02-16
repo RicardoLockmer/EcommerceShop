@@ -3,7 +3,7 @@
 
 
 @section('crearItem')
-<div class="container grid grid-cols-9 border-4" id="itemLayout" >
+<div class="container grid grid-cols-9" id="itemLayout" >
 
 
     <div :class="(vistaPrevia)? 'grid grid-cols-12 col-start-2 col-end-12 border-red-600 ' : 'grid grid-cols-12 col-start-1 col-end-11 lg:col-start-3 lg:col-end-8 '" style="margin-top: 14px;" >
@@ -87,11 +87,12 @@
                     <div class="tab">
                         @include('includeFiles/tab5')
                     </div>
-                    <div class="my-4" style="overflow:auto;">
-                        <div style="float:right;">
-                            <button type="button" id="prevBtn" @click="nextPrev(-1)" class="btn btn-outline-primary mx-2">Anterior</button>
-                            <button type="button" id="nextBtn" @click="nextPrev(1)" class="btn btn-outline-primary">Siguiente</button>
-                            <button type="submit" id="subBtn"  class="btn btn-outline-primary">Agregar</button>
+                    <br>
+                    <div class="my-4" >
+                        <div style="float:right;" class="flex">
+                            <button type="button" id="prevBtn" @click="nextPrev(-1)" class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 mr-2">Anterior</button>
+                            <button type="button" id="nextBtn" @click="nextPrev(1)" class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Siguiente</button>
+                            <button type="submit" id="subBtn"  class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">Agregar</button>
                         </div>
                     </div>
 

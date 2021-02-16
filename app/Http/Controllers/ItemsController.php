@@ -129,7 +129,6 @@ class ItemsController extends Controller
         }
         $coloresResult = array_unique($colores);
         sort($coloresResult);
-        cd myStore
         $variante->colorImages = json_decode($variante->colorImages);
         return view('itemPage',[
         'item' => $item,

@@ -3,16 +3,6 @@ const itemLayout = {
 
     data() {
         return {
-            tutorial: false,
-            vistaPrevia: false,
-            nombre: '',
-            marca: '',
-            unit: '',
-            descripcion: '',
-            mainImage: '',
-            image: '',
-            categorySelected: '',
-            subCategorySelected: '',
             products: [{
                 id: 'Electrónica',
                 name: ['Accesorios', 'Cámara y Fotografía', 'Accesorios de Vehículo', 'Celulares y Accesorios', 'Computadoras y Accesorios', 'GPS y Navegación', 'Audífonos', 'Sistema de Audio', 'Oficina', 'Audio y Video Portátil', 'Seguridad y Vigilancia', 'Televisión y Video', 'Consolas y Accesorios', 'Proyectores', 'Tecnología Portátil']
@@ -104,8 +94,6 @@ const itemLayout = {
             }
 
             ],
-            allCRChecked: false,
-            todoGratis: false,
             provincias: [
                 {
                     gratis: false,
@@ -150,12 +138,24 @@ const itemLayout = {
                     tiempoEntrega: '',
                 }
             ],
+            tutorial: false,
+            vistaPrevia: false,
+            nombre: '',
+            marca: '',
+            unit: '',
+            descripcion: '',
+            mainImage: '',
+            image: '',
+            categorySelected: '',
+            subCategorySelected: '',
+            allCRChecked: false,
+            todoGratis: false,
             SelectedProv: [],
             myProvincias: [],
             empresaEnvios: '',
             selected: '',
             selectedSize: '',
-            currentTab: 4,
+            currentTab: 0,
             selectedType: '',
             otro: '',
             selectedImage: null,
@@ -186,22 +186,22 @@ const itemLayout = {
         };
     },
     mounted() {
-        var currentTab = 4;
+
         this.showTab(this.currentTab);
     },
     methods: {
-        showTab: function (n) {
+        showTab: function (n) { //displays tab y los botones de next y prev dependiendo en que tab este
 
             var x = document.getElementsByClassName("tab");
             x[n].style.display = "block";
 
-            if (n == 0) {
+            if (n == 0) { // si es el tab 1 solo mostrar el next button, esconder el boton de previo
                 document.getElementById("prevBtn").style.display = "none";
                 document.getElementById("nextBtn").style.display = "inline";
-            } else {
+            } else { // si el tab es 2 o mas mostrar el boton de previo
                 document.getElementById("prevBtn").style.display = "inline";
             }
-            if (n == (x.length - 1)) {
+            if (n == (x.length - 1)) { // si el tab es igual al numero maximo de tabs (- 1 porque comienzan en 0) mostrar el boton de submit_
                 document.getElementById("nextBtn").style.display = "none";
                 document.getElementById("subBtn").style.display = "inline";
             } else {
@@ -212,7 +212,7 @@ const itemLayout = {
 
             this.fixStepIndicator(n)
         },
-        nextPrev: function (n) {
+        nextPrev: function (n) { // funciones de lo botones - pide el cambio de tab a showTab() dependiendo si validateForm() es valido
 
             var x = document.getElementsByClassName("tab");
 
@@ -230,7 +230,7 @@ const itemLayout = {
 
             this.showTab(this.currentTab);
         },
-        validateForm: function () {
+        validateForm: function () { // antes de cambiar de tab verifica si todo las reglas se cumplen y aprueba el cambio en nextPrev()
 
             var x, y, i, z, f, xl, valid = true;
             x = document.getElementsByClassName("tab");
@@ -292,7 +292,7 @@ const itemLayout = {
             }
             return valid; // return the valid status
         },
-        fixStepIndicator: function (n) {
+        fixStepIndicator: function (n) { // indica en que paso va dependiendo si click en next o prev
 
             var i, x = document.getElementsByClassName("step");
             for (i = 0; i < x.length; i++) {
@@ -301,25 +301,23 @@ const itemLayout = {
 
             x[n].className += " active";
         },
-        CHECKER: function (main, index) {
+        CHECKER: function (main, index) { //tab3
             if (this.variantes[main].sizes[index].unidad == 'NoAplica') {
                 for (var i = 0; i < this.variantes.length; i++) {
                     for (var e = 0; e < this.variantes[i].sizes.length; e++) {
                         this.variantes[i].sizes.splice(1, this.variantes[main].sizes.length);
-
                         this.variantes[i].sizes[e].unidad = 'NoAplica';
                     }
                 }
             } else {
                 for (var i = 0; i < this.variantes.length; i++) {
                     for (var e = 0; e < this.variantes[i].sizes.length; e++) {
-
                         this.variantes[i].sizes[e].unidad = this.variantes[main].sizes[index].unidad;
                     }
                 }
             }
         },
-        saveData: function () {
+        saveData: function () { //envia todo al servidor
             let formData = new FormData();
             let store_id = document.getElementById("store_id").value;
             let store_name = document.getElementById("store_name").value;
