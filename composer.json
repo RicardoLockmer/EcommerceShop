@@ -13,8 +13,10 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
+        "laravel-lang/lang": "~7.0",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
+        "livewire/livewire": "^2.2",
         "twbs/bootstrap": "4.5.2"
     },
     "require-dev": {

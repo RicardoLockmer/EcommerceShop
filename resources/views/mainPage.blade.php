@@ -2,117 +2,175 @@
 
 @section('jumbotron')
 
-
-<div>
-    {{-- <img class="mainPageImageTop" src="dummy/big1.jpg" alt="First slide"> --}}
-    <div id="carouselExampleControls " class="carousel slide" data-ride="carousel">
+  
+<div class="">
+    
+    <div id="carouselExampleControls " class="carousel  slide z-1" data-ride="carousel">
         <div class="carousel-inner ">
             <div class="carousel-item active ">
-                <img class="mainPageImageTop" src="dummy/big1.jpg" alt="First slide">
+                <img class="mainPageImageTop h-60 lg:h-96" src="dummy/cs.gif" alt="First slide">
+            </div>
+            <!-- <div class="carousel-item">
+                <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-                <img class="mainPageImageTop" src="dummy/big2.png" alt="First slide">
-            </div>
-            <div class="carousel-item">
-                <img class="mainPageImageTop" src="dummy/big3.jpg" alt="First slide">
-            </div>
+                <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
+            </div> -->
+            <div class="grid sm:mt-0 lg:-mt-1/2  justify-items-center relative" style="z-index:5;">
+                <p class="font-bold text-gray-600 pt-10">Muy Pronto...</p>
+                <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-700" ></p>
+               
+             </div>
+                
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        <div data-aos="zoom-in" data-aos-duration="2000" class="grid h-auto  my-32 block font-bold  my-4 justify-center " style="z-index:100;">
+            <!-- <a href="###" class="justify-self-center " style="z-index:100;">
+            <div class="grid h-14 w-72 border-2 hover:shadow-lg border-yellow-500  items-center rounded-md" style="background-color: #FF9800">
+                <div class="justify-self-center font-bold  text-xl text-white">
+                    COMENZAR A VENDER
+                </div>
+            </div> 
+            </a> -->
+                
+        </div>   
     </div>
 </div>
 
-<div class="container">
 
 
-    <br>
+
+   
     @endsection
 
     @section('cards')
-    <br>
-    <div class="container">
-        <div class="row" style="text-align: center;">
+    
+    
 
-            <a href="###" class="card col centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
-                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                    Hombres
-                </h1>
-            </a>
-            <a href="###" class="card col centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
-                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                    Mujeres
-                </h1>
-            </a>
-            <a href="###" class="card col centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:300px; background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
-                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                    Niños
-                </h1>
-            </a>
+    <div class="container -mt-0 lg:mt-10">
+
+        <div class=" grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-4 lg:pt-4 place-items-center">
+            
+    
+    
+            <div class="relative bg-white shadow-md lg:rounded-md">
+                <a href="Categorias/Hombre" class="bg-white rounded-md h-32 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-80 lg: centerMyImages " style=" background-image:  url(dummy/regh1.jpg); background-size: cover; background-repeat: no-repeat;">
+    
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Hombres
+                    </h1>
+                </a>
+            </div>
+            <div class="relative bg-white shadow-md lg:rounded-md">
+    
+                <a href="Categorias/Mujer" class="bg-white rounded-md h-32 w-80 md:w-72 tablet:col-span-2 tablet:col-start-1 lg:h-80 lg:w-80 centerMyImages" style=" background-image: url(dummy/regm1.jpg); background-size: cover; background-repeat: no-repeat;">
+                
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Mujeres
+                    </h1>
+                </a>
+            </div>
+    
+            <div class="relative md:col-start-1 lg:rounded-md md:col-span-2 tablet:col-span-2 tablet:col-start-1 lg:col-span-1 bg-white shadow-md">
+    
+                <a href="Categorias/Niños" class="bg-white rounded-md h-32 w-80 md:w-96 lg:w-80 lg:h-80 centerMyImages " style="background-image:  url(dummy/regaloa.jpg); background-size: cover; background-repeat: no-repeat;">
+                
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Niños
+                    </h1>
+                </a>
+            </div>
+    
+           
         </div>
     </div>
     <br>
+
     @endsection
 
 
+<<<<<<< HEAD
     
+=======
+    @section('productosDestacados')
+    <div class="myFirstSection ">
+        <p class="div">
+            Mas Vendidos
+        </p>
+        <div class="myFirstSectionInner scroll">
+            <div class="container-fluid">
+                <div class="noWrap">
+                    <!-- {{-- @foreach($mejores as $mejor)
+                    <a href="/producto/{{$mejor->id}}">
+                    <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}" alt="">
+                    </a>
+                    @endforeach --}}
+  -->
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @endsection
+>>>>>>> masterTester
 
     @section('mejoresEn')
-    <br>
+    
     <div class="container">
-        <div class="row" style="text-align: center;">
+        <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-4 lg:pt-10 place-items-center">
+                        
+            <div class="relative bg-white shadow-lg">
+                <a href="Categorias/Baño" class="rounded shadow-md bg-white h-36 md:h-52 w-80 bg-cover tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-80 lg: centerMyImages " style=" background-image:  url(dummy/ban1.jpg); background-repeat: no-repeat;">
+    
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Baños
+                    </h1>
+                </a>
+            </div>
+            <div class="relative bg-white shadow-lg">
+                <a href="Categorias/Oficina" class="rounded shadow-md bg-white h-36 md:h-52 bg-cover w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-80 lg: centerMyImages " style=" background-image:  url(dummy/ofi1.jpg); background-repeat: no-repeat;">
+    
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Oficina
+                    </h1>
+                </a>
+            </div>
 
-            <a href="###" class="card col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ban1.jpg); background-size: cover; background-repeat: no-repeat;">
-                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                    Baños
-                </h1>
-            </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ofi1.jpg); background-size: cover; background-repeat: no-repeat;">
-                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                    Oficina
-                </h1>
-            </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
-                <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
-                    Exterior
-                </h1>
-            </a>
+            <div class="relative md:col-start-1 md:col-span-2 tablet:col-span-2 tablet:col-start-1 lg:col-span-1 bg-white">
+    
+                <a href="Categorias/Exterior" class="rounded shadow-md bg-white h-36 md:h-52 w-80 md:w-96 lg:w-80 lg:h-80 centerMyImages " style="background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
+                
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Exterior
+                    </h1>
+                </a>
+            </div>
+           
 
         </div>
         <br>
-        <div class="row" style="text-align: center;">
+        <!-- <div class="row" style="text-align: center;">
 
-            <a href="###" class="card col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Hogar" class="card col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/sal1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Hogar
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Habitacion" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/cuart1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Habitación
                 </h1>
             </a>
-            <a href="###" class="box col-sm centerMyImages"
-                style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
+            <a href="Categorias/Decoracion" class="box col-sm centerMyImages" style="margin: 0 2em 0 1em; width: 100px; height:310px; background-image:  url(dummy/dec1.jpg); background-size: cover; background-repeat: no-repeat;">
                 <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
                     Decoración
                 </h1>
             </a>
 
-        </div>
+        </div> -->
     </div>
     <br>
     @endsection
@@ -120,16 +178,17 @@
 
     @section('productosMujer')
     <div class="myFirstSection">
-        <p class="div text-muted"> para Mujeres</p>
+        <p class="div ">Mas sobre DetoShop</p>
         <div class="myFirstSectionInner scroll">
             <div class="container-fluid">
                 <div class="noWrap">
-                    @foreach($mujerItems as $mujeres)
-                    <a href="/producto/{{$mujeres->id}}">
-                        <img class="sectionImage2" src="{{ Storage::URL('/storage/assetItems/'.$mujeres->image) }}"
-                            alt="">
-                    </a>
-                    @endforeach
+                   
+                    
+                       <div>DETOSHOP GRATIS</div>
+                       <div>DETOSHOP GRATIS</div>
+                       <div>DETOSHOP GRATIS</div>
+                  
+                   
                 </div>
             </div>
         </div>
@@ -140,16 +199,11 @@
 
     @section('productosTecnologia')
     <div class="myFirstSection">
-        <p class="div text-muted" style="color: rgb(59, 59, 59);"> Tecnología</p>
+        <p class="div " > Tecnología</p>
         <div class="myFirstSectionInner scroll">
-            <div class="container is-fluid">
+            <div class="container-fluid">
                 <div class="noWrap">
-                    @foreach($techItems as $tech)
-                    <a href="/producto/{{$tech->id}}">
-                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$tech->image) }}"
-                            alt="">
-
-                        @endforeach
+               
                 </div>
             </div>
         </div>
@@ -157,3 +211,87 @@
 
     <br>
     @endsection
+    @section('productosJuguetes')
+    <div class="myFirstSection">
+        <p class="div " > Juguetes</p>
+        <div class="myFirstSectionInner scroll">
+            <div class="container-fluid">
+                <div class="noWrap">
+               
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    @endsection
+    @section('mejoresEnDos')
+    <div class="container">
+        <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-4 lg:pt-10 place-items-center">
+                        
+            <div class="relative bg-white shadow-lg">
+                <a href="Categorias/Baño" class="rounded shadow-md bg-white h-36 md:h-52 w-80 bg-cover tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-80 lg: centerMyImages " style=" background-image:  url(dummy/ban1.jpg); background-repeat: no-repeat;">
+    
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Baños
+                    </h1>
+                </a>
+            </div>
+            <div class="relative bg-white shadow-lg">
+                <a href="Categorias/Oficina" class="rounded shadow-md bg-white h-36 md:h-52 bg-cover w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-80 lg: centerMyImages " style=" background-image:  url(dummy/ofi1.jpg); background-repeat: no-repeat;">
+    
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Oficina
+                    </h1>
+                </a>
+            </div>
+
+            <div class="relative md:col-start-1 md:col-span-2 tablet:col-span-2 tablet:col-start-1 lg:col-span-1 bg-white">
+    
+                <a href="Categorias/Exterior" class="rounded shadow-md bg-white h-36 md:h-52 w-80 md:w-96 lg:w-80 lg:h-80 centerMyImages " style="background-image:  url(dummy/ext1.jpg); background-size: cover; background-repeat: no-repeat;">
+                
+                    <h1 class="has-text-weight-bold text-white" style="text-shadow: 3px 3px 3px #4e4e4e;">
+                        Exterior
+                    </h1>
+                </a>
+            </div>
+           
+
+        </div>
+        <br>
+    @endsection
+
+
+    @section('clock')
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Apr 1, 2021 09:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "D " + hours + "H "
+  + minutes + "M " + seconds + "s";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+@endsection

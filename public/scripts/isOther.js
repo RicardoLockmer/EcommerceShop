@@ -17,10 +17,13 @@ function otherColor(name) {
 $('#size').on('change', function () {
     var selectedValue = $('#size').val();
 
-    if (selectedValue == 'otro') {
-        document.getElementById('OS').innerHTML = '<input class=" form-control" type="text" name="size" style="margin: 0 0 0.5em 0; width: auto; padding-left: 0px!important;" id="size " placeholder="  Especifique el Tamaño"/>';
+    if ((selectedValue == 'Extra Pequeño (XS)') || (selectedValue == 'Pequeño (S)') || (selectedValue == 'Mediano (M)') || (selectedValue == 'Grande (L)') || (selectedValue == 'Extra Grande (XL)')) {
+
+        $('#UNITSIZE').hide();
+        $('#SEPUNITS').hide();
     } else {
-        document.getElementById('OS').innerHTML = '';
+        $('#UNITSIZE').show();
+        $('#SEPUNITS').show();
     }
 
 })

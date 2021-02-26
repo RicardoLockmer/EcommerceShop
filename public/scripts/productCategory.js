@@ -1,0 +1,27 @@
+var app = new Vue({
+  el: '#BIZCAT',
+  data: {
+    categorySelected: '',
+    Categories: [
+      'Manualidades',
+      'Accesorios para Automóvil',
+      'Bebes',
+      'Belleza y Cuidado Personal',
+      'Libros',
+      'Celulares y Accesorios',
+      'Ropa, Zapatos y Joyería',
+      'Computadoras',
+      'Electrónica',
+      'Jardín y Exterior',
+      'Artesanal',
+      'Hogar y Cocina',
+      'Equipaje',
+      'Instrumentos Musicales',
+      'Productos de Oficina',
+      'Suministros para Mascotas',
+      'Deporte',
+      'Herramientas de Trabajo',
+      'Juguetes',
+    ],
+  },
+});

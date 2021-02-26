@@ -1,17 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use App\Store;
 use App\Items;
 use App\Shipping;
 use App\User;
-use App\categortias;
-use Illuminate\Http\Request;
+use App\itemColors;
+use App\itemSizes;
+use App\itemCantidades;
 use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -25,18 +29,15 @@ class StoreController extends Controller
         }
         if (Auth::user()->id == $myStore->user_id) {
 
-            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->get();
-           
-            foreach ($myItems as $items) {
-                $items->image = json_decode($items->image);
+            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->orderBy('id', 'desc')->get();
+
             
-            }
             return view('myStore', [
                 'store' => $myStore,
                 'items' => $myItems
             ]);
         } else {
-            abort(404); 
+            abort(404);
         }
     }
 
@@ -86,6 +87,7 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
           $myStore = request()->validate([
                 'primerNombre' => 'required|max:50',
@@ -98,7 +100,7 @@ class StoreController extends Controller
                 'user_id' => 'required|unique:stores',
                 'usuario' => 'required|unique:stores|max:50',
                 'tipoNegocio' => 'required',
-                'cedulaJuridica' => 'required|max:10',
+                'cedulaJuridica' => 'nullable|max:10',
                 'provincia' => 'required',
                 'BizE' =>'nullable',
                 'canton' => 'required',
@@ -112,14 +114,14 @@ class StoreController extends Controller
                 'karma'=> 'nullable',
                 'updated_at' => 'nullable',
                 'created_at' => 'date',
-                'closeDate' => 'nullable', 
+                'closeDate' => 'nullable',
             ]);
             $newStore = new Store();
             $newStore->primerNombre = $request->primerNombre;
             $newStore->segundoNombre = $request->segundoNombre;
             $newStore->primerApellido = $request->primerApellido;
             $newStore->segundoApellido = $request->segundoApellido;
-            
+
             $newStore->nombreNegocio = $request->nombreNegocio;
             $newStore->descripcion = $request->descripcion;
             $newStore->user_id = Auth::user()->id;
@@ -133,19 +135,17 @@ class StoreController extends Controller
             $newStore->tyc = $request->tyc;
             $newStore->created_at = date('dmy');
             $newStore->cedulaJuridica = $request->cedulaJuridica;
-            if($request->BizE != NULL) {
+
                 $newStore->email = $request->BizE;
-            } else {
-                $newStore->email = Auth::user()->email;
-            }
+
             $newStore->save();
-            
+
             $newBiz = User::find($newStore->user_id);
             $newBiz->nombreNegocio = $newStore->nombreNegocio;
             $newBiz->save();
        return redirect('negocio/'.$newStore->nombreNegocio);
         } catch (\Illuminate\Database\QueryException $e) {
-            return back()->withErrors([$e, 'The Message']);
+            echo $e;
         }
     }
 
@@ -156,120 +156,178 @@ class StoreController extends Controller
         }
         if (Auth::user()->id == $myStore->user_id) {
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
-            
-            
-            return view('crearItem', [
+            $units = ['Metros (mts)'=>'mts', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
+            arsort($units);
+
+            return view('livewire/crear-item', [
                 'store' => $myStore,
                 'categories' => $myCategories,
-               
+               'units' => $units,
             ]);
 
-        } else {
-            abort(404);
+        } else { 
+            abort(404, 'Este no es el negocio que esta buscando!');
         }
     }
-
+    
     public function storeItem(Request $request) {
-
-   
+        
+        $data = json_decode($request->variantes);
+        $provincias = json_decode($request->provincias);           
         $myItem =  request()->validate([
-                    'nombre' => 'required|max:25',
-                    'descripcion' => 'required|max:255',
-                    'categoria' => 'required',
-                    'subcategoria' => 'required',
-                    'precio' => 'required',
-                    'size' => 'required',
-                    'cantidad'=>'required',
-                    'color' => 'required',
-                    'marca' => 'required',
-                    'Specs' => 'nullable',
-                    'rep' =>'nullable',
-                    'karma' => 'nullable',
-                    'updateDate' => 'nullable',
-                    'user_id' => 'required',
-                    'store_id' => 'required',
-                    'updated_at' => 'nullable',
-                    'created_at' => 'nullable',
-                    'image' => 'required|max:2048',
-                    'image.*' => 'mimes:jpg,jpeg,png',
-                    'empresa' => 'required',
-                    'provincia' => 'required',
-                    'restringidos' => 'nullable',
-                    'peso' => 'required',
-                    'dimensiones' => 'required',
-                    'precioEnvio' => 'required',
-                     
-                    'tiempoEntrega' => 'required',
-                    'etiquetas'=> 'nullable',
-                    'caja' => 'nullable'
-
-                ]);
-        // FILEs 
-        
-        // CREATE NEW ITEM IN DATABASE
-        $item = new Items();
-        $item->nombre = $request->nombre;
-        $item->descripcion = $request->descripcion;
-        $item->categoria = $request->categoria;
-        $item->subcategoria = $request->subcategoria;
-        $item->precio = $request->precio;
-        $item->size = $request->size;
-        $item->Specs = json_encode($request->Specs);
-        $item->cantidad = $request->cantidad;
-        $item->color = $request->color;
-        $item->marca = $request->marca;
-        $item->rep = NULL;
-        $item->karma = NULL;
-        $item->updateDate = date("dmy");
-        $item->store_id = $request->store_id;
-        $item->user_id = Auth::user()->id;
-        $item->nombreNegocio = Auth::user()->nombreNegocio;
-        $item->updated_at = NULL;
-        $item->created_at = date("dmy");
-        
-        
-       // HANDLE IMAGES
-       foreach($request->file('image') as $file){
-        
+            'nombre' => 'required|max:250',
+            'marca' => 'required|max:20',
+            'descripcion' => 'required|max:450',
+            'categoria' => 'required',
+            'subcategoria' => 'required',
+            'store_id' => 'required',
+            'store_name' => 'required',
+            'user_id' => 'required',
+            'specs' => 'required',
+            'data.*.color' => 'required',
+            'data.*.sizes.*.unidad' => 'required',
+            'data.*.sizes.*.tamano' => 'required',
+            'data.*.sizes.*.cantidad' => 'required',
+            'data.*.sizes.*.precio' => 'required',
+            'image' => 'required|max:4048',
+            'image.*' => 'mimes:jpg,jpeg,png,gif',
+            'updateDate' => 'nullable',
+            'updated_at' => 'nullable',
+            'created_at' => 'nullable',
+            'peso' => 'nullable',
+            'dimensiones' => 'nullable',               
+            ]);
             
-            $filename =$file->getClientOriginalName();
-            $fileNewName = date('dmyhms').$filename;
-            $data[] = $fileNewName; 
-            
-            $file->move(public_path().'/storage/assetItems/', $fileNewName);  
-       }
-        $item->image = json_encode($data);
+    try {
+        // try adding everything to DB
+        // New Item in DB
+    $allowedExtensions = ['jpg', 'jpeg', 'png'];
         
+    $item = new Items();
+    $item->nombre = $request->nombre;
+    $item->marca = $request->marca;
+    $item->descripcion = $request->descripcion;
+    $item->categoria = $request->categoria;
+    $item->subcategoria = $request->subcategoria;
+    $item->tipoVariante = $request->tipoVariante;
+    $item->specs = $request->specs;
+    $item->store_id = $request->store_id;
+    $item->nombreNegocio = Auth::user()->nombreNegocio;
+    $item->user_id = Auth::user()->id;
+    $item->updated_at = date("dmy");
+    $item->created_at = date("dmy");
+    $item->updateDate = date("dmy");
+
+    // New Images in DB
+    if($request->image > 0){
+        $ext = pathinfo($request->fileNamed, PATHINFO_EXTENSION);
+        $un = uniqid('DM');
+        $newFileName = date('dmyhms').$un.'.'.$ext;
+        $request->image->move(public_path().'/storage/assetItems/', $newFileName);
+        $item->image = $newFileName;
+    } else {
+        abort(404);
+    }
+    
+    $item->save(); // SAVE NEW ITEM
+    $addDTID = Items::find($item->id); // NEWLY CREATED ITEM ID
+    $storeInitials = substr($item->nombreNegocio, 0, 3);
+    $nameInitials = substr($item->nombre, 0, 2);
 
 
-        
-        //SAVE TO DATABASE
-        $item->save();
-        $itemID = $item->id;
+    // New Colors for Item - AGREGA UN COLOR POR CADA COLOR DEL PRODUCTO
+        for($i = 0; $i < count($data); $i++){
+            $colorInitials = substr($data[$i]->color, 0, 1);
+            $itemVar = new itemColors();
+            $itemVar->item_id = $item->id;
+            $itemVar->color = $data[$i]->color;
+            $uniqueItemId = uniqid('DT');
+            $itemVar->link = $storeInitials.'TM'.$item->id.date("dmy").$uniqueItemId.date("his");
+            $itemVarImgs = [];
+                foreach($request->moreImages[$i] as $imgs){ 
+                    // AGREGA IMAGENES DE CADA COLOR DEL PRODUCTO
+                    $filename = $imgs->getClientOriginalName();
+                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+                    if(in_array($ext, $allowedExtensions)){
+                        $un = uniqid('DM');
+                        $newFileNames = date('dmyhms').$un.'.'.$ext;       
+                            $itemVarImgs[] = $newFileNames;
+                            $imgs->move(public_path().'/storage/assetItems/', $newFileNames);
 
-        $newItemShipping = new Shipping();
-        $newItemShipping->items_id = $itemID;
-        $newItemShipping->empresa = $request->empresa;
-        
-        $provinciaEncode = json_encode($request->provincia);
-        $newItemShipping->provincia = $provinciaEncode;
+                    } else {
+                        return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
+                    }
+                }
+             
+        // FOR LOOP DE LOS COLORES COMIENZA A SALVAR CADA ROW
+        $itemVar->colorImages = json_encode($itemVarImgs);
+        $itemVar->created_at = date("dmy");
+        $itemVar->updated_at = date("dmy");
+        $itemVar->save();
+                    
+        foreach($data[$i]->sizes as $sizes){
+            // FOREACH LOOP PARA AGREGAR CADA TAMANO Y PRECIO DE CADA VARIANTE 
+            $sizesVar = new itemSizes();
+            $sizesVar->item_id = $item->id;
+            $sizesVar->color_id = $itemVar->id;
+            $sizeInitials = substr($sizes->tamano, 0 ,3);
+            $qtyInitials = substr($sizes->cantidad, 0,1);
+            $sizesVar->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
+            $sizesVar->size = $sizes->tamano.' '.$sizes->unidad;
+            $sizesVar->quantity = $sizes->cantidad;
+            $sizesVar->precio = $sizes->precio;
+            $sizesVar->save();
 
-        $newItemShipping->restringidos = $request->restringidos;
-        $newItemShipping->peso = $request->peso;
-        $newItemShipping->dimensiones = $request->dimensiones;
-        $newItemShipping->precioEnvio = $request->precioEnvio;
-        
-        $newItemShipping->tiempoEntrega = $request->tiempoEntrega;
 
-        $newItemShipping->save();
+        }
 
-        return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
+
+        //AGREGAR CADA PROVINCIA A LA QUE SE PUEDE ENVIAR EL PRODUCTO
+        //AGREGA CADA PRECIO ENVIO, EMPRESA ENVIO, TIEMPOE ENTREGA, PESO, DIMENSIONES
+    }
+            foreach($provincias as $provincia){
+                if($provincia->tiempoEntrega > 0){
+                        $newItemShipping = new Shipping();
+                        $newItemShipping->items_id = $item->id;
+                        $newItemShipping->created_at = date("dmy");
+                        $newItemShipping->updated_at = date("dmy");
+                        $newItemShipping->empresa = $request->empresa;
+                        $newItemShipping->provincia = $provincia->provincia;
+                        $newItemShipping->tiempoEntrega = $provincia->tiempoEntrega;
+                        if ($provincia->gratis == true){
+                            $newItemShipping->precioEnvio = 0;
+                        } else if ($provincia->precioEnvio > 0){
+                            $newItemShipping->precioEnvio = $provincia->precioEnvio;
+                        }
+                        $newItemShipping->peso = $request->peso;
+                        $newItemShipping->dimensiones = $request->dimensiones;
+                        $newItemShipping->save();
+                        //SALVA CADA ROW DE CADA PROVINCIA CON SUSS DATOS
+                }
+                    
+                }
+         
+ 
+    } catch(\Illuminate\Database\QueryException $e) {
+    return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
+}
+   
+
+
+
+    
+
+    
+
+    //     return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
         
-        
+    // return response()->json([
+    //     'message' => 'New post created'
+    // ]);
 
         // REDIRECT A LA PAGINA DE PRODUCTOS
-        
-    
+
+
     }
     /**
      * Display the specified resource.
@@ -288,12 +346,16 @@ class StoreController extends Controller
             \Cart::session(Auth::user()->id);
         }
     if (Auth::user()->id == $myStore->user_id) {
-    $images = json_decode($item->image);
-    
+     $colors = itemColors::where('item_id', $item->id)->get();
+     $sizes = itemSizes::where('item_id', $item->id)->get();
+     
+
     return view('thisItem',[
     'item' => $item,
     'store' => $myStore,
-    'images' => $images
+    'colors' => $colors,
+
+    'sizes' => $sizes
 
     ]);
     } else {
@@ -306,11 +368,9 @@ class StoreController extends Controller
         if (Auth::user()->id == $myStore->user_id) {
 
         $allItems = Items::where('store_id', $myStore->store_id)->get();
-        foreach ($allItems as $items) {
-            $items->image = json_decode($items->image);
         
-        }
         
+
         if(Auth::user()){
 
             \Cart::session(Auth::user()->id);
@@ -318,14 +378,14 @@ class StoreController extends Controller
         return view('myItem', [
             'items' => $allItems,
             'store' => $myStore,
-            
+
             ]);
         } else {
             abort(404);
         }
         }
-        
-    
+
+
 
 
     /**
@@ -410,7 +470,7 @@ class StoreController extends Controller
         $updateItemStore = Items::where('nombreNegocio', Auth::user()->nombreNegocio)->get();
             foreach ($updateItemStore as $itemStore) {
                 $itemStore->nombreNegocio = $request->nombreNegocio;
-                $itemStore->save(); 
+                $itemStore->save();
             }
 
         if ($request->primerNombre != NULL) {
@@ -430,7 +490,7 @@ class StoreController extends Controller
         }
         if ($request->nombreNegocio != NULL) {
         $newStore->nombreNegocio = $request->nombreNegocio;
-        } 
+        }
         if ($request->cedulaJuridica != NULL) {
             $newStore->cedulaJuridica = $request->cedulaJuridica;
             }
@@ -471,7 +531,7 @@ class StoreController extends Controller
         $newStore->phoneNumber = $request->ntel;
         }
         $newStore->created_at = date('dmy');
-       
+
         $newStore->save();
         if ($newStore->nombreNegocio != NULL){
         $newBiz = User::find($newStore->user_id);
@@ -483,14 +543,14 @@ class StoreController extends Controller
     } catch (\Illuminate\Database\QueryException $e) {
          return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
     }
-        
-            
-            
-       
-           
-        
-        
-       
+
+
+
+
+
+
+
+
     }
 
 
@@ -610,7 +670,7 @@ class StoreController extends Controller
     } // ELSE IMAGE 6 NULL
 
 
-    
+
     //SAVE TO DATABASE
     $item->save();
 
@@ -634,16 +694,24 @@ class StoreController extends Controller
     public function destroyItem(Store $myStore, Items $item)
     {
         if (Auth::user()->id == $myStore->user_id) {
-            
+            $itemColors = itemColors::where('item_id', $item->id)->get();
+            foreach($itemColors as $colors){
+                $colors->delete();
+            }
+            $itemSizes = itemSizes::where('item_id', $item->id)->get();
+            foreach($itemSizes as $sizes){
+                $sizes->delete();
+            }
+            $itemShipping = Shipping::where('items_id', $item->id)->get();
+            foreach($itemShipping as $shipping){
+                $shipping->delete();
+            }
             $item->delete();
-            
+
 
             return back();
-            // return view('myItem', [
-            // 'items' => $myItems,
-            // 'store' => $myStore
-            // ]);
-        
+           
+
         } else {
         abort(404);
         }

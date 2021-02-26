@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Items;
+use App\itemSizes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,12 +27,12 @@ class ShoppingController extends Controller
                 }
             }
             foreach($myCartItems as $updateItems) {
-            $Items = Items::where('id', $updateItems->associatedModel->id)->first();
+            $Items = itemSizes::where('id', $updateItems->associatedModel->id)->first();
            
             
             
             \Cart::session($userID)->update($updateItems->id, array(
-                'name' => $Items->nombre,
+                'name' => $Items->items->nombre,
                 'price' => $Items->precio,
                 'associatedModel' => $Items
             ));
@@ -66,24 +67,27 @@ class ShoppingController extends Controller
     public function store(Request $request)
     {
         if(Auth::user()){
+    
         $userId = Auth::user()->id;
         $uniqueId = 'DTRID'.$request->id;
-        $newCartItem = Items::where('id', $request->id)->first();
+        $newCartItem = itemSizes::where('id', $request->id)->first();
+        $myItem = Items::where('id', $newCartItem->item_id)->first();
+            
         $cartExist = \Cart::session($userId)->getContent();
             if($cartExist != NULL) {
                 $itemExist = \Cart::get($uniqueId);
-                if($itemExist !=null){
+                if($itemExist != null){
                     $cart =  \Cart::session($userId)->update($uniqueId, array(
-                        'quantity' => 1
+                        'quantity' => $request->qty
                         
                   ));
                   return back();
                 }else {
                     \Cart::session($userId)->add(array(
                         'id' => $uniqueId,
-                        'name' => $newCartItem->nombre,
+                        'name' => $myItem->nombre,
                         'price' => $newCartItem->precio,
-                        'quantity' => 1,
+                        'quantity' => $request->qty,
                         'associatedModel' => $newCartItem
                     ));
                   
@@ -98,9 +102,9 @@ class ShoppingController extends Controller
             
             \Cart::session($userId)->add(array(
                 'id' => $uniqueId,
-                'name' => $newCartItem->nombre,
+                'name' => $newCartItem->items->nombre,
                 'price' => $newCartItem->precio,
-                'quantity' => 1,
+                'quantity' => $request->qty,
                 'associatedModel' => $newCartItem
             ));
           
@@ -108,9 +112,9 @@ class ShoppingController extends Controller
         
        
     }
-    
+
     } else {
-      return back();
+      return redirect('login');
     }
     }
 

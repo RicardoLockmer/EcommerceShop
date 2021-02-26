@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Items;
+use App\itemColors;
+use App\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,31 +14,43 @@ class SearchController extends Controller
 
             \Cart::session(Auth::user()->id);
         }
+        
         if($request->q === NULL) {
           return redirect('/');
         } else {
             // $q = $request->q;
-            $terms = explode(" ", request('q'));
+            $terms = explode(' ', request('q'));
             foreach ($terms as $q) {
             $items = Items::where ( 'nombre', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
             ->orWhere('categoria', 'LIKE', '%'.$q.'%')
             ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')
             ->orWhere('marca', 'LIKE', '%'.$q.'%')
-            ->orWhere('nombreNegocio', 'LIKE', '%'.$q.'%')
             ->get();
 
+            foreach($terms as $word){
+                $itemVar = itemColors::where('color', 'LIKE', '%'.$word.'%')->get();
+            }
             
             }
-            foreach ($items as $item ) {
-                $item->image = json_decode($item->image);
-            }
+            
             
         return view('mySearch', [
             'items' => $items,
-            'search' => $q
+            'itemsVar' => $itemVar,
+            'search' => $terms,
+            
         ]);
         }
         
+    }
+
+    public function masNegocio(Store $negocio){
+
+        // $neg = Store::where('store_id', $negocio)->get();
+
+        return view('masNegocio', [
+            'negocio' =>$negocio
+        ]);
     }
 }

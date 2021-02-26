@@ -18,8 +18,8 @@ class CreateShippingsTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('items_id');
             $table->string('empresa')->nullable();
-            $table->json('provincia')->nullable();
-            $table->string('restringidos')->nullable();
+            $table->string('provincia')->nullable();
+            // $table->string('restringidos')->nullable();
             $table->string('peso')->nullable();
             $table->string('dimensiones')->nullable();
             $table->string('precioEnvio')->nullable();

@@ -1,16 +1,9 @@
-
-
-
-
-
 let isDown = false;
 let startX;
 let scrollLeft;
 
+$('.scroll').on('mouseenter', function () {
 
-
-
-$('.scroll').hover(function () {
     this.addEventListener("mousedown", e => {
         isDown = true;
         this.classList.add("active");

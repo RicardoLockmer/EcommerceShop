@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Auth;
 // GUEST PAGES
 Route::get('/', 'MainPageController@index');
 Route::get('destacados/{item}', 'MainPageController@show');
-Route::get('producto/{item}', 'ItemsController@show');
+Route::get('producto/{varItem}', 'ItemsController@show');
+ 
  
 //CART ROUTES
 Route::get('/ShoppingCart', 'ShoppingController@index');
@@ -24,7 +25,17 @@ Route::post('/shoppingCart', 'ShoppingController@store');
 Route::post('/updateCart', 'ShoppingController@update');
 Route::post('/deleteCartItem', 'ShoppingController@destroy');
 
-// MAIN ROUTES
+//BUUY ROUTES
+Route::post('/comprar', 'BuyItemController@index');
+Route::get('/ADDR', 'BuyItemController@ADDR');
+Route::post('/newADDR', 'BuyItemController@newADDR');
+Route::get('/drumroll', 'BuyItemController@tryTransaction')->middleware('auth');
+
+// MAINPAGE ROUTES
+Route::get('/paraHombres', 'CategoryController@paraHombres');
+Route::get('/ComoVender', 'MainPageController@comoVender')->name('comoVender');
+Route::get('Categorias/{categoria}', 'CategoriasController@index');
+
 // MY STORE ROUTE
 Route::get('/negocio/{myStore:nombreNegocio}', 'StoreController@index')->middleware('auth');
 
@@ -32,7 +43,7 @@ Route::get('/negocio/{myStore:nombreNegocio}', 'StoreController@index')->middlew
 Route::get('/perfil/{user:name}', 'UserController@index')->middleware('auth');
 Route::get('/prefil/{user:name}/update')->middleware('auth'); //inclompleto
 Route::get('/perfil/{user:name}/direcciones', 'DireccionesController@index')->middleware('auth');
-Route::get('/perfil/{user:name}/direcciones/agregar', 'DireccionesController@create')->middleware('auth');
+Route::get('/perfil/{user:name}/direcciones/agregar', 'DireccionesController@create')->name('direcciones')->middleware('auth');
 
 Route::post('/NuevaDireccion', 'DireccionesController@store')->middleware('auth');
 // DELETE ADDRESS\
@@ -43,12 +54,11 @@ Route::put('/perfil/{direccion:id}/update', 'DireccionesController@update')->mid
 //CREAR NEGOCIO
 Route::get('/iniciar-mi-negocio', 'StoreController@create')->middleware('auth'); // crear negocio view
 Route::post('/iniciar-mi-negocio', 'StoreController@store')->middleware('auth'); // guardar info del negocio
-
+Route::get('/cheese', 'ItemsController@update');
 
 //CREAR PRODUCTO
 Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem')->middleware('auth'); // crear view
-Route::post('/negocio/{myStore:nombreNegocio}/nuevo-producto',
-'StoreController@storeItem')->middleware('auth');//guardar
+Route::post('/nuevo-producto', 'StoreController@storeItem')->middleware('auth');//guardar
 Route::get('/negocio/{myStore:nombreNegocio}/productos/', 'StoreController@showItem')->middleware('auth');// items view
 Route::get('/negocio/{myStore:nombreNegocio}/productos/{item}', 'StoreController@thisItem')->middleware('auth'); // 1
 
@@ -72,3 +82,4 @@ Route::put('/negocio/{myStore:nombreNegocio}/{item:id}/editar', 'StoreController
 
 // SEARCH
 Route::post ( '/search', 'SearchController@mySearch');
+Route::get('/negocio/compras/{negocio}', 'SearchController@masNegocio');

@@ -14,17 +14,17 @@ class MainPageController extends Controller
      */
     public function index()
     {
-        $myTech = Items::take(15)->where('subcategoria', 'Computadoras')->latest()->get();
-        // $destacados = Items::take(15)->where('rep', '>', 100)->orderBy('rep', 'desc')->get();
-        $paraMujer = Items::take(15)->where('categoria', 'Ropa para Mujer')->latest()->get();
+        
+        
+      
         if(Auth::user()){
 
             \Cart::session(Auth::user()->id);
         }
         return view('mainPage', [
-            'techItems' => $myTech,
-            // 'mejores' => $destacados,
-            'mujerItems' => $paraMujer
+           
+            
+           
         ]);
     } 
 
@@ -92,5 +92,8 @@ class MainPageController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function comoVender(){
+        return view('comoVender');
     }
 }
