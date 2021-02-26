@@ -15,16 +15,17 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id('id')->uniqid();
-            $table->string('nombre');
-            $table->string('descripcion');
+            $table->string('nombre', 255);
+            $table->string('descripcion', 450);
             $table->string('categoria');
             $table->string('subcategoria');
             $table->string('marca');
-            $table->string('specs', 3000);
+            $table->string('specs', 3000)->nullable();
             $table->string('tipoVariante');    
             $table->timestamp('updateDate')->nullable();
             $table->integer('store_id');
             $table->string('nombreNegocio');
+            $table->string('features')->nullable();
             $table->longText('etiquetas')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamp('publicado')->nullable();
