@@ -37,7 +37,7 @@
             Información de su Cuenta
             </h3>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">
-            Dato Personales
+            Datos Personales
             </p>
         <div  class="flex md:col-start-6 lg:col-start-6 mt-4 justify-center border-2 border-solid font-bold hover:bg-gray-500 rounded-full  bg-white shadow-md h-10 w-32    centerMyImages items-center relative">
         <a class="w-28 h-6 flex centerMyImages" href="###">
@@ -67,7 +67,7 @@
         @if ($user->nombreNegocio != NULL)
         {{$user->nombreNegocio}}
         @else
-        <a href="/iniciar-mi-negocio">Comenzar a Vender</a>
+        <a class="text-blue-600" href="/iniciar-mi-negocio">Comenzar a Vender</a>
         @endif
         </dd>
       </div>
@@ -81,7 +81,7 @@
             {{$direccion->direccion}}, {{$direccion->pais}}, 
             {{$direccion->codigoPostal}}
         @else
-        <a href="/perfil/{{$user->name}}/direcciones">Agregar Dirección y Teléfono</a>
+        <a class="text-blue-600" href="/perfil/{{$user->name}}/direcciones">Agregar Dirección y Teléfono</a>
         @endif
         </dd>
       </div>
@@ -114,7 +114,7 @@
         @if($user->compras != NULL)
             Ver mis Tarjetas
         @else
-        No hay Tarjetas Registradas - regitrar tarjeta -
+        No hay Tarjetas Registradas <a class="text-blue-600" href="###">Registrar una Tarjeta</a>
         @endif
         </dd>
       </div>
