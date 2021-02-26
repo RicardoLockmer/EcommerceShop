@@ -88,9 +88,6 @@
     @endsection
 
 
-<<<<<<< HEAD
-    
-=======
     @section('productosDestacados')
     <div class="myFirstSection ">
         <p class="div">
@@ -115,7 +112,6 @@
     </div>
     
     @endsection
->>>>>>> masterTester
 
     @section('mejoresEn')
     
