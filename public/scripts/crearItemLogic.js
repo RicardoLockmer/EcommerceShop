@@ -140,27 +140,33 @@ const itemLayout = {
             ],
             tutorial: false,
             vistaPrevia: false,
-            nombre: '',
-            marca: '',
+            nombre: 'Apple Watch SE (GPS, 40mm)',
+            marca: 'Apple',
             unit: '',
-            descripcion: '',
+            descripcion: 'Built-in GPS, GLONASS, Galileo, and QZSS, S5 with 64-bit dual-core processor, W3 Apple wireless chip, Barometric altimeter, Capacity 32GB, Optical heart sensor, Electrical heart sensor, Improved accelerometer up to 32 g‑forces, Improved gyroscope, Ambient light sensor',
             mainImage: '',
             image: '',
-            categorySelected: '',
-            subCategorySelected: '',
+            selectedCategory: '',
+            selectedSubCategory: '',
             allCRChecked: false,
             todoGratis: false,
             SelectedProv: [],
             myProvincias: [],
             empresaEnvios: '',
             selected: '',
+            selectedImageSize: '',
+            maxFileSize: 4194304,
             selectedSize: '',
-            currentTab: 0,
-            selectedType: '',
+            selectedImageHeight: null,
+            selectedImageWidth: '',
+            maxImageHeight: 1500,
+            currentTab: 1,
+            selectedType: 'Color',
             otro: '',
             selectedImage: null,
             peso: '',
             myImageError: '',
+
             dimensiones: '',
             specs: [{
                 specName: '',
@@ -171,6 +177,7 @@ const itemLayout = {
                     moreImages: [],
                     myImagesError: '',
                     imageListed: [],
+                    verified: false,
                     color: "",
                     sizes: [
                         {
@@ -212,7 +219,7 @@ const itemLayout = {
 
             this.fixStepIndicator(n)
         },
-        nextPrev: function (n) { // funciones de lo botones - pide el cambio de tab a showTab() dependiendo si validateForm() es valido
+        nextPrev: function (n) { // funciones de los botones - pide el cambio de tab a showTab() dependiendo si validateForm() es valido
 
             var x = document.getElementsByClassName("tab");
 
@@ -236,7 +243,7 @@ const itemLayout = {
             x = document.getElementsByClassName("tab");
             y = x[this.currentTab].getElementsByTagName("input");
             select = x[this.currentTab].getElementsByTagName("select");
-            f = x[this.currentTab].getElementsByTagName("label");
+            f = this.selectedImage;
             xl = x[this.currentTab].getElementsByTagName("small");
             z = x[this.currentTab].getElementsByTagName("textarea");
 
@@ -277,16 +284,25 @@ const itemLayout = {
                 }
 
             }
-            for (i = 0; i < f.length; i++) {
-
-                if (f[i].value == "") {
-
-                    f[i].className += " is-invalid";
-
+            if (this.currentTab == 1) {
+                if (this.selectedImage == '') {
                     valid = false;
                 }
+                if (this.selectedImageSize > this.maxFileSize) {
+                    valid = false;
+                }
+                for (var i = 0; i < this.variantes.length; i++) {
 
+                    if (this.variantes[i].moreImages.length == 0) {
+                        valid = false
+                        break
+
+                    }
+
+                }
             }
+
+
             if (valid) {
                 document.getElementsByClassName("step")[this.currentTab].className += " finish";
             }
@@ -327,8 +343,8 @@ const itemLayout = {
             formData.append('nombre', this.nombre);
             formData.append('marca', this.marca);
             formData.append('descripcion', this.descripcion);
-            formData.append('categoria', this.categorySelected.id);
-            formData.append('subcategoria', this.subCategorySelected);
+            formData.append('categoria', this.selectedCategory.id);
+            formData.append('subcategoria', this.selectedSubCategory);
             formData.append('store_id', store_id);
             formData.append('store_name', store_name);
             formData.append('user_id', user_id);
@@ -369,8 +385,9 @@ const itemLayout = {
             this.variantes.push({
                 moreImages: [],
                 myImagesError: '',
-                color: '',
                 imageListed: [],
+                verified: false,
+                color: "",
                 sizes: [
                     {
                         unidad: '',
@@ -409,71 +426,101 @@ const itemLayout = {
         onFileChange(e) {
             this.selectedImage = document.getElementById("MIMG").files[0];
 
+
             var filename = document.getElementById("MIMG").files[0].name;
             var ext = filename.split('.').pop();
             var files = e.target.files || e.dataTransfer.files;
 
             console.log(this.selectedImage);
 
-            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
                 this.myImageError = '';
+
                 this.createImage(files[0]);
+
             } else {
                 document.getElementById('MIMG').value = "";
                 this.myImageError = "El Archivo no es .jpg, .jpeg o .png";
 
             }
 
+
+
         },
 
         createImage(file) {
 
-            var image = new Image();
+
             var reader = new FileReader();
             var vm = this;
-            reader.onload = (e) => {
-                vm.image = e.target.result;
-            };
 
             reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                var image = new Image();
+                vm.image = e.target.result;
+                image.src = e.target.result;
+                image.onload = function () {
+                    var height = this.height;
+
+
+                    if (height > vm.maxImageHeight) {
+                        vm.myImageError = "Excede el Alto de la imagen";
+                        vm.image = '';
+                        vm.selectedImage = '';
+                    }
+
+                }
+
+
+
+            };
+
+
+
+
         },
+
         createImages(e, index) {
-            let imageList = e.target.files || e.dataTransfer.files;
-            if (this.variantes[index].imageListed.length > 0) {
+            var imageList = e.target.files || e.dataTransfer.files;
 
-                this.variantes[index].imageListed = [];
-                this.variantes[index].moreImages = [];
+            console.log(imageList);
 
-            }
 
             for (var i = 0; i < imageList.length; i++) {
                 var filename = imageList[i].name;
                 var ext = filename.split('.').pop();
-                if (ext == 'jpg' || ext == 'jpeg' || ext == 'png') {
+                var reader = new FileReader();
+
+                if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
                     this.variantes[index].myImagesError = "";
-                    for (var e = 0; e < this.variantes[index].moreImages.length; e++) {
-                        console.log(this.variantes[index].moreImages[e]);
-                    }
-
-                    for (var i = 0; i < imageList.length; i++) {
-                        let reader = new FileReader();
-                        this.variantes[index].moreImages.push(imageList[i]);
-                        reader.readAsDataURL(imageList[i]);
-                        reader.onload = e => {
-                            this.variantes[index].imageListed.push(e.target.result);
-
-
-                        }
+                    this.variantes[index].moreImages.push(imageList[i]);
+                    reader.readAsDataURL(imageList[i]);
+                    this.variantes[index].verified = true;
+                    reader.onload = e => {
+                        this.variantes[index].imageListed.push(e.target.result);
                         console.log(imageList.length);
                         console.log(this.variantes[index].moreImages.length);
+
+
                     }
 
                 } else {
-                    this.variantes[index].imageListed.splice(0, this.variantes[index].imageListed.length);
-                    this.variantes[index].moreImages.splice(0, this.variantes[index].moreImages.length);
-                    this.variantes[index].myImagesError = "El Archivo no es .jpg, .jpeg o .png";
+
+                    while (this.variantes[index].imageListed.length > 0) {
+                        this.variantes[index].imageListed.pop();
+                    }
+                    while (this.variantes[index].moreImages.length > 0) {
+                        this.variantes[index].moreImages.pop();
+                    }
+                    this.variantes[index].myImagesError = "Una o mas imagenes no cumplen con los requisitos";
+
+                    reader.abort();
                     console.log(imageList.length);
+                    console.log(this.variantes[index].imageListed.length)
                     console.log(this.variantes[index].moreImages.length);
+                    this.variantes[index].verified = false;
+                    break
+
                 }
 
 

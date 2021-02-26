@@ -175,7 +175,7 @@ class StoreController extends Controller
         $data = json_decode($request->variantes);
         $provincias = json_decode($request->provincias);           
         $myItem =  request()->validate([
-            'nombre' => 'required|max:100',
+            'nombre' => 'required|max:250',
             'marca' => 'required|max:20',
             'descripcion' => 'required|max:450',
             'categoria' => 'required',
@@ -190,7 +190,7 @@ class StoreController extends Controller
             'data.*.sizes.*.cantidad' => 'required',
             'data.*.sizes.*.precio' => 'required',
             'image' => 'required|max:4048',
-            'image.*' => 'mimes:jpg,jpeg,png',
+            'image.*' => 'mimes:jpg,jpeg,png,gif',
             'updateDate' => 'nullable',
             'updated_at' => 'nullable',
             'created_at' => 'nullable',
@@ -202,7 +202,7 @@ class StoreController extends Controller
         // try adding everything to DB
         // New Item in DB
     $allowedExtensions = ['jpg', 'jpeg', 'png'];
-
+        
     $item = new Items();
     $item->nombre = $request->nombre;
     $item->marca = $request->marca;

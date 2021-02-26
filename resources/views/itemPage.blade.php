@@ -20,7 +20,7 @@
                 <div class="w-full h-full">
                     <a  id="sticky">
                         <img class="mainImage object-contain object-scale-down w-full"  
-                            src="{{ Storage::URL('assetItems/'.$searchedItem->colorImages[0])}}" 
+                            src="{{ Storage::URL('assetItems/'.$item->image)}}" 
                             alt="{{$item->nombre}}">
 
                     </a>
@@ -97,8 +97,8 @@
                         </small>
                     @endif
                 @endif
-                <br>
-                <div class="mt-2">
+            
+                <div class="">
                     <small class="text-muted flex items-center " style="font-size: 14px; left:-18px;">
                     <div class="mr-2 flex">
                     @for($i = 0; $i <= 5; $i++)
@@ -124,9 +124,9 @@
 
                             <span>
                                 <select 
-                                    onchange="top.location.href = this.options[this.selectedIndex].value" 
+                                     
                                     style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
-                                    class="custom-select col-3" 
+                                    oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
                                     name="color" 
                                     id="color">
                                     
@@ -136,11 +136,11 @@
 
                                     @foreach ($item->colors as $color)
                                         @if($searchedItem->color != ucfirst($color->color))
-                                            <a href="#">
-                                            <option  value="{{ url  ('producto/'.$color->link)  }}">
+                                            
+                                            <option  >
                                                 {{ucfirst($color->color)}}
                                             </option>
-                                            </a>
+                                            
                                         @endif
                                     @endforeach
                                 </select>
@@ -167,8 +167,9 @@
                                 <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span>
                                     
                                     <select 
-                                        @change="updateItem($event)" 
-                                        class="custom-select col-3" 
+                                        @change="updateItem($event)"
+                                        style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
+                                        oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
                                         name="color" 
                                         id="color">
                                             
@@ -217,7 +218,8 @@
                                 </strong>
                             </span>
                             <select v-model="selectedQty" 
-                                style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px;" class="custom-select col-3" 
+                            style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
+                                        oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
                                 name="color" 
                                 id="qty">
                                     
@@ -242,8 +244,8 @@
                             </span>
                     
                             <select v-model="selectedQty" 
-                                style="height: 35px; padding: 0 0 0 .75rem; width: calc(100% + 25px); min-width: 80px" class="custom-select col-3" 
-                                name="color"
+                            style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
+                                        oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control"
                                 max="20" 
                                 id="color">
 
@@ -259,14 +261,13 @@
                     
                 <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base border">
                     <p class="card-text flex" >
-                        <svg width="1.4em" 
-                            height="1.4em" 
-                            viewBox="0 0 16 16" 
-                            class="bi bi-box-seam text-muted mr-2 flex" 
-                            fill="currentColor" 
-                            xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z" />
-                        </svg>
+                        <svg width="1.5em" 
+                            height="1.5em"
+                            class="mr-2"
+                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path fill="#fff" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+</svg>
 
                 @if (Auth::check()) 
 
@@ -275,7 +276,7 @@
                         @if(in_array($selectedAddress->provincia, $provinciasEnvio))
                             
                             <small>
-                                <strong style="color: seagreen"> 
+                                <strong class="text-green-500"> 
                                     Si se envía a {{$selectedAddress->provincia}}
                                 </strong>
                             </small>
@@ -300,8 +301,8 @@
                             
                         @else
                             <small>
-                            <strong style="color:rgb(145, 7, 7)"> No se Envía a {{$selectedAddress->provincia}} </strong>
-                            </small><small><a href="/perfil/{{Auth::user()->name}}/direcciones"> - Cambiar Dirección</a></small>
+                            <strong class="text-red-600 mr-2"> No se Envía a {{$selectedAddress->provincia}} </strong>
+                            </small> <small class="ml-2"> <a class="text-blue-600" href="/perfil/{{Auth::user()->name}}/direcciones">Cambiar Dirección</a></small>
                             <p>
                             <small class="text-muted">
                                 Lo sentimos, este producto no se puede enviar a su dirección.
@@ -353,27 +354,18 @@
         <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
             <div class="flex nowrap">
                 
-                @foreach ($item->colors as $color)
-                        @if(count($item->colors) > 1)
-                        @foreach(json_decode($color->colorImages) as $image)
-                            @if($image != NULL)
-                            <a href="{{$color->link}}" class="ml-4">
-                            <img id="subimage" class="sectionImage subimage " src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}" style="max-width:initial;">
+            @foreach ($item->colors as $color)
+                        
+                @foreach(json_decode($color->colorImages) as $image)
+                    @if($image != NULL)
                             
-                            </a>
-                            @endif
-                        @endforeach
-                        @else 
-                        @foreach(json_decode($color->colorImages) as $image)
-                            @if($image != NULL)
-                            
-                            <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+                        <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
                             
                           
-                            @endif
-                        @endforeach
-                        @endif
+                    @endif
                 @endforeach
+           
+            @endforeach
 
             </div>
         </div>

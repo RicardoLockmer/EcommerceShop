@@ -6,15 +6,15 @@
 <div class="container grid grid-cols-9" id="itemLayout" >
 
 
-    <div :class="(vistaPrevia)? 'grid grid-cols-12 col-start-2 col-end-12 border-red-600 ' : 'grid grid-cols-12 col-start-1 col-end-11 lg:col-start-3 lg:col-end-8 '" style="margin-top: 14px;" >
+    <div :class="(vistaPrevia)? 'grid grid-cols-12 col-start-2 col-end-12 border-red-600 ' : 'grid grid-cols-12 col-start-1 col-end-11 lg:col-start-2 lg:col-end-9 '" style="margin-top: 14px;" >
 
         <div :class="(vistaPrevia)? ' border-red-600 col-span-5 ' : 'col-span-12'" style=" height:auto;">
             <form class="" @submit.prevent="saveData" style="display:block!important; top:15px!important;"   id="sticky" enctype="multipart/form-data">
-                {{-- CSRF --}}
+            
                 @csrf
                 
                 @if ($errors->any())
-                <div class="alert alert-warning alert-dismissible fade show lg:ml-30 " role="alert">
+                <div class="alert alert-warning alert-dismissible fade show lg:ml-30" role="alert">
                     <strong>
                         Parece que hay un problema!
                     </strong>
@@ -50,10 +50,10 @@
                     <div class="grid">
                     <img class="mx-auto h-12 w-auto  " src="/dummy/logoTest.png" alt="Workflow">
                         <span class="mx-auto h-12  w-auto text-xl"> <strong>NUEVO PRODUCTO</strong></span>
-                        <div class="lg:mx-auto w-auto mb-4">
+                        <!-- <div class="lg:mx-auto w-auto mb-4">
                             <button v-if="vistaPrevia" class="hidden  lg:block btn btn-danger btn-sm" @click="quitarVistaPrevia">Ocultar Vista Previa</button>
                             <button v-if="!vistaPrevia" class="hidden  lg:block btn btn-primary btn-sm" @click="quitarVistaPrevia">Ver Vista Previa</button>
-                        </div>
+                        </div> -->
                         <div  style="text-align:center;">
                         <span class="step mx-2"></span>
                         <span class="step mx-2"></span>
@@ -67,6 +67,7 @@
 
                     {{-- TAB 1 --}}
                     <!-- One "tab" for each step in the form: -->
+                    <div class="border border-gray-200 shadow-md rounded-md px-20 py-10 bg-gray-100">
                     <div class="tab" >
                         @include('includeFiles/tab1')
                     </div>
@@ -88,6 +89,7 @@
                         @include('includeFiles/tab5')
                     </div>
                     <br>
+                    </div>
                     <div class="my-4" >
                         <div style="float:right;" class="flex">
                             <button type="button" id="prevBtn" @click="nextPrev(-1)" class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 mr-2">Anterior</button>
@@ -96,7 +98,7 @@
                         </div>
                     </div>
 
-                    <!-- Circles which indicates the steps of the form: -->
+                 
                     
 <br>
             </form>
@@ -104,7 +106,7 @@
 
 
     </div>
-    @include('includeFiles/vistaPrevia')
+    <!-- @includeincludeFiles/vistaPrevia' -->
 
 
 {{-- ENDING --}}

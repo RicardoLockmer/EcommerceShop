@@ -27,18 +27,17 @@
         
             @if(count($items) > 0)
                 @foreach($items as $item)
-                    @foreach($item->colors as $colors)
+                   
                 <!-- ITEM BOX -->
             <div class="grid grid-cols-4 p-1 grid-rows-1 my-2  col-span-6 md:grid-cols-6 md:my-4 lg:pb-4 border-solid border-gray-200  lg:col-span-4 lg:grid-cols-8 mx-1 lg:mx-4 lg:mb-4  shadow-md ">
 
                 <!-- IMAGE BOX -->
                 <div class="grid col-start-1 row-span-1  col-span-6 md:col-span-3 lg:col-start-2 lg:col-span-6 centerMyImages " style="min-height: 160px;">
-                    <a href="/producto/{{$colors->link}}">
-                        @foreach(json_decode($colors->colorImages) as $ColorImage)
+                    <a href="/producto/{{$item->colors[0]->link}}">
+                        
 
-                            <img class="img-fluid object-contain card-img centerMyImages mt-2 lg:h-auto max-h-80 lg:max-h-96" src="{{Storage::URL('assetItems/'.$ColorImage)}}" alt="{{$item->nombre}}">
-                        @break
-                        @endforeach
+                            <img class="img-fluid object-contain card-img centerMyImages mt-2 lg:h-auto max-h-80 lg:max-h-96" src="{{Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
+                        
                     </a>
                 </div>
   
@@ -49,9 +48,9 @@
                 <div class="col-span-9 md:pl-4 max-h-72 lg:col-span-8 lg:items-end" >
 
 
-                    <a href="/producto/{{$colors->link}}" class="searchItem  lg:items-end">
+                    <a href="/producto/{{$item->colors[0]->link}}" class="searchItem  lg:items-end">
                         <h4 class="font-bold  text-md lg:text-2xl w-36 md:w-40 lg:w-full " style="overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2;">
-                            {{$item->nombre}} {{ $colors->color }}
+                            {{$item->nombre}} 
                         </h4>
                     </a>
                     <div class=" col-span-9 lg:mt-2 max-h-72 lg:col-span-6 h-24">
@@ -63,7 +62,7 @@
                         {{-- PRECIO --}}
                         <div class="">
                             <p class="font-bold text-green-700" style=" font-size: 16px; font-family:Arial, Helvetica, sans-serif;">
-                                <span> &#8353; </span>{{number_format($colors->size[0]->precio, 0, '.', ',')}}
+                                <span> &#8353; </span>{{number_format($item->sizes[0]->precio, 0, '.', ',')}}
                             </p>
                         </div>
                         {{-- STAR RATING LOOP --}}
@@ -111,7 +110,7 @@
             <div class=" grid mt-4 justify-items-center">
                 <div class="grid  w-full lg:w-1/2 border-red-400">
                     
-                    <a href="/producto/{{$colors->link}}" 
+                    <a href="/producto/{{$item->colors[0]->link}}" 
                         class="group relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
         
@@ -127,7 +126,6 @@
     </div>
            
 
-    @endforeach
     @endforeach
 @else
 <p class="textmuted" style="text-align:center;">Lo sentimos aun no tenemos productos en esta categoria!</p>

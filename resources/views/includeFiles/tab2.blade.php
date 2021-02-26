@@ -1,15 +1,15 @@
-<label class="newbiz" for="image">
-    <h4>
+<!-- <label class="newbiz" for="image"> -->
+    <!-- <h4>
         <strong>
             Variaciones del producto
         </strong>
-    </h4>
+    </h4> -->
  
-</label><br>
+<!-- </label><br> -->
 
 
 <div class='grid grid-cols-1' >
-    <div class="my-4">
+    <!-- <div class="my-4">
         <button v-if="tutorial" class="btn btn-danger btn-sm" @click="quitarVideo">
             Ocultar Video
         </button>
@@ -22,35 +22,46 @@
             <source src="{{ Storage::URL('videos/temp02.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>  
-    </div>
+    </div> -->
 
-        <div class="grid" style="">
+        <div class="" style="">
             <div class="" >
                     <small>
                         <strong class="text-xl">
-                            Imagen Principal <br>
-                            <small class="text-gray-400 text-sm">Tipo de Archivo permitido: .jpg, .jpeg y .png</small>
+                            Imagenes
                         </strong>
                     </small>
-                <div class="">
-                    <div class="w-2/3 lg:w-1/2 flex"> 
-                        <label for="MIMG" :class="(image) ? 'border-2 h-32 w-32 bg-green-200 mr-1 flex grid grid-cols-1 border-2 border-gray-300 p-6 items-center place-items-center shadow-md w-2/3 my-4' : 'border-2 h-32 w-32 flex grid grid-cols-1  p-6  items-center border-b-2 border-r border-gray-300 place-items-center shadow-md w-2/3 my-4' " >
+                        <ul class="list-inside list-disc">
+                            <li class="text-gray-500 text-sm"> Tipo de Archivo permitido: <strong>.jpg, .jpeg, .png o .gif</strong> </li>
+                            <li class="text-gray-500 text-sm"> Tamaño Maximo: <strong>4 MB</strong></li>
+                            <li class="text-gray-500 text-sm"> El producto debe ocupar el <strong>90%</strong> de la imagen</li>
+                            <li class="text-gray-500 text-sm"><strong>La imagen principal</strong> se recomienda tenga fondo blanco</li>
+                            <li class="text-gray-500 text-sm"> Las imagenes deben mostrar solo el producto - <strong>No debe incluir texto, promociones, decoraciones, logos o marcas de agua</strong></li>
+                            <li class="text-gray-500 text-sm"> <strong>No debe incluir texto, promociones, decoraciones, logos o marcas de agua</strong></li>
+                        </ul>
+                <div class="grid grid-cols-12">
+                    
+                        <label for="MIMG" :class="(image) ? 'border-2 cursor-pointer shadow-sm h-32  w-32 lg:col-span-6 bg-green-400 mr-1 flex grid grid-cols-1  border-gray-300 p-6 items-center place-items-center  w-2/3 mt-4' : 'border-2 shadow-md rounded-md hover:bg-gray-300  cursor-pointer h-32 w-32 flex grid grid-cols-1 lg:col-span-6 p-6 bg-white items-center   border-gray-300 place-items-center  w-2/3 mt-4 ' " >
                       
                             <svg  width="2em" height="2em" viewBox="0 0 16 16" class="self-center place-self-center bi bi-upload justify-self-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
                                 <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
                             </svg>
+                        <p class="font-bold">Imagen Principal*</p>
                         
                         </label>
-                        <div v-if="!vistaPrevia"  class=" w-32 h-32 ">
+                        
         
-                                <div v-if="image" class="mt-4 ml-4 grid" >
-                                    <img class=" w-auto max-h-32 justify-self-center"  :src="image" />
-                                    <button class="group cursor-pointer relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-400 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" @click="removeImage">Quitar</button>
+                                <div v-if="image" class=" flex items-center col-start-7 col-span-4 " >
+                                    <img class="w-auto max-h-36 object-contain object-scale-down border"  :src="image" id="MainImage"  />
+                                    <!-- <button class="group cursor-pointer relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-400 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" @click="removeImage">Quitar</button> -->
                                 </div>
-                        </div>
-                    </div>  
-                    <small v-if="myImageError" class=" flex text-sm text-red-500">
+                    
+              
+                    
+                    <input  @change="onFileChange" id="MIMG" ref="mainImage" type="file" class="custom-file-input"  required hidden>
+            </div>
+            <small v-if="myImageError" class=" flex text-sm text-red-500 ">
                         <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                         </svg>
@@ -58,10 +69,7 @@
                             @{{myImageError}}
                        </small> 
                     </small>
-                    <input  @change="onFileChange" id="MIMG" ref="mainImage" type="file" class="custom-file-input"  required hidden>
-            </div>
-
-            <div class="flex items-center my-2" style="">
+            <div class="flex items-center pt-2 mt-2 border-t border-gray-200" style="">
         {{-- NOMBRE PRODUCTO --}}
         <strong>
             Tipo de Variante
@@ -73,6 +81,7 @@
             </svg>
         </a>
     </div>
+    <small class="text-gray-500 text-md">Elija como puede variar su producto</small>
             <select v-model="selectedType"  id="size" class=" my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-1/3 pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" required>
                 <option disabled selected value>--</option>
                 <option value="Color">Color</option>
@@ -94,8 +103,9 @@
                 <!-- <option class="dropdown-item" value=""></option> -->
                                     
             </select>
-            <br>
             
+            
+                                    
             <div v-if="selectedType == 'otro'">
                 
                 <input type="text" 
@@ -106,9 +116,13 @@
                     required>
 
             </div>
-
+            <ul class="">
+            <li class="text-gray-500 text-sm">Ejemplo: Una Camisa puede variar en Color / La Comida para Mascotas puede variar en Sabor</li>
+            <li class="text-gray-500 text-sm">Para mas Información en esta seccion visite la pagina de <a href="###" class="text-blue-500" target="_blank">Ayuda</a></li>
+            </ul>
+            <br>
             <span  
-                class="group cursor-pointer relative w-full flex justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" v-if="selectedType" 
+                class="cursor-pointer justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" v-if="selectedType" 
                 style="margin-bottom:15px;margin-top:15px;" 
                 @click="addFind">
                         
@@ -124,15 +138,19 @@
                 </span>
 
             </span>
-
         </div>
 </div>
 
+            <ul class="mt-2">
+            <li class="text-gray-500 text-sm">Para agregar mas variantes del mismo producto dar click en Agregar Otro +</li>
+            
+            </ul>         
 
-<div  v-if="selectedType" class="grid grid-cols-12 border-b-2 border-gray-300 pb-4" v-for="(variante, index) in variantes">
+
+<div  v-if="selectedType" class="grid grid-cols-12 border-b-2 border-gray-300 pb-4 mt-4" v-for="(variante, index) in variantes">
 
         
-        <div v-if="selectedType == 'otro'" class="col-span-4 " >
+        <div v-if="selectedType == 'otro'" class="col-span-6 lg:col-span-3 " >
             <div class="">
 
                 <small>
@@ -142,25 +160,25 @@
                     </strong>
 
                 </small>
-                <input  v-model="variante.color" type="text"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control">
+                <input  v-model="variante.color" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" type="text"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control">
 
             </div>
         </div>
-        <div v-else-if="selectedType != 'NoAplica'" class="col-span-4  " >
+        <div v-else-if="selectedType != 'NoAplica'" class="col-span-6 lg:col-span-3 " >
             <div class="">
 
                 <small>
                     <strong>
 
-                    @{{ index+1 }}.  @{{ selectedType }}
+                    @{{ index+1 }}.  @{{ selectedType }}*
                     </strong>
                                
                 </small>
-                <input  v-model="variante.color"  type="text"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control">
+                <input  v-model="variante.color" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control'"  type="text"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control">
 
             </div>
         </div>
-        <div v-else class="col-span-4  ">
+        <div v-else class="col-span-6  lg:col-span-3">
         
             <div class="">
 
@@ -172,44 +190,37 @@
 
             </small>
             
-            <input disabled type="text"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md  form-control disabled">
+            <input disabled type="text" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control'"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md  form-control disabled">
 
         </div>
         
         </div>
         
             <!-- add file box -->
-        <div class="ml-2  col-span-3 lg:col-span-3 " >
+        <div class="ml-2  col-span-6 lg:col-span-3 " >
             <div class="custom-file">
                 <small>
                     <strong>
 
-                        Imagenes
+                        Imagenes*
                     </strong>
 
                 </small>
                 <div>
-
-                    <label  :class="(variantes[index].imageListed.length > 0) ? 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control bg-green-200 ' : 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control content-center'"  v-bind:for="index" v-bind:key="index">
-                    
-
-
+                    <label  :class="(variantes[index].verified) ? 'focus:ring-indigo-500 cursor-pointer focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control bg-green-200 ' : 'focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control content-center'"  v-bind:for="index" v-bind:key="index">  
                         <svg style="vertical-align: baseline;" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload pt-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
                             <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
                         </svg>
-
                     </label>
-                    
-                
                 </span>
-                    <input  @change="createImages($event, index)" v-bind:id="index" ref="listImage" type="file" class="custom-file-input" multiple required hidden>
-                    <span style="position: absolute; top:22px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger" @click="deleteFind(index)">
+              
+                    <input @change="createImages($event, index)" v-bind:id="index" ref="ListImage" type="file" class="custom-file-input" multiple required hidden>
+                    <span style="position: absolute; top:22px; right: -40px;" v-if="index != 0" class="btn btn-outline-danger font-bold" @click="deleteFind(index)">
                         x
-                    </span>
-                    
-                                    
+                    </span>   
                 </div>
+                
                 <small v-if="variante.myImagesError" class=" flex text-sm text-red-500">
                         <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -220,8 +231,8 @@
                     </small>
             </div>
         </div>
-        <div v-if="!vistaPrevia" class=" col-auto col-span-8 lg:col-span-8 flex overflow-auto scrolling-touch  h-auto mt-3 border-l-4"  >
-            <img v-for="image in variantes[index].imageListed" id="subimage" class="col-auto w-28 h-auto" :src="image" alt="##" > 
+        <div v-if="variantes[index].myImagesError == ''"  class=" col-auto col-span-8 lg:col-span-8 flex overflow-auto scrolling-touch gap-2 h-auto mt-3 border-l-4 object-contain"  >
+            <img v-for="image in variantes[index].imageListed" id="subimage" class=" w-auto max-h-28 object-contain border" :src="image" alt="##" > 
         </div>
 
     </div>
