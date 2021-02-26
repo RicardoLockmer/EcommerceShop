@@ -63,28 +63,7 @@
     @endsection
 
 
-    @section('productosDestacados')
-    <div class="myFirstSection ">
-        <p class="div text-muted">
-            Mas Vendidos
-        </p>
-        <div class="myFirstSectionInner scroll">
-            <div class="container-fluid">
-                <div class="noWrap">
-                    @foreach($mejores as $mejor)
-                    <a href="/producto/{{$mejor->id}}">
-                        <img class="sectionImage2 " src="{{ Storage::URL('/storage/assetItems/'.$mejor->image) }}"
-                            alt="">
-                    </a>
-                    @endforeach
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    @endsection
+    
 
     @section('mejoresEn')
     <br>

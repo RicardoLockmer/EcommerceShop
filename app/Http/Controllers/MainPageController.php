@@ -15,7 +15,7 @@ class MainPageController extends Controller
     public function index()
     {
         $myTech = Items::take(15)->where('subcategoria', 'Computadoras')->latest()->get();
-        $destacados = Items::take(15)->where('rep', '>', 100)->orderBy('rep', 'desc')->get();
+        // $destacados = Items::take(15)->where('rep', '>', 100)->orderBy('rep', 'desc')->get();
         $paraMujer = Items::take(15)->where('categoria', 'Ropa para Mujer')->latest()->get();
         if(Auth::user()){
 
@@ -23,7 +23,7 @@ class MainPageController extends Controller
         }
         return view('mainPage', [
             'techItems' => $myTech,
-            'mejores' => $destacados,
+            // 'mejores' => $destacados,
             'mujerItems' => $paraMujer
         ]);
     } 
