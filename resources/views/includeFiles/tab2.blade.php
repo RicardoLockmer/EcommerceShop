@@ -26,22 +26,25 @@
 
         <div class="" style="">
             <div class="" >
+            <div class="border-b-2 border-gray-200">
                     <small>
-                        <strong class="text-xl">
-                            Imagenes
+                        <strong class="text-2xl">
+                           Variantes - Imagenes
                         </strong>
                     </small>
-                        <ul class="list-inside list-disc">
+            </div>
+                        <ul class="list-inside list-disc mt-4">
                             <li class="text-gray-500 text-sm"> Tipo de Archivo permitido: <strong>.jpg, .jpeg, .png o .gif</strong> </li>
                             <li class="text-gray-500 text-sm"> Tamaño Maximo: <strong>4 MB</strong></li>
                             <li class="text-gray-500 text-sm"> El producto debe ocupar el <strong>90%</strong> de la imagen</li>
                             <li class="text-gray-500 text-sm"><strong>La imagen principal</strong> se recomienda tenga fondo blanco</li>
-                            <li class="text-gray-500 text-sm"> Las imagenes deben mostrar solo el producto - <strong>No debe incluir texto, promociones, decoraciones, logos o marcas de agua</strong></li>
+                            <li class="text-gray-500 text-sm"> Las imagenes deben mostrar solo el producto 
                             <li class="text-gray-500 text-sm"> <strong>No debe incluir texto, promociones, decoraciones, logos o marcas de agua</strong></li>
+                            <li class="text-gray-500 text-sm">Para mas Información en esta seccion visite la pagina de <a href="###" class="text-blue-500" target="_blank">Ayuda</a></li>
                         </ul>
-                <div class="grid grid-cols-12">
+                <div class="grid grid-cols-12 flex items-center mt-4     h-52">
                     
-                        <label for="MIMG" :class="(image) ? 'border-2 cursor-pointer shadow-sm h-32  w-32 lg:col-span-6 bg-green-400 mr-1 flex grid grid-cols-1  border-gray-300 p-6 items-center place-items-center  w-2/3 mt-4' : 'border-2 shadow-md rounded-md hover:bg-gray-300  cursor-pointer h-32 w-32 flex grid grid-cols-1 lg:col-span-6 p-6 bg-white items-center   border-gray-300 place-items-center  w-2/3 mt-4 ' " >
+                        <label for="MIMG" style="margin-bottom:0;" :class="(image) ? 'border-2 cursor-pointer shadow-sm h-36   lg:col-span-6 bg-green-400 mr-1 flex grid grid-cols-1  border-green-500 p-6 items-center place-items-center  w-2/3' : 'border-2 shadow-md rounded-md hover:bg-gray-300  cursor-pointer h-36 flex grid grid-cols-1 lg:col-span-6 p-6 bg-white items-center   border-gray-300 place-items-center  w-2/3  ' " >
                       
                             <svg  width="2em" height="2em" viewBox="0 0 16 16" class="self-center place-self-center bi bi-upload justify-self-center" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
@@ -52,8 +55,8 @@
                         </label>
                         
         
-                                <div v-if="image" class=" flex items-center col-start-7 col-span-4 " >
-                                    <img class="w-auto max-h-36 object-contain object-scale-down border"  :src="image" id="MainImage"  />
+                                <div v-if="image" class="flex items-center col-start-7 col-span-5  " >
+                                    <img class="w-auto max-h-44 object-contain  border"  :src="image" id="MainImage"  />
                                     <!-- <button class="group cursor-pointer relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-red-400 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" @click="removeImage">Quitar</button> -->
                                 </div>
                     
@@ -118,7 +121,7 @@
             </div>
             <ul class="">
             <li class="text-gray-500 text-sm">Ejemplo: Una Camisa puede variar en Color / La Comida para Mascotas puede variar en Sabor</li>
-            <li class="text-gray-500 text-sm">Para mas Información en esta seccion visite la pagina de <a href="###" class="text-blue-500" target="_blank">Ayuda</a></li>
+            
             </ul>
             <br>
             <span  

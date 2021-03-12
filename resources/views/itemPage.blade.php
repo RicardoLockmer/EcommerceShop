@@ -353,7 +353,7 @@
         style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
         <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
             <div class="flex nowrap">
-                
+            <img class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
             @foreach ($item->colors as $color)
                         
                 @foreach(json_decode($color->colorImages) as $image)

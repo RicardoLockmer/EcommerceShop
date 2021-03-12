@@ -160,7 +160,7 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 1,
+            currentTab: 2,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,
@@ -178,7 +178,7 @@ const itemLayout = {
                     myImagesError: '',
                     imageListed: [],
                     verified: false,
-                    color: "",
+                    color: "Rojo",
                     sizes: [
                         {
                             unidad: '',
@@ -491,6 +491,14 @@ const itemLayout = {
                 var ext = filename.split('.').pop();
                 var reader = new FileReader();
 
+                if (this.variantes[index].imageListed.length > 0) {
+                    while (this.variantes[index].imageListed.length > 0) {
+                        this.variantes[index].imageListed.pop();
+                    }
+                    while (this.variantes[index].moreImages.length > 0) {
+                        this.variantes[index].moreImages.pop();
+                    }
+                }
                 if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
                     this.variantes[index].myImagesError = "";
                     this.variantes[index].moreImages.push(imageList[i]);

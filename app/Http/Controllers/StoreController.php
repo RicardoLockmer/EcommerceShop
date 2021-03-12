@@ -91,9 +91,9 @@ class StoreController extends Controller
         try {
           $myStore = request()->validate([
                 'primerNombre' => 'required|max:50',
-                'segundoNombre' => 'required|max:50',
+                'segundoNombre' => 'nullable|max:50',
                 'primerApellido' => 'required|max:50',
-                'segundoApellido' => 'required|max:50',
+                'segundoApellido' => 'nullable|max:50',
                 'email' => 'required|unique:stores',
                 'nombreNegocio' => 'required|unique:stores|max:35',
                 'descripcion' =>'nullable|max:125',
@@ -687,9 +687,54 @@ class StoreController extends Controller
      * @param  \App\Store  $store
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Store $store)
+    public function destroy($id)
     {
-        //
+        $store = Store::where('store_id', $id)->first();
+        $user = Auth::user();
+        if (Auth::user()->id == $store->user_id) {
+            if(count($store->items) > 0){
+                
+                    foreach ($store->items as $item) {
+                        if(count($item->shipping) > 0){
+
+                            foreach($item->shipping as $shipping){
+                                $shipping->delete();
+                            }
+                        } else {
+                            break;
+                        }
+                    }
+                
+                    foreach($store->items as $item){
+                        foreach($item->colors as $colors){
+                            foreach($colors->size as $size){
+    
+                                $size->delete();
+                            }
+                            
+                        }
+                    }
+                    foreach($store->items as $item){
+                        foreach($item->colors as $colors){
+
+                            $colors->delete();
+                        }
+                    }
+                    
+                    foreach($store->items as $item){
+                        $item->delete();
+                    }
+
+
+            }
+            $store->delete();
+            
+            $user->nombreNegocio = Null;
+            $user->save();
+            return redirect('/');
+            
+            
+        }
     }
     public function destroyItem(Store $myStore, Items $item)
     {
@@ -702,6 +747,7 @@ class StoreController extends Controller
             foreach($itemSizes as $sizes){
                 $sizes->delete();
             }
+
             $itemShipping = Shipping::where('items_id', $item->id)->get();
             foreach($itemShipping as $shipping){
                 $shipping->delete();

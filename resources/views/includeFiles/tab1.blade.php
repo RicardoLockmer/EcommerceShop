@@ -1,4 +1,12 @@
-    <div class="flex items-center mt-2" style="">
+    <div class="border-b-2 border-gray-200">
+        <small >
+            <strong class="text-2xl">
+                Información Basica
+            </strong>
+        </small>
+    </div>
+    <div class="flex items-center mt-4" style="">
+    
         {{-- NOMBRE PRODUCTO --}}
         <strong>
             Nombre Producto* 

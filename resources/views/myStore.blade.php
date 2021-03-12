@@ -8,7 +8,7 @@
 @endsection
 
 @section('agregarProductos') 
-
+<canvas id="myChart" width="400" height="100"></canvas>
 <div class='container'>
     <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-8 lg:pt-10 place-items-center">
 

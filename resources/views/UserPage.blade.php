@@ -63,9 +63,10 @@
         <dt class="text-sm font-medium text-gray-500">
           Negocio
         </dt>
-        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+        <dd class="flex mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
         @if ($user->nombreNegocio != NULL)
-        {{$user->nombreNegocio}}
+        {{$user->nombreNegocio}} 
+        
         @else
         <a class="text-blue-600" href="/iniciar-mi-negocio">Comenzar a Vender</a>
         @endif
@@ -120,5 +121,31 @@
       </div>
     </dl>
   </div>
+  
 </div>
+
+
+<div class="flex mx-2 justify-center lg:justify-end ">
+
+@if($user->nombreNegocio != NULL)
+<form action="/negocio/{{$user->store->store_id}}/delete" method="POST">
+          @method('DELETE')
+          @csrf
+            <button type="submit" class="appearance-none hover:bg-red-500 hover:text-white  hover:border-red-600 border-2 font-bold border-red-400 justify-center rounded-full h-10 ml-4 text-red-600 rounded-full bg-red-100 px-4 py-2 shadow-md" style="" onclick="return confirm('Esto Eliminara el Negocio, Productos e Imagenes. Esta Seguro? ')">
+                            Eliminar Negocio
+          </button>
+
+</form>
+@endif
+
+<form action="/user/{{$user->id}}/delete" method="POST">
+          @method('DELETE')
+          @csrf
+            <button type="submit" class="apprearance-none border-2 font-bold border-red-400 justify-center rounded-full h-10 ml-4 text-red-600 rounded-full bg-red-100 px-4 py-2 shadow-md" style="" onclick="return confirm('Esto Eliminara su cuenta y el Negocio, Productos e Imagenes. Esta Seguro? ')">
+                            Eliminar Cuenta
+          </button>
+
+</form>
+</div>
+
 @endsection

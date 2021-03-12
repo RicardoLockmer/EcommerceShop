@@ -67,8 +67,8 @@
 
                     {{-- TAB 1 --}}
                     <!-- One "tab" for each step in the form: -->
-                    <div class="border border-gray-200 shadow-md rounded-md px-20 py-10 bg-gray-100">
-                    <div class="tab" >
+                    <div class="border border-gray-200 shadow-md rounded-md px-20 py-10 bg-gray-100 overflow-y-scroll h-screen">
+                    <div class="tab " >
                         @include('includeFiles/tab1')
                     </div>
 

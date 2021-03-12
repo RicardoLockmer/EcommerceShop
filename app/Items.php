@@ -12,13 +12,16 @@ class Items extends Model
     public function sizes(){
         return $this->hasMany(itemSizes::class, 'item_id', 'id');
     }
-    
+    public function shippings(){
+        return $this->hasMany(Shipping::class, 'items_id');
+    }
     public function shipping(){
         return $this->hasMany(Shipping::class, 'items_id')->select(['provincia']);;
     }
     public function store() {
         return $this->belongsTo(Store::class, 'store_id', 'store_id');
     }
+    
     protected $fillable = [
                 'nombre' ,
                 'descripcion',

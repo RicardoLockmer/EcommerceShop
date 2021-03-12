@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Store;
 use App\direcciones;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -94,6 +96,54 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        
+        $store = Store::where('user_id', $user->id)->first();
+        if(Auth::user()->id == $user->id){
+            if($user->nombreNegocio != NULL){
+                if(count($store->items) > 0){
+                
+                    foreach ($store->items as $item) {
+                        if(count($item->shipping) > 0){
+
+                            foreach($item->shipping as $shipping){
+                                $shipping->delete();
+                            }
+                        } 
+                    }
+                
+                    foreach($store->items as $item){
+                        foreach($item->colors as $colors){
+                            foreach($colors->size as $size){
+    
+                                $size->delete();
+                            }
+                            
+                        }
+                    }
+                    foreach($store->items as $item){
+                        foreach($item->colors as $colors){
+
+                            $colors->delete();
+                        }
+                    }
+                    
+                    foreach($store->items as $item){
+                        $item->delete();
+                    }
+
+
+            }
+            $store->delete();
+            
+            $user->nombreNegocio = Null;
+            $user->save();
+            
+            
+            
+        }
+        $user->delete();
+        return redirect('/');
+            }
+        }
     }
-}
+

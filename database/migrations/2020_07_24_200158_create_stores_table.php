@@ -17,9 +17,9 @@ class CreateStoresTable extends Migration
             $table->id('store_id')->uniqid();
             $table->string('nombreNegocio')->unique();
             $table->string('primerNombre');
-            $table->string('segundoNombre');
+            $table->string('segundoNombre')->nullable();
             $table->string('primerApellido');
-            $table->string('segundoApellido');
+            $table->string('segundoApellido')->nullable();
             $table->string('descripcion')->nullable();
             $table->string('tipoNegocio');
             $table->string('cedulaJuridica')->nullable();

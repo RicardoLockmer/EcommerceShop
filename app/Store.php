@@ -10,12 +10,19 @@ class Store extends Model
     public function items() {
         return $this->hasMany(Items::class, 'store_id', 'store_id');
     }
+    public function colors() {
+        return $this->items->hasMany(Items::class);
+    }
     public function categoria() {
         return $this->hasMany(categorias::class);
     }
     public function user(){
         return $this->belongsTo(User::class, 'nombreNegocio', 'nombreNegocio');
     }
+    
+
+
+
     protected $fillable = [
     'primerNombre',
     'segundoNombre',

@@ -45,9 +45,12 @@ Route::get('/prefil/{user:name}/update')->middleware('auth'); //inclompleto
 Route::get('/perfil/{user:name}/direcciones', 'DireccionesController@index')->middleware('auth');
 Route::get('/perfil/{user:name}/direcciones/agregar', 'DireccionesController@create')->name('direcciones')->middleware('auth');
 
+
 Route::post('/NuevaDireccion', 'DireccionesController@store')->middleware('auth');
 // DELETE ADDRESS\
 Route::delete('/perfil/{direccion:id}/delete', 'DireccionesController@destroy')->middleware('auth');
+Route::delete('/negocio/{store:id}/delete', 'StoreController@destroy')->middleware('auth');
+Route::delete('/user/{user:id}/delete', 'UserController@destroy')->middleware('auth');
 // UPDATE ADDRESS
 Route::get('/perfil/{direccion:id}/editar', 'DireccionesController@edit')->middleware('auth');
 Route::put('/perfil/{direccion:id}/update', 'DireccionesController@update')->middleware('auth');

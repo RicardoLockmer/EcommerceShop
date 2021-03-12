@@ -13,6 +13,7 @@ class itemSizes extends Model
     public function items(){
         return $this->belongsTo(Items::class, "item_id", "id");
     }
+    
     protected $fillables = [
         'item_id',
         'color_id',
