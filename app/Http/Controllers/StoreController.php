@@ -184,9 +184,8 @@ class StoreController extends Controller
             'store_name' => 'required',
             'user_id' => 'required',
             'specs' => 'required',
-            'data.*.color' => 'required',
-            'data.*.sizes.*.unidad' => 'required',
-            'data.*.sizes.*.tamano' => 'required',
+            'data.*.color' => 'nullable',
+            'data.*.sizes.*.tamano' => 'nullable',
             'data.*.sizes.*.cantidad' => 'required',
             'data.*.sizes.*.precio' => 'required',
             'image' => 'required|max:4048',
@@ -273,7 +272,7 @@ class StoreController extends Controller
             $sizeInitials = substr($sizes->tamano, 0 ,3);
             $qtyInitials = substr($sizes->cantidad, 0,1);
             $sizesVar->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
-            $sizesVar->size = $sizes->tamano.' '.$sizes->unidad;
+            $sizesVar->size = $sizes->tamano;
             $sizesVar->quantity = $sizes->cantidad;
             $sizesVar->precio = $sizes->precio;
             $sizesVar->save();
@@ -311,13 +310,6 @@ class StoreController extends Controller
     } catch(\Illuminate\Database\QueryException $e) {
     return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
 }
-   
-
-
-
-    
-
-    
 
     //     return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
         

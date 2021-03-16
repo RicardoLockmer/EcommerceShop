@@ -40,7 +40,7 @@
                             <li class="text-gray-500 text-sm"><strong>La imagen principal</strong> se recomienda tenga fondo blanco</li>
                             <li class="text-gray-500 text-sm"> Las imagenes deben mostrar solo el producto 
                             <li class="text-gray-500 text-sm"> <strong>No debe incluir texto, promociones, decoraciones, logos o marcas de agua</strong></li>
-                            <li class="text-gray-500 text-sm">Para mas Información en esta seccion visite la pagina de <a href="###" class="text-blue-500" target="_blank">Ayuda</a></li>
+                            <li class="text-gray-500 text-sm">Para mas Información de esta seccion visite la pagina de <a href="###" class="text-blue-500" target="_blank">Ayuda</a></li>
                         </ul>
                 <div class="grid grid-cols-12 flex items-center mt-4     h-52">
                     
@@ -100,7 +100,7 @@
                 <option value="Modelo">Modelo</option>
                 <option value="Diseño">Diseño</option>
                 <option value="Dimensiones">Dimensiones</option>
-                <option value="NoAplica">No Aplica</option>
+                <option value="N/A">No Aplica</option>
                 <option value="otro">Otro</option>
                                     
                 <!-- <option class="dropdown-item" value=""></option> -->
@@ -125,7 +125,7 @@
             </ul>
             <br>
             <span  
-                class="cursor-pointer justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" v-if="selectedType" 
+                class="cursor-pointer justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" v-if="selectedType != 'N/A'" 
                 style="margin-bottom:15px;margin-top:15px;" 
                 @click="addFind">
                         
@@ -133,7 +133,7 @@
                 <span v-if="selectedType == 'otro'">
                     Agregar Otro @{{ otro }} +
                 </span>
-                <span v-else-if="selectedType == 'NoAplica'">
+                <span v-else-if="selectedType == 'N/A'">
                     Agregar mas imagenes +
                 </span>
                 <span v-else>
@@ -144,7 +144,7 @@
         </div>
 </div>
 
-            <ul class="mt-2">
+            <ul class="mt-2" v-if="selectedType != 'N/A'">
             <li class="text-gray-500 text-sm">Para agregar mas variantes del mismo producto dar click en Agregar Otro +</li>
             
             </ul>         
@@ -167,7 +167,7 @@
 
             </div>
         </div>
-        <div v-else-if="selectedType != 'NoAplica'" class="col-span-6 lg:col-span-3 " >
+        <div v-else-if="selectedType != 'N/A'" class="col-span-6 lg:col-span-3 " >
             <div class="">
 
                 <small>
@@ -181,7 +181,7 @@
 
             </div>
         </div>
-        <div v-else class="col-span-6  lg:col-span-3">
+        <div v-else class="col-span-6 lg:col-span-3">
         
             <div class="">
 
@@ -193,10 +193,10 @@
 
             </small>
             
-            <input disabled type="text" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control'"  class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md  form-control disabled">
+            <input disabled type="text" v-model="selectedType" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md  form-control disabled">
 
+       
         </div>
-        
         </div>
         
             <!-- add file box -->
@@ -204,7 +204,6 @@
             <div class="custom-file">
                 <small>
                     <strong>
-
                         Imagenes*
                     </strong>
 

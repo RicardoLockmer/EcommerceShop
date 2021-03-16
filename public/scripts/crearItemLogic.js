@@ -178,10 +178,10 @@ const itemLayout = {
                     myImagesError: '',
                     imageListed: [],
                     verified: false,
-                    color: "Rojo",
+                    color: "",
                     sizes: [
                         {
-                            unidad: '',
+
                             tamano: '',
                             cantidad: '',
                             precio: '',
@@ -317,22 +317,22 @@ const itemLayout = {
 
             x[n].className += " active";
         },
-        CHECKER: function (main, index) { //tab3
-            if (this.variantes[main].sizes[index].unidad == 'NoAplica') {
-                for (var i = 0; i < this.variantes.length; i++) {
-                    for (var e = 0; e < this.variantes[i].sizes.length; e++) {
-                        this.variantes[i].sizes.splice(1, this.variantes[main].sizes.length);
-                        this.variantes[i].sizes[e].unidad = 'NoAplica';
-                    }
-                }
-            } else {
-                for (var i = 0; i < this.variantes.length; i++) {
-                    for (var e = 0; e < this.variantes[i].sizes.length; e++) {
-                        this.variantes[i].sizes[e].unidad = this.variantes[main].sizes[index].unidad;
-                    }
-                }
-            }
-        },
+        // CHECKER: function (main, index) { //tab3
+        //     if (this.variantes[main].sizes[index].unidad == 'NoAplica') {
+        //         for (var i = 0; i < this.variantes.length; i++) {
+        //             for (var e = 0; e < this.variantes[i].sizes.length; e++) {
+        //                 this.variantes[i].sizes.splice(1, this.variantes[main].sizes.length);
+        //                 this.variantes[i].sizes[e].unidad = 'NoAplica';
+        //             }
+        //         }
+        //     } else {
+        //         for (var i = 0; i < this.variantes.length; i++) {
+        //             for (var e = 0; e < this.variantes[i].sizes.length; e++) {
+        //                 this.variantes[i].sizes[e].unidad = this.variantes[main].sizes[index].unidad;
+        //             }
+        //         }
+        //     }
+        // },
         saveData: function () { //envia todo al servidor
             let formData = new FormData();
             let store_id = document.getElementById("store_id").value;

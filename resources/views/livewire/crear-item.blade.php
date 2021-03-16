@@ -5,7 +5,6 @@
 @section('crearItem')
 <div class="container grid grid-cols-9" id="itemLayout" >
 
-
     <div :class="(vistaPrevia)? 'grid grid-cols-12 col-start-2 col-end-12 border-red-600 ' : 'grid grid-cols-12 col-start-1 col-end-11 lg:col-start-2 lg:col-end-9 '" style="margin-top: 14px;" >
 
         <div :class="(vistaPrevia)? ' border-red-600 col-span-5 ' : 'col-span-12'" style=" height:auto;">
@@ -55,11 +54,11 @@
                             <button v-if="!vistaPrevia" class="hidden  lg:block btn btn-primary btn-sm" @click="quitarVistaPrevia">Ver Vista Previa</button>
                         </div> -->
                         <div  style="text-align:center;">
-                        <span class="step mx-2"></span>
-                        <span class="step mx-2"></span>
-                        <span class="step mx-2"></span>
-                        <span class="step mx-2"></span>
-                        <span class="step mx-2"></span>
+                            <span class="step mx-2"></span>
+                            <span class="step mx-2"></span>
+                            <span class="step mx-2"></span>
+                            <span class="step mx-2"></span>
+                            <span class="step mx-2"></span>
                         </div>
                     </div>
                     <br>
@@ -67,12 +66,10 @@
 
                     {{-- TAB 1 --}}
                     <!-- One "tab" for each step in the form: -->
-                    <div class="border border-gray-200 shadow-md rounded-md px-20 py-10 bg-gray-100 overflow-y-scroll h-screen">
+                    <div class="border border-gray-200 shadow-md rounded-md px-10 lg:px-20 py-10 bg-gray-100 overflow-y-scroll h-screen">
                     <div class="tab " >
                         @include('includeFiles/tab1')
                     </div>
-
-                    {{-- TAB 2 --}}
                     <div class="tab">
                         @include('includeFiles/tab2')
                     </div>
