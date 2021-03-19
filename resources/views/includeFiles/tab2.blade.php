@@ -85,7 +85,7 @@
         </a>
     </div>
     <small class="text-gray-500 text-md">Elija como puede variar su producto</small>
-            <select v-model="selectedType"  id="size" class=" my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-1/3 pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" required>
+            <select v-model="selectedType" @change="controlVariante" id="size" class="my-2 focus:ring-indigo-500 focus:border-indigo-500 block w-1/3 pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" required>
                 <option disabled selected value>--</option>
                 <option value="Color">Color</option>
                 <option value="Sabor">Sabor</option>

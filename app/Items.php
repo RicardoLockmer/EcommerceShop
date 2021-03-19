@@ -33,6 +33,7 @@ class Items extends Model
                 'color',
                 'marca',
                 'Specs',
+                'keyFeatures',
                 'rep',
                 'karma',
                 'updateDate',

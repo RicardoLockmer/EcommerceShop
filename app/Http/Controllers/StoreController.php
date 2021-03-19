@@ -173,18 +173,21 @@ class StoreController extends Controller
     public function storeItem(Request $request) {
         
         $data = json_decode($request->variantes);
-        $provincias = json_decode($request->provincias);           
+        $provincias = json_decode($request->provincias);
+                   
         $myItem =  request()->validate([
             'nombre' => 'required|max:250',
-            'marca' => 'required|max:20',
+            'marca' => 'required|max:50',
             'descripcion' => 'required|max:450',
             'categoria' => 'required',
             'subcategoria' => 'required',
             'store_id' => 'required',
             'store_name' => 'required',
             'user_id' => 'required',
-            'specs' => 'required',
+            'specs' => 'nullable',
+            'keyFeatures' => 'nullable',
             'data.*.color' => 'nullable',
+            'data.*.sizes.*.unidad' => 'nullable',
             'data.*.sizes.*.tamano' => 'nullable',
             'data.*.sizes.*.cantidad' => 'required',
             'data.*.sizes.*.precio' => 'required',
@@ -210,6 +213,7 @@ class StoreController extends Controller
     $item->subcategoria = $request->subcategoria;
     $item->tipoVariante = $request->tipoVariante;
     $item->specs = $request->specs;
+    $item->keyFeatures = $request->keyFeature;
     $item->store_id = $request->store_id;
     $item->nombreNegocio = Auth::user()->nombreNegocio;
     $item->user_id = Auth::user()->id;
@@ -272,7 +276,7 @@ class StoreController extends Controller
             $sizeInitials = substr($sizes->tamano, 0 ,3);
             $qtyInitials = substr($sizes->cantidad, 0,1);
             $sizesVar->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
-            $sizesVar->size = $sizes->tamano;
+            $sizesVar->size = $sizes->tamano.' '.strtolower($sizes->unidad);
             $sizesVar->quantity = $sizes->cantidad;
             $sizesVar->precio = $sizes->precio;
             $sizesVar->save();

@@ -140,10 +140,10 @@ const itemLayout = {
             ],
             tutorial: false,
             vistaPrevia: false,
-            nombre: 'Apple Watch SE (GPS, 40mm)',
-            marca: 'Apple',
+            nombre: '',
+            marca: '',
             unit: '',
-            descripcion: 'Built-in GPS, GLONASS, Galileo, and QZSS, S5 with 64-bit dual-core processor, W3 Apple wireless chip, Barometric altimeter, Capacity 32GB, Optical heart sensor, Electrical heart sensor, Improved accelerometer up to 32 g‑forces, Improved gyroscope, Ambient light sensor',
+            descripcion: '',
             mainImage: '',
             image: '',
             selectedCategory: '',
@@ -160,7 +160,7 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 2,
+            currentTab: 0,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,
@@ -172,6 +172,7 @@ const itemLayout = {
                 specName: '',
                 specValue: ''
             }],
+            keyFeatures: [{ feature: '' }],
             variantes: [
                 {
                     moreImages: [],
@@ -181,7 +182,7 @@ const itemLayout = {
                     color: "",
                     sizes: [
                         {
-
+                            unidad: '',
                             tamano: '',
                             cantidad: '',
                             precio: '',
@@ -247,16 +248,25 @@ const itemLayout = {
             xl = x[this.currentTab].getElementsByTagName("small");
             z = x[this.currentTab].getElementsByTagName("textarea");
 
-            for (i = 0; i < y.length; i++) {
+            if (this.currentTab != 3) {
+                for (i = 0; i < y.length; i++) {
 
-                if (y[i].value == "") {
+                    if (y[i].value == "") {
 
-                    y[i].className += " is-invalid";
+                        y[i].className += " is-invalid";
 
-                    valid = false;
+                        valid = false;
+                    }
+
+
                 }
+                // } else {
+                //     for(var i = 0; i < this.keyFeatures.length; i++){
+                //             if(this.keyFeature[i].feature == ""){
+                //                 y[i].className += " is-invalid";
 
-
+                //             }
+                //     }
             }
             for (i = 0; i < select.length; i++) {
                 if (!select[i].value) {
@@ -264,25 +274,27 @@ const itemLayout = {
                     valid = false;
                 }
             }
-            for (i = 0; i < z.length; i++) {
+            if (this.currentTab != 3) {
+                for (i = 0; i < z.length; i++) {
 
-                if (z[i].value == "") {
+                    if (z[i].value == "") {
 
-                    z[i].className += " is-invalid";
+                        z[i].className += " is-invalid";
 
 
-                    valid = false;
+                        valid = false;
+                    }
+                    if (z[i].value.length > 450) {
+                        valid = false;
+                        xl[i].className += " exceededLimit";
+                        z[i].className += " is-invalid";
+                        alert('Excede los 450 caracteres.');
+                    } else {
+                        xl[i].className -= " exceededLimit";
+                        xl[i].className = " text-muted";
+                    }
+
                 }
-                if (z[i].value.length > 450) {
-                    valid = false;
-                    xl[i].className += " exceededLimit";
-                    z[i].className += " is-invalid";
-                    alert('Excede los 450 caracteres.');
-                } else {
-                    xl[i].className -= " exceededLimit";
-                    xl[i].className = " text-muted";
-                }
-
             }
             if (this.currentTab == 1) {
                 if (this.selectedImage == '') {
@@ -317,29 +329,45 @@ const itemLayout = {
 
             x[n].className += " active";
         },
-        // CHECKER: function (main, index) { //tab3
-        //     if (this.variantes[main].sizes[index].unidad == 'NoAplica') {
-        //         for (var i = 0; i < this.variantes.length; i++) {
-        //             for (var e = 0; e < this.variantes[i].sizes.length; e++) {
-        //                 this.variantes[i].sizes.splice(1, this.variantes[main].sizes.length);
-        //                 this.variantes[i].sizes[e].unidad = 'NoAplica';
-        //             }
-        //         }
-        //     } else {
-        //         for (var i = 0; i < this.variantes.length; i++) {
-        //             for (var e = 0; e < this.variantes[i].sizes.length; e++) {
-        //                 this.variantes[i].sizes[e].unidad = this.variantes[main].sizes[index].unidad;
-        //             }
-        //         }
-        //     }
-        // },
+        CHECKER: function (main, index) { //tab3
+            if (this.variantes[main].sizes[index].unidad == 'NoAplica') {
+                for (var i = 0; i < this.variantes.length; i++) {
+                    for (var e = 0; e < this.variantes[i].sizes.length; e++) {
+                        this.variantes[i].sizes.splice(1, this.variantes[main].sizes.length);
+                        this.variantes[i].sizes[e].unidad = 'NoAplica';
+                    }
+                }
+            } else {
+                for (var i = 0; i < this.variantes.length; i++) {
+                    for (var e = 0; e < this.variantes[i].sizes.length; e++) {
+                        this.variantes[i].sizes[e].unidad = this.variantes[main].sizes[index].unidad;
+                    }
+                }
+            }
+        },
+        controlVariante: function () {
+            if (this.selectedType == 'N/A') {
+                for (var i = 0; i < this.variantes.length; i++) {
+
+                    this.variantes.splice(1, this.variantes.length);
+                    this.variantes[0].color = '';
+
+                }
+
+            }
+
+        },
         saveData: function () { //envia todo al servidor
             let formData = new FormData();
             let store_id = document.getElementById("store_id").value;
             let store_name = document.getElementById("store_name").value;
             let user_id = document.getElementById("user_id").value;
             formData.append('empresaEnvios', this.empresaEnvios);
-            formData.append('tipoVariante', this.selectedType);
+            if (this.selectedType == 'otro') {
+                formData.append('tipoVariante', this.otro);
+            } else {
+                formData.append('tipoVariante', this.selectedType);
+            }
             formData.append('nombre', this.nombre);
             formData.append('marca', this.marca);
             formData.append('descripcion', this.descripcion);
@@ -356,6 +384,7 @@ const itemLayout = {
             formData.append('provincias', JSON.stringify(this.provincias));
             formData.append('image', this.selectedImage, this.selectedImage.name);
             formData.append('fileNamed', this.selectedImage.name);
+            formData.append('keyFeature', JSON.stringify(this.keyFeatures));
             for (var i = 0; i < this.variantes.length; i++) {
                 let images = this.variantes[i].moreImages;
                 images.forEach(img => {
@@ -380,7 +409,11 @@ const itemLayout = {
                 }
             )
         },
-
+        addFeature: function () {
+            this.keyFeatures.push(
+                { feature: '' }
+            )
+        },
         addFind: function () {
             this.variantes.push({
                 moreImages: [],
@@ -422,6 +455,11 @@ const itemLayout = {
             console.log(index);
             console.log(this.specs[index]);
             this.specs.splice(index, 1);
+        },
+        deleteFeature: function (index) {
+            console.log(index);
+            console.log(this.keyFeatures[index]);
+            this.keyFeatures.splice(index, 1);
         },
         onFileChange(e) {
             this.selectedImage = document.getElementById("MIMG").files[0];

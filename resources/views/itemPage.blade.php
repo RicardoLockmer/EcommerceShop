@@ -148,7 +148,7 @@
                         
                         @else 
                         
-                            @if(trim($item->tipoVariante) != "NoAplica")
+                            @if(trim($item->tipoVariante) != "N/A")
                                 <span for="provincia" class="">
                                     <strong> {{ $item->tipoVariante }}: </strong> {{ $searchedItem->color }} 
                                 </span>
@@ -259,7 +259,7 @@
                    <br>
 
                     
-                <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base border">
+                <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base">
                     <p class="card-text flex" >
                         <svg width="1.5em" 
                             height="1.5em"
