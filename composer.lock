@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "16875f1b5b97b8c741b3748656abea03",
+    "content-hash": "f8ddbb5d6aa5ae84cd25a531548eb83c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -112,23 +112,23 @@
         },
         {
             "name": "darryldecode/cart",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/darryldecode/laravelshoppingcart.git",
-                "reference": "7dcaddea121bf7724834ff3448b0d052a458d207"
+                "reference": "2ad23e070af341da80300ef990b1fb529af88893"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darryldecode/laravelshoppingcart/zipball/7dcaddea121bf7724834ff3448b0d052a458d207",
-                "reference": "7dcaddea121bf7724834ff3448b0d052a458d207",
+                "url": "https://api.github.com/repos/darryldecode/laravelshoppingcart/zipball/2ad23e070af341da80300ef990b1fb529af88893",
+                "reference": "2ad23e070af341da80300ef990b1fb529af88893",
                 "shasum": ""
             },
             "require": {
                 "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
                 "illuminate/translation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
                 "illuminate/validation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
-                "php": ">=7.1"
+                "php": ">=7.3"
             },
             "require-dev": {
                 "mockery/mockery": "^1.4.2",
@@ -167,7 +167,11 @@
                 "laravel",
                 "shopping cart"
             ],
-            "time": "2020-09-12T12:23:59+00:00"
+            "support": {
+                "issues": "https://github.com/darryldecode/laravelshoppingcart/issues",
+                "source": "https://github.com/darryldecode/laravelshoppingcart/tree/4.2.1"
+            },
+            "time": "2020-12-18T03:01:17+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -6926,5 +6930,5 @@
         "php": "^7.2.5"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
