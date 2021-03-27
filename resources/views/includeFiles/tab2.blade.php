@@ -72,7 +72,7 @@
                             @{{myImageError}}
                        </small> 
                     </small>
-            <div class="flex items-center pt-2 mt-2 border-t border-gray-200" style="">
+            <div class="flex items-center pt-2 mt-2 border-t-2 border-gray-300" style="">
         {{-- NOMBRE PRODUCTO --}}
         <strong>
             Tipo de Variante
@@ -112,7 +112,8 @@
             <div v-if="selectedType == 'otro'">
                 
                 <input type="text" 
-                    v-model="otro" 
+                    v-model="otro"
+                    max="25" 
                     placeholder="Escriba su Variante Aqui" 
                     class="focus:ring-indigo-500 focus:border-indigo-500 block w-1/3 pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
                     id="" 
@@ -120,32 +121,16 @@
 
             </div>
             <ul class="">
-            <li class="text-gray-500 text-sm">Ejemplo: Una Camisa puede variar en Color / La Comida para Mascotas puede variar en Sabor</li>
+            <li class="text-gray-500 text-sm">Ejemplo: Una Camisa puede variar en <strong>Color</strong> / La Comida para Mascotas puede variar en <strong>Sabor</strong></li>
             
             </ul>
-            <br>
-            <span  
-                class="cursor-pointer justify-center my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" v-if="selectedType != 'N/A'" 
-                style="margin-bottom:15px;margin-top:15px;" 
-                @click="addFind">
-                        
-                            
-                <span v-if="selectedType == 'otro'">
-                    Agregar Otro @{{ otro }} +
-                </span>
-                <span v-else-if="selectedType == 'N/A'">
-                    Agregar mas imagenes +
-                </span>
-                <span v-else>
-                    Agregar Otro @{{ selectedType }} +
-                </span>
-
-            </span>
+           
+            
         </div>
 </div>
 
-            <ul class="mt-2" v-if="selectedType != 'N/A'">
-            <li class="text-gray-500 text-sm">Para agregar mas variantes del mismo producto dar click en Agregar Otro +</li>
+            <ul class="mb-2" v-if="selectedType != 'N/A'">
+            <li class="text-gray-500 text-sm">Para agregar mas variantes del mismo producto dar click en <strong> Agregar Otro + </strong></li>
             
             </ul>         
 
@@ -233,11 +218,29 @@
                     </small>
             </div>
         </div>
+        
         <div v-if="variantes[index].myImagesError == ''"  class=" col-auto col-span-8 lg:col-span-8 flex overflow-auto scrolling-touch gap-2 h-auto mt-3 border-l-4 object-contain"  >
             <img v-for="image in variantes[index].imageListed" id="subimage" class=" w-auto max-h-28 object-contain border" :src="image" alt="##" > 
         </div>
 
     </div>
+<div class="border-b-2 border-gray-300">
+    <span  
+                class="cursor-pointer justify-center my-4 py-2 px-4  text-md font-bold rounded-md  text-white bg-yellow-500 flex items-center w-3/6 shadow-md hover:bg-yellow-400 hover:border-yellow-600 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" v-if="selectedType != 'N/A'" 
+                style="margin-bottom:15px;margin-top:15px;" 
+                @click="addFind">
+                        
+                            
+                <span v-if="selectedType == 'otro'">
+                    Agregar Otro @{{ otro }} +
+                </span>
+                <span v-else-if="selectedType == 'N/A'">
+                    Agregar mas imagenes +
+                </span>
+                <span v-else>
+                    Agregar Otro @{{ selectedType }} +
+                </span>
 
-
+            </span>
+</div>
 </div>

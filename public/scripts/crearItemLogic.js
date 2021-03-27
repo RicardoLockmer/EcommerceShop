@@ -160,7 +160,7 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 0,
+            currentTab: 3,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,

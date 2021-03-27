@@ -79,7 +79,7 @@
                 <li>
                     <div class=" w-5/6 ">
                         <div class="relative">
-                            <textarea v-model="feature.feature" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mb-2'" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mb-2"   id="textarea" data-length="0"  maxlength="250" ></textarea>
+                            <textarea v-model="feature.feature" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mb-2'" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm form-control char-textarea mb-2" data-length="0"  maxlength="250" ></textarea>
                     <span v-if="KFindex != 0" style="position: absolute; top:5px; right: -40px;" class="btn btn-outline-danger" @click="deleteFeature(KFindex)">
                         x
                     </span>
@@ -89,6 +89,7 @@
                 </li>
             </ul>
         </div>                
+       
         </div>
       
     </div>         

@@ -174,7 +174,7 @@ class StoreController extends Controller
         
         $data = json_decode($request->variantes);
         $provincias = json_decode($request->provincias);
-                   
+        // $keyFeatures = json_decode($request->keyFeature);           
         $myItem =  request()->validate([
             'nombre' => 'required|max:250',
             'marca' => 'required|max:50',
@@ -185,7 +185,7 @@ class StoreController extends Controller
             'store_name' => 'required',
             'user_id' => 'required',
             'specs' => 'nullable',
-            'keyFeatures' => 'nullable',
+            'keyFeature' => 'nullable',
             'data.*.color' => 'nullable',
             'data.*.sizes.*.unidad' => 'nullable',
             'data.*.sizes.*.tamano' => 'nullable',
@@ -222,7 +222,7 @@ class StoreController extends Controller
     $item->updateDate = date("dmy");
 
     // New Images in DB
-    if($request->image > 0){
+    if($request->image != NULL){
         $ext = pathinfo($request->fileNamed, PATHINFO_EXTENSION);
         $un = uniqid('DM');
         $newFileName = date('dmyhms').$un.'.'.$ext;
