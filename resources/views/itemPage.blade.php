@@ -161,6 +161,8 @@
                     </div>
        
                     <div class="mb-3">
+                    
+                    @if($searchedItem->size[0]->size == 'noaplica')
                         @if(count($searchedItem->size) > 1)
                             
                             <span>
@@ -201,6 +203,7 @@
                             @endif
 
                         @endif
+                    @endif
                     </div>
                 </div>
                 @if($searchedItem->size[0]->quantity <= 0)
@@ -220,10 +223,11 @@
                             <select v-model="selectedQty" 
                             style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
                                         oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
-                                name="color" 
+                                name="color"
+                                
                                 id="qty">
                                     
-                                @for ($i = 1; $i <= $searchedItem->size[0]->quantity; $i++)
+                                @for ($i = 1; $i <= min(25, $searchedItem->size[0]->quantity); $i++)
                                 
                                     <option value="{{$i}}">
                                         {{$i}}
@@ -249,7 +253,7 @@
                                 max="20" 
                                 id="color">
 
-                                <option v-for="x in qty">
+                                <option v-for="x in qty.slice(0,25) ">
                                     @{{x}}
                                 </option>
                             </select>

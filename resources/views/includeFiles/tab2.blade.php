@@ -226,7 +226,7 @@
     </div>
 <div class="border-b-2 border-gray-300">
     <span  
-                class="cursor-pointer justify-center my-4 py-2 px-4  text-md font-bold rounded-md  text-white bg-yellow-500 flex items-center w-3/6 shadow-md hover:bg-yellow-400 hover:border-yellow-600 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" v-if="selectedType != 'N/A'" 
+                class="cursor-pointer justify-center my-4 py-2 px-4  text-md font-bold rounded-xl  text-gray-700 bg-grey-500 flex items-center w-3/6 shadow-md hover:bg-gray-300 hover:border-gray-400 border-l border-b border-r border-t border-gray-400 " v-if="selectedType != 'N/A'" 
                 style="margin-bottom:15px;margin-top:15px;" 
                 @click="addFind">
                         

@@ -156,8 +156,8 @@ class StoreController extends Controller
         }
         if (Auth::user()->id == $myStore->user_id) {
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
-            $units = ['Metros (mts)'=>'mts', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
-            arsort($units);
+            $units = ['Metros (mts)'=>'mts','Altura (cm)'=>'cm','Ancho (cm)'=>'cm','Largo (cm)'=>'cm', 'Talla'=>' ', 'Talla Zapatos (US)'=>'US', 'Talla Zapatos (UK)'=>'UK', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
+            krsort($units);
 
             return view('livewire/crear-item', [
                 'store' => $myStore,

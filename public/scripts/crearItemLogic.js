@@ -160,7 +160,7 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 3,
+            currentTab: 0,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,
@@ -358,48 +358,54 @@ const itemLayout = {
 
         },
         saveData: function () { //envia todo al servidor
-            let formData = new FormData();
-            let store_id = document.getElementById("store_id").value;
-            let store_name = document.getElementById("store_name").value;
-            let user_id = document.getElementById("user_id").value;
-            formData.append('empresaEnvios', this.empresaEnvios);
-            if (this.selectedType == 'otro') {
-                formData.append('tipoVariante', this.otro);
+            if (this.validateForm()) {
+
+
+                let formData = new FormData();
+                let store_id = document.getElementById("store_id").value;
+                let store_name = document.getElementById("store_name").value;
+                let user_id = document.getElementById("user_id").value;
+                formData.append('empresaEnvios', this.empresaEnvios);
+                if (this.selectedType == 'otro') {
+                    formData.append('tipoVariante', this.otro);
+                } else {
+                    formData.append('tipoVariante', this.selectedType);
+                }
+                formData.append('nombre', this.nombre);
+                formData.append('marca', this.marca);
+                formData.append('descripcion', this.descripcion);
+                formData.append('categoria', this.selectedCategory.id);
+                formData.append('subcategoria', this.selectedSubCategory);
+                formData.append('store_id', store_id);
+                formData.append('store_name', store_name);
+                formData.append('user_id', user_id);
+                formData.append('peso', this.peso);
+                formData.append('dimensiones', this.dimensiones);
+                formData.append('empresa', this.empresaEnvios);
+                formData.append('specs', JSON.stringify(this.specs));
+                formData.append('variantes', JSON.stringify(this.variantes));
+                formData.append('provincias', JSON.stringify(this.provincias));
+                formData.append('image', this.selectedImage, this.selectedImage.name);
+                formData.append('fileNamed', this.selectedImage.name);
+                formData.append('keyFeature', JSON.stringify(this.keyFeatures));
+                for (var i = 0; i < this.variantes.length; i++) {
+                    let images = this.variantes[i].moreImages;
+                    images.forEach(img => {
+                        formData.append("moreImages[" + i + "][]", img)
+                    }
+                    )
+                }
+                axios.post('/nuevo-producto', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+                ).then(function (response) {
+                    console.log(response);
+                })
             } else {
-                formData.append('tipoVariante', this.selectedType);
+                alert('Faltan Cosas!!!')
             }
-            formData.append('nombre', this.nombre);
-            formData.append('marca', this.marca);
-            formData.append('descripcion', this.descripcion);
-            formData.append('categoria', this.selectedCategory.id);
-            formData.append('subcategoria', this.selectedSubCategory);
-            formData.append('store_id', store_id);
-            formData.append('store_name', store_name);
-            formData.append('user_id', user_id);
-            formData.append('peso', this.peso);
-            formData.append('dimensiones', this.dimensiones);
-            formData.append('empresa', this.empresaEnvios);
-            formData.append('specs', JSON.stringify(this.specs));
-            formData.append('variantes', JSON.stringify(this.variantes));
-            formData.append('provincias', JSON.stringify(this.provincias));
-            formData.append('image', this.selectedImage, this.selectedImage.name);
-            formData.append('fileNamed', this.selectedImage.name);
-            formData.append('keyFeature', JSON.stringify(this.keyFeatures));
-            for (var i = 0; i < this.variantes.length; i++) {
-                let images = this.variantes[i].moreImages;
-                images.forEach(img => {
-                    formData.append("moreImages[" + i + "][]", img)
-                }
-                )
-            }
-            axios.post('/nuevo-producto', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            }
-            ).then(function (response) {
-                console.log(response);
-            })
         },
         addSpec: function () {
             this.specs.push(

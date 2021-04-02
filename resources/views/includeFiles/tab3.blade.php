@@ -35,14 +35,6 @@
                 <div class="font-bold mb-2">
                    @{{ mainIndex+1 }}. @{{ variante.color }}
                 </div>
-        
-           
-                <span class="cursor-pointer justify-center w-full my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"  style="margin-bottom:15px;margin-top:15px;"   @click="addSize(mainIndex)">    
-                    Agregar Otro Tamaño +    
-                </span>
-           
-                
-    
     
     <!-- <span class="btn btn-dark" style="margin-bottom:15px;margin-top:15px;" @click="addSize(mainIndex)">Agregar Otro Tamaño +</span> -->
     <div v-for="(size, index) in variante.sizes" class="grid grid-cols-12 border-b-2" >
@@ -65,13 +57,7 @@
                 <select v-model="variante.sizes[index].unidad" oninput="this.className = 'focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm custom-select'" @change="CHECKER(mainIndex, index)"  id="size" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2 sm:text-sm border-gray-300 rounded-md shadow-sm custom-select" required>
                     <option disabled selected value>--</option>
                     <option value="NoAplica">No Aplica</option>
-                    <option value="cm">Altura (cm)</option>
-                    <option value="cm">Ancho (cm)</option>
-                    <option value="cm">Largo (cm)</option>
-                    <option value="  ">Talla Camisa</option>
-                    <option value=" ">Talla Pantalon</option>
-                    <option value="US">Talla Zapatos (US)</option>
-                    <option value="UK">Talla Zapatos (UK)</option>
+                    
                     @foreach($units as $unit => $abrv)
                         <option class="dropdown-item" value="{{$abrv}}">{{$unit}}</option>
                     @endforeach
@@ -79,7 +65,7 @@
 
             </div>
 
-            <div class="col-span-3" style="" id="UNITSIZE" >
+            <div v-if="variantes[mainIndex].sizes[index].unidad != 'NoAplica'" class="col-span-3" style="" id="UNITSIZE" >
                             
                 <small class="flex items-center text-sm font-medium text-gray-700">
                     <strong>
@@ -132,7 +118,7 @@
                         </a>    
                     </small>
                     <div class="relative rounded-md shadow-sm">
-                        <div  class="absolute  pl-3 flex items-center pointer-events-none">
+                        <div  class="absolute pl-3 flex items-center pointer-events-none">
                             <span class="pt-2 text-gray-500 sm:text-sm">
                                 &#8353;
                             </span>
@@ -160,6 +146,11 @@
                 </span>
             </div>
         </div>
+    </div>
+    <div v-if="variantes[0].sizes[0].unidad != 'NoAplica'" class="border-b-2 border-gray-300">
+        <span class="cursor-pointer justify-center my-4 py-2 px-4  text-md font-bold rounded-xl  text-gray-700 bg-grey-500 flex items-center w-3/6 shadow-md hover:bg-gray-300 hover:border-gray-400 border-l border-b border-r border-t border-gray-400 "  style="margin-bottom:15px;margin-top:15px;"   @click="addSize(mainIndex)">    
+            Agregar Otro Tamaño +    
+        </span>
     </div>
 </div>
 <br>

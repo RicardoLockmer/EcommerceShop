@@ -27,10 +27,8 @@
                 <li class="text-gray-800 text-md font-bold">Crear una Tabla de Especificaciones <span class="font-normal text-sm text-gray-400">(opcional)</span></li>
                 
             </ul>
-            <div class="text-gray-500 text-sm mb-4"> Ejemplo: Una <strong> tabla </strong> para una Computadora - <strong> Memoria | 1 TB </strong></div>
-            <span @click="addSpec" class="cursor-pointer justify-center w-full my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 add">
-                <strong>Agregar otra fila</strong>
-            </span>
+            <div class="text-gray-500 text-sm mb-4"> Ejemplo: Una <strong> tabla </strong> para una Camisa - <strong> Material | 50% Algodón </strong></div>
+            
         </div>
 
         <div  class="" >
@@ -57,6 +55,9 @@
                 </span>
             </div>           
         </div>
+        <span @click="addSpec" class="cursor-pointer justify-center my-4 py-2 px-4  text-md font-bold rounded-xl  text-gray-700 bg-grey-500 flex items-center w-3/6 shadow-md hover:bg-gray-300 hover:border-gray-400 border-l border-b border-r border-t border-gray-400  add">
+                <strong>Agregar otra fila</strong>
+            </span>
    </div>
    </div>
 
@@ -67,10 +68,8 @@
             <ul class=" flex" v-if="selectedType != 'N/A'">
                 <li class="text-gray-800 text-md font-bold">Crear caracteristicas clave <span class="font-normal text-sm text-gray-400">(opcional)</span></li>
             </ul>
-            <div class="text-gray-500 text-sm mb-4">Ejemplo: <strong>Caracteristicas clave</strong> de una Computadora - <strong> <span> Decodificación de video 4K con salida de dos pantallas</span> </strong> </div>
-            <span @click="addFeature" class="cursor-pointer justify-center w-full my-4 py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 add">
-                <strong>Agregar otra caracteristica</strong>
-            </span>
+            <div class="text-gray-500 text-sm mb-4">Ejemplo: <strong>Caracteristicas clave</strong> de una Camisa - <strong> <span> Un corte clásico y una tela de algodón suave hacen que este polo sea ideal para la oficina o el fin de semana.</span> </strong> </div>
+            
         </div>
 
         <div  class="" >
@@ -91,5 +90,7 @@
         </div>                
        
         </div>
-      
+        <span @click="addFeature" class="cursor-pointer justify-center my-4 py-2 px-4  text-md font-bold rounded-xl  text-gray-700 bg-grey-500 flex items-center w-3/6 shadow-md hover:bg-gray-300 hover:border-gray-400 border-l border-b border-r border-t border-gray-400 add">
+                <strong>Agregar otra caracteristica</strong>
+            </span>
     </div>         
