@@ -29,7 +29,7 @@
     <form action="/iniciar-mi-negocio" method="POST" class="grid justify-center ">
         @csrf
         
-        <div class="grid border border-gray-200 shadow-md rounded-md px-10 lg:px-20 bg-gray-100 justify-center text-sm lg:text-base border-4 w-4/4" style="">
+        <div class="grid border border-gray-200 shadow-md rounded-md px-10 lg:px-20 bg-gray-100 justify-center text-sm lg:text-base border-4 w-4/4">
             <div class="w-2/2">
 
                 
@@ -221,7 +221,7 @@
 
 
                 <br>
-                <div class=" flex justify-start" style="">
+                <div class=" flex justify-start" >
                     <div class=" flex">
                         <label class="checkbox flex" for="tyc">
                             <input type="checkbox" name="tyc" id="tyc" value="1" class="w-4 mr-2 mt-1.5">
