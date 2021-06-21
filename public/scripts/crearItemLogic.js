@@ -359,8 +359,6 @@ const itemLayout = {
         },
         saveData: function () { //envia todo al servidor
             if (this.validateForm()) {
-
-
                 let formData = new FormData();
                 let store_id = document.getElementById("store_id").value;
                 let store_name = document.getElementById("store_name").value;

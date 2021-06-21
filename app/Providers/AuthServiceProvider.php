@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\User;
+use App\Store;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::define('index-store', function($user, $myStore){
+            return $user->id === $myStore->user_id;
+        });
 
         //
     }

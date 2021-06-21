@@ -24,7 +24,6 @@ class ItemSeed extends Seeder
             'tipoVariante' => 'Color',
             'updateDate' => now(),
             'store_id' => 1,
-            'nombreNegocio' => 'DetoShop',
             'user_id' => 1,
             'image' => '270421100400DM608889d834d00.jpg',
             'created_at' => now()

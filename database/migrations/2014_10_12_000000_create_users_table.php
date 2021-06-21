@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('nombreNegocio')->nullable();
+            $table->unsignedBigInteger('store_id')->nullable();
             $table->string('pais')->nullable();
             $table->string('provincia')->nullable();
             $table->string('canton')->nullable();

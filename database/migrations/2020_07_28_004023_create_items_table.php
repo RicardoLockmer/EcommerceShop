@@ -25,7 +25,6 @@ class CreateItemsTable extends Migration
             $table->string('tipoVariante');    
             $table->timestamp('updateDate')->nullable();
             $table->integer('store_id');
-            $table->string('nombreNegocio');
             $table->string('features')->nullable();
             $table->longText('etiquetas')->nullable();
             $table->unsignedBigInteger('user_id');

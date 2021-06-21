@@ -10,7 +10,7 @@ use App\itemColors;
 use App\itemSizes;
 use App\itemCantidades;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -23,22 +23,19 @@ class StoreController extends Controller
      */
     public function index(Store $myStore)
     {
-        if(Auth::user()){
-
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
             \Cart::session(Auth::user()->id);
-        }
-        if (Auth::user()->id == $myStore->user_id) {
-
-            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)->orderBy('id', 'desc')->get();
-
-            
+            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)
+                ->orderBy('id', 'desc')
+                ->get();  
             return view('myStore', [
                 'store' => $myStore,
                 'items' => $myItems
             ]);
-        } else {
-            abort(404);
-        }
+        
     }
 
     /**
@@ -48,6 +45,7 @@ class StoreController extends Controller
      */
     public function create()
     {
+        
         $arr = [
         'Manualidades',
         'Accesorios para Automovil',
@@ -69,10 +67,8 @@ class StoreController extends Controller
         'Herramientas de Trabajo',
         'Juguetes'
         ];
-        if(Auth::user()){
-
-            \Cart::session(Auth::user()->id);
-        }
+        
+        \Cart::session(Auth::user()->id);
         sort($arr);
         return view('crearNegocio', [
             'myCategory' => $arr
@@ -85,9 +81,12 @@ class StoreController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Store $myStore)
     {
-
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
         try {
           $myStore = request()->validate([
                 'primerNombre' => 'required|max:50',
@@ -150,10 +149,13 @@ class StoreController extends Controller
     }
 
     public function createItem(Store $myStore) {
-        if(Auth::user()){
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
 
-            \Cart::session(Auth::user()->id);
-        }
+        \Cart::session(Auth::user()->id);
+        
         if (Auth::user()->id == $myStore->user_id) {
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
             $units = ['Metros (mts)'=>'mts','Altura (cm)'=>'cm','Ancho (cm)'=>'cm','Largo (cm)'=>'cm', 'Talla'=>' ', 'Talla Zapatos (US)'=>'US', 'Talla Zapatos (UK)'=>'UK', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
@@ -170,8 +172,11 @@ class StoreController extends Controller
         }
     }
     
-    public function storeItem(Request $request) {
-        
+    public function storeItem(Request $request, Store $myStore) {
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
         $data = json_decode($request->variantes);
         $provincias = json_decode($request->provincias);
         // $keyFeatures = json_decode($request->keyFeature);           
@@ -204,7 +209,7 @@ class StoreController extends Controller
         // try adding everything to DB
         // New Item in DB
     $allowedExtensions = ['jpg', 'jpeg', 'png'];
-        
+        // QUITANDO EL NOMBRE DE NEGOCIO DE TODOS LOS FOREIGN KEYS, DEBE RELACIONARSE CON STORE ID EN VEZ DE EL NOMBRE. AUN NO TERMINO
     $item = new Items();
     $item->nombre = $request->nombre;
     $item->marca = $request->marca;
@@ -215,7 +220,6 @@ class StoreController extends Controller
     $item->specs = $request->specs;
     $item->keyFeatures = $request->keyFeature;
     $item->store_id = $request->store_id;
-    $item->nombreNegocio = Auth::user()->nombreNegocio;
     $item->user_id = Auth::user()->id;
     $item->updated_at = date("dmy");
     $item->created_at = date("dmy");
@@ -315,16 +319,9 @@ class StoreController extends Controller
     return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
 }
 
-    //     return redirect('negocio/'.Auth::user()->nombreNegocio.'/'.'productos/');
-        
-    // return response()->json([
-    //     'message' => 'New post created'
-    // ]);
+   
 
-        // REDIRECT A LA PAGINA DE PRODUCTOS
-
-
-    }
+}
     /**
      * Display the specified resource.
      *
@@ -337,50 +334,42 @@ class StoreController extends Controller
     }
     public function thisItem(Store $myStore, Items $item)
     {
-        if(Auth::user()){
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
 
-            \Cart::session(Auth::user()->id);
-        }
-    if (Auth::user()->id == $myStore->user_id) {
-     $colors = itemColors::where('item_id', $item->id)->get();
-     $sizes = itemSizes::where('item_id', $item->id)->get();
+        \Cart::session(Auth::user()->id);
+        
+    
+        $colors = itemColors::where('item_id', $item->id)->get();
+        $sizes = itemSizes::where('item_id', $item->id)->get();
      
 
-    return view('thisItem',[
-    'item' => $item,
-    'store' => $myStore,
-    'colors' => $colors,
-
-    'sizes' => $sizes
-
-    ]);
-    } else {
-    abort(404);
+        return view('thisItem',[
+            'item' => $item,
+            'store' => $myStore,
+            'colors' => $colors,
+            'sizes' => $sizes
+        ]); 
     }
-    }
+
 
     public function showItem(Store $myStore)
     {
-        if (Auth::user()->id == $myStore->user_id) {
-
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
         $allItems = Items::where('store_id', $myStore->store_id)->get();
-        
-        
-
-        if(Auth::user()){
-
-            \Cart::session(Auth::user()->id);
-        }
+        \Cart::session(Auth::user()->id);
         return view('myItem', [
             'items' => $allItems,
             'store' => $myStore,
 
-            ]);
-        } else {
-            abort(404);
-        }
-        }
-
+        ]);
+    }
+       
 
 
 
@@ -392,6 +381,10 @@ class StoreController extends Controller
      */
     public function edit(Store $myStore)
     {
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
         $arr = [
         'Manualidades',
         'Accesorios para Automovil',
@@ -414,10 +407,7 @@ class StoreController extends Controller
         'Juguetes'
         ];
         sort($arr);
-        if(Auth::user()){
-
-            \Cart::session(Auth::user()->id);
-        }
+        \Cart::session(Auth::user()->id);    
         return view('editStore', [
             'store' => $myStore,
             'myCategory' => $arr
@@ -434,119 +424,110 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $myStore)
     {
+        $user = Auth::user();
+        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
+            abort(403);
+        } 
         try{
-        $myStore = request()->validate([
-        'primerNombre' => 'max:50',
-        'segundoNombre' => 'max:50',
-        'primerApellido' => 'max:50',
-        'segundoApellido' => 'max:50',
-        'email' => 'unique:stores',
-        'nombreNegocio' => 'unique:stores|max:35',
-        'descripcion' =>'nullable|max:125',
-        'user_id' => 'unique:stores',
-        'usuario' => 'unique:stores|max:50',
-        'tipoNegocio' => 'nullable',
-        'cedulaJuridica' => 'unique:stores|max:10',
-        'provincia' => 'nullable',
-        'canton' => 'nullable',
-        'direccion' => 'nullable',
-        'phoneNumber' => 'unique:stores',
-        'tyc',
-        'email_verified_at' => 'nullable',
-        'remember_token' => 'nullable',
-        'rep'=> 'nullable',
-        'karma'=> 'nullable',
-        'updated_at' => 'nullable',
-        'created_at' => 'date',
-        'closeDate' => 'nullable',
-        ]);
-       // UNIQUE INFORMACION OVERRIDE ERROR
+            $myStore = request()->validate([
+            'primerNombre' => 'max:50',
+            'segundoNombre' => 'max:50',
+            'primerApellido' => 'max:50',
+            'segundoApellido' => 'max:50',
+            'email' => 'unique:stores',
+            'nombreNegocio' => 'unique:stores|max:35',
+            'descripcion' =>'nullable|max:125',
+            'user_id' => 'unique:stores',
+            'usuario' => 'unique:stores|max:50',
+            'tipoNegocio' => 'nullable',
+            'cedulaJuridica' => 'unique:stores|max:10',
+            'provincia' => 'nullable',
+            'canton' => 'nullable',
+            'direccion' => 'nullable',
+            'phoneNumber' => 'unique:stores',
+            'tyc',
+            'email_verified_at' => 'nullable',
+            'remember_token' => 'nullable',
+            'rep'=> 'nullable',
+            'karma'=> 'nullable',
+            'updated_at' => 'nullable',
+            'created_at' => 'date',
+            'closeDate' => 'nullable',
+            ]);
+        // UNIQUE INFORMACION OVERRIDE ERROR
 
-        $newStore = Store::find($request->store_id);
-        $updateItemStore = Items::where('nombreNegocio', Auth::user()->nombreNegocio)->get();
-            foreach ($updateItemStore as $itemStore) {
-                $itemStore->nombreNegocio = $request->nombreNegocio;
-                $itemStore->save();
+            $newStore = Store::find($request->store_id);
+            
+
+            if ($request->primerNombre != NULL) {
+            $newStore->primerNombre = $request->primerNombre;
             }
-
-        if ($request->primerNombre != NULL) {
-        $newStore->primerNombre = $request->primerNombre;
-        }
-        if ($request->segundoNombre != NULL) {
-        $newStore->segundoNombre = $request->segundoNombre;
-        }
-        if ($request->primerApellido != NULL) {
-        $newStore->primerApellido = $request->primerApellido;
-        }
-        if ($request->segundoApellido != NULL) {
-        $newStore->segundoApellido = $request->segundoApellido;
-        }
-        if($request->email != NULL) {
-        $newStore->email = Auth::user()->email;
-        }
-        if ($request->nombreNegocio != NULL) {
-        $newStore->nombreNegocio = $request->nombreNegocio;
-        }
-        if ($request->cedulaJuridica != NULL) {
-            $newStore->cedulaJuridica = $request->cedulaJuridica;
+            if ($request->segundoNombre != NULL) {
+            $newStore->segundoNombre = $request->segundoNombre;
             }
-        if ($request->descripcion){
-        $newStore->descripcion = $request->descripcion;
-        }
-        if ($request->user_id != NULL) {
-        $newStore->user_id = Auth::user()->id;
-        }
-        if ($request->usuario != NULL) {
-        $newStore->usuario = Auth::user()->name;
-        }
-        if($request->tipoNegocio != NULL) {
-        $newStore->tipoNegocio = $request->tipoNegocio;
-        }
-        if ($request->tyc != NULL) {
-        $newStore->tyc = 1;
-        }
-        if ($request->CDJ != NULL) {
-        $newStore->cedulaJuridica = $request->CDJ;
-        }
-        if ($request->BizE != NULL) {
-        $newStore->email = $request->BizE;
-        }
-        //aqui
-        if ($request->dir != NULL) {
-        $newStore->direccion = $request->dir;
-        }
-        if ($request->provincia != NULL) {
-            if($request->canton != NULL) {
-                $newStore->provincia = $request->provincia;
+            if ($request->primerApellido != NULL) {
+            $newStore->primerApellido = $request->primerApellido;
             }
+            if ($request->segundoApellido != NULL) {
+            $newStore->segundoApellido = $request->segundoApellido;
+            }
+            if($request->email != NULL) {
+            $newStore->email = Auth::user()->email;
+            }
+            if ($request->nombreNegocio != NULL) {
+            $newStore->nombreNegocio = $request->nombreNegocio;
+            }
+            if ($request->cedulaJuridica != NULL) {
+                $newStore->cedulaJuridica = $request->cedulaJuridica;
+                }
+            if ($request->descripcion){
+            $newStore->descripcion = $request->descripcion;
+            }
+            if ($request->user_id != NULL) {
+            $newStore->user_id = Auth::user()->id;
+            }
+            if ($request->usuario != NULL) {
+            $newStore->usuario = Auth::user()->name;
+            }
+            if($request->tipoNegocio != NULL) {
+            $newStore->tipoNegocio = $request->tipoNegocio;
+            }
+            if ($request->tyc != NULL) {
+            $newStore->tyc = 1;
+            }
+            if ($request->CDJ != NULL) {
+            $newStore->cedulaJuridica = $request->CDJ;
+            }
+            if ($request->BizE != NULL) {
+            $newStore->email = $request->BizE;
+            }
+            //aqui
+            if ($request->dir != NULL) {
+            $newStore->direccion = $request->dir;
+            }
+            if ($request->provincia != NULL) {
+                if($request->canton != NULL) {
+                    $newStore->provincia = $request->provincia;
+                }
+            }
+            if ($request->canton != NULL) {
+            $newStore->canton = $request->canton;
+            }
+            if ($request->ntel != NULL) {
+            $newStore->phoneNumber = $request->ntel;
+            }
+            $newStore->created_at = date('dmy');
+
+            $newStore->save();
+            if ($newStore->nombreNegocio != NULL){
+            $newBiz = User::find($newStore->user_id);
+            $newBiz->nombreNegocio = $newStore->nombreNegocio;
+            $newBiz->save();
+            }
+            return redirect('negocio/'.$newStore->nombreNegocio);
+        } catch (\Illuminate\Database\QueryException $e) {
+            return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
         }
-        if ($request->canton != NULL) {
-        $newStore->canton = $request->canton;
-        }
-        if ($request->ntel != NULL) {
-        $newStore->phoneNumber = $request->ntel;
-        }
-        $newStore->created_at = date('dmy');
-
-        $newStore->save();
-        if ($newStore->nombreNegocio != NULL){
-        $newBiz = User::find($newStore->user_id);
-        $newBiz->nombreNegocio = $newStore->nombreNegocio;
-        $newBiz->save();
-        }
-        return redirect('negocio/'.$newStore->nombreNegocio);
-
-    } catch (\Illuminate\Database\QueryException $e) {
-         return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
-    }
-
-
-
-
-
-
-
-
     }
 
 
@@ -597,7 +578,7 @@ class StoreController extends Controller
     ]);
     // FILEs
 
-    // CREATE NEW ITEM IN DATABASE
+// CREATE NEW ITEM IN DATABASE
     $item = Items::find($request->item_id);
 
     $item->nombre = $request->nombre;

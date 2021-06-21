@@ -77,7 +77,7 @@ class ItemsController extends Controller
                 $more->image = json_decode($more->image);
             }
         if (Auth::user()){
-    // SHIPPING LOGIC
+        // SHIPPING LOGIC
         $user =Auth::user();
         $userAddressCurrent = direcciones::where('user_id', $user->id)->where('selected', 1)->first();
         } else {
