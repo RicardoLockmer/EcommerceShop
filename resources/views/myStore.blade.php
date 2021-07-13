@@ -2,14 +2,12 @@
 
 @if(Auth::user()->id == $store->user_id)
 
-@section('storebanner')
+<!-- @section('storebanner')
 
 
-@endsection
+@endsection -->
 
 @section('agregarProductos') 
-
-<canvas id="myChart" width="400" height="100"></canvas>
 
 <div class='container'>
     <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-8 lg:pt-10 place-items-center">
@@ -27,67 +25,18 @@
         </a>
 
     </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-2 border my-10">
+        <div class="col-span-1 h-full border-2 border-red-500">
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+        <div class="col-span-1 h-full border-2 border-red-500">
+            <canvas id="mySecondChart" width="400" height="200"></canvas>
+        </div>
+    </div>
 </div>
-
 @endsection
 
-@section('recientes')
-<div class="myFirstSection">
-    <span class="div">Mas Vendidos</span><small>(Esta Semana)</small>
-    <div class="myFirstSectionInner scroll">
-        <div class="container is-fluid">
-            <div class="noWrap">
-                @foreach($items as $item)
-                <div class="myCards">
-                    <div class="card-block">
 
-                        <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}">
-                        <img class="sectionImage2 h-20 w-auto md:h-24 lg:h-32" src="{{ Storage::URL('assetItems/'.$item->image)  }}" alt=""></a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</div>
-<div class="myFirstSection ">
-    <p class="div"> Vendidos Recientemente</p>
-    <div class="myFirstSectionInner scroll">
-        <div class="container is-fluid">
-            <div class="noWrap">
-                @foreach($items as $item)
-                <div class="myCards">
-                    <div class="card-block">
-
-                        <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}">
-                        <img class="sectionImage2 h-20 w-auto md:h-24 lg:h-32" src="{{ Storage::URL('assetItems/'.$item->image)  }}" alt=""></a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</div>
-<div class="myFirstSection ">
-    <p class="div"> Agregados Recientemente</p>
-    <div class="myFirstSectionInner scroll">
-        <div class="container is-fluid">
-            <div class="noWrap">
-                @foreach($items as $item)
-                <div class="myCards">
-                    <div class="card-block">
-
-                        <a href="{{$store->nombreNegocio}}/productos/{{$item->id}}">
-                        <img class="sectionImage2 h-20 w-auto md:h-24 lg:h-32" src="{{ Storage::URL('assetItems/'.$item->image)  }}" alt=""></a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-</div>
-
-@endsection
 
 @else
 
