@@ -173,10 +173,9 @@ class StoreController extends Controller
     }
     
     public function storeItem(Request $request, Store $myStore) {
-        $user = Auth::user();
-        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
-            abort(403);
-        } 
+        
+        
+        
         $data = json_decode($request->variantes);
         $provincias = json_decode($request->provincias);
         // $keyFeatures = json_decode($request->keyFeature);           
@@ -237,7 +236,7 @@ class StoreController extends Controller
     }
     
     $item->save(); // SAVE NEW ITEM
-    $addDTID = Items::find($item->id); // NEWLY CREATED ITEM ID
+    // $addDTID = Items::find($item->id); // NEWLY CREATED ITEM ID
     $storeInitials = substr($item->nombreNegocio, 0, 3);
     $nameInitials = substr($item->nombre, 0, 2);
 
