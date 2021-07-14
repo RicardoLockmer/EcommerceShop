@@ -174,7 +174,7 @@ class StoreController extends Controller
         
         $data = json_decode($request->variantes);
         $provincias = json_decode($request->provincias);
-        // $keyFeatures = json_decode($request->keyFeature);           
+        $keyFeatures = json_decode($request->keyFeature);           
         $myItem =  request()->validate([
             'nombre' => 'required|max:250',
             'marca' => 'required|max:50',
@@ -289,7 +289,7 @@ class StoreController extends Controller
         //AGREGA CADA PRECIO ENVIO, EMPRESA ENVIO, TIEMPOE ENTREGA, PESO, DIMENSIONES
     }
             foreach($provincias as $provincia){
-                if($provincia->tiempoEntrega > 0){
+                if($provincia->tiempoEntrega){
                         $newItemShipping = new Shipping();
                         $newItemShipping->items_id = $item->id;
                         $newItemShipping->created_at = date("dmy");
