@@ -40,7 +40,7 @@
 @include('menuDos')
     {{-- CONTENT --}}
     
-    <div class="main-container md:mx-auto grid grid-cols-1">
+    <div class="main-container bg-white md:mx-auto grid grid-cols-1">
     
         @yield('masNegocio')
 

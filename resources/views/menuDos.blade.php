@@ -98,27 +98,27 @@
               <div v-for="productos in allCategories" class=" text-white font-bold px-1 w-full sm:w-2/2  lg:w-1/4 lg:border-l lg:border-solid lg:border-b-0 lg:border-gray-200 lg:pt-3">
                 
                 <div v-for="product in productos.products1">
-                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-gray-100 rounded-md  text-gray-700 font-bold hover:text-black">
+                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-yellow-300 hover:shadow-md rounded-md   text-white font-bold hover:text-black">
                      @{{ product.category }}
                   </a>
                 </div>
                 <div v-for="product in productos.products2">
-                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-gray-100 rounded-md   text-gray-700 font-bold hover:text-black">
+                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-yellow-300 hover:shadow-md rounded-md   text-white font-bold hover:text-black">
                      @{{ product.category }}
                   </a>
                 </div>
                 <div v-for="product in productos.products3">
-                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-gray-100 rounded-md   text-gray-700 font-bold hover:text-black">
+                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-yellow-300 hover:shadow-md rounded-md   text-white font-bold hover:text-black">
                      @{{ product.category }}
                   </a>
                 </div>
                 <div v-for="product in productos.products4">
-                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-gray-100 rounded-md   text-gray-700 font-bold hover:text-black">
+                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-yellow-300 hover:shadow-md rounded-md   text-white font-bold hover:text-black">
                      @{{ product.category }}
                   </a>
                 </div>
                 <div v-for="product in productos.products5">
-                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-gray-100 rounded-md   text-gray-700 font-bold hover:text-black">
+                  <a :href="'/Categorias/' + product.category" class="block p-3 hover:bg-yellow-300 hover:shadow-md rounded-md   text-white font-bold hover:text-black">
                      @{{ product.category }}
                   </a>
                 </div>
@@ -126,29 +126,30 @@
               </div>
               
               
-              <ul class=" px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 pb-6 pt-6 lg:pt-3">
-                
+              <ul class=" px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 pb-6 pt-6 lg:pt-3">                
                 <li class="pt-3">
-                <img class="rounded-md" src="/dummy/tenor.gif" alt="" srcset="">
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
+                  <img class="rounded-md" src="/dummy/tenor.gif" alt="" srcset="">
+                </li>
+              </ul>
 
-               <a v-for="menuCat in category" class="hidden md:block lg:block text-white hover:text-black" :href="'/Categorias/' + menuCat.value" style="padding: 0 0 0 0;">
-            <div class="grid  hidden lg:inline-flex lg:justify-items-center" style="padding-left: 20px; padding-right: 20px; ">
+            </div>
+          </div>
+        </li>
+
+               <a v-for="menuCat in category" class="hidden md:block lg:block block p-2 hover:bg-yellow-300 hover:shadow-md rounded-md text-white font-bold" :href="'/Categorias/' + menuCat.value" style="padding: 0 0 0 0;">
+            <div class="grid  hidden lg:inline-flex lg:justify-items-center">
                 @{{  menuCat.key  }} 
             </div>
                </a> 
             
             <a 
-               class="flex border border-white justify-center rounded-full h-10  col-start-8  m-2 col-span-5 md:col-span-1 md:col-start-11 md:col-span-2 lg:justify-center  items-center p-2 lg:col-end-13 lg:col-start-11 lg:p-2  text-white font-bold hover:shadow-md" 
+               class="flex border border-white rounded-md col-start-8  m-2 col-span-5 md:col-span-1 md:col-start-11 md:col-span-2 lg:justify-center  items-center p-2 lg:col-end-13 lg:col-start-11 lg:p-2  text-white font-bold hover:bg-yellow-300 hover:shadow-md" 
                href="{{route('comoVender')}}" 
                style="">
               
               COMO VENDER
             </a>
+            
         </div>
 
 </div>

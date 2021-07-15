@@ -3,17 +3,10 @@
 {{-- BUYING ITEM PAGE --}}
 
 @section('thisItem')
-<div class="container  grid grid-cols-1 mt-4"  >
-    
-
-
+<div class="container bg-white grid grid-cols-1 mt-4"  >
 
     <div class=" grid grid-rows-1 grid-cols-1 md:grid-cols-5 lg:grid-cols-12 ">
 
-    
-   
-    
-        
         <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:ml-10 mb-4" >
 
             
@@ -353,7 +346,7 @@
 </div>
    
     
-            <br>
+            
             <div class="myFirstSectionInner scroll mb-10" 
         style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
         <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
@@ -388,16 +381,16 @@
     <div class="container grid grid-rows-1 mt-4 py-4  border-t border-gray-200" >
         <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-10 content-start" >
 
+            <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-5 col-start-1 col-span-4  justify-self-start">
+                <div class="">
+                    <h3 class="font-bold text-2xl">
+                     {{$item->nombre}}
+                    </h3>
+                    <p class="mt-4 md:mt-0">
+                        {{$item->descripcion}}
+                    </p>
+                </div>
             @if(json_decode($item->specs) != 'null')
-                <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-5 col-start-1 col-span-4  justify-self-start">
-                    <div class="">
-                        <h3 class="font-bold text-2xl">
-                         {{$item->nombre}}
-                        </h3>
-                        <p class="mt-4 md:mt-0">
-                            {{$item->descripcion}}
-                        </p>
-                    </div>
                 
                     <div>
                         <table class="mt-4 px-4 w-full">
@@ -422,10 +415,22 @@
                         </table>
                     </div>
                         
+                    
+                    
+                    @endif
+                    @if(json_decode($item->keyFeatures) != 'null')
+                    <ul class="list-disc list-inside my-4">
+                        @foreach(json_decode($item->keyFeatures) as $feature)
+                            <li class=""> 
+                                
+                                    {{$feature->feature}}
+                                
+                            </li>                                 
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
-        
-                
-                <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
+            <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
                     <div class="">
                         <h3 class="font-bold">
                         Comentarios
@@ -459,15 +464,11 @@
                 </div>
 
             </div>
-                            
-                        
-       
-            @endif
-
 
         
     
-</div>
+    </div>
+
 </div>
 
 <div class=" form-row " style=" border-top: 1px solid rgb(180, 180, 180); width: 100%; height: auto; min-height: 250px;margin: 3em 0 0 0.5em">
@@ -536,7 +537,7 @@
  @section('clock')
 <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Apr 1, 2021 09:00:00").getTime();
+var countDownDate = new Date("Apr 1, 2022 09:00:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
