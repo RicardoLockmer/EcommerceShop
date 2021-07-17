@@ -70,7 +70,7 @@
 
 @if(Auth::user()->nombreNegocio != NULL)
 <div >
-    <a class="flex hover:text-white h-10 w-28 justify-center border border-white rounded-md items-center  text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->nombreNegocio}}" >
+    <a class="flex hover:text-white hover:bg-yellow-300 h-10 w-28 justify-center border border-white rounded-md items-center  text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->nombreNegocio}}" >
         Mi Negocio
     </a>
 </div>
