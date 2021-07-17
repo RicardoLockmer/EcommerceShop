@@ -8,7 +8,7 @@
     <div id="carouselExampleControls " class="carousel  slide z-1" data-ride="carousel">
         <div class="carousel-inner ">
             <div class="carousel-item active ">
-                <img class="mainPageImageTop h-60 lg:h-96" src="dummy/cs.gif" alt="First slide">
+                <img class="mainPageImageTop lg:h-96" src="dummy/jtest.jpg" alt="First slide">
             </div>
             <!-- <div class="carousel-item">
                 <img class="mainPageImageTop" src="dummy/2957.jpg" alt="First slide">
@@ -18,19 +18,26 @@
             </div> -->
             <div class="grid sm:mt-0 lg:-mt-1/2  justify-items-center relative" style="z-index:5;">
                 <p class="font-bold text-gray-600 pt-10">Muy Pronto...</p>
-                <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-700" ></p>
+                <p id="demo" class=" justify-center font-bold text-2xl lg:text-5xl text-gray-700" ></p>
                
              </div>
                 
         </div>
-        <div data-aos="zoom-in" data-aos-duration="2000" class="grid h-auto  my-32 block font-bold  my-4 justify-center " style="z-index:100;">
-            <!-- <a href="###" class="justify-self-center " style="z-index:100;">
-            <div class="grid h-14 w-72 border-2 hover:shadow-lg border-yellow-500  items-center rounded-md" style="background-color: #FF9800">
-                <div class="justify-self-center font-bold  text-xl text-white">
-                    COMENZAR A VENDER
+        <div data-aos="zoom-in" data-aos-duration="2000" class="flex h-auto my-32 block font-bold  my-4 justify-center " style="z-index:100;">
+            <!-- <a href="###" class="justify-self-center mr-2" style="z-index:100;">
+            <div class="grid py-2 px-4 bg-yellow-400 hover:bg-yellow-300 items-center rounded-md shadow-lg">
+                <div class="justify-self-center font-bold  text-sm text-white">
+                    Como Funciona
                 </div>
             </div> 
             </a> -->
+            <a href="###" class="justify-self-center " style="z-index:100;">
+            <div class="grid py-2 px-4 bg-yellow-400 hover:bg-yellow-300 items-center rounded-md shadow-lg">
+                <div class="justify-self-center font-bold  text-sm text-white">
+                    Pre-Registrar Negocio
+                </div>
+            </div> 
+            </a>  
                 
         </div>   
     </div>
@@ -261,7 +268,11 @@
     @section('clock')
 <script>
 // Set the date we're counting down to
+<<<<<<< HEAD
 var countDownDate = new Date("Apr 1, 2022 09:00:00").getTime();
+=======
+var countDownDate = new Date("Dec 1, 2021 09:00:00").getTime();
+>>>>>>> Deto-BusinessDashboard
 
 // Update the count down every 1 second
 var x = setInterval(function() {

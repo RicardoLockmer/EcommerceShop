@@ -40,7 +40,7 @@
 @include('menuDos')
     {{-- CONTENT --}}
     
-    <div class="main-container md:mx-auto grid grid-cols-1">
+    <div class="main-container bg-white md:mx-auto grid grid-cols-1">
     
         @yield('masNegocio')
 
@@ -147,6 +147,7 @@
 
     </script>
     @yield('clock')
+<<<<<<< HEAD
     <script>
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
@@ -230,5 +231,8 @@ var myChart = new Chart(ctx, {
 });
 </script>
 </body>
+=======
+ </body>
+>>>>>>> Deto-BusinessDashboard
 
 </html>

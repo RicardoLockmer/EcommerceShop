@@ -6,18 +6,13 @@
 
         </div>
 
+        <!-- SEARCH BAR -->
         <div class="col-span-1" >
-
             <form class="" autocomplete="off" action="/search" method="POST" role="search" >
                 @csrf
-                <span class=" h-10 bg-gray-200 cursor-pointer border border-gray-300 text-sm rounded-full flex">
-      <input  name="q" placeholder="Buscar"
-        class=" px-4 rounded-l-full rounded-r-full text-sm focus:outline-none border-none">
-     
-    </span>
-                
-               
-    
+                <span class=" h-10 bg-gray-200 cursor-pointer border border-white text-sm rounded-md flex">
+                    <input  name="q" placeholder="Buscar..." class=" px-4 rounded-md text-sm focus:outline-none border-none">
+                </span>
             </form>
         </div>
 
@@ -75,7 +70,7 @@
 
 @if(Auth::user()->nombreNegocio != NULL)
 <div >
-    <a class="flex hover:text-white h-10 w-28 justify-center border border-white rounded-full items-center  text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->nombreNegocio}}" >
+    <a class="flex hover:text-white hover:bg-yellow-300 h-10 w-28 justify-center border border-white rounded-md items-center  text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->nombreNegocio}}" >
         Mi Negocio
     </a>
 </div>
