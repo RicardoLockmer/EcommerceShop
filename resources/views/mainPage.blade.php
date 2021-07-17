@@ -268,11 +268,7 @@
     @section('clock')
 <script>
 // Set the date we're counting down to
-<<<<<<< HEAD
-var countDownDate = new Date("Apr 1, 2022 09:00:00").getTime();
-=======
 var countDownDate = new Date("Dec 1, 2021 09:00:00").getTime();
->>>>>>> Deto-BusinessDashboard
 
 // Update the count down every 1 second
 var x = setInterval(function() {
