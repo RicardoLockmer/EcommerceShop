@@ -221,24 +221,25 @@ class BuyItemController extends Controller
     public function tryTransaction(Request $request){
 
     try{
-        $cardName = $request->cName;
-        $cardNumber = trim($request->cNumber);
-        $cardMonth = $request->cMonth;
-        $cardYear = $request->cYear;
-        $cvv = $request->cCvv;
-
+        
         $CreditCardValidation = request()->validate([
-            'cName' => 'required|max:50',
-            'cNumber' => 'required|min:16',
-            'cMonth' => 'required|numeric|max:12',
-            'cYear' => 'required|numeric|min:21',
-            'cCvv' => 'required|numeric',
-
+            'CardName' => 'required|max:50',
+            'CardNumber' => 'required|min:16',
+            'CardMonth' => 'required|numeric|max:12',
+            'CardYear' => 'required|numeric|min:21',
+            'CardCVV' => 'required|numeric',
+            
             
         ]);
-
+        
+        $cardName = $request->CardName;
+        $cardNumber = trim($request->CardNumber);
+        $cardMonth = $request->CardMonth;
+        $cardYear = $request->CardYear;
+        $cvv = $request->CardCVV;
         $x = 'Successs';
         return $x;
+
     } catch(\Illuminate\Database\QueryException $e) {
         echo $e;
             
