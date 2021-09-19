@@ -19,10 +19,10 @@
     </div>
 
         <div class="grid grid-cols-12 lg:grid-cols-12 col-start-2 col-span-10 mb-4 " >
-    <div class="grid col-start-1 col-span-12 h-28  bg-yellow-200 bg-opacity-40 sm:mt-0 lg:-mt-1/2  justify-items-center relative " style="z-index:5;">
+    <!-- <div class="grid col-start-1 col-span-12 h-28  bg-yellow-200 bg-opacity-40 sm:mt-0 lg:-mt-1/2  justify-items-center relative " style="z-index:5;">
                 <p class="font-bold text-gray-600">Muy Pronto...</p>
                     <p id="demo" class=" justify-center font-bold text-2xl lg:text-6xl text-gray-600" ></p>
-                </div>
+                </div> -->
            
         
             @if(count($items) > 0)

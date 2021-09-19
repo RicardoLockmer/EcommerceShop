@@ -55,13 +55,13 @@ Route::delete('/user/{user:id}/delete', 'UserController@destroy')->middleware('a
 Route::get('/perfil/{direccion:id}/editar', 'DireccionesController@edit')->middleware('auth');
 Route::put('/perfil/{direccion:id}/update', 'DireccionesController@update')->middleware('auth');
 //CREAR NEGOCIO
-Route::get('/iniciar-mi-negocio', 'StoreController@create')->middleware('auth'); // crear negocio view
-Route::post('/iniciar-mi-negocio', 'StoreController@store')->middleware('auth'); // guardar info del negocio
+Route::get('/iniciar-mi-negocio', 'StoreController@create'); // crear negocio view
+Route::post('/iniciar-mi-negocio', 'StoreController@store'); // guardar info del negocio
 Route::get('/cheese', 'ItemsController@update');
 
 //CREAR PRODUCTO
-Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem')->middleware('auth'); // crear view
-Route::post('/nuevo-producto', 'StoreController@storeItem')->middleware('auth');//guardar
+Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem'); // crear view
+Route::post('/nuevo-producto', 'StoreController@storeItem');//guardar
 Route::get('/negocio/{myStore:nombreNegocio}/productos/', 'StoreController@showItem')->middleware('auth');// items view
 Route::get('/negocio/{myStore:nombreNegocio}/productos/{item}', 'StoreController@thisItem')->middleware('auth'); // 1
 

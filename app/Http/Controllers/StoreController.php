@@ -84,9 +84,7 @@ class StoreController extends Controller
     public function store(Request $request, Store $myStore)
     {
         $user = Auth::user();
-        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
-            abort(403);
-        } 
+         
         try {
           $myStore = request()->validate([
                 'primerNombre' => 'required|max:50',
@@ -150,9 +148,7 @@ class StoreController extends Controller
 
     public function createItem(Store $myStore) {
         $user = Auth::user();
-        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
-            abort(403);
-        } 
+        
 
         \Cart::session(Auth::user()->id);
         
@@ -216,6 +212,7 @@ class StoreController extends Controller
     $item->categoria = $request->categoria;
     $item->subcategoria = $request->subcategoria;
     $item->tipoVariante = $request->tipoVariante;
+    $item->nombreNegocio = $request->store_name;
     $item->specs = $request->specs;
     $item->keyFeatures = $request->keyFeature;
     $item->store_id = $request->store_id;
@@ -315,7 +312,8 @@ class StoreController extends Controller
          
  
     } catch(\Illuminate\Database\QueryException $e) {
-    return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
+       return $e;
+    
 }
 
    

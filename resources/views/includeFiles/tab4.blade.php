@@ -1,4 +1,4 @@
-{{-- ITEM SPECS --}}
+    {{-- ITEM SPECS --}}
     
     
     
@@ -27,7 +27,7 @@
                 <li class="text-gray-800 text-md font-bold">Crear una Tabla de Especificaciones <span class="font-normal text-sm text-gray-400">(opcional)</span></li>
                 
             </ul>
-            <div class="text-gray-500 text-sm mb-4"> Ejemplo: Una <strong> tabla </strong> para una Camisa - <strong> Material | 50% Algodón </strong></div>
+            <div class="text-gray-500 text-sm mb-4"> Ejemplo: Una <strong> Tabla </strong> para una Camisa - <strong> Material | 50% Algodón </strong></div>
             
         </div>
 
@@ -36,7 +36,7 @@
                 <div class=" col-5 py-2 bg-gray-200 border-t border-b border-gray-400">
                     <div class="control">
 
-                        <input v-model="spec.specName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control myspecKey @error('myspec') is-invalid @enderror" type="text"  value="{{ old('myspec') }}">
+                        <input v-model="spec.specName" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control myspecKey @error('myspec') is-invalid @enderror" type="text"  value="{{ old('myspec') }}" placeholder="Material">
 
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control myspecVal @error('myspec') is-invalid @enderror" 
                         type="text" 
                          
-                        value="{{ old('myspec') }}">
+                        value="{{ old('myspec') }}" placeholder="50% Algodón">
                 </div>
                 <span style="position: absolute; top:5px; right: -40px;" v-if="specIndex != 0" class="btn btn-outline-danger" @click="deleteDetalle(specIndex)">
                     x
@@ -68,7 +68,7 @@
             <ul class=" flex" v-if="selectedType != 'N/A'">
                 <li class="text-gray-800 text-md font-bold">Crear caracteristicas clave <span class="font-normal text-sm text-gray-400">(opcional)</span></li>
             </ul>
-            <div class="text-gray-500 text-sm mb-4">Ejemplo: <strong>Caracteristicas clave</strong> de una Camisa - <strong> <span> Un corte clásico y una tela de algodón suave hacen que este polo sea ideal para la oficina o el fin de semana.</span> </strong> </div>
+            <div class="text-gray-500 text-sm mb-4">Ejemplo: <strong>Caracteristicas clave</strong> de una Camisa - <strong> <span> Un corte clásico y una tela de algodón suave hacen que esta polo sea ideal para la oficina o el fin de semana.</span> </strong> </div>
             
         </div>
 

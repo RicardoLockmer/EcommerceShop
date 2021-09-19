@@ -10,75 +10,94 @@
 @section('agregarProductos') 
 
 <div class='container'>
-<div class="grid grid-cols-1 md:grid-cols-3 tablet:grid-cols-3 lg:grid-cols-3 border my-10">
-        <div class="col-span-1 h-full border-2 p-2">
-        <h1 class="text-xl font-bold">$ Total Hoy</h1>
-            <h3 class=" centerMyImages text-3xl my-3 text-green-500">$2,450.00</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 tablet:grid-cols-3 lg:grid-cols-3 rounded-md border shadow-md my-10">
+        <div class="col-span-1 h-full p-2">
+        <h1 class="text-xl font-bold">Hoy</h1>
+            <h3 class=" centerMyImages text-3xl my-3 text-green-500">$0.00</h3>
             
         </div>
-        <div class="col-span-1 h-full border-2 p-2">
-            <h1 class="text-xl font-bold">$ Total Mes</h1>
-            <h3 class="text-muted centerMyImages text-3xl my-3">$8,220.00</h3>
+        <div class="col-span-1 h-full border-l border-r p-2">
+            <h1 class="text-xl font-bold">Mes</h1>
+            <h3 class="text-muted centerMyImages text-3xl my-3">$0.00</h3>
         </div>
-        <div class="col-span-1 h-full border-2 p-2">
-            <h1 class="text-xl font-bold">$ Total Año</h1>
-            <h3 class="text-muted centerMyImages text-3xl my-3">$45,990.00</h3>
+        <div class="col-span-1 h-full p-2">
+            <h1 class="text-xl font-bold">Año</h1>
+            <h3 class="text-muted centerMyImages text-3xl my-3">$0.00</h3>
         </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-2 lg:pt-10 place-items-center">
+        
+        <a class="border border-yellow-500 font-bold rounded-md  bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 centerMyImages"  href="/negocio/{{$store->nombreNegocio}}/nuevo-producto">
+        <div class="grid grid-col-1 justify-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+                Agregar Producto
+            </div>
 
-        <a class="border border-solid font-bold rounded-md  bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 lg: centerMyImages "  href="/negocio/{{$store->nombreNegocio}}/nuevo-producto">
-            Agregar Producto
+        </div>
         </a>
 
         <a href="/negocio/{{$store->nombreNegocio}}/editar" class=' border border-solid font-bold  rounded-md  bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 lg: centerMyImages ' >
+        <div class="grid grid-col-1 justify-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+</svg>
+            <div>
             Editar Información
+            </div>
+
+        </div>
+           
         </a>
 
         <a class='border border-solid font-bold rounded-md md:col-start-1 md:col-span-2 shadow-md tablet:col-span-2 tablet:col-start-1 lg:col-span-1 h-16 w-80 md:w-96 lg:w-80 lg:h-20 centerMyImages hover:bg-grey-200' href="/negocio/{{$store->nombreNegocio}}/productos/">
+        <div class="grid grid-col-1 justify-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+</svg>
+            <div>
             Productos
+            </div>
+
+        </div>   
+        
         </a>
 
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-2 border my-10">
-        <div class="col-span-1 h-full border-2 border-red-500">
+    <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-2 my-10">
+        <div class="col-start-2 col-span-1 h-full ">
             <canvas id="myChart" width="400" height="200"></canvas>
         </div>
-        <div class="col-span-1 h-full border-2 border-red-500">
+        <!-- <div class="col-span-1 h-full border-2 border-red-500">
             <canvas id="mySecondChart" width="400" height="200"></canvas>
-        </div>
+        </div> -->
     </div>
 </div>
-<<<<<<< HEAD
-=======
 <script>
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio'],
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         datasets: [{
-            label: '# de Ventas: ',
-            data: [6, 12, 28, 25, 29, 17,50],
+            label: 'Total Ventas: ',
+            data: [0, 0],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(45, 106, 80, 0.2)'
+                'rgba(255, 99, 132, 0.0)',
+                
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
+                // 'rgba(255, 99, 132, 1)',
+                // 'rgba(54, 162, 235, 1)',
+                // 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(45, 106, 80, 1)'
+                // 'rgba(153, 102, 255, 1)',
+                // 'rgba(255, 159, 64, 1)',
+                // 'rgba(45, 106, 80, 1)'
             ],
-            borderWidth: 1
+            borderWidth: 2
         }]
     },
     options: {
@@ -133,7 +152,6 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
->>>>>>> Deto-BusinessDashboard
 @endsection
 
 
