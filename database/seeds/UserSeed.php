@@ -17,8 +17,9 @@ class UserSeed extends Seeder
         DB::table('users')->insert([
             'name' => 'ADMIN',
             'email' => 'admin@deto.com',
+            'acctype' => 2,
             'password' => Hash::make('rpineda34'),
-            'nombreNegocio' => 'DetoShop',
+            'store_id' => 1,
             'created_at' => now()
             
         ]);

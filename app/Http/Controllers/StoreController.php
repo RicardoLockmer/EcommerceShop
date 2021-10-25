@@ -68,7 +68,7 @@ class StoreController extends Controller
         'Juguetes'
         ];
         
-        \Cart::session(Auth::user()->id);
+        
         sort($arr);
         return view('crearNegocio', [
             'myCategory' => $arr
@@ -735,5 +735,8 @@ class StoreController extends Controller
         } else {
         abort(404);
         }
+    }
+    public function AccountTypeShow(){
+            return view('AccountType');
     }
 }

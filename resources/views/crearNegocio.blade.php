@@ -33,12 +33,7 @@
             <div class="w-2/2">
 
                 
-                <br>
-
-                <input type="text" name="usuario" value="{{Auth::user()->name}}" hidden>
-                <input type="text" name="email" value="{{Auth::user()->email}}" hidden>
-                <input type="text" name="user_id" value="{{Auth::user()->id}}" hidden>
-
+                
                 <div class='row'>
                     <div class="newbiz col">
 
@@ -113,13 +108,11 @@
                     <div class="control">
                         <input class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control @error('BizE') is-invalid @enderror" name="BizE" id="BizE"
                             type="text"   >
-                        <small class="form-text text-muted">Puede utilizar el correo personal o agregar uno de
-                            negocio.</small>
+                        <!-- <small class="form-text text-muted">Puede utilizar el correo personal o agregar uno de
+                            negocio.</small> -->
                     </div>
                 </div>
 
-                <br>
-                <input type="text" name="email" value="{{Auth::user()->email}}" hidden>
                 <div class="newbiz">
                     <label class="" for="tipoNegocio"><strong>Tipo de Productos*</strong></label>
                     <div class="control ">

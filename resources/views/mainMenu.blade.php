@@ -42,7 +42,7 @@
 
         @if (Route::has('register'))
         <div>
-            <a class="hover:text-white" href="{{ route('register') }}">
+            <a class="hover:text-white" href="/Account">
                 {{ __('Registrarse') }}
             </a>
         </div>

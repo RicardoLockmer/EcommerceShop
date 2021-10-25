@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', 'MainPageController@index');
 Route::get('destacados/{item}', 'MainPageController@show');
 Route::get('producto/{varItem}', 'ItemsController@show');
- 
+Route::get('/Account', 'StoreController@AccountTypeShow');
  
 //CART ROUTES
 Route::get('/ShoppingCart', 'ShoppingController@index');

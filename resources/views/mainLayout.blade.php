@@ -32,7 +32,7 @@
     <link href="/css/app.css" rel="stylesheet">
 </head>
 
-<body class="antialiased">
+<body class="bg-white antialiased">
 
     <!-- -- MENU 1 Principal Top -- -->
     @include('mainMenu')
@@ -40,7 +40,7 @@
 @include('menuDos')
     {{-- CONTENT --}}
     
-    <div class="main-container bg-white md:mx-auto grid grid-cols-1">
+    <div class="bg-white">
     
         @yield('masNegocio')
 
@@ -63,7 +63,7 @@
         @yield('errorStore')
         @yield('agregarProductos')
         @yield('recientes')
-
+        @yield('AccountType')
         {{-- EDITAR STORE --}}
         @yield('updateStore')
         {{-- MY ITEMS --}}
@@ -98,10 +98,7 @@
 
     </div>
     {{-- CONTENT ENDING --}}
-<div style="background-color: grey; display: block; margin-top: 100px; height: 100px;">
-        <div style='align-self: center;  flex: 1; text-align: center;'>DetoShop.com</div>
- 
-</div>
+
 
 
 
