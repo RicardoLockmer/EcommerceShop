@@ -22,14 +22,14 @@
     </div>
 </div>
     
-        @if($errors->any())
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center;">
-            <strong >
-            
-            {{$errors->first()}}
-            </strong>
-        </div>
-                @endif
+@if($errors->any())
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" style="text-align: center;">
+      <strong >
+      
+      {{$errors->first()}}
+      </strong>
+  </div>
+@endif
 <div class="bg-white shadow overflow-hidden sm:rounded-lg my-4">
     <div class="grid grid-cols-6">
         <div class="px-4 py-5 sm:px-6 col-start-1 col-span-6 md:col-span-4 lg:col-span-4">
@@ -40,14 +40,14 @@
             Datos Personales
             </p>
         <div  class="flex md:col-start-6 lg:col-start-6 mt-4 justify-center border-2 border-solid font-bold hover:bg-gray-500 rounded-full  bg-white shadow-md h-10 w-32    centerMyImages items-center relative">
-        <a class="w-28 h-6 flex centerMyImages" href="###">
-        <svg class="flex -ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-        </svg>
-        Editar
-        </a>
+          <a class="w-28 h-6 flex centerMyImages" href="###">
+            <svg class="flex -ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+              Editar
+          </a>
         </div>
-        </div>
+      </div>
     </div>
   <div class="border-t border-gray-200">
     <dl>
@@ -64,8 +64,8 @@
           Negocio
         </dt>
         <dd class="flex mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-        @if ($user->nombreNegocio != NULL)
-        {{$user->nombreNegocio}} 
+        @if ($user->acctype == 2)
+        {{$user->store->nombreNegocio}} 
         
         @else
         <a class="text-blue-600" href="/iniciar-mi-negocio">Comenzar a Vender</a>
@@ -127,7 +127,7 @@
 
 <div class="flex mx-2 justify-center lg:justify-end ">
 
-@if($user->nombreNegocio != NULL)
+@if($user->acctype == 2)
 <form action="/negocio/{{$user->store->store_id}}/delete" method="POST">
           @method('DELETE')
           @csrf

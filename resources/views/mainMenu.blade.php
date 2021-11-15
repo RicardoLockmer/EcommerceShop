@@ -48,7 +48,7 @@
         </div>
         @endif
         @else
-            @if(Auth::user()->nombreNegocio == NULL)
+            @if(Auth::user()->acctype == 1)
         
         <div >
             <a class="flex-grow hover:text-white  text-white hover:text-black font-bold" href="/perfil/{{Auth::user()->name}}">
@@ -66,14 +66,12 @@
 
         @else
         @if(Auth::user())
-
-
-@if(Auth::user()->nombreNegocio != NULL)
-<div >
-    <a class="flex hover:text-white hover:bg-yellow-300 h-10 w-28 justify-center border border-white rounded-md items-center  text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->nombreNegocio}}" >
-        Mi Negocio
-    </a>
-</div>
+            @if(Auth::user()->acctype == 2)
+                <div >
+                    <a class="flex hover:text-white hover:bg-yellow-300 h-10 w-28 justify-center border border-white rounded-md items-center  text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->store->nombreNegocio}}" >
+                        Mi Negocio
+                    </a>
+                </div>
 
 
 

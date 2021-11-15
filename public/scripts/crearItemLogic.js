@@ -160,7 +160,7 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 0,
+            currentTab: 1,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,
@@ -175,6 +175,7 @@ const itemLayout = {
             keyFeatures: [{ feature: '' }],
             variantes: [
                 {
+                    mainImage: '',
                     moreImages: [],
                     myImagesError: '',
                     imageListed: [],
@@ -466,20 +467,16 @@ const itemLayout = {
             this.keyFeatures.splice(index, 1);
         },
         onFileChange(e) {
-            this.selectedImage = document.getElementById("MIMG").files[0];
-
-
-            var filename = document.getElementById("MIMG").files[0].name;
+            // set IF id i MIMG or indexMainImage
+            console.log(e.target);
+            this.selectedImage = e.target.files[0];
+            var filename = e.target.files[0].name;
             var ext = filename.split('.').pop();
             var files = e.target.files || e.dataTransfer.files;
 
-            console.log(this.selectedImage);
-
             if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
                 this.myImageError = '';
-
                 this.createImage(files[0]);
-
             } else {
                 document.getElementById('MIMG').value = "";
                 this.myImageError = "El Archivo no es .jpg, .jpeg o .png";
@@ -501,10 +498,9 @@ const itemLayout = {
                 var image = new Image();
                 vm.image = e.target.result;
                 image.src = e.target.result;
+
                 image.onload = function () {
                     var height = this.height;
-
-
                     if (height > vm.maxImageHeight) {
                         vm.myImageError = "Excede el Alto de la imagen";
                         vm.image = '';

@@ -12,6 +12,7 @@ use App\itemCantidades;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StoreController extends Controller
 {
@@ -24,16 +25,11 @@ class StoreController extends Controller
     public function index(Store $myStore)
     {
         $user = Auth::user();
-        if (!Gate::forUser($user)->allows('index-store', $myStore)) {
-            abort(403);
-        } 
+         
             \Cart::session(Auth::user()->id);
-            $myItems = Items::where('nombreNegocio', $myStore->nombreNegocio)
-                ->orderBy('id', 'desc')
-                ->get();  
+            
             return view('myStore', [
-                'store' => $myStore,
-                'items' => $myItems
+                'user' => $user
             ]);
         
     }
@@ -49,15 +45,36 @@ class StoreController extends Controller
         $arr = [
         'Manualidades',
         'Accesorios para Automovil',
+        'Accesorios para Moto',
+        'Bicicletas y mas',
+        'Audio',
+        'Muebles',
+        'Celulares y Tablets',
+        'Bioseguridad',
+        'Escolar',
+        'Otro',
+        'Bazar',
+        'Regalos',
+        'Vintage',
+        'Chic',
+        'Iluminacion',
         'Bebes',
         'Belleza y Cuidado Personal',
         'Libros',
+        'Camas y Colchones',
         'Celulares y Accesorios',
         'Ropa, Zapatos y Joyeria',
         'Computadoras',
         'Electrónica',
+        'Electrodomesticos',
+        'Linea Blanca',
+        'TV y Video',
         'Jardin y Exterior',
         'Artesanal',
+        'Decoracion',
+        'Ferreteria',
+        'Deporte Extremo',
+        'Retail',
         'Hogar y Cocina',
         'Equipaje',
         'Instrumentos Musicales',
@@ -65,7 +82,10 @@ class StoreController extends Controller
         'Suministros para Mascotas',
         'Deporte',
         'Herramientas de Trabajo',
-        'Juguetes'
+        'Juguetes',
+        'Miscelaneo',
+        'Surtido',
+
         ];
         
         
@@ -83,7 +103,7 @@ class StoreController extends Controller
      */
     public function store(Request $request, Store $myStore)
     {
-        $user = Auth::user();
+        
          
         try {
           $myStore = request()->validate([
@@ -93,14 +113,7 @@ class StoreController extends Controller
                 'segundoApellido' => 'nullable|max:50',
                 'email' => 'required|unique:stores',
                 'nombreNegocio' => 'required|unique:stores|max:35',
-                'descripcion' =>'nullable|max:125',
-                'user_id' => 'required|unique:stores',
-                'usuario' => 'required|unique:stores|max:50',
-                'tipoNegocio' => 'required',
                 'cedulaJuridica' => 'nullable|max:10',
-                'provincia' => 'required',
-                'BizE' =>'nullable',
-                'canton' => 'required',
                 'dir' => 'required',
                 'prefix' => 'required',
                 'ntel' => 'required',
@@ -118,29 +131,29 @@ class StoreController extends Controller
             $newStore->segundoNombre = $request->segundoNombre;
             $newStore->primerApellido = $request->primerApellido;
             $newStore->segundoApellido = $request->segundoApellido;
-
             $newStore->nombreNegocio = $request->nombreNegocio;
-            $newStore->descripcion = $request->descripcion;
-            $newStore->user_id = Auth::user()->id;
-            $newStore->usuario = Auth::user()->name;
-            $newStore->tipoNegocio = $request->tipoNegocio;
-            $newStore->provincia = $request->provincia;
-            $newStore->canton = $request->canton;
+            $newStore->referencia = $request->referencia;
             $newStore->direccion = $request->dir;
             $newStore->prefix = $request->prefix;
             $newStore->phoneNumber = $request->ntel;
             $newStore->tyc = $request->tyc;
             $newStore->created_at = date('dmy');
             $newStore->cedulaJuridica = $request->cedulaJuridica;
-
-                $newStore->email = $request->BizE;
+            $newStore->email = $request->email;
+            $newStore->password = Hash::make($request->password);
 
             $newStore->save();
 
-            $newBiz = User::find($newStore->user_id);
-            $newBiz->nombreNegocio = $newStore->nombreNegocio;
-            $newBiz->save();
-       return redirect('negocio/'.$newStore->nombreNegocio);
+            $newUser = new User();
+            $newUser->name = $newStore->primerNombre;
+            $newUser->acctype = 2;
+            $newUser->email = $newStore->email;
+            $newUser->password = Hash::make($request->password);
+            $newUser->store_id = $newStore->store_id;
+            $newUser->save();
+
+            return redirect('negocio/'.$newStore->nombreNegocio);
+        
         } catch (\Illuminate\Database\QueryException $e) {
             echo $e;
         }
@@ -152,7 +165,7 @@ class StoreController extends Controller
 
         \Cart::session(Auth::user()->id);
         
-        if (Auth::user()->id == $myStore->user_id) {
+        if (Auth::user()->store->store_id == $myStore->store_id) {
             $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
             $units = ['Metros (mts)'=>'mts','Altura (cm)'=>'cm','Ancho (cm)'=>'cm','Largo (cm)'=>'cm', 'Talla'=>' ', 'Talla Zapatos (US)'=>'US', 'Talla Zapatos (UK)'=>'UK', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
             krsort($units);
@@ -212,10 +225,9 @@ class StoreController extends Controller
     $item->categoria = $request->categoria;
     $item->subcategoria = $request->subcategoria;
     $item->tipoVariante = $request->tipoVariante;
-    $item->nombreNegocio = $request->store_name;
     $item->specs = $request->specs;
     $item->keyFeatures = $request->keyFeature;
-    $item->store_id = $request->store_id;
+    $item->store_id = Auth::user()->store_id;
     $item->user_id = Auth::user()->id;
     $item->updated_at = date("dmy");
     $item->created_at = date("dmy");

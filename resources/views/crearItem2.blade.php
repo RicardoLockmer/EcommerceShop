@@ -56,10 +56,7 @@
                 </div>
                 <br>
                 {{-- EXTRA --}}
-                <input type="text" value="{{ $store->store_id }}" name="store_id" hidden>
-                <input type="text" value="{{ $store->nombreNegocio }}" name="store_name" hidden>
-                <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
-
+                
                 @livewire('item-multi-form')
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Store;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -53,6 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            
         ]);
     }
 
@@ -64,10 +66,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        if($data['acctype'] == 1){
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'acctype' => $data['acctype'],
+            ]);
+
+        } else {
+            Store::create([
+                'nombreNegocio' => $data['nombreNegocio'],
+                'primerNombre' => $data['primerNombre'],
+                'segundoNombre' => $data['segundoNombre'],
+                'primerApellido' => $data['primerApellido'],
+                'segundoApellido' => $data['segundoApellido'],
+                'referencia' => $data['referencia'],
+                'cedulaJuridica' => $data['cedulaJuridica'],
+                'direccion' => $data['direccion'],
+                'prefix' => $data['prefix'],
+                'phoneNumber' => $data['ntel'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'tyc' => 1,
+
+            ]);
+            return User::create([
+                'name' => $data['primerNombre'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'acctype' => $data['acctype'],
+            ]);
+
+        }
     }
 }

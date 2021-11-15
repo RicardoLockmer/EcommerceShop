@@ -1,6 +1,6 @@
 @extends('mainLayout')
 
-@if(Auth::user()->id == $store->user_id)
+@if($user->store_id == $user->store->store_id)
 
 <!-- @section('storebanner')
 
@@ -27,7 +27,7 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 tablet:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-x-2 pt-2 lg:pt-10 place-items-center">
         
-        <a class="border border-yellow-500 font-bold rounded-md  bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 centerMyImages"  href="/negocio/{{$store->nombreNegocio}}/nuevo-producto">
+        <a class="border border-yellow-500 font-bold rounded-md  bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 centerMyImages"  href="/negocio/{{$user->store->nombreNegocio}}/nuevo-producto">
         <div class="grid grid-col-1 justify-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -37,7 +37,7 @@
             </div>
         </div>
         </a>
-        <a class='border border-solid font-bold rounded-md md:col-start-1 md:col-span-2 shadow-md tablet:col-span-2 tablet:col-start-1 lg:col-span-1 h-16 w-80 md:w-96 lg:w-80 lg:h-20 centerMyImages hover:bg-grey-200' href="/negocio/{{$store->nombreNegocio}}/productos/">
+        <a class='border border-solid font-bold rounded-md md:col-start-1 md:col-span-2 shadow-md tablet:col-span-2 tablet:col-start-1 lg:col-span-1 h-16 w-80 md:w-96 lg:w-80 lg:h-20 centerMyImages hover:bg-grey-200' href="/negocio/{{$user->store->nombreNegocio}}/productos/">
             <div class="grid grid-col-1 justify-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -48,7 +48,7 @@
 
             </div>
         </a>
-        <a href="/negocio/{{$store->nombreNegocio}}/editar" class=' border border-solid font-bold  rounded-md  bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 lg: centerMyImages' >
+        <a href="/negocio/{{$user->store->nombreNegocio}}/editar" class=' border border-solid font-bold  rounded-md  bg-white shadow-md h-16 w-80 tablet:col-span-2 tablet:col-start-1  md:w-72 lg:w-80 lg:h-20 lg: centerMyImages' >
             <div class="grid grid-col-1 justify-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />

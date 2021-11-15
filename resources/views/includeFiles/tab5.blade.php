@@ -6,9 +6,9 @@
     <ul class="list-inside list-disc mt-4">
         <li class="text-gray-500 text-sm"> Incluir con que empresa envia el paquete</li>
         
-        <li class="text-gray-500 text-sm">Ejemplo: <strong>Correos de Costa Rica</strong></li>
+        <li class="text-gray-500 text-sm">Ejemplo: <strong>Correo Nacional</strong></li>
         <li class="text-gray-500 text-sm">Incluir donde puede enviar el paquete, precio de envio y tiempo de entrega </li>
-        <li class="text-gray-500 text-sm">Ejemplo: <strong>San Jose | Envio Gratis | 2 Dias</strong> </li>
+        <li class="text-gray-500 text-sm">Ejemplo: <strong>Interurbano | Envio Gratis | 2 Dias</strong> </li>
         <li class="text-gray-500 text-sm">Para mas Información de esta seccion visite la pagina de <a href="###" class="text-blue-500" target="_blank">Ayuda</a></li>
     </ul>
 

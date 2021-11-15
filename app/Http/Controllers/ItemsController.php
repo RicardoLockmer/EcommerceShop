@@ -78,14 +78,14 @@ class ItemsController extends Controller
             }
         if (Auth::user()){
         // SHIPPING LOGIC
-        $user =Auth::user();
-        $userAddressCurrent = direcciones::where('user_id', $user->id)->where('selected', 1)->first();
+            $user =Auth::user();
+            $userAddressCurrent = direcciones::where('user_id', $user->id)->where('selected', 1)->first();
         } else {
             $user = Auth::guest();
             $userAddressCurrent = false;
         }
        
-        $shipping = $item->shipping;
+        $shipping = $item->shippings;
         $decodeProvincia[] ='';
         foreach($shipping as $address){
             $decodeProvincia[] .= $address->provincia; 

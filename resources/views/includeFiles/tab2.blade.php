@@ -131,9 +131,9 @@
 
             <ul class="mb-2" v-if="selectedType != 'N/A'">
             <li class="text-gray-500 text-sm">Para agregar mas variantes del mismo producto dar click en <strong> Agregar Otro + </strong></li>
-            
+            <li class="text-gray-500 text-sm">La primera imagen seleccionada de cada <strong> @{{selectedType}} </strong> sera la imagen primaria</li>
             </ul>         
-
+            
 
 <div  v-if="selectedType" class="grid grid-cols-12 border-b-2 border-gray-300 pb-4 mt-4" v-for="(variante, index) in variantes">
 
@@ -153,6 +153,7 @@
             </div>
         </div>
         <div v-else-if="selectedType != 'N/A'" class="col-span-6 lg:col-span-3 " >
+            
             <div class="">
 
                 <small>
@@ -186,6 +187,7 @@
         
             <!-- add file box -->
         <div class="ml-2  col-span-6 lg:col-span-3 " >
+            
             <div class="custom-file">
                 <small>
                     <strong>
@@ -216,14 +218,14 @@
                             @{{variante.myImagesError}}
                        </small> 
                     </small>
+                </div>
             </div>
+            <div v-if="variantes[index].myImagesError == ''"  class=" col-auto col-span-8 lg:col-span-8 flex overflow-auto scrolling-touch gap-2 h-auto mt-3 border-l-4 object-contain"  >
+                <img v-for="image in variantes[index].imageListed" id="subimage" class=" w-auto max-h-28 object-contain border" :src="image" alt="##" > 
+            </div>
+            
+            
         </div>
-        
-        <div v-if="variantes[index].myImagesError == ''"  class=" col-auto col-span-8 lg:col-span-8 flex overflow-auto scrolling-touch gap-2 h-auto mt-3 border-l-4 object-contain"  >
-            <img v-for="image in variantes[index].imageListed" id="subimage" class=" w-auto max-h-28 object-contain border" :src="image" alt="##" > 
-        </div>
-
-    </div>
 <div class="border-b-2 border-gray-300">
     <span  
                 class="cursor-pointer justify-center my-4 py-2 px-4  text-md font-bold rounded-xl  text-gray-700 bg-grey-500 flex items-center w-3/6 shadow-md hover:bg-gray-300 hover:border-gray-400 border-l border-b border-r border-t border-gray-400 " v-if="selectedType != 'N/A'" 

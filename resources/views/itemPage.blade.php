@@ -3,33 +3,18 @@
 {{-- BUYING ITEM PAGE --}}
 
 @section('thisItem')
-<div class="container bg-white grid grid-cols-1 mt-4"  >
-
-    <div class=" grid grid-rows-1 grid-cols-1 md:grid-cols-5 lg:grid-cols-12 ">
-
-        <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:ml-10 mb-4" >
-
-            
-                <div class="w-full h-full">
-                    <a  id="sticky">
-                        <img class="mainImage object-contain object-scale-down w-full"  
-                            src="{{ Storage::URL('assetItems/'.$item->image)}}" 
-                            alt="{{$item->nombre}}">
-
-                    </a>
-                </div>
-           
-
- 
+<div class="container bg-white mt-4"  >
+    <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-12 shadow-md rounded-md p-4">
+        <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:ml-10 mb-4">
+            <div class="w-full h-full">
+                <a  id="sticky">
+                    <img class="mainImage object-contain object-scale-down w-full" src="{{ Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
+                </a>
+            </div>
         </div>
-        
-        
         <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 ">
-        <div id="DTpageUp" v-cloak>
-            
-
-            <article style="margin: 0 0 1em 0;">
-
+            <div id="DTpageUp" v-cloak>
+                <article style="margin: 0 0 1em 0;">
                 <h1 class="font-bold" style="font-size:28px;">
                     {{$item->nombre}}
                 </h1>
@@ -40,17 +25,8 @@
                         </strong>
                     </small>
                 </p>
-                <small>
-                    <a href="/negocio/compras/{{$item->store->store_id}}" class="text-blue-600 hover:text-yellow-500">
-                        Ver productos de {{$item->store->nombreNegocio}}
-                    </a>
-                </small>
-                <br>
-                
-
                 <p v-if="!price" class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;">    
                     &#8353; {{number_format($searchedItem->size[0]->precio, 0, '.', ',')}}
-             
                     <small style="font-size: 14px;" class="text-muted">
                      (no incluye iva)
                     </small>
@@ -71,7 +47,6 @@
                         </a>
                     </small>
                 </p>
-
                 @if($shipping)
                     @if($shipping->precioEnvio > 0)
 
@@ -90,9 +65,8 @@
                         </small>
                     @endif
                 @endif
-            
                 <div class="">
-                    <small class="text-muted flex items-center " style="font-size: 14px; left:-18px;">
+                    <small class="text-muted flex items-center" style="font-size: 14px; left:-18px;">
                     <div class="mr-2 flex">
                     @for($i = 0; $i <= 5; $i++)
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="color:#d6d300ef;" viewBox="0 0 20 20" fill="currentColor">
@@ -102,72 +76,65 @@
                     </div>
                         (1099) reseñas
                     </small>
-
                 </div>
-
                 <div class="content">
                     <p class="mb-4 mt-4 hidden lg:block">{{$item->descripcion}}</p>
                     <div class="mb-3" >
-                    
-                        @if(count($item->colors) > 1)
-
+                        @if(count($item->colors) > 0)
                             <span for="provincia" >
                                 <strong> {{ $item->tipoVariante }}: </strong>
                             </span>
-
                             <span>
-                                <select 
-                                     
+                                {{-- <select   
                                     style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
                                     oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
                                     name="color" 
-                                    id="color">
-                                    
-                                    <option value="{{$searchedItem->color}}"selected style="background-color: #0003;">
-                                        {{ucfirst($searchedItem->color)}}
-                                    </option>
-
-                                    @foreach ($item->colors as $color)
-                                        @if($searchedItem->color != ucfirst($color->color))
-                                            
-                                            <option  >
-                                                {{ucfirst($color->color)}}
-                                            </option>
-                                            
-                                        @endif
+                                    id="color"> --}}
+                                <div class="flex space-x-5 p-2">
+                                    @foreach ($item->colors as $colors)
+                                
+                                        <a class="w-auto h-16 shadow-md rounded-md border" href="/producto/{{$colors->link}}">
+                                            @foreach(json_decode($colors->colorImages) as $vImage)
+                                                <img class="w-auto h-16 p-2" src="{{Storage::URL('assetItems/'.$vImage)}}" alt="{{$item->nombre}}">
+                                                @break
+                                            @endforeach
+                                        </a>
                                     @endforeach
-                                </select>
+
+                                </div>
+                                    
+                                    
+                                        {{-- {{ucfirst($searchedItem->color)}} --}}
+                                    
+                                        {{-- @if($searchedItem->color != ucfirst($color->color))
+                                            <option>
+                                                <a href="/producto/{{$color->link}}">{{ucfirst($color->color)}}</a>
+                                                
+                                            </option>
+                                        @endif --}}
+                                    {{-- @endforeach --}}
+                                {{-- </select> --}}
                             </span>
-                        
                         @else 
-                        
                             @if(trim($item->tipoVariante) != "N/A")
                                 <span for="provincia" class="">
                                     <strong> {{ $item->tipoVariante }}: </strong> {{ $searchedItem->color }} 
                                 </span>
-                            
                             @endif
-
                         @endif
-                  
-                      
                     </div>
-       
                     <div class="mb-3">
-                    
-                    @if($searchedItem->size[0]->size == 'noaplica')
-                        @if(count($searchedItem->size) > 1)
-                            
-                            <span>
-                                <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span>
-                                    
-                                    <select 
-                                        @change="updateItem($event)"
-                                        style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
-                                        oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
-                                        name="color" 
-                                        id="color">
-                                            
+                        @if($searchedItem->size[0]->size != 'noaplica')
+                            @if(count($searchedItem->size) > 1)
+                                <span>
+                                    <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
+                                        <select 
+                                            @change="updateItem($event)"
+                                            style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
+                                            oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
+                                            name="color" 
+                                            id="color">
+                                                
                                             @foreach ($searchedItem->size as $size)
                                                 
                                                 <option value="{{$size->id}}">
@@ -175,28 +142,20 @@
                                                 </option>
                                             
                                             @endforeach
-
                                         </select>
+                                    </span> 
+                                </span>       
+                            @else
+                                @if(trim($searchedItem->size[0]->size) != "noaplica")
+                                    <span style="margin-top: 15px;">
+                                        <strong>
+                                            Tamaño:
+                                        </strong>
+                                            {{ strtoupper($searchedItem->size[0]->size) }}
                                     </span>
-                           
-                                
-                                    
-                        @else
-                            @if(trim($searchedItem->size[0]->size) != "NoAplica")
-                                <span style="margin-top: 15px;">
-                                    <strong>
-                                        Tamaño:
-                                    </strong>
-                                        {{ strtoupper($searchedItem->size[0]->size) }}
-                                </span>
-
-                                
-                    
-                      
+                                @endif
                             @endif
-
                         @endif
-                    @endif
                     </div>
                 </div>
                 @if($searchedItem->size[0]->quantity <= 0)
@@ -204,7 +163,6 @@
                         Lo sentimos el {{  $item->tipoVariante }} o Tamaño se encuentra Agotado.
                     </p>
                 @endif
-
                 @if($searchedItem->size[0]->quantity > 0)
                     <div style="display: inline;">
                         <span>
@@ -240,13 +198,11 @@
                                 Cantidad:
                                 </strong>
                             </span>
-                    
                             <select v-model="selectedQty" 
                             style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
                                         oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control"
                                 max="20" 
                                 id="color">
-
                                 <option v-for="x in qty.slice(0,25) ">
                                     @{{x}}
                                 </option>
@@ -254,7 +210,7 @@
                         </span>
                     </div>
                 @endif
-                   <br>
+                 
 
                     
                 <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base">
@@ -334,11 +290,15 @@
                
 
             @endif
-       
+            <div class="grid justify-center my-4 border border-gray-200 hover:bg-gray-100 rounded-md py-2 px-3 shadow-md">
+                <a href="/negocio/compras/{{$item->store->store_id}}" class="text-gray-700  text-sm font-bold ">
+                    Ver productos de {{$item->store->nombreNegocio}}
+                </a>
+            </div>
 
 
 
-    <div style="text-align: right;">
+    <div class="flex justify-end space-x-3">
         @include('BuyingCartButtons')
     </div>
 
@@ -347,127 +307,123 @@
    
     
             
-            <div class="myFirstSectionInner scroll mb-10" 
+    <div class="myFirstSectionInner scroll mb-10" 
         style="border-top: 1px solid grey; border-bottom: 1px solid grey; height: 7em;">
         <div class="flex nowrap" style=" padding: 15px 0 15px 0;">
             <div class="flex nowrap">
-            <img class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
-            @foreach ($item->colors as $color)
-                        
-                @foreach(json_decode($color->colorImages) as $image)
-                    @if($image != NULL)
+                
+                @foreach ($item->colors as $color)
                             
-                        <img id="subimage" class="sectionImage subimage" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
-                            
-                          
-                    @endif
+                    @foreach(json_decode($color->colorImages) as $image)
+                        @if($image != NULL)
+                                
+                            <img id="subimage" class="sectionImage subimage cursor-pointer" src="{{ Storage::URL('assetItems/'.$image) }}" alt="{{$item->nombre}}">
+          
+                        @endif
+                    @endforeach
+            
                 @endforeach
-           
-            @endforeach
 
             </div>
         </div>
     </div>
 
-    <br>
-    </div>
-    </div>
     
-
-   
-    </div>
-    </div>
-
-    <div class="container grid grid-rows-1 mt-4 py-4  border-t border-gray-200" >
-        <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-10 content-start" >
-
-            <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-5 col-start-1 col-span-4  justify-self-start">
-                <div class="">
-                    <h3 class="font-bold text-2xl">
-                     {{$item->nombre}}
-                    </h3>
-                    <p class="mt-4 md:mt-0">
-                        {{$item->descripcion}}
-                    </p>
                 </div>
-            @if(json_decode($item->specs) != 'null')
-                
-                    <div>
-                        <table class="mt-4 px-4 w-full">
-
-                            @foreach(json_decode($item->specs) as $value)
-                                <tr 
-                                    style="list-style: none; border-bottom: 1px solid rgb(197, 197, 197);border-top: 1px solid rgb(197, 197, 197); ">
-                                    <td 
-                                        style="background-color:rgba(236, 236, 236, 0.507); padding: 5px 5px; 5px 7px;width: 180px;"> 
-                                            <strong>
-                                                {{$value->specName}}
-                                            </strong>
-                                        </td>
-                                    <td 
-                                        style="padding: 5px 0 5px 7px; width: 200px;"> 
-                                            {{$value->specValue}}
-                                    </td>
-                                </tr>
-
-                            @endforeach
-
-                        </table>
-                    </div>
-                        
-                    
-                    
-                    @endif
-                    @if(json_decode($item->keyFeatures) != 'null')
-                    <ul class="list-disc list-inside my-4">
-                        @foreach(json_decode($item->keyFeatures) as $feature)
-                            <li class=""> 
-                                
-                                    {{$feature->feature}}
-                                
-                            </li>                                 
-                        @endforeach
-                    </ul>
-                    @endif
-                </div>
-            <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
-                    <div class="">
-                        <h3 class="font-bold">
-                        Comentarios
-                        </h3>
-                        <p class="mt-4 md:mt-0">
-                            COMENTARIOS DEL PRODUCTO
-                        </p>
-                        
-                    </div>
-                    <div >
-                        <div class="my-4">
-                            <p>Persona con Comentario #2</p>
-                            <p><small class="text-gray-600">Comentario #2</small></p>
-                        </div>
-                        <div class="my-4">
-                            <p>Persona con Comentario #3</p>
-                            <p><small class="text-gray-600">Comentario #3</small></p>
-                        </div>
-                        <div class="my-4">
-                            <p>Persona con Comentario #4</p>
-                            <p><small class="text-gray-600">Comentario #4</small></p>
-                        </div>
-                        <div class="my-4">
-                            <p>Persona con Comentario #5</p>
-                            <p><small class="text-gray-600">Comentario #5</small></p>
-                        </div>
-                    </div>
-
-                    
-                        
-                </div>
-
             </div>
-
+            <div class="container grid grid-rows-1 mt-4 py-4  border-t border-gray-200 shadow-md" >
+                <div class=" grid grid-cols-1 md:grid-cols-6 lg:grid-cols-10 content-start" >
         
-    
+                    <div class="grid grid-cols-1 mb-4 md:col-span-3 lg:col-span-5 col-start-1 col-span-4  justify-self-start">
+                        <div class="">
+                            <h3 class="font-bold text-2xl">
+                             {{$item->nombre}}
+                            </h3>
+                            <p class="mt-4 md:mt-0">
+                                {{$item->descripcion}}
+                            </p>
+                        </div>
+                    @if(json_decode($item->specs) != 'null')
+                        
+                            <div>
+                                <table class="mt-4 px-4 w-full">
+        
+                                    @foreach(json_decode($item->specs) as $value)
+                                        <tr 
+                                            style="list-style: none; border-bottom: 1px solid rgb(197, 197, 197);border-top: 1px solid rgb(197, 197, 197); ">
+                                            <td 
+                                                style="background-color:rgba(236, 236, 236, 0.507); padding: 5px 5px; 5px 7px;width: 180px;"> 
+                                                    <strong>
+                                                        {{$value->specName}}
+                                                    </strong>
+                                                </td>
+                                            <td 
+                                                style="padding: 5px 0 5px 7px; width: 200px;"> 
+                                                    {{$value->specValue}}
+                                            </td>
+                                        </tr>
+        
+                                    @endforeach
+        
+                                </table>
+                            </div>
+                                
+                            
+                            
+                            @endif
+                            @if(json_decode($item->keyFeatures) != 'null')
+                            <ul class="list-disc list-inside my-4">
+                                @foreach(json_decode($item->keyFeatures) as $feature)
+                                    <li class=""> 
+                                        
+                                            {{$feature->feature}}
+                                        
+                                    </li>                                 
+                                @endforeach
+                            </ul>
+                            @endif
+                        </div>
+                    <div class=" mb-4 md:col-span-3 lg:col-start-8 lg:col-span-4 ">
+                            <div class="">
+                                <h3 class="font-bold">
+                                Comentarios
+                                </h3>
+                                <p class="mt-4 md:mt-0">
+                                    COMENTARIOS DEL PRODUCTO
+                                </p>
+                                
+                            </div>
+                            <div >
+                                <div class="my-4">
+                                    <p>Persona con Comentario #2</p>
+                                    <p><small class="text-gray-600">Comentario #2</small></p>
+                                </div>
+                                <div class="my-4">
+                                    <p>Persona con Comentario #3</p>
+                                    <p><small class="text-gray-600">Comentario #3</small></p>
+                                </div>
+                                <div class="my-4">
+                                    <p>Persona con Comentario #4</p>
+                                    <p><small class="text-gray-600">Comentario #4</small></p>
+                                </div>
+                                <div class="my-4">
+                                    <p>Persona con Comentario #5</p>
+                                    <p><small class="text-gray-600">Comentario #5</small></p>
+                                </div>
+                            </div>
+        
+                            
+                                
+                        </div>
+        
+                    </div>
+        
+                
+            
+            </div>
+        </div>
     </div>
+
 
 </div>
 
@@ -520,7 +476,7 @@
 
 </script> --}}
 <script type="text/javascript">
-    $('img').mouseenter(function() {
+    $('img').click(function() {
 
         var image = $(this).attr('src');
 
@@ -534,7 +490,7 @@
 <script src="/scripts/itemPage.js"></script>
 
 @endsection
- @section('clock')
+ {{-- @section('clock')
 <script>
 // Set the date we're counting down to
 var countDownDate = new Date("Apr 1, 2022 09:00:00").getTime();
@@ -566,4 +522,4 @@ var x = setInterval(function() {
 }, 1000);
 </script>
 
-@endsection
+@endsection --}}

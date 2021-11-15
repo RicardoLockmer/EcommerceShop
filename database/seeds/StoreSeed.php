@@ -17,16 +17,15 @@ class StoreSeed extends Seeder
             'nombreNegocio' => 'DetoShop',
             'primerNombre' => 'Admin',
             'primerApellido' => 'Deto',
-            'tipoNegocio' => 'Equipaje',
+            
             'cedulaJuridica' => '0123456789',
-            'provincia' => 'San José',
-            'canton' => 'San José',
-            'direccion' => 'NONE',
-            'prefix' => '+506',
+            
+            'direccion' => 'SEED',
+            'prefix' => '+504',
             'phoneNumber' => '85832592',
-            'usuario' => 'ADMIN',
+            'password' => Hash::make('rpineda34'),
             'email' => 'admin@deto.com',
-            'user_id' => 1,
+            
             'tyc' => 1,
             'created_at' => now()
         

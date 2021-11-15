@@ -20,6 +20,7 @@
         </div>
         <form method="POST" class="mt-8 space-y-6" action="{{ route('register') }}">
             @csrf
+            <input type="text" name="acctype" value="1" hidden>
             <div class="rounded-md -space-y-px"
                 style="text-align: center;">
                 <div>     

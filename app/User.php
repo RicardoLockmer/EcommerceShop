@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     public function store() {
-        return $this->belongsTo(Store::class, 'nombreNegocio', 'nombreNegocio');
+        return $this->belongsTo(Store::class, 'store_id', 'store_id');
     }
     public function direcciones(){
         return $this->hasMany(direcciones::class)->orderBy('selected', 'DESC');
