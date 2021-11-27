@@ -166,14 +166,24 @@ class ItemsController extends Controller
      */
     public function update(Request $request)
     { 
-        $dbSizes = itemSizes::where('id', $request->sizeId)->first();
-        $item = Items::where('id', $dbSizes->item_id)->first();
-        $newPrice = $dbSizes->precio;
-        $newQty = $dbSizes->quantity;
-        $x = [ number_format($newPrice, 0, '.', ','), $newQty];
+        $dbColors = itemColors::where('link', $request->itemLink)->first();
+        $colorImages = json_decode($dbColors->colorImages);
+        $dbSizes = itemSizes::where('color_id', $dbColors->id)->get();
+        $sizes = [];
+        foreach($dbSizes as $size){
+            array_push($sizes, $size->size);
+        }
+        $price = $dbSizes[0]->precio;
+        
+        // $dbSizes = itemSizes::where('id', $request->sizeId)->first();
+        // $item = Items::where('id', $dbSizes->item_id)->first();
+        // $itemSizes = $dbColors->sizes;
+        // $itemQty = $dbSizes->quantity;
+        // $x = [ number_format($newPrice, 0, '.', ','), $newQty];
+        
         // $newPriceSearch = itemSizes::where('item_id', $item->id)->get();
         // $newPrice = $newPriceSearch->precio;
-
+        $x = [number_format($price, 0, '.', ','), $sizes];
         return $x;
     }
 

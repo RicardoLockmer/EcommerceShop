@@ -14,6 +14,7 @@
         </div>
         <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 ">
             <div id="DTpageUp" v-cloak>
+                
                 <article style="margin: 0 0 1em 0;">
                 <h1 class="font-bold" style="font-size:28px;">
                     {{$item->nombre}}
@@ -36,7 +37,7 @@
                         </a>
                     </small>
                 </p>
-                <p v-else class="subtitle " style="color: rgba(36, 36, 36, 0.829); font-size: 21px; margin-bottom: 0;">                    
+                <p v-else  class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;" >                    
                     &#8353; @{{ price }}
                     <small style="font-size: 14px;" class="text-muted">
                         (no incluye iva)
@@ -93,14 +94,14 @@
                                 <div class="flex space-x-5 p-2">
                                     @foreach ($item->colors as $colors)
                                 
-                                        <a class="w-auto h-16 shadow-md rounded-md border" href="/producto/{{$colors->link}}">
+                                        <div class="hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer" v-on:click="updateItem" name="{{$colors->link}}">
                                             @foreach(json_decode($colors->colorImages) as $vImage)
-                                                <img class="w-auto h-16 p-2" src="{{Storage::URL('assetItems/'.$vImage)}}" alt="{{$item->nombre}}">
+                                                <img id="{{$colors->link}}" class="h-16 py-2 px-4 rounded-full" src="{{Storage::URL('assetItems/'.$vImage)}}"  alt="{{$item->nombre}}">
                                                 @break
                                             @endforeach
-                                        </a>
+                                        </div>
                                     @endforeach
-
+                                       
                                 </div>
                                     
                                     
@@ -124,38 +125,42 @@
                         @endif
                     </div>
                     <div class="mb-3">
-                        @if($searchedItem->size[0]->size != 'noaplica')
-                            @if(count($searchedItem->size) > 1)
+                        <div v-if="item == 0">
+                            @if($searchedItem->size[0]->size != 'noaplica')
+                                @if(count($searchedItem->size) > 1)
+                                    {{-- CHANGE TO DIV BLOCKS INSTEAD OF SELECT DROPDOWN --}}
                                 <span>
-                                    <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
-                                        <select 
-                                            @change="updateItem($event)"
-                                            style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
-                                            oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
-                                            name="color" 
-                                            id="color">
+                                        <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
+                                            <div id="Sizes" class="flex space-x-5 p-2">
                                                 
-                                            @foreach ($searchedItem->size as $size)
                                                 
-                                                <option value="{{$size->id}}">
-                                                    {{$size->size}}
-                                                </option>
-                                            
-                                            @endforeach
-                                        </select>
-                                    </span> 
-                                </span>       
-                            @else
-                                @if(trim($searchedItem->size[0]->size) != "noaplica")
-                                    <span style="margin-top: 15px;">
-                                        <strong>
-                                            Tamaño:
-                                        </strong>
-                                            {{ strtoupper($searchedItem->size[0]->size) }}
-                                    </span>
+                                                @foreach ($searchedItem->size as $size)
+                                                    
+                                                    <div id="{{$size->size}}" @click="updateSelectedSize($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full">
+                                                        {{strtoupper($size->size)}}
+                                                    </div>
+                                                
+                                                @endforeach
+                                            </div>
+                                        </span> 
+                                    </span>       
                                 @endif
                             @endif
-                        @endif
+
+                        </div>
+                        <div v-else>
+                            <span>
+                                <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
+                                
+                                    <div id="Sizes" class="flex space-x-5 p-2"> 
+                                            <div v-for="size in sizes" style="" :id="size" @click="updateSelectedSize($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full">
+                                                @{{size.toUpperCase()}}
+                                            </div> 
+                                    </div>
+                                </span> 
+                            </span>       
+
+                        </div>
                     </div>
                 </div>
                 @if($searchedItem->size[0]->quantity <= 0)
@@ -290,7 +295,7 @@
                
 
             @endif
-            <div class="grid justify-center my-4 border border-gray-200 hover:bg-gray-100 rounded-md py-2 px-3 shadow-md">
+            <div class="grid justify-center my-4 border border-gray-200 hover:bg-gray-100 rounded-full py-2 px-3 shadow-md">
                 <a href="/negocio/compras/{{$item->store->store_id}}" class="text-gray-700  text-sm font-bold ">
                     Ver productos de {{$item->store->nombreNegocio}}
                 </a>
@@ -343,21 +348,21 @@
                                 {{$item->descripcion}}
                             </p>
                         </div>
-                    @if(json_decode($item->specs) != 'null')
+                    @if(json_decode($item->specs))
                         
-                            <div>
-                                <table class="mt-4 px-4 w-full">
+                            <div class="">
+                                <table class=" my-5 shadow-md w-full">
         
                                     @foreach(json_decode($item->specs) as $value)
-                                        <tr 
+                                        <tr
                                             style="list-style: none; border-bottom: 1px solid rgb(197, 197, 197);border-top: 1px solid rgb(197, 197, 197); ">
-                                            <td 
+                                            <td class="px-3 py-2" 
                                                 style="background-color:rgba(236, 236, 236, 0.507); padding: 5px 5px; 5px 7px;width: 180px;"> 
                                                     <strong>
                                                         {{$value->specName}}
                                                     </strong>
                                                 </td>
-                                            <td 
+                                            <td class="px-3 py-2"
                                                 style="padding: 5px 0 5px 7px; width: 200px;"> 
                                                     {{$value->specValue}}
                                             </td>
