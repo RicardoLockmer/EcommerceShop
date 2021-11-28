@@ -86,35 +86,17 @@
                                 <strong> {{ $item->tipoVariante }}: </strong>
                             </span>
                             <span>
-                                {{-- <select   
-                                    style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
-                                    oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
-                                    name="color" 
-                                    id="color"> --}}
-                                <div class="flex space-x-5 p-2">
-                                    @foreach ($item->colors as $colors)
                                 
-                                        <div class="hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer" v-on:click="updateItem" name="{{$colors->link}}">
+                                <div id="Items" class="flex space-x-5 p-2">
+                                    @foreach ($item->colors as $colors)
                                             @foreach(json_decode($colors->colorImages) as $vImage)
-                                                <img id="{{$colors->link}}" class="h-16 py-2 px-4 rounded-full" src="{{Storage::URL('assetItems/'.$vImage)}}"  alt="{{$item->nombre}}">
+                                                <img id="{{$colors->link}}" class="h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer" v-on:click="updateItem" name="{{$colors->link}}" src="{{Storage::URL('assetItems/'.$vImage)}}"  alt="{{$item->nombre}}">
                                                 @break
                                             @endforeach
-                                        </div>
                                     @endforeach
-                                       
                                 </div>
                                     
                                     
-                                        {{-- {{ucfirst($searchedItem->color)}} --}}
-                                    
-                                        {{-- @if($searchedItem->color != ucfirst($color->color))
-                                            <option>
-                                                <a href="/producto/{{$color->link}}">{{ucfirst($color->color)}}</a>
-                                                
-                                            </option>
-                                        @endif --}}
-                                    {{-- @endforeach --}}
-                                {{-- </select> --}}
                             </span>
                         @else 
                             @if(trim($item->tipoVariante) != "N/A")
@@ -128,8 +110,8 @@
                         <div v-if="item == 0">
                             @if($searchedItem->size[0]->size != 'noaplica')
                                 @if(count($searchedItem->size) > 1)
-                                    {{-- CHANGE TO DIV BLOCKS INSTEAD OF SELECT DROPDOWN --}}
-                                <span>
+                                    
+                           
                                         <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
                                             <div id="Sizes" class="flex space-x-5 p-2">
                                                 
@@ -142,14 +124,14 @@
                                                 
                                                 @endforeach
                                             </div>
-                                        </span> 
-                                    </span>       
+                                       
+                                          
                                 @endif
                             @endif
 
                         </div>
                         <div v-else>
-                            <span>
+                            
                                 <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
                                 
                                     <div id="Sizes" class="flex space-x-5 p-2"> 
@@ -157,43 +139,38 @@
                                                 @{{size.toUpperCase()}}
                                             </div> 
                                     </div>
-                                </span> 
-                            </span>       
+                               
+                              
 
                         </div>
                     </div>
                 </div>
+
+
+
+                
                 @if($searchedItem->size[0]->quantity <= 0)
                     <p v-if="qty <= 0" style="color: red;">
                         Lo sentimos el {{  $item->tipoVariante }} o Tamaño se encuentra Agotado.
                     </p>
                 @endif
                 @if($searchedItem->size[0]->quantity > 0)
-                    <div style="display: inline;">
-                        <span>
-                            <span style=" margin-top: 15px;">
-                                <strong>
-                                    Cantidad:
-                                </strong>
-                            </span>
-                            <select v-model="selectedQty" 
-                            style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
-                                        oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control" 
+                <span style=" margin-top: 15px;">
+                    <strong>
+                        Cantidad:
+                    </strong>
+                </span>
+                    <div id="QTY" class="flex space-x-5 p-2">
+                        
+                            <div id="1" @click="updateSelectedQTY($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full"> +1 </div>
+                            <div id="2" @click="updateSelectedQTY($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full"> +2 </div>
+                            <div id="3" @click="updateSelectedQTY($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full"> +3 </div>
+                            <input type="number" v-model="selectedQty" @click="updateSelectedQTY($event)" max="10"
+                                         class="w-28 hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full" 
                                 name="color"
                                 
                                 id="qty">
-                                    
-                                @for ($i = 1; $i <= min(25, $searchedItem->size[0]->quantity); $i++)
-                                
-                                    <option value="{{$i}}">
-                                        {{$i}}
-                                    </option>
-                                    
-                                @endfor
 
-                            </select>
-                            
-                        </span>
                     </div>
                 @else
                     <div v-if='qty > 0' style="display: inline;">
