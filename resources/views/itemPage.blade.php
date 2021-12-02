@@ -14,20 +14,22 @@
         </div>
         <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 ">
             <div id="DTpageUp" v-cloak>
-                
+                <input type="text" id="Item" value="{{$item->colors[0]->id}}" hidden>
+                {{$item->colors[0]->id}}
                 <article style="margin: 0 0 1em 0;">
                 <h1 class="font-bold" style="font-size:28px;">
-                    {{$item->nombre}}
+                    @{{item.nombre}}
                 </h1>
                 <p style="margin: 0 0 0 0;">
                     <small class="text-muted text-base">
                         <strong>
-                            {{$item->marca}}
+                            @{{item.marca}}
                         </strong>
                     </small>
                 </p>
-                <p v-if="!price" class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;">    
-                    &#8353; {{number_format($searchedItem->size[0]->precio, 0, '.', ',')}}
+                <p  class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;">   
+                   
+                    &#8353; @{{price}}
                     <small style="font-size: 14px;" class="text-muted">
                      (no incluye iva)
                     </small>
@@ -37,17 +39,7 @@
                         </a>
                     </small>
                 </p>
-                <p v-else  class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;" >                    
-                    &#8353; @{{ price }}
-                    <small style="font-size: 14px;" class="text-muted">
-                        (no incluye iva)
-                    </small>
-                    <small style="font-size: 13px;">
-                        <a href="##">
-                            Detalles
-                        </a>
-                    </small>
-                </p>
+             
                 @if($shipping)
                     @if($shipping->precioEnvio > 0)
 
@@ -66,6 +58,8 @@
                         </small>
                     @endif
                 @endif
+
+                {{-- RATINGS --}}
                 <div class="">
                     <small class="text-muted flex items-center" style="font-size: 14px; left:-18px;">
                     <div class="mr-2 flex">
@@ -78,71 +72,46 @@
                         (1099) reseñas
                     </small>
                 </div>
-                <div class="content">
-                    <p class="mb-4 mt-4 hidden lg:block">{{$item->descripcion}}</p>
-                    <div class="mb-3" >
-                        @if(count($item->colors) > 0)
+
+
+                <div v-if="item.descripcion" class="content">
+                    <p class="mb-4 mt-4 hidden lg:block">@{{item.descripcion}}</p>
+                </div>
+                <div>
+                    <div v-if="colors.length > 0" class="mb-3" >
+                        
                             <span for="provincia" >
                                 <strong> {{ $item->tipoVariante }}: </strong>
                             </span>
-                            <span>
-                                
-                                <div id="Items" class="flex space-x-5 p-2">
-                                    @foreach ($item->colors as $colors)
-                                            @foreach(json_decode($colors->colorImages) as $vImage)
-                                                <img id="{{$colors->link}}" class="h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer" v-on:click="updateItem" name="{{$colors->link}}" src="{{Storage::URL('assetItems/'.$vImage)}}"  alt="{{$item->nombre}}">
-                                                @break
-                                            @endforeach
-                                    @endforeach
+                            
+                                <div  id="Items" class="flex space-x-5 p-2">
+                                    <img v-for="img in item.colors" class="h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer" :id="img.id" v-on:click="updateItem" :src="imgPreUrl + img.colorImages[0]"  alt="">
+                                    
                                 </div>
-                                    
-                                    
-                            </span>
-                        @else 
-                            @if(trim($item->tipoVariante) != "N/A")
-                                <span for="provincia" class="">
-                                    <strong> {{ $item->tipoVariante }}: </strong> {{ $searchedItem->color }} 
-                                </span>
-                            @endif
-                        @endif
+                     
+                     
+                            
+                      
                     </div>
                     <div class="mb-3">
-                        <div v-if="item == 0">
-                            @if($searchedItem->size[0]->size != 'noaplica')
-                                @if(count($searchedItem->size) > 1)
-                                    
-                           
-                                        <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
-                                            <div id="Sizes" class="flex space-x-5 p-2">
-                                                
-                                                
-                                                @foreach ($searchedItem->size as $size)
-                                                    
-                                                    <div id="{{$size->size}}" @click="updateSelectedSize($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full">
-                                                        {{strtoupper($size->size)}}
-                                                    </div>
-                                                
-                                                @endforeach
-                                            </div>
-                                       
-                                          
-                                @endif
-                            @endif
-
-                        </div>
-                        <div v-else>
-                            
-                                <span style=" margin-top: 15px;"><strong>Tamaño:</strong></span> 
+                        <div>
+                            <span style=" margin-top: 15px;">
+                                <strong>Tamaño:</strong>
+                            </span>
+                            <div class="text-muted" v-if="!sizes">
+                                <small>
+                                    Seleccione un {{ $item->tipoVariante }}
+                                </small> 
+                            </div>
+                            <div id="Sizes" class="flex space-x-5 p-2">
                                 
-                                    <div id="Sizes" class="flex space-x-5 p-2"> 
-                                            <div v-for="size in sizes" style="" :id="size" @click="updateSelectedSize($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full">
-                                                @{{size.toUpperCase()}}
-                                            </div> 
-                                    </div>
-                               
-                              
+                                <div v-for="size in sizes" id="size.id" @click="updateSelectedSize($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full">
+                                   @{{size.size}}
+                                </div>
 
+                            </div>
                         </div>
+                        
                     </div>
                 </div>
 

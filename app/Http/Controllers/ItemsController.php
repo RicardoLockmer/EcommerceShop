@@ -166,27 +166,51 @@ class ItemsController extends Controller
      */
     public function update(Request $request)
     { 
-        $dbColors = itemColors::where('link', $request->itemLink)->first();
-        $colorImages = json_decode($dbColors->colorImages);
-        $dbSizes = itemSizes::where('color_id', $dbColors->id)->get();
-        $sizes = [];
-        foreach($dbSizes as $size){
-            array_push($sizes, $size->size);
+        $dbColors = itemColors::where('id', $request->itemLink)->get();
+        $dbItem = Items::where('id', $dbColors[0]->item_id)->first();
+        $dbSizes = itemSizes::where('color_id', $dbColors[0]->id)->get();
+        $mainImage = array();
+        $tmpArray = array();
+        foreach($dbItem->colors as $color){
+            $tmpArray[] = json_decode($color->colorImages);
         }
+        foreach($tmpArray as $image){
+            $mainImage[] = $image[0];
+        }
+        foreach($dbItem->colors as $image){
+            $image->colorImages = json_decode($image->colorImages);
+        }
+        
         $price = $dbSizes[0]->precio;
         
-        // $dbSizes = itemSizes::where('id', $request->sizeId)->first();
-        // $item = Items::where('id', $dbSizes->item_id)->first();
-        // $itemSizes = $dbColors->sizes;
-        // $itemQty = $dbSizes->quantity;
-        // $x = [ number_format($newPrice, 0, '.', ','), $newQty];
         
-        // $newPriceSearch = itemSizes::where('item_id', $item->id)->get();
-        // $newPrice = $newPriceSearch->precio;
-        $x = [number_format($price, 0, '.', ','), $sizes];
+        
+        $x = [$dbItem, number_format($price, 0, '.', ','), $dbColors, $mainImage, $dbSizes];
         return $x;
+       
     }
 
+
+    public function updateItem(Request $request){
+        $dbColors = itemColors::where('id', $request->itemLink)->get();
+        $dbItem = Items::where('id', $dbColors[0]->item_id)->first();
+        $dbSizes = itemSizes::where('color_id', $dbColors[0]->id)->get();
+        $mainImage = array();
+        $tmpArray = array();
+        foreach($dbItem->colors as $color){
+            $tmpArray[] = json_decode($color->colorImages);
+        }
+        foreach($tmpArray as $image){
+            $mainImage[] = $image[0];
+        }
+        foreach($dbItem->colors as $image){
+            $image->colorImages = json_decode($image->colorImages);
+        }
+        
+        $price = $dbSizes[0]->precio;
+        $x = [$dbItem, number_format($price, 0, '.', ','), $dbColors, $mainImage, $dbSizes];
+        return $x;
+    }
     /**
      * Remove the specified resource from storage.
      *

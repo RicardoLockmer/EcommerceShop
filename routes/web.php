@@ -58,7 +58,7 @@ Route::put('/perfil/{direccion:id}/update', 'DireccionesController@update')->mid
 Route::get('/iniciar-mi-negocio', 'StoreController@create'); // crear negocio view
 Route::post('/iniciar-mi-negocio', 'StoreController@store'); // guardar info del negocio
 Route::get('/cheese', 'ItemsController@update');
-
+Route::get('/updateItem', 'ItemsController@updateItem');
 //CREAR PRODUCTO
 Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem'); // crear view
 Route::post('/nuevo-producto', 'StoreController@storeItem');//guardar

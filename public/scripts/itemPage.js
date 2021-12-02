@@ -5,6 +5,7 @@ const itemPage = {
         return {
             loading: false,
             price: '',
+            imgPreUrl: "/storage/assetItems/",
             cantidad: 0,
             cant: 1,
             sizeId: '',
@@ -12,44 +13,56 @@ const itemPage = {
             qty: 0,
             selectedQty: 1,
             item: '',
+            colors: [],
             sizes: [],
+            images: [],
+            mainImages: [],
             itemIDL: '',
 
         };
     },
-    mounted: {
-        item = document.getElementById("")
+    mounted() {
+
+        axios.get('/cheese', {
+            params: {
+                itemLink: document.getElementById("Item").value,
+
+            }
+        }).then(x => {
+            this.item = x.data[0];
+            this.price = x.data[1];
+            this.colors = x.data[2];
+            this.mainImages = x.data[3]
+            // this.images = x.data[4];
+            this.sizes = x.data[4];
+            console.log(this.colors);
+
+        })
     },
 
     methods: {
 
         updateItem: function (event) {
             let selectedColor = "rgba(245, 158, 11)";
-            console.log(event);
+            console.log(event.target.id);
 
             //ITEMS
             var allItems = document.getElementById("Items");
             allItems.childNodes.forEach(item => item.style = '');
             event.target.style.borderColor = selectedColor;
 
-
-            axios.get('/cheese', {
+            axios.get('/updateItem', {
                 params: {
                     itemLink: event.target.id,
-
-
                 }
             }).then(x => {
-                this.price = x.data[0];
-                this.loading = true;
-                this.cantidad = x.data[0];
-                this.cant = x.data[0];
-                this.qty = x.data[0];
-                this.sizeId = event.target.value;
-                this.item = x.data.length;
-                this.sizes = x.data[1];
-                console.log(this.item);
-                var firstSize = document.getElementById(this.sizes[0]);
+                this.item = x.data[0];
+                this.price = x.data[1];
+                this.colors = x.data[2];
+                this.mainImages = x.data[3]
+                // this.images = x.data[4];
+                this.sizes = x.data[4];
+                var firstSize = document.getElementById(this.sizes.id);
 
                 firstSize.style.borderColor = selectedColor;
 
