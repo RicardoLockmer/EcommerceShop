@@ -8,7 +8,7 @@
         <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:ml-10 mb-4">
             <div class="w-full h-full">
                 <a  id="sticky">
-                    <img class="mainImage object-contain object-scale-down w-full" src="{{ Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
+                    <img class="mainImage object-contain object-scale-down w-full" src="{{ Storage::URL('assetItems/'.$item->image)}}" id="image" alt="{{$item->nombre}}">
                 </a>
             </div>
         </div>
@@ -75,7 +75,10 @@
 
 
                 <div v-if="item.descripcion" class="content">
-                    <p class="mb-4 mt-4 hidden lg:block">@{{item.descripcion}}</p>
+                    <details class="my-4 py-2 border-b rounde-md">
+                    <summary class="px-2 font-bold">Descripción</summary>
+                    <p class="mb-4 mt-4 px-2 hidden lg:block">@{{item.descripcion}}</p>
+                    </details>
                 </div>
                 <div>
                     <div v-if="colors.length > 0" class="mb-3" >

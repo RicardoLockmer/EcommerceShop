@@ -50,7 +50,8 @@ const itemPage = {
             var allItems = document.getElementById("Items");
             allItems.childNodes.forEach(item => item.style = '');
             event.target.style.borderColor = selectedColor;
-
+            var mainImage = document.getElementById("image");
+            var imgSource = event.target.src;
             axios.get('/updateItem', {
                 params: {
                     itemLink: event.target.id,
@@ -62,8 +63,8 @@ const itemPage = {
                 this.mainImages = x.data[3]
                 // this.images = x.data[4];
                 this.sizes = x.data[4];
+                mainImage.src = imgSource;
                 var firstSize = document.getElementById(this.sizes.id);
-
                 firstSize.style.borderColor = selectedColor;
 
             })
@@ -76,35 +77,29 @@ const itemPage = {
             console.log(event.target);
             var allSizes = document.getElementById("Sizes");
             console.log(allSizes.childElementCount);
-
             allSizes.childNodes.forEach(size => size.style = '');
-            // for (var i = 1; i <= allSizes.childElementCount; i++) {
-            //     allSizes.childNodes[i].style.borderColor = "";
-            //     console.log(allSizes[i]);
-            // };
             event.target.style.borderColor = "rgba(245, 158, 11)";
 
+            axios.get('/slectedSize', {
+                params: {
+                    itemLink: event.target.id,
 
 
-            // axios.get('/slectedSize', {
-            //     params: {
-            //         itemLink: event.target.id,
-
-
-            //     }
-            // }).then(x => {
-            //     this.price = x.data[0];
-            //     this.loading = true;
-            //     this.cantidad = x.data[0];
-            //     this.cant = x.data[0];
-            //     this.qty = x.data[0];
-            //     this.sizeId = event.target.value;
-            //     this.item = x.data.length;
-            //     this.sizes = x.data[1];
-            //     console.log(this.item);
-            // })
+                }
+            }).then(x => {
+                this.price = x.data[0];
+                this.loading = true;
+                this.cantidad = x.data[0];
+                this.cant = x.data[0];
+                this.qty = x.data[0];
+                this.sizeId = event.target.value;
+                this.item = x.data.length;
+                this.sizes = x.data[1];
+                console.log(this.item);
+            })
 
         },
+
         updateSelectedQTY: function (event) {
             console.log(event.target);
             var allSizes = document.getElementById("QTY");
