@@ -15,7 +15,7 @@
         <div class="col-start-1 col-span-5 md:col-start-3 md:ml-6 md:col-end-6 lg:col-start-6 lg:col-span-5 lg:mx-2 lg:ml-4 lg:pl-4 ">
             <div id="DTpageUp" v-cloak>
                 <input type="text" id="Item" value="{{$item->colors[0]->id}}" hidden>
-                {{$item->colors[0]->id}}
+                
                 <article style="margin: 0 0 1em 0;">
                 <h1 class="font-bold" style="font-size:28px;">
                     @{{item.nombre}}
@@ -27,57 +27,54 @@
                         </strong>
                     </small>
                 </p>
-                <p  class="font-bold text-green-700" style="font-size: 21px; margin-bottom: 0;">   
-                   
-                    &#8353; @{{price}}
-                    <small style="font-size: 14px;" class="text-muted">
-                     (no incluye iva)
-                    </small>
-                    <small style="font-size: 13px;">
-                        <a href="##" class="text-blue-600 hover:text-yellow-500">
-                            Detalles
-                        </a>
-                    </small>
-                </p>
-             
-                @if($shipping)
-                    @if($shipping->precioEnvio > 0)
-
-                        <small class="text-muted">
-                            Precio de Envió +
-                            <strong>
-                                &#8353; {{number_format($shipping->precioEnvio, 0, '.', ',')}}
-                            </strong>
-                        </small>
-                    @else
-                        <small class="text-muted">
-                            Envió
-                            <strong>
-                                Gratis
-                            </strong>
-                        </small>
-                    @endif
-                @endif
-
+                
                 {{-- RATINGS --}}
                 <div class="">
                     <small class="text-muted flex items-center" style="font-size: 14px; left:-18px;">
-                    <div class="mr-2 flex">
-                    @for($i = 0; $i <= 5; $i++)
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="color:#d6d300ef;" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    @endfor
-                    </div>
+                        <div class="mr-2 flex">
+                            @for($i = 0; $i <= 5; $i++)
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                            @endfor
+                        </div>
                         (1099) reseñas
+                    </small>
+                    <small class="text-muted flex items-center" style="font-size: 14px; left:-18px;">
+                        <div class="mr-2 flex">
+                            @for($i = 0; $i <= 5; $i++)
+                                @if($i <= 3 )
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                @else
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-200" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                @endif
+                            @endfor
+                        </div>
+                        (999) reseñas
                     </small>
                 </div>
 
 
                 <div v-if="item.descripcion" class="content">
-                    <details class="my-4 py-2 border-b rounde-md">
+                    <details class="mt-4 py-2 border-b rounde-md" open>
                     <summary class="px-2 font-bold">Descripción</summary>
-                    <p class="mb-4 mt-4 px-2 hidden lg:block">@{{item.descripcion}}</p>
+                    <p class="mb-4 mt-4 px-2 hidden lg:block font-bold text-gray-600 text-md text-sm">@{{item.descripcion}}</p>
+                    </details>
+                </div>
+                <div v-if="item.keyFeatures" class="content">
+                    <details class="mt-2 mb-4 py-2 border-b rounde-md">
+                    <summary class="px-2 font-bold">Característica</summary>
+                    <ul class="list-disc list-inside my-4">
+                        @foreach(json_decode($item->keyFeatures) as $feature)
+                            <li class="font-bold text-gray-600 text-sm"> 
+                                    {{$feature->feature}}
+                            </li>                                 
+                        @endforeach
+                    </ul>
                     </details>
                 </div>
                 <div>
@@ -88,7 +85,7 @@
                             </span>
                             
                                 <div  id="Items" class="flex space-x-5 p-2">
-                                    <img v-for="img in item.colors" class="h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer" :id="img.id" v-on:click="updateItem" :src="imgPreUrl + img.colorImages[0]"  alt="">
+                                    <img v-for="(img, index) in item.colors" :class="(index == 0) ? 'h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer border-yellow-500' : 'h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer'" :id="img.id" v-on:click="updateItem" :src="imgPreUrl + img.colorImages[0]"  alt="">
                                     
                                 </div>
                      
@@ -99,83 +96,62 @@
                     <div class="mb-3">
                         <div>
                             <span style=" margin-top: 15px;">
-                                <strong>Tamaño:</strong>
+                                <strong>Tamaño: </strong>
                             </span>
                             <div class="text-muted" v-if="!sizes">
                                 <small>
                                     Seleccione un {{ $item->tipoVariante }}
                                 </small> 
                             </div>
-                            <div id="Sizes" class="flex space-x-5 p-2">
+                            <div id="Sizes" class="flex space-x-5 py-2">
                                 
-                                <div v-for="size in sizes" id="size.id" @click="updateSelectedSize($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full">
-                                   @{{size.size}}
+                                <div v-for="size in sizes" :id="size.id" v-on:click="updateSelectedSize($event)" :class="(size.quantity > 0) ? 'w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer grid justify-items-center rounded-full mx-2' : 'w-auto border-2 cursor-not-allowed bg-gray-200 grid content-center rounded-full mx-2'">
+                                    <span :class="(size.quantity > 0) ? 'font-bold px-4 mt-1 mx-2' : 'font-bold px-4 mx-2 w-full'">
+                                        @{{size.size}}
+                                    </span>
+                                    <div v-if="size.quantity > 0" class="font-bold mb-1 text-green-500 px-4">
+                                       &#76; @{{size.precio.toLocaleString()}}
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                         
+                        
+                        
                     </div>
                 </div>
-
-
-
                 
-                @if($searchedItem->size[0]->quantity <= 0)
-                    <p v-if="qty <= 0" style="color: red;">
-                        Lo sentimos el {{  $item->tipoVariante }} o Tamaño se encuentra Agotado.
-                    </p>
-                @endif
-                @if($searchedItem->size[0]->quantity > 0)
-                <span style=" margin-top: 15px;">
-                    <strong>
-                        Cantidad:
-                    </strong>
-                </span>
-                    <div id="QTY" class="flex space-x-5 p-2">
-                        
-                            <div id="1" @click="updateSelectedQTY($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full"> +1 </div>
-                            <div id="2" @click="updateSelectedQTY($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full"> +2 </div>
-                            <div id="3" @click="updateSelectedQTY($event)" class="w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full"> +3 </div>
-                            <input type="number" v-model="selectedQty" @click="updateSelectedQTY($event)" max="10"
-                                         class="w-28 hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer py-2 px-4 rounded-full" 
-                                name="color"
-                                
-                                id="qty">
-
+                
+                <div>
+                    <span style=" margin-top: 15px;">
+                        <strong>
+                            Cantidad:
+                        </strong>
+                    </span>
+                    <div v-if="qty > 0" id="QTY" class="flex space-x-5 p-2">
+                        <div  v-for="index in qty" :id="index" class=" w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer rounded-full  font-bold"> 
+                            <div class="Quantity px-4" v-if="qty >= index" v-on:click="updateSelectedQTY($event)">
+                                @{{index}}
+                            </div> 
+                        </div>
                     </div>
-                @else
-                    <div v-if='qty > 0' style="display: inline;">
-                        <span>
-                            <span style=" margin-top: 15px;">
-                                <strong>
-                                Cantidad:
-                                </strong>
-                            </span>
-                            <select v-model="selectedQty" 
-                            style="height: 35px; padding: 0 0 0 .75rem; width: 280px;" 
-                                        oninput="this.className = 'mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control'" class="mt-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-2  sm:text-sm border-gray-300 rounded-md shadow-sm form-control"
-                                max="20" 
-                                id="color">
-                                <option v-for="x in qty.slice(0,25) ">
-                                    @{{x}}
-                                </option>
-                            </select>
-                        </span>
+                    <div v-else class="mx-2">
+                        <div v-if="qty <= 0" class="w-auto py-2 px-4 mx-2 font-bold text-red-500">
+                            Lo sentimos el {{ $item->tipoVariante }} o Tamaño se encuentra Agotado.
+                        </div>
                     </div>
-                @endif
-                 
-
-                    
+                </div>
+               
                 <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base">
                     <p class="card-text flex" >
                         <svg width="1.5em" 
                             height="1.5em"
                             class="mr-2"
                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  <path fill="#fff" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
-</svg>
+                            <path fill="#fff" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
+                        </svg>
 
                 @if (Auth::check()) 
 

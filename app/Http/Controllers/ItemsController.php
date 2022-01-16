@@ -192,6 +192,7 @@ class ItemsController extends Controller
 
 
     public function updateItem(Request $request){
+
         $dbColors = itemColors::where('id', $request->itemLink)->get();
         $dbItem = Items::where('id', $dbColors[0]->item_id)->first();
         $dbSizes = itemSizes::where('color_id', $dbColors[0]->id)->get();
@@ -206,9 +207,18 @@ class ItemsController extends Controller
         foreach($dbItem->colors as $image){
             $image->colorImages = json_decode($image->colorImages);
         }
-        
+       
+        $selectedColor = $dbColors[0];
+        $selectedColor->colorImages = json_decode($selectedColor->colorImages);
         $price = $dbSizes[0]->precio;
-        $x = [$dbItem, number_format($price, 0, '.', ','), $dbColors, $mainImage, $dbSizes];
+        $x = [$dbItem, number_format($price, 0, '.', ','), $dbColors, $selectedColor, $mainImage, $dbSizes];
+        return $x;
+    }
+
+    public function updateSizeItem(Request $request){
+        $dbSizes = ItemSizes::where('id', $request->itemLink)->firstOrFail();
+        $price = $dbSizes->precio;
+        $x = [$dbSizes, number_format($price, 0, '.', ',')];
         return $x;
     }
     /**

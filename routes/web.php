@@ -59,6 +59,7 @@ Route::get('/iniciar-mi-negocio', 'StoreController@create'); // crear negocio vi
 Route::post('/iniciar-mi-negocio', 'StoreController@store'); // guardar info del negocio
 Route::get('/cheese', 'ItemsController@update');
 Route::get('/updateItem', 'ItemsController@updateItem');
+Route::get('/selectedSize', 'ItemsController@updateSizeItem');
 //CREAR PRODUCTO
 Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem'); // crear view
 Route::post('/nuevo-producto', 'StoreController@storeItem');//guardar

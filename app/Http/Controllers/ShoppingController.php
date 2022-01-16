@@ -71,8 +71,8 @@ class ShoppingController extends Controller
         $userId = Auth::user()->id;
         $uniqueId = 'DTRID'.$request->id;
         $newCartItem = itemSizes::where('id', $request->id)->first();
-        $myItem = Items::where('id', $newCartItem->item_id)->first();
-            
+        $myItem = Items::where('id', $request->item_id)->first();
+        
         $cartExist = \Cart::session($userId)->getContent();
             if($cartExist != NULL) {
                 $itemExist = \Cart::get($uniqueId);
@@ -85,31 +85,26 @@ class ShoppingController extends Controller
                 }else {
                     \Cart::session($userId)->add(array(
                         'id' => $uniqueId,
-                        'name' => $myItem->nombre,
-                        'price' => $newCartItem->precio,
+                        'name' => $request->name,
+                        'price' => $request->precio,
                         'quantity' => $request->qty,
-                        'associatedModel' => $newCartItem
+                        'associatedModel' => $newCartItem,
                     ));
-                  
-                    return back();
+                  return $x = $newCartItem;
+                
                 }
-
+                
             } else {
-
-        
-            
-            
-            
             \Cart::session($userId)->add(array(
                 'id' => $uniqueId,
-                'name' => $newCartItem->items->nombre,
-                'price' => $newCartItem->precio,
+                'name' => $request->name,
+                'price' => $request->precio,
                 'quantity' => $request->qty,
                 'associatedModel' => $newCartItem
             ));
           
             return back();
-        
+            
        
     }
 
