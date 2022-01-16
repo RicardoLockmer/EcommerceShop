@@ -19,11 +19,13 @@
             </button>
        
         
-        
+        <form action="/comprar" >
             @csrf
+            <input type="text" name="id" :value="selectedSize.id" hidden>
+            <input type="text" name="qty" :value="selectedQty" hidden>
             <button v-if="selectedSize && selectedQty && selectedColor" width="1em" height="1em" type="submit" class="btn hover:bg-yellow-300 bg-yellow-400 rounded-full shadow-sm text-md px-4 font-bold">Comprar</button>
             <button v-else class="btn  bg-yellow-400 rounded-full shadow-sm px-4 text-md font-bold" width="1em" height="1em" disabled>Comprar<button>
-        
+        </form>
 </div>
     
    

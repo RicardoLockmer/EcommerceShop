@@ -147,7 +147,27 @@ const itemPage = {
             let qty = parseInt(this.selectedQty);
             let itemName = this.item.nombre;
             let precio = this.selectedSize.precio;
-            axios.post('/shoppingCart', {
+            axios.get('/shoppingCart', {
+
+                params: {
+                    id: id,
+                    item_id: item_id,
+                    name: itemName,
+                    precio: precio,
+                    qty: qty
+                }
+
+            }).then(x => {
+                console.log(x);
+            })
+        },
+        buyItem: function (event) {
+            let id = this.selectedSize.id;
+            let item_id = this.selectedSize.item_id;
+            let qty = parseInt(this.selectedQty);
+            let itemName = this.item.nombre;
+            let precio = this.selectedSize.precio;
+            axios.get('/comprar', {
 
                 params: {
                     id: id,

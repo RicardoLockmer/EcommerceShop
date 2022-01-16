@@ -22,10 +22,9 @@ class BuyItemController extends Controller
      */
     public function index(Request $request)
     {
-        $storeName = $request->stnm;
+       
         $qty = $request->qty;
-        $itemSizeId = $request->sid;
-        $storeId = $request->stid;
+        $itemSizeId = $request->id;
         $delivery = false;
         $deliveLastDay = false;
         $provinciass = false;
@@ -59,13 +58,13 @@ class BuyItemController extends Controller
                    
          
         return view('Comprar', [
-            'storeName' => $storeName,
+            
             'shipping' => $provinciass,
             'item' => $purchaseItem,
             'unitPrice' =>$purchaseItem->precio,
             'cantidad' => $qty,
             'itemSizeId' => $itemSizeId,
-            'storeId' => $storeId,
+            
             'DeliveryAddress' => $userAddress,
             'TotalPrice' => $itemTotalPrice,
             'TotalPay' => $totalPagar, 

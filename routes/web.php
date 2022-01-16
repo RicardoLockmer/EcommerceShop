@@ -21,12 +21,12 @@ Route::get('/Account', 'StoreController@AccountTypeShow');
  
 //CART ROUTES
 Route::get('/ShoppingCart', 'ShoppingController@index');
-Route::post('/shoppingCart', 'ShoppingController@store');
+Route::get('/shoppingCart', 'ShoppingController@store');
 Route::post('/updateCart', 'ShoppingController@update');
 Route::post('/deleteCartItem', 'ShoppingController@destroy');
 
 //BUUY ROUTES
-Route::post('/comprar', 'BuyItemController@index');
+Route::get('/comprar', 'BuyItemController@index');
 Route::get('/ADDR', 'BuyItemController@ADDR');
 Route::post('/newADDR', 'BuyItemController@newADDR');
 Route::get('/drumroll', 'BuyItemController@tryTransaction')->middleware('auth');
