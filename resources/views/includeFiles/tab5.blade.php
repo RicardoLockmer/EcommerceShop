@@ -40,6 +40,7 @@
                 <div class="flex items-center text-sm font-medium text-gray-700" for="provincia">
                     <strong class="text-base my-2 mr-2"> 
                         Donde puede entregar
+                     
                     </strong>
                     <a class="text-muted" data-toggle="tooltip" data-placement="right" title="Donde puede enviar el Paquete.">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -88,13 +89,8 @@
 
             <!-- ENVIO GRATIS -->
             <div v-if="SelectedProv.includes(provincia.provincia)" class=" items-center  my-4 flex" >
-                <div v-for="(canton, index) in provincia.canton">
-                    <div class="flex">
-                        <input class="" v-model="SelectedCity" :id="canton.ciudad" :value="canton.ciudad" type="checkbox">
-                        <div>
-                            @{{canton.ciudad}}
-                        </div>
-                    </div>
+                
+                    
                     <div class="flex" >
                         <div v-if="!canton.gratis">
                             <small> <strong>Precio del envio</strong> </small>
@@ -111,7 +107,7 @@
                         <div class="text-gray-700 font-bold" ><small class="text-gray-700 font-bold">Envio Gratis</small> </div>
 
                     </div>
-                </div>
+               
              
             </div>    
                    

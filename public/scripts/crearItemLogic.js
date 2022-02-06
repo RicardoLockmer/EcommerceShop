@@ -96,22 +96,10 @@ const itemLayout = {
             ],
             provincias: [
                 {
+                    gratis: false,
                     provincia: 'Atlántida',
-                    canton: [
-                        {
-                            ciudad: 'Tela',
-                            gratis: false,
-                            precioEnvio: 0,
-                            tiempoEntrega: '',
-                        },
-                        {
-                            ciudad: 'La Ceiba',
-                            gratis: false,
-                            precioEnvio: 0,
-                            tiempoEntrega: '',
-
-                        }
-                    ],
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
                 },
                 {
                     gratis: false,
