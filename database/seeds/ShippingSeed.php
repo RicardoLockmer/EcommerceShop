@@ -12,11 +12,12 @@ class ShippingSeed extends Seeder
      */
     public function run()
     {
+        // Mochila
         DB::table("shippings")->insert([
             'created_at' => now(),
             'items_id' => 1,
             'empresa' => 'Correos de Costa Rica',
-            'provincia' => 'San José',
+            'provincia' => 'Tegucigalpa',
             'precioEnvio' => 0,
             'tiempoEntrega' => 2,
         ]);
@@ -24,49 +25,52 @@ class ShippingSeed extends Seeder
             'created_at' => now(),
             'items_id' => 1,
             'empresa' => 'Correos de Costa Rica',
-            'provincia' => 'Alajuela',
-            'precioEnvio' => 0,
+            'provincia' => 'San Pedro Sula',
+            'precioEnvio' => 90,
             'tiempoEntrega' => 3,
         ]);
         DB::table("shippings")->insert([
             'created_at' => now(),
             'items_id' => 1,
             'empresa' => 'Correos de Costa Rica',
-            'provincia' => 'Cartago',
-            'precioEnvio' => 0,
+            'provincia' => 'Puerto Cortes',
+            'precioEnvio' => 100,
             'tiempoEntrega' => 3,
         ]);
         DB::table("shippings")->insert([
             'created_at' => now(),
             'items_id' => 1,
             'empresa' => 'Correos de Costa Rica',
-            'provincia' => 'Heredia',
-            'precioEnvio' => 0,
+            'provincia' => 'Siguatepeque',
+            'precioEnvio' => 90,
             'tiempoEntrega' => 3,
         ]);
         DB::table("shippings")->insert([
             'created_at' => now(),
             'items_id' => 1,
             'empresa' => 'Correos de Costa Rica',
-            'provincia' => 'Guanacaste',
-            'precioEnvio' => 0,
+            'provincia' => 'Comayaguela',
+            'precioEnvio' => 35,
             'tiempoEntrega' => 4,
+        ]);
+
+        // Watch
+        DB::table("shippings")->insert([
+            'created_at' => now(),
+            'items_id' => 2,
+            'empresa' => 'Correos de Costa Rica',
+            'provincia' => 'Tegucigalpa',
+            'precioEnvio' => 0,
+            'tiempoEntrega' => 2,
         ]);
         DB::table("shippings")->insert([
             'created_at' => now(),
-            'items_id' => 1,
+            'items_id' => 2,
             'empresa' => 'Correos de Costa Rica',
-            'provincia' => 'Puntarenas',
-            'precioEnvio' => 0,
-            'tiempoEntrega' => 4,
+            'provincia' => 'San Pedro Sula',
+            'precioEnvio' => 120,
+            'tiempoEntrega' => 3,
         ]);
-        DB::table("shippings")->insert([
-            'created_at' => now(),
-            'items_id' => 1,
-            'empresa' => 'Correos de Costa Rica',
-            'provincia' => 'Limón',
-            'precioEnvio' => 0,
-            'tiempoEntrega' => 4,
-        ]);
+        
     }
 }

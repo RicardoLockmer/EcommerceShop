@@ -95,7 +95,7 @@ class ItemsController extends Controller
     // DELIVER DATE LOGIC
     if($userAddressCurrent != NULL){
         if(Auth::user()){
-        $provinciass = Shipping::where('items_id', $item->id)->where('provincia', $userAddressCurrent->provincia)->first();
+        $provinciass = Shipping::where('items_id', $item->id)->where('provincia', $userAddressCurrent->canton)->first();
         if($provinciass){  
         $string = $provinciass->tiempoEntrega;
         $day = '+'.$string.' day';

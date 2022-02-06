@@ -157,11 +157,11 @@
 
                     @if($selectedAddress != NULL){{-- SHIPPING ADDRESS EXISTS --}}
 
-                        @if(in_array($selectedAddress->provincia, $provinciasEnvio))
+                        @if(in_array($selectedAddress->canton, $provinciasEnvio))
                             
                             <small>
                                 <strong class="text-green-500"> 
-                                    Si se envía a {{$selectedAddress->provincia}}
+                                    Si se envía a {{$selectedAddress->canton}}
                                 </strong>
                             </small>
                            </p>
@@ -174,14 +174,14 @@
                                 </small>
                             </p>
 
-                            <p>
+                            {{-- <p>
                                 <small class="text-muted">
                                     El paquete se envía por
                                     <strong>
                                         {{$shipping->empresa}}
                                     </strong>
                                 </small>
-                            </p>
+                            </p> --}}
                             
                         @else
                             <small>

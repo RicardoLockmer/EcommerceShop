@@ -27,10 +27,14 @@ class StoreController extends Controller
         $user = Auth::user();
          
             \Cart::session(Auth::user()->id);
-            
-            return view('myStore', [
-                'user' => $user
-            ]);
+            if($user->store_id == $myStore->store_id){
+                return view('myStore', [
+                    'user' => $user
+                ]);
+
+            } else {
+                return view('errorPagina');
+            }
         
     }
 

@@ -14,7 +14,7 @@
                 Toda información que comparta con nosotros es <strong class="text-primary">Protegida.</strong>
             </small>
         </div>
-        <br>
+      
         <div class="myForms" style="width: 35em; margin-left: 26%; border: 2px solid #007bff">
             <div class="myFormData">
                 <div>
@@ -39,7 +39,7 @@
                     <input type="text" name="primary" value="0" hidden>
                     @endif
 
-                    <br>
+                    
                     {{-- Nombre Completo --}}
                     <div class="newbiz ">
                         <label class="" for="nombreCompleto"><strong>Nombre Completo*</strong>
@@ -61,7 +61,7 @@
                         </div>
 
                     </div>
-                    <br>
+                    
                     <div class='row'>
                         <div class='newbiz col'>
                             <div class="control">
@@ -69,9 +69,9 @@
                                     <strong> País* </strong>
                                 </label>
 
-                                <input class="form-control @error('pais') is-invalid @enderror" type="number"
-                                    value="Costa Rica" placeholder="Costa Rica" disabled>
-                                <input type="text" name="pais" value="Costa Rica" hidden>
+                                <input class="form-control @error('pais') is-invalid @enderror" type="text"
+                                    value="Honduras" placeholder="Honduras" disabled>
+                                <input type="text" name="pais" value="Honduras" hidden>
                             </div>
                         </div>
                         {{-- CANTON --}}
@@ -86,18 +86,18 @@
                                 maxlength="5" name="codigoPostal" value="{{old('codigoPostal')}}"
                                 placeholder="Código Postal">
                             <small class="text-muted text-wrap">Conseguir mi <a
-                                    href="https://correos.go.cr/codigo-postal/" target="_blank">Código
+                                    href="http://honducor.gob.hn/codpost/consulta.php" target="_blank" class="text-blue-500">Código
                                     Postal</a></small>
 
                         </div>
 
                     </div>
-                    <br>
+                    
                     <div class='row' id='appAd'>
                         <div class='newbiz col'>
 
                             <label class="label" for="provincia">
-                                <strong> Provincia* </strong>
+                                <strong> Municipio* </strong>
                             </label>
 
                             <select class="custom-select 
@@ -134,7 +134,7 @@
                         </div>
 
                     </div>
-                    <br>
+                   
 
                     <div class="newbiz ">
                         <label class="" for="dir"><strong>Dirección*</strong></label>
@@ -145,7 +145,7 @@
 
                         </div>
                     </div>
-                    <br>
+                   
                     <div class="newbiz ">
                         <label class="" for="infoAdicional"><strong>Información Adicional<small
                                     class="text-muted">(opcional)</small></strong> <a class="text-muted"
@@ -167,7 +167,7 @@
 
                         </div>
                     </div>
-                    <br>
+                    
                     <div class="row">
                         <div class="newbiz col">
 
@@ -192,14 +192,6 @@
                                 required>
                         </div>
                     </div>
-
-
-
-
-
-
-                    <br>
-                    <br>
                     <button type="submit" class="btn btn-outline-primary">Agregar Dirección</button>
             </div>
         </div>

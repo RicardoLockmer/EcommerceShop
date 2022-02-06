@@ -58,7 +58,7 @@
                             <span class="step mx-2"></span>
                             <span class="step mx-2"></span>
                             <span class="step mx-2"></span>
-                            {{-- <span class="step mx-2"></span> --}}
+                            <span class="step mx-2"></span> 
                         </div>
                     </div>
                     <br>
@@ -82,9 +82,9 @@
                         @include('includeFiles/tab4')
                     </div>
 
-                    {{-- <div class="tab">
+                   <div class="tab">
                         @include('includeFiles/tab5')
-                    </div> --}}
+                    </div>
                     <br>
                     </div>
                     <div class="my-4" >

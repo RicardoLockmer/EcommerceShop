@@ -96,44 +96,92 @@ const itemLayout = {
             ],
             provincias: [
                 {
+                    provincia: 'Atlántida',
+                    canton: [
+                        {
+                            ciudad: 'Tela',
+                            gratis: false,
+                            precioEnvio: 0,
+                            tiempoEntrega: '',
+                        },
+                        {
+                            ciudad: 'La Ceiba',
+                            gratis: false,
+                            precioEnvio: 0,
+                            tiempoEntrega: '',
+
+                        }
+                    ],
+                },
+                {
                     gratis: false,
-                    provincia: 'San José',
+                    provincia: 'San Pedro Sula',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 },
                 {
                     gratis: false,
-                    provincia: 'Alajuela',
+                    provincia: 'Comayagüela',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 },
                 {
                     gratis: false,
-                    provincia: 'Cartago',
+                    provincia: 'Choloma',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 },
                 {
                     gratis: false,
-                    provincia: 'Heredia',
+                    provincia: 'La Ceiba',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 },
                 {
                     gratis: false,
-                    provincia: 'Guanacaste',
+                    provincia: 'El Progreso',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 },
                 {
                     gratis: false,
-                    provincia: 'Puntarenas',
+                    provincia: 'Villanueva',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 },
                 {
                     gratis: false,
-                    provincia: 'Limón',
+                    provincia: 'Comayagua',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia: 'Choluteca',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia: 'Puerto Cortés',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia: 'Danlí',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia: 'Siguatepeque',
+                    precioEnvio: 0,
+                    tiempoEntrega: '',
+                },
+                {
+                    gratis: false,
+                    provincia: 'Juticalpa',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 }
@@ -142,8 +190,8 @@ const itemLayout = {
             vistaPrevia: false,
             nombre: '',
             marca: '',
-            unit: '',
             descripcion: '',
+            unit: '',
             mainImage: '',
             image: '',
             selectedCategory: '',
@@ -160,11 +208,12 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 1,
+            currentTab: 4,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,
             peso: '',
+            savePresets: false,
             myImageError: '',
 
             dimensiones: '',
@@ -382,6 +431,9 @@ const itemLayout = {
                 formData.append('dimensiones', this.dimensiones);
                 formData.append('empresa', this.empresaEnvios);
                 formData.append('specs', JSON.stringify(this.specs));
+                if (this.savePresets == true) {
+                    formData.append('')
+                }
                 formData.append('variantes', JSON.stringify(this.variantes));
                 formData.append('provincias', JSON.stringify(this.provincias));
                 formData.append('image', this.selectedImage, this.selectedImage.name);
@@ -405,6 +457,7 @@ const itemLayout = {
             } else {
                 alert('Faltan Cosas!!!')
             }
+
         },
         addSpec: function () {
             this.specs.push(
@@ -612,9 +665,20 @@ const itemLayout = {
                 }
                 this.todoGratis = false;
             }
+        },
+
+        activePreset: function (e) {
+            var guardarPreset = e.target;
+            if (this.savePresets == true) {
+                guardarPreset.className = 'border w-1/2 rounded-md centerMyImages p-2 cursor-pointer shadow-md mt-5 hover:bg-gray-200';
+                this.savePresets = false;
+            } else {
+                guardarPreset.className = "bg-green-300 border w-1/2 rounded-md centerMyImages p-2 cursor-pointer shadow-md mt-5";
+                this.savePresets = true;
+            }
+
+            console.log(e.target);
         }
-
-
 
 
     }

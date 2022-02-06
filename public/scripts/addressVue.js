@@ -5,75 +5,75 @@ const provincias = {
             addressSelected: '',
             addresses: [{
                 provincia: 'Atlántida',
-                canton: ['San José', 'Escazú', 'Desamparados', 'Puriscal', 'Tarrazú', 'Aserrí', 'Mora', 'Goicoechea', 'Santa Ana', 'Alajuelita', 'Vázquez de Coronado', 'Acosta', 'Tibás', 'Moravia', 'Montes de Oca', 'Turrubares', 'Dota', 'Curridabat', 'Pérez Zeledón', 'León Cortés Castro']
+                canton: ['Tela', 'La Ceiba']
             },
             {
                 provincia: 'Colón',
-                canton: ['Alajuela', 'San Ramón', 'Grecia', 'San Mateo', 'Atenas', 'Naranjo', 'Palmares', 'Poás', 'Orotina', 'San Carlos', 'Zarcero', 'Sarchí', 'Upala', 'Los Chiles', 'Guatuso', 'Río Cuarto']
+                canton: ['Trujillo', 'Tocoa']
             },
             {
                 provincia: 'Comayagua',
-                canton: ['Cartago', 'Paraíso', 'La Unión', 'Jiménez', 'Turrialba', 'Alvarado', 'Oreamuno', 'El Guarco']
+                canton: ['Comayagua', 'Siguatepeque']
             },
             {
                 provincia: 'Copán',
-                canton: ['Heredia', 'Barva', 'Santo Domingo', 'Santa Bárbara', 'San Rafael', 'San Isidro', 'Belén', 'Flores', 'San Pablo', 'Sarapiquí']
+                canton: ['Santa Rosa de Copán', 'La Entrada']
             },
             {
                 provincia: 'Cortés',
-                canton: ['Liberia', 'Nicoya', 'Santa Cruz', 'Bagaces', 'Carrillo', 'Cañas', 'Abangares', 'Tilarán', 'Nandayure', 'La Cruz', 'Hojancha']
+                canton: ['San Pedro Sula', 'Choloma', 'Puerto Cortés', 'La Lima', 'Villanueva', 'Cofradía', 'Potrerillos']
             },
             {
                 provincia: 'Choluteca',
-                canton: ['Puntarenas', 'Esparza', 'Buenos Aires', 'Montes de Oro', 'Osa', 'Quepos', 'Golfito', 'Coto Brus', 'Parrita', 'Corredores', 'Garbito']
+                canton: ['Choluteca']
             },
             {
                 provincia: 'El Paraíso',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Danlí', 'El Paraíso', 'Yuscarán']
             },
             {
                 provincia: 'Francisco Morazán',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Tegucigalpa', 'Comayaguela', 'Talanga', 'Guaimaca']
             },
             {
                 provincia: 'Gracias a Dios',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Puerto Lempira']
             },
             {
                 provincia: 'Intibucá',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Intibucá', 'La Esperanza']
             },
             {
                 provincia: 'Islas de la Bahía',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Coxen Hole (Roatán)']
             },
             {
                 provincia: 'La Paz',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['	La Paz']
             },
             {
                 provincia: 'Lempira',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Gracias']
             },
             {
                 provincia: 'Ocotepeque',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Nueva Ocotepeque']
             },
             {
                 provincia: 'Olancho',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Catacamas', 'Juticalpa']
             },
             {
                 provincia: 'Santa Bárbara',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['Santa Bárbara']
             },
             {
                 provincia: 'Valle',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['San Lorenzo', 'Nacaome']
             }
                 , {
                 provincia: 'Yoro',
-                canton: ['Limón', 'Pococí', 'Siquirres', 'Talamanca', 'Matina', 'Guácimo']
+                canton: ['El Progreso', 'Olanchito', 'Yoro', 'Santa Rita', 'Morazán']
             }
             ]
         }
