@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,10 +13,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        if(Auth::user()){
-
-            \Cart::session(Auth::user()->id);
-        }
         $this->middleware('auth');
     }
 
@@ -27,10 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()){
-
-          $start =  \Cart::session(Auth::user()->id);
-        }
-        return view('/');
+        return view('home');
     }
 }
