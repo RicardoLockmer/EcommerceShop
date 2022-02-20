@@ -8,6 +8,7 @@ use App\Shipping;
 use App\User;
 use App\itemColors;
 use App\itemSizes;
+use App\addressPresets;
 use App\itemCantidades;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -25,16 +26,17 @@ class StoreController extends Controller
     public function index(Store $myStore)
     {
         $user = Auth::user();
-         
-            \Cart::session(Auth::user()->id);
-            if($user->store_id == $myStore->store_id){
-                return view('myStore', [
-                    'user' => $user
-                ]);
-
-            } else {
-                return view('errorPagina');
-            }
+         if($user){
+             \Cart::session(Auth::user()->id);
+             if($user->store_id == $myStore->store_id){
+                 return view('myStore', [
+                     'user' => $user
+                 ]);
+ 
+             } else {
+                 return view('errorPagina');
+             }
+         }
         
     }
 
@@ -164,24 +166,27 @@ class StoreController extends Controller
     }
 
     public function createItem(Store $myStore) {
+        
         $user = Auth::user();
-        
+        if($user){
 
-        \Cart::session(Auth::user()->id);
-        
-        if (Auth::user()->store->store_id == $myStore->store_id) {
-            $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
-            $units = ['Metros (mts)'=>'mts','Altura (cm)'=>'cm','Ancho (cm)'=>'cm','Largo (cm)'=>'cm', 'Talla'=>' ', 'Talla Zapatos (US)'=>'US', 'Talla Zapatos (UK)'=>'UK', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
-            krsort($units);
-
-            return view('livewire/crear-item', [
-                'store' => $myStore,
-                'categories' => $myCategories,
-               'units' => $units,
-            ]);
-
-        } else { 
-            abort(404, 'Este no es el negocio que esta buscando!');
+            if ($user->store_id == $myStore->store_id) {
+                \Cart::session(Auth::user()->id);
+                $myCategories = Items::where('store_id', $myStore->store_id)->distinct()->get(['categoria']);
+                $units = ['Metros (mts)'=>'mts','Altura (cm)'=>'cm','Ancho (cm)'=>'cm','Largo (cm)'=>'cm', 'Talla'=>' ', 'Talla Zapatos (US)'=>'US', 'Talla Zapatos (UK)'=>'UK', 'Centimetros (cm)'=> 'cm', 'Milimetros (mm)' => 'mm', 'Pulgadas ( " )' => ' " ', 'Litro (l)' => 'l', 'Mililitro (mL)' => 'mL', 'Gramos (g)' =>  'g', 'Miligramos (mg)' => 'mg', 'Libras (lb)' => 'lb', 'Onzas (oz)' => 'oz', 'Largo x Alto x Ancho (cm)' => '(cm)'];
+                krsort($units);
+    
+                return view('livewire/crear-item', [
+                    'store' => $myStore,
+                    'categories' => $myCategories,
+                   'units' => $units,
+                ]);
+    
+            } else { 
+                abort(404, 'Este no es el negocio que esta buscando!');
+            }
+        }else {
+            return redirect(route('login'));
         }
     }
     
@@ -304,27 +309,42 @@ class StoreController extends Controller
         //AGREGAR CADA PROVINCIA A LA QUE SE PUEDE ENVIAR EL PRODUCTO
         //AGREGA CADA PRECIO ENVIO, EMPRESA ENVIO, TIEMPOE ENTREGA, PESO, DIMENSIONES
     }
+        if(json_decode($request->isPreset)){
+            $provincias = json_decode($request->allowed_cities);
+        }
+        foreach($provincias as $provincia){
+            if($provincia->tiempoEntrega > 0){
+                $newItemShipping = new Shipping();
+                $newItemShipping->items_id = $item->id;
+                $newItemShipping->created_at = date("dmy");
+                $newItemShipping->updated_at = date("dmy");
+                $newItemShipping->empresa = $request->empresa;
+                $newItemShipping->provincia = $provincia->provincia;
+                $newItemShipping->tiempoEntrega = $provincia->tiempoEntrega;
+                if ($provincia->gratis == true){
+                    $newItemShipping->precioEnvio = 0;
+                } else if ($provincia->precioEnvio > 0){
+                    $newItemShipping->precioEnvio = $provincia->precioEnvio;
+                }
+                $newItemShipping->peso = $request->peso;
+                $newItemShipping->dimensiones = $request->dimensiones;
+                $newItemShipping->save();
+                //SALVA CADA ROW DE CADA PROVINCIA CON SUSS DATOS
+            }
+        }
+        if(json_decode($request->isNewPreset)){
+            $presetProvincias = array();
             foreach($provincias as $provincia){
-                if($provincia->tiempoEntrega){
-                        $newItemShipping = new Shipping();
-                        $newItemShipping->items_id = $item->id;
-                        $newItemShipping->created_at = date("dmy");
-                        $newItemShipping->updated_at = date("dmy");
-                        $newItemShipping->empresa = $request->empresa;
-                        $newItemShipping->provincia = $provincia->provincia;
-                        $newItemShipping->tiempoEntrega = $provincia->tiempoEntrega;
-                        if ($provincia->gratis == true){
-                            $newItemShipping->precioEnvio = 0;
-                        } else if ($provincia->precioEnvio > 0){
-                            $newItemShipping->precioEnvio = $provincia->precioEnvio;
-                        }
-                        $newItemShipping->peso = $request->peso;
-                        $newItemShipping->dimensiones = $request->dimensiones;
-                        $newItemShipping->save();
-                        //SALVA CADA ROW DE CADA PROVINCIA CON SUSS DATOS
+                if($provincia->tiempoEntrega > 0){
+                    $presetProvincias[] = $provincia;
                 }
-                    
-                }
+            }
+            $newPreset = new addressPresets();
+            $newPreset->preset_name = $request->preset_name;
+            $newPreset->allowed_cities = json_encode($presetProvincias);
+            $newPreset->store_id = $request->store_id;
+            $newPreset->save();
+        }
          
  
     } catch(\Illuminate\Database\QueryException $e) {

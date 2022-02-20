@@ -17,8 +17,10 @@ class CreateAddressPresetsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('preset_name');
-            $table->unsignedBigInteger('items_id');
-
+            $table->string('allowed_cities', 3000);
+            $table->unsignedBigInteger('store_id');
+            
+ 
         });
     }
 

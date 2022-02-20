@@ -62,6 +62,8 @@ Route::get('/updateItem', 'ItemsController@updateItem');
 Route::get('/selectedSize', 'ItemsController@updateSizeItem');
 //CREAR PRODUCTO
 Route::get('/negocio/{myStore:nombreNegocio}/nuevo-producto', 'StoreController@createItem'); // crear view
+// SAVE PRESET
+Route::get('/getPresets', 'ShippingController@getPresets');
 Route::post('/nuevo-producto', 'StoreController@storeItem');//guardar
 Route::get('/negocio/{myStore:nombreNegocio}/productos/', 'StoreController@showItem')->middleware('auth');// items view
 Route::get('/negocio/{myStore:nombreNegocio}/productos/{item}', 'StoreController@thisItem')->middleware('auth'); // 1

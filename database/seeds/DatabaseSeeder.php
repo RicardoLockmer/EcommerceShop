@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             ItemSeed::class,
             ItemColorSeed::class,
             ItemSizeSeed::class,
-            ShippingSeed::class
+            ShippingSeed::class,
+            PresetSeed::class
             ]);
 
     }

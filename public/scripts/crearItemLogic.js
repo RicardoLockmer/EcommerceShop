@@ -97,7 +97,7 @@ const itemLayout = {
             provincias: [
                 {
                     gratis: false,
-                    provincia: 'Atlántida',
+                    provincia: 'Tegucigalpa',
                     precioEnvio: 0,
                     tiempoEntrega: '',
                 },
@@ -201,8 +201,12 @@ const itemLayout = {
             otro: '',
             selectedImage: null,
             peso: '',
-            savePresets: false,
-            myImageError: '',
+            saveNewPreset: false,
+            isPreset: false,
+            presets: [],
+            presetId: '',
+            presetName: '',
+            presetAllowedCities: [],
 
             dimensiones: '',
             specs: [{
@@ -419,9 +423,10 @@ const itemLayout = {
                 formData.append('dimensiones', this.dimensiones);
                 formData.append('empresa', this.empresaEnvios);
                 formData.append('specs', JSON.stringify(this.specs));
-                if (this.savePresets == true) {
-                    formData.append('')
-                }
+                formData.append('preset_name', 'TEST NAME 2')
+                formData.append('isNewPreset', JSON.stringify(this.saveNewPreset));
+                formData.append('isPreset', JSON.stringify(this.isPreset));
+                formData.append('allowed_cities', this.presets)
                 formData.append('variantes', JSON.stringify(this.variantes));
                 formData.append('provincias', JSON.stringify(this.provincias));
                 formData.append('image', this.selectedImage, this.selectedImage.name);
@@ -655,19 +660,25 @@ const itemLayout = {
             }
         },
 
-        activePreset: function (e) {
-            var guardarPreset = e.target;
-            if (this.savePresets == true) {
-                guardarPreset.className = 'border w-1/2 rounded-md centerMyImages p-2 cursor-pointer shadow-md mt-5 hover:bg-gray-200';
-                this.savePresets = false;
-            } else {
-                guardarPreset.className = "bg-green-300 border w-1/2 rounded-md centerMyImages p-2 cursor-pointer shadow-md mt-5";
-                this.savePresets = true;
-            }
+        savePreset: function () {
+            this.saveNewPreset = !this.saveNewPreset;
 
-            console.log(e.target);
+        },
+        usePreset: function () {
+            this.saveNewPreset = false;
+            this.isPreset = !this.isPreset;
+            let store_id = document.getElementById("store_id").value
+            axios.get('/getPresets', {
+                params: {
+                    store_id: store_id,
+                }
+
+            }).then(x => {
+                this.presets = x.data[0];
+
+
+            })
         }
-
 
     }
 

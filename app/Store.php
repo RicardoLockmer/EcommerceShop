@@ -21,7 +21,9 @@ class Store extends Model
     public function user(){
         return $this->belongsTo(User::class, 'nombreNegocio', 'nombreNegocio');
     }
-    
+    public function presets(){
+        return $this->hasMany(addressPresets::class, 'store_id', 'store_id');
+    }
     use Notifiable;
     protected $fillable = [
     'primerNombre',

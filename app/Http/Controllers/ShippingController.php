@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Shipping;
+use App\Store;
+use App\addressPresets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,5 +84,13 @@ class ShippingController extends Controller
     public function destroy(Shipping $shipping)
     {
         //
+    }
+
+
+    public function getPresets(Request $request){
+        $myPresets = addressPresets::where('store_id', $request->store_id)->get();
+        
+        $x = [$myPresets];
+        return $x;
     }
 }
