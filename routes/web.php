@@ -89,3 +89,7 @@ Route::put('/negocio/{myStore:nombreNegocio}/{item:id}/editar', 'StoreController
 // SEARCH
 Route::post ( '/search', 'SearchController@mySearch');
 Route::get('/negocio/compras/{negocio}', 'SearchController@masNegocio');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
