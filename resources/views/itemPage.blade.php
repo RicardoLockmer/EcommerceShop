@@ -85,7 +85,7 @@
                             </span>
                             
                                 <div  id="Items" class="flex space-x-5 p-2">
-                                    <img v-for="(img, index) in item.colors" :class="(index == 0) ? 'h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer border-yellow-500' : 'h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-full border-2 cursor-pointer'" :id="img.id" v-on:click="updateItem" :src="imgPreUrl + img.colorImages[0]"  alt="">
+                                    <img v-for="(img, index) in item.colors" :class="(index == 0) ? 'h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-sm border-2 cursor-pointer border-yellow-500' : 'h-16 py-2 px-4 hover:shadow-lg shadow-md hover:border-yellow-300 rounded-sm border-2 cursor-pointer'" :id="img.id" v-on:click="updateItem" :src="imgPreUrl + img.colorImages[0]"  alt="">
                                     
                                 </div>
                      
@@ -105,9 +105,14 @@
                             </div>
                             <div id="Sizes" class="flex space-x-5 py-2">
                                 
-                                <div v-for="size in sizes" :id="size.id" v-on:click="updateSelectedSize($event)" :class="(size.quantity > 0) ? 'w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer grid justify-items-center rounded-full mx-2' : 'w-auto border-2 cursor-not-allowed bg-gray-200 grid content-center rounded-full mx-2'">
+                                <div v-for="(size, index) in sizes" :id="size.id" v-on:click="updateSelectedSize(size.id)" :class="(size.quantity > 0) ? 'w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer grid justify-items-center rounded-full mx-2' : 'w-auto border-2 cursor-not-allowed bg-gray-200 grid content-center rounded-full mx-2'">
                                     <span :class="(size.quantity > 0) ? 'font-bold px-4 mt-1 mx-2' : 'font-bold px-4 mx-2 w-full'">
-                                        @{{size.size}}
+                                        <div v-if="size.size == ' noaplica'">
+                                            @{{colors[0].color}}
+                                        </div>
+                                        <div v-else>
+                                            @{{size.size}}
+                                        </div>
                                     </span>
                                     <div v-if="size.quantity > 0" class="font-bold mb-1 text-green-500 px-4">
                                        &#76; @{{size.precio.toLocaleString()}}

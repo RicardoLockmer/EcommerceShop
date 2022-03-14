@@ -95,6 +95,7 @@ const itemLayout = {
 
             ],
             provincias: [
+
                 {
                     gratis: false,
                     provincia: 'Tegucigalpa',
@@ -196,7 +197,7 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 4,
+            currentTab: 0,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,
@@ -206,6 +207,10 @@ const itemLayout = {
             presets: [],
             presetId: '',
             presetName: '',
+            showPresetInfo: false,
+            isPresetSelected: false,
+            selectedPresetIndex: 0,
+            showSelectedPreset: '',
             presetAllowedCities: [],
 
             dimensiones: '',
@@ -423,10 +428,10 @@ const itemLayout = {
                 formData.append('dimensiones', this.dimensiones);
                 formData.append('empresa', this.empresaEnvios);
                 formData.append('specs', JSON.stringify(this.specs));
-                formData.append('preset_name', 'TEST NAME 2')
+                formData.append('preset_name', this.presetName);
                 formData.append('isNewPreset', JSON.stringify(this.saveNewPreset));
                 formData.append('isPreset', JSON.stringify(this.isPreset));
-                formData.append('allowed_cities', this.presets)
+                formData.append('allowed_cities', JSON.stringify(this.showSelectedPreset.allowed_cities));
                 formData.append('variantes', JSON.stringify(this.variantes));
                 formData.append('provincias', JSON.stringify(this.provincias));
                 formData.append('image', this.selectedImage, this.selectedImage.name);
@@ -520,7 +525,7 @@ const itemLayout = {
             var ext = filename.split('.').pop();
             var files = e.target.files || e.dataTransfer.files;
 
-            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+            if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif' || ext == 'webp') {
                 this.myImageError = '';
                 this.createImage(files[0]);
             } else {
@@ -583,7 +588,7 @@ const itemLayout = {
                         this.variantes[index].moreImages.pop();
                     }
                 }
-                if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif') {
+                if (ext == 'jpg' || ext == 'jpeg' || ext == 'png' || ext == 'gif' || ext == 'webp') {
                     this.variantes[index].myImagesError = "";
                     this.variantes[index].moreImages.push(imageList[i]);
                     reader.readAsDataURL(imageList[i]);
@@ -664,10 +669,18 @@ const itemLayout = {
             this.saveNewPreset = !this.saveNewPreset;
 
         },
+
         usePreset: function () {
             this.saveNewPreset = false;
+            this.isPresetSelected = !this.isPresetSelected;
+
+            this.provincias.forEach(provincia => {
+                provincia.tiempoEntrega = '';
+                provincia.precioEnvio = 0;
+                this.SelectedProv = [];
+            });
             this.isPreset = !this.isPreset;
-            let store_id = document.getElementById("store_id").value
+            let store_id = document.getElementById("store_id").value;
             axios.get('/getPresets', {
                 params: {
                     store_id: store_id,
@@ -676,9 +689,24 @@ const itemLayout = {
             }).then(x => {
                 this.presets = x.data[0];
 
+                if (this.isPresetSelected) {
+                    this.showSelectedPreset = this.presets[this.selectedPresetIndex];
+                } else {
+                    this.showSelectedPreset = '';
+                }
 
             })
-        }
+
+        },
+        showPresetInfos: function (index) {
+
+            this.selectedPresetIndex = index;
+            this.showSelectedPreset = this.presets[this.selectedPresetIndex];
+            console.log(typeof this.presets[this.isPresetSelected]);
+
+        },
+
+
 
     }
 

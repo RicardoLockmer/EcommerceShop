@@ -225,7 +225,7 @@ class StoreController extends Controller
     try {
         // try adding everything to DB
         // New Item in DB
-    $allowedExtensions = ['jpg', 'jpeg', 'png'];
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
         // QUITANDO EL NOMBRE DE NEGOCIO DE TODOS LOS FOREIGN KEYS, DEBE RELACIONARSE CON STORE ID EN VEZ DE EL NOMBRE. AUN NO TERMINO
     $item = new Items();
     $item->nombre = $request->nombre;
@@ -309,7 +309,7 @@ class StoreController extends Controller
         //AGREGAR CADA PROVINCIA A LA QUE SE PUEDE ENVIAR EL PRODUCTO
         //AGREGA CADA PRECIO ENVIO, EMPRESA ENVIO, TIEMPOE ENTREGA, PESO, DIMENSIONES
     }
-        if(json_decode($request->isPreset)){
+        if(json_decode($request->isPreset == "true")){
             $provincias = json_decode($request->allowed_cities);
         }
         foreach($provincias as $provincia){

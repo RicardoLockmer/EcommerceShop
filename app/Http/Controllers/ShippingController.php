@@ -89,8 +89,11 @@ class ShippingController extends Controller
 
     public function getPresets(Request $request){
         $myPresets = addressPresets::where('store_id', $request->store_id)->get();
-        
+        foreach($myPresets as $preset){
+            $preset->allowed_cities = json_decode($preset->allowed_cities);
+        }
         $x = [$myPresets];
+        
         return $x;
     }
 }

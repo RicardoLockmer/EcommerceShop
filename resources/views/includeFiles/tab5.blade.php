@@ -39,11 +39,40 @@
     </span>
 </div>
 
+{{-- USE PRESETS --}}
 <div v-if="isPreset">
-    <div v-for="preset in presets">
-        @{{preset.preset_name}}
+    <div v-if="presets.length > 0" class="grid grid-cols-3 gap-4" >
+        <div v-for="(preset, index) in presets" class="border-3 border-red-400">
+            <div :class="(index == selectedPresetIndex) ? 'bg-green-400 rounded-md shadow-md p-2 cursor-pointer': 'rounded-md shadow-md border-2 p-2 hover:bg-green-200 cursor-pointer'" @click="showPresetInfos(index)">
+                <div class="font-bold" :id="index">
+                   @{{index}} @{{preset.preset_name}}
+                </div>
+                {{-- <div :id="index"> 
+                    <div v-if="presets.visible" >
+                        <div class="text-sm" v-for="city in preset.allowed_cities">
+                            @{{city.provincia}} 
+                            <small class="text-muted">Entrega @{{city.tiempoEntrega}} dias | Envio &#76;@{{city.precioEnvio}} </small>
+                        </div>
+                    </div>
+                </div> --}}
+            </div>
+            
+        </div>
     </div>
 </div>
+<div v-if="isPresetSelected => 0" class="border-t-2 border-gray-600 w-full my-5 py-2 ">
+    <div v-for="presetCities in showSelectedPreset.allowed_cities">
+        <div class="my-2 border-b">
+            @{{presetCities.provincia}} 
+            <small class="text-muted">Entrega @{{presetCities.tiempoEntrega}} dias | Envio &#76;@{{presetCities.precioEnvio}} </small>
+        </div>
+    </div>
+    
+</div>
+
+index - @{{selectedPresetIndex}}
+show preset - @{{showSelectedPreset}}
+
 <div v-if="!isPreset" class='w-full' >
     <div class="w-full" >
         <div class="w-full">
@@ -123,6 +152,10 @@
         <span v-on:click="savePreset" :class="(saveNewPreset) ? 'bg-green-400 border w-1/2 rounded-full centerMyImages p-2 cursor-pointer shadow-sm text-white font-bold mt-5' : 'border border-gray-300 font-bold text-gray-600 w-1/2 rounded-full centerMyImages p-2 cursor-pointer shadow-sm hover:bg-gray-200 bg-white mt-5'">
             Guardar
         </span>
+        <div v-if="saveNewPreset" class="my-3">
+            <input v-model="presetName" type="text" placeholder="nombre de la preselección" class="w-1/3 rounded-md shadow-sm p-2">
+        </div>
+        
         <p class="text-muted text-sm">Guardar como preestablecido para futuros productos</p>
    
 

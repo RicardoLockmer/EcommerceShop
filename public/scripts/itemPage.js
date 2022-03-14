@@ -92,22 +92,23 @@ const itemPage = {
 
         },
 
-        updateSelectedSize: function (event) {
-            var allSizes = document.getElementById("Sizes");
+        updateSelectedSize: function (id) {
+            var allSizes = document.getElementById(id);
             axios.get('/selectedSize', {
 
                 params: {
 
-                    itemLink: event.target.parentNode.id,
+                    itemLink: id,
 
                 }
 
             }).then(x => {
                 this.qty = x.data[0].quantity;
                 if (this.qty > 0) {
+                    var sizesElements = document.getElementById(id);
                     allSizes.childNodes.forEach(size => size.style = '');
-                    event.target.parentNode.style.borderColor = "rgba(245, 158, 11)";
-                    console.log(event.id);
+                    sizesElements.style.borderColor = "rgba(245, 158, 11)";
+                    console.log(id);
                     this.selectedSize = x.data[0];
 
                     if (this.selectedSize.quantity <= 5) {
