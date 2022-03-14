@@ -19,6 +19,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 1,
             'size' => '44 US',
             'quantity' => 35,
+            'unique_size_id' => 1111113,
             'precio' => 45000,
             'created_at' => now()
         ]);
@@ -28,6 +29,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 1,
             'size' => '45 US',
             'quantity' => 30,
+            'unique_size_id' => 1111114,
             'precio' => 45000,
             'created_at' => now()
         ]);
@@ -37,6 +39,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 2,
             'size' => '44 US',
             'quantity' => 35,
+            'unique_size_id' => 1111115,
             'precio' => 45000,
             'created_at' => now()
         ]);
@@ -46,6 +49,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 2,
             'size' => '45 US',
             'quantity' => 33,
+            'unique_size_id' => 1111116,
             'precio' => 45000,
             'created_at' => now()
         ]);
@@ -55,6 +59,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 2,
             'size' => '46 US',
             'quantity' => 34,
+            'unique_size_id' => 1111117,
             'precio' => 45000,
             'created_at' => now()
         ]);
@@ -66,6 +71,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 3, // rojo
             'size' => '40 mm',
             'quantity' => 40,
+            'unique_size_id' => 1111118,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -75,6 +81,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 3, // rojo
             'size' => '44 mm',
             'quantity' => 40,
+            'unique_size_id' => 1111119,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -84,6 +91,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 4, // Azul
             'size' => '40 mm',
             'quantity' => 40,
+            'unique_size_id' => 11111101,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -93,6 +101,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 4, // Azul
             'size' => '44 mm',
             'quantity' => 40,
+            'unique_size_id' => 11111102,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -102,6 +111,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 5, // Rosa
             'size' => '40 mm',
             'quantity' => 40,
+            'unique_size_id' => 11111103,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -111,6 +121,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 5, // Rosa
             'size' => '44 mm',
             'quantity' => 40,
+            'unique_size_id' => 11111104,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -120,6 +131,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 6, // Blanco
             'size' => '40 mm',
             'quantity' => 40,
+            'unique_size_id' => 11111105,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -129,6 +141,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 6, // Blanco
             'size' => '44 mm',
             'quantity' => 40,
+            'unique_size_id' => 11111106,
             'precio' => 250000,
             'created_at' => now()
         ]);
@@ -138,6 +151,7 @@ class ItemSizeSeed extends Seeder
             'color_id' => 6, // Blanco
             'size' => '48 mm',
             'quantity' => 40,
+            'unique_size_id' => 11111107,
             'precio' => 260000,
             'created_at' => now()
         ]);

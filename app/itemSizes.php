@@ -20,6 +20,7 @@ class itemSizes extends Model
         'sku',
         'size',
         'quantity',
-        'precio'
+        'precio',
+        'unique_size_id',
     ];
 }

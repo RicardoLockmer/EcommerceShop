@@ -18,6 +18,7 @@ class CreateItemSizesTable extends Migration
             $table->string('sku');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('color_id');
+            $table->string('unique_size_id', 500);
             $table->string('size');
             $table->bigInteger('quantity');
             $table->bigInteger('precio');

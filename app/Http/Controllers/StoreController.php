@@ -298,6 +298,8 @@ class StoreController extends Controller
             $qtyInitials = substr($sizes->cantidad, 0,1);
             $sizesVar->sku = strtoupper('DT'.$storeInitials.'-'.$nameInitials.$item->id.'-'.$colorInitials.$sizeInitials.$qtyInitials);
             $sizesVar->size = $sizes->tamano.' '.strtolower($sizes->unidad);
+            $uniqueSizeId = uniqid('US');
+            $sizesVar->unique_size_id = date('dmyhms').$uniqueSizeId.$item->id;
             $sizesVar->quantity = $sizes->cantidad;
             $sizesVar->precio = $sizes->precio;
             $sizesVar->save();
@@ -512,7 +514,7 @@ class StoreController extends Controller
             }
             if ($request->cedulaJuridica != NULL) {
                 $newStore->cedulaJuridica = $request->cedulaJuridica;
-                }
+            }
             if ($request->descripcion){
             $newStore->descripcion = $request->descripcion;
             }
@@ -534,7 +536,6 @@ class StoreController extends Controller
             if ($request->BizE != NULL) {
             $newStore->email = $request->BizE;
             }
-            //aqui
             if ($request->dir != NULL) {
             $newStore->direccion = $request->dir;
             }
@@ -551,12 +552,8 @@ class StoreController extends Controller
             }
             $newStore->created_at = date('dmy');
 
+            
             $newStore->save();
-            if ($newStore->nombreNegocio != NULL){
-            $newBiz = User::find($newStore->user_id);
-            $newBiz->nombreNegocio = $newStore->nombreNegocio;
-            $newBiz->save();
-            }
             return redirect('negocio/'.$newStore->nombreNegocio);
         } catch (\Illuminate\Database\QueryException $e) {
             return back()->withErrors(['Los Datos que quieres usar ya se encuentran en uso.', 'The Message']);
@@ -748,7 +745,7 @@ class StoreController extends Controller
     }
     public function destroyItem(Store $myStore, Items $item)
     {
-        if (Auth::user()->id == $myStore->user_id) {
+        if (Auth::user()->store_id == $myStore->store_id) {
             $itemColors = itemColors::where('item_id', $item->id)->get();
             foreach($itemColors as $colors){
                 $colors->delete();
@@ -765,7 +762,7 @@ class StoreController extends Controller
             $item->delete();
 
 
-            return back();
+            return redirect('negocio/'.$myStore->nombreNegocio.'/productos');
            
 
         } else {

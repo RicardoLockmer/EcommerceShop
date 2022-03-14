@@ -216,7 +216,7 @@ class ItemsController extends Controller
     }
 
     public function updateSizeItem(Request $request){
-        $dbSizes = ItemSizes::where('id', $request->itemLink)->firstOrFail();
+        $dbSizes = ItemSizes::where('unique_size_id', $request->itemLink)->firstOrFail();
         $price = $dbSizes->precio;
         $x = [$dbSizes, number_format($price, 0, '.', ',')];
         return $x;

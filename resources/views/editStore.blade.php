@@ -25,7 +25,7 @@
 
             @endif
         </div>
-        <br>
+       
         <div class="myForms" style="width: 35em; margin-left: 26%">
             <div class="myFormData">
 
@@ -33,7 +33,7 @@
                     Actualizar Negocio
                 </h3>
 
-                <br>
+               
 
 
                 <input type="text" name="store_id" value="{{$store->store_id}}" hidden>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <br>
+               
 
 
                 <div class='row'>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <br>
+               
                 <div class="newbiz ">
                     <label class="" for="nombreNegocio"> <strong> Nombre del Negocio </strong></label>
                     <div class="control">
@@ -91,7 +91,7 @@
                             id="nombreNegocio" type="text" placeholder="{{$store->nombreNegocio}}">
                     </div>
                 </div>
-                <br>
+               
                 {{-- CEDULA JURIDICA --}}
                 <div class="newbiz ">
                     <label class="" for="cedulaJuridica"><strong>Cedula Jurídica</strong></label>
@@ -101,7 +101,7 @@
                             value="{{old('cedulaJuridica')}}">
                     </div>
                 </div>
-                <br>
+               
                 {{-- TIPO DE PRODUCTOS --}}
                 <div class="newbiz">
                     <label class="" for="tipoNegocio"><strong>Tipo de Productos</strong></label>
@@ -122,7 +122,7 @@
                                 @endforeach
 
                             </select>
-                            <br>
+                           
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
 
-                <br>
+               
                 {{-- Provincia --}}
                 <div class='row' id='appAd'>
                     <div class='newbiz col'>
@@ -180,7 +180,7 @@
                 </div>
 
 
-                <br>
+               
                 <div class="newbiz ">
                     <label class="" for="dir"><strong>Dirección</strong></label>
                     <div class="control">
@@ -189,7 +189,7 @@
 
                     </div>
                 </div>
-                <br>
+               
                 <div class="row">
                     <div class="newbiz col">
 
@@ -218,13 +218,13 @@
 
 
 
-                <br>
+               
 
                 <div id="tipoNegocio" style="margin: 0 0 2em 0"></div>
-                <br>
+               
 
 
-                <br>
+               
                 <button type="submit" class="btn btn-outline-success btn-lg">ACTUALIZAR</button>
 
             </div>

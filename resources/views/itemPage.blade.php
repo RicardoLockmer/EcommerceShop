@@ -105,7 +105,7 @@
                             </div>
                             <div id="Sizes" class="flex space-x-5 py-2">
                                 
-                                <div v-for="(size, index) in sizes" :id="size.id" v-on:click="updateSelectedSize(size.id)" :class="(size.quantity > 0) ? 'w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer grid justify-items-center rounded-full mx-2' : 'w-auto border-2 cursor-not-allowed bg-gray-200 grid content-center rounded-full mx-2'">
+                                <div v-for="(size, index) in sizes" :id="size.unique_size_id" v-on:click="updateSelectedSize(size.unique_size_id)" :class="(size.quantity > 0) ? 'w-auto hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer grid justify-items-center rounded-full mx-2' : 'w-auto border-2 cursor-not-allowed bg-gray-200 grid content-center rounded-full mx-2'">
                                     <span :class="(size.quantity > 0) ? 'font-bold px-4 mt-1 mx-2' : 'font-bold px-4 mx-2 w-full'">
                                         <div v-if="size.size == ' noaplica'">
                                             @{{colors[0].color}}
