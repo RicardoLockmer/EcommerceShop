@@ -25,15 +25,17 @@
         <form action="/updateCart" method="POST" name="CARTUP" id="CARTUP" style="position: flex;">
             @csrf
 
-            @foreach($myCart as $item)
-
+    @foreach($myCart as $item)
+        @if($item)
+            
             <div class="CARTIT" id="{{$item->id}}">
                 <div class="row no-gutters">
 
                     {{-- FOTO DEL ITEM --}}
 
                     <div class="col-md-1 centerMyImages CARTIM">
-                        <a href="/producto/{{$item->associatedModel->colors->link}}">
+                        
+                        {{-- <a href="/producto/{{$item->associatedModel->colors->link}}"> --}}
                         @foreach(json_decode($item->associatedModel->colors->colorImages) as $colorImage)
                             <img class="img-fluid card-img centerMyImages" style="max-height: 50%!important;" src="{{Storage::URL('assetItems/'.$colorImage)}}" alt="{{$item->associatedModel->nombre}}">
                             @break
@@ -95,8 +97,9 @@
 
             </div>
 
-
-            @endforeach
+        @endif
+            
+    @endforeach
 
         </form>
         @else

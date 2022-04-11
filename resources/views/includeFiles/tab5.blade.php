@@ -3,6 +3,7 @@
         Información de Envio
     </strong>
 </div>
+<button v-on:click="onSuccess">click</button>
 <ul class="list-inside list-disc mt-4">
     
     <li class="text-gray-500 text-sm">Incluir donde puede enviar el paquete, precio de envio y tiempo de entrega </li>
@@ -69,9 +70,6 @@
     </div>
     
 </div>
-
-index - @{{selectedPresetIndex}}
-show preset - @{{showSelectedPreset}}
 
 <div v-if="!isPreset" class='w-full' >
     <div class="w-full" >
@@ -162,5 +160,4 @@ show preset - @{{showSelectedPreset}}
 
     </div>
 </div>
-
 </div>

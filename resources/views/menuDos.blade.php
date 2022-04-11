@@ -126,11 +126,7 @@
               </div>
               
               
-              <ul class=" px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 pb-6 pt-6 lg:pt-3">                
-                <li class="pt-3">
-                  <img class="rounded-md" src="/dummy/tenor.gif" alt="" srcset="">
-                </li>
-              </ul>
+              
 
             </div>
           </div>

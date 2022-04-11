@@ -212,6 +212,10 @@ const itemLayout = {
             selectedPresetIndex: 0,
             showSelectedPreset: '',
             presetAllowedCities: [],
+            addingItem: false,
+            isLoading: false,
+            isFailed: false,
+            isSuccess: false,
 
             dimensiones: '',
             specs: [{
@@ -444,14 +448,18 @@ const itemLayout = {
                     }
                     )
                 }
+                this.addingItem = true
+                this.isLoading = true;
                 axios.post('/nuevo-producto', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 }
                 ).then(function (response) {
-                    console.log(response);
-                })
+
+                    console.log(response.status);
+
+                }).finally(() => this.isLoading = false, this.isSuccess = true);
             } else {
                 alert('Faltan Cosas!!!')
             }
@@ -705,6 +713,30 @@ const itemLayout = {
             console.log(typeof this.presets[this.isPresetSelected]);
 
         },
+        onSuccess: function () {
+            var modal = document.getElementById('UploadSuccess');
+            modal.classList.add('animate__animated')
+            modal.classList.add('animate__bounce')
+            if (modal.style.display == 'none') {
+                modal.style.display = 'block';
+            } else {
+                modal.style.display = 'none';
+
+            }
+        },
+        ModalLogic: function () {
+            var homeLink = document.getElementById('BusinessButton');
+            if (homeLink) {
+                if (this.isFailed == true) {
+                    this.isLoading = false;
+                }
+                if (this.isSuccess == true) {
+                    window.location.replace(homeLink.href);
+                }
+            } else {
+                console.log('Not Finished')
+            }
+        }
 
 
 

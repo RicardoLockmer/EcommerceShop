@@ -19,30 +19,32 @@ class ShoppingController extends Controller
             $userID = Auth::user()->id;
             \Cart::session($userID);
             $TotalSum = \Cart::getTotal();
-             $myCartItems = \Cart::getContent();
-            
-                foreach ($myCartItems as $item) {
-                    if(gettype($item->associatedModel->image) != 'array'){
-                    $item->associatedModel->image = json_decode($item->associatedModel->image);
-                }
+            $myCartItems = \Cart::getContent();
+        
+        foreach ($myCartItems as $item) {
+            if(gettype($item->associatedModel->image) != 'array'){
+                $item->associatedModel->image = json_decode($item->associatedModel->image);
             }
             foreach($myCartItems as $updateItems) {
-            $Items = itemSizes::where('id', $updateItems->associatedModel->id)->first();
-           
-            
-            
-            \Cart::session($userID)->update($updateItems->id, array(
-                'name' => $Items->items->nombre,
-                'price' => $Items->precio,
-                'associatedModel' => $Items
-            ));
+                $Items = itemSizes::where('id', $updateItems->associatedModel->id)->first();
+                
+                if($Items){
+                    \Cart::session($userID)->update($updateItems->id, array(
+                        'name' => $Items->items->nombre,
+                        'price' => $Items->precio,
+                        'associatedModel' => $Items
+                    ));
+                } else{
+                    $cart =  \Cart::session($userID)->remove($updateItems->id);
+                }
             }
-      
-        return view('shoppingCart', [
-            'myCart' => $myCartItems,
-            'Total' => $TotalSum,
-            
-        ]);
+        }
+    
+    return view('shoppingCart', [
+        'myCart' => $myCartItems,
+        'Total' => $TotalSum,
+        
+    ]);
     } else {
         return back();
     }
