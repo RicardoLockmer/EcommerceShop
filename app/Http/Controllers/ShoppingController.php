@@ -17,34 +17,38 @@ class ShoppingController extends Controller
     {
         if (Auth::user()){
             $userID = Auth::user()->id;
-            \Cart::session($userID);
-            $TotalSum = \Cart::getTotal();
+            $cart = \Cart::session($userID);
             $myCartItems = \Cart::getContent();
-        
-        foreach ($myCartItems as $item) {
-            if(gettype($item->associatedModel->image) != 'array'){
-                $item->associatedModel->image = json_decode($item->associatedModel->image);
-            }
-            foreach($myCartItems as $updateItems) {
-                $Items = itemSizes::where('id', $updateItems->associatedModel->id)->first();
-                
-                if($Items){
-                    \Cart::session($userID)->update($updateItems->id, array(
-                        'name' => $Items->items->nombre,
-                        'price' => $Items->precio,
-                        'associatedModel' => $Items
+            foreach($myCartItems as $item){
+                $searchItem = itemSizes::where('id', $item->id)->first();
+                if(!$searchItem){
+                    \Cart::remove($item->id);
+                } else {
+                    \Cart::update($item->id, array(
+                        'associatedModel' => $searchItem
+                        
                     ));
-                } else{
-                    $cart =  \Cart::session($userID)->remove($updateItems->id);
                 }
+                if($searchItem->quantity < 1){
+                    \Cart::update($item->id, array(
+                        'price' => 0,
+                        
+                    ));
+                } else {
+                    \Cart::update($item->id, array(
+                        'price' => $searchItem->precio,
+                        
+                    ));
+                }
+                
             }
-        }
-    
-    return view('shoppingCart', [
-        'myCart' => $myCartItems,
-        'Total' => $TotalSum,
-        
-    ]);
+            $myCartItems = \Cart::getContent();
+            $TotalSum = \Cart::getTotal();
+        return view('shoppingCart', [
+            'myCart' => $myCartItems,
+            'Total' => $TotalSum,
+        ]);
+
     } else {
         return back();
     }
@@ -71,7 +75,7 @@ class ShoppingController extends Controller
         if(Auth::user()){
     
         $userId = Auth::user()->id;
-        $uniqueId = 'DTRID'.$request->id;
+        $uniqueId = $request->id;
         $newCartItem = itemSizes::where('id', $request->id)->first();
         $myItem = Items::where('id', $request->item_id)->first();
         
@@ -147,18 +151,16 @@ class ShoppingController extends Controller
     public function update(Request $request)
     {
         if (Auth::user()){
-            $userID = Auth::user()->id;
-          $cart =  \Cart::session($userID)->update($request->rowId, array(
-                'quantity' => array(
-                    'relative' => false,
-                    'value' => $request->cantidad,
-                
-          )));
+        $userID = Auth::user()->id;
+        $cart =  \Cart::session($userID)->update($request->rowId, array(
+            'quantity' => array(
+            'relative' => false,
+            'value' => $request->cantidad,
+            
+        )));
           
           
-         $dataNumber = \Cart::getTotal();
-         
-           
+        $dataNumber = \Cart::getTotal();   
         $data[] =  number_format($dataNumber, 0, '.', ',');
         $data[] = \Cart::getTotalQuantity();
         return response()->json($data);

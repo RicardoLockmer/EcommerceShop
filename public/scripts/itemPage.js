@@ -51,24 +51,26 @@ const itemPage = {
 
     methods: {
 
-        updateItem: function (event) {
-            let selectedColor = "rgba(245, 158, 11)";
-
+        updateItem: function (id) {
             //ITEMS
             var allItems = document.getElementById("Items");
             allItems.children[0].classList.remove('border-yellow-500')
-            allItems.childNodes.forEach(item => item.style = '');
-            event.target.style.borderColor = selectedColor;
+
+
             var mainImage = document.getElementById("image");
-            var imgSource = event.target.src;
+
             var allSizes = document.getElementById("Sizes");
             allSizes.childNodes.forEach(size => size.style = '');
 
             axios.get('/updateItem', {
                 params: {
-                    itemLink: event.target.id,
+                    itemLink: id,
                 }
             }).then(x => {
+                var selectedImage = document.getElementById(id);
+                var imgSource = selectedImage.firstChild.src;
+                allItems.childNodes.forEach(size => size.style = '')
+                selectedImage.style.borderColor = "rgba(245, 158, 11)";
                 this.item = x.data[0];
                 this.price = x.data[1];
                 this.colors = x.data[2];

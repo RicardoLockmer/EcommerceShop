@@ -84,8 +84,10 @@
                                 <strong> {{ $item->tipoVariante }}: </strong>
                             </span>
                             
-                                <div  id="Items" class="grid grid-cols-8 px-4">
-                                    <img v-for="(img, index) in item.colors" :class="(index == 0) ? 'h-16 hover:shadow-lg shadow-md hover:border-yellow-300 border-2 hover:border-yellow-300 rounded-lg  cursor-pointer border-yellow-500 mt-2' : 'h-16 hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg cursor-pointer mt-2'" :id="img.id" v-on:click="updateItem" :src="imgPreUrl + img.colorImages[0]"  alt="">
+                                <div id="Items" class="grid gap-4 grid-cols-6 ml-4">
+                                    <div :id="img.id" :class="(index == 0) ? 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg  cursor-pointer border-yellow-500 p-2' : 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg cursor-pointer p-2'" v-on:click="updateItem(img.id)" v-for="(img, index) in item.colors">
+                                        <img :src="imgPreUrl + img.colorImages[0]"  alt="">
+                                    </div>
                                     
                                 </div>
                      
