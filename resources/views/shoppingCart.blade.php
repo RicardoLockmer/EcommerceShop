@@ -42,8 +42,9 @@
                                             <h5 class="card-title" style="margin-bottom: 0!important;">
                                                 {{$item->associatedModel->items->nombre}} 
                                                 <small class="font-bold">
+                                                 
                                                     {{ $item->associatedModel->colors->color }}
-                                                    @if(trim($item->associatedModel->size) != "NoAplica")
+                                                    @if(trim($item->associatedModel->size) != "noaplica")
                                                         {{ $item->associatedModel->size }}
                                                     @endif
                                                 </small>
@@ -53,8 +54,8 @@
 
 
                                         {{-- PRECIO --}}
-                                        <div class="flex card-text CARTPR text-sm font-bold text-yellow-400">
-                                            <div class="mr-1"> HN&#76; </div> 
+                                        <div class="flex card-text CARTPR text-red-400 text-sm font-bold">
+                                            <div class="mr-1 font-bold"> HN&#76; </div> 
                                             <div>
                                                 {{number_format($item->associatedModel->precio, 0, '.', ',')}}
                                             </div>
@@ -153,15 +154,9 @@
                 , 'rowId': DTRID
             , }
             , success: function(data) {
-                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data[0] + '  </h5></div>');
+                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 30px 0em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data[0] + '  </h5></div>');
                 $('#CARTCOUNT').replaceWith('<span class="badge badge-light" id="CARTCOUNT">' + data[1] + '</span>');
-                if (data[1] == 0) {
-                    $('#CARTUP').replaceWith('<div style="padding: 6em 0 6em 0; border-bottom: 2px solid #007bff;" class="text-muted CARTIT">No tiene articulos en su carrito.</div>')
-                } else if (data[1] == 1) {
-                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulo)</small></h1>');
-                } else if (data[1] >= 2) {
-                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulos)</small></h1>')
-                }
+                
             }
         });
     })
@@ -181,17 +176,10 @@
             }
             , success: function(data) {
                 $('#' + DTRID + '').remove();
-                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 6px 5em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data[0] + '  </h5></div>');
+                $('#SUBTOT').replaceWith('<div style="text-align: right; margin: 30px 0em 0 0" id="SUBTOT"><h5><strong>SubTotal: </strong>&#8353; ' + data[0] + '  </h5></div>');
                 $('#CARTCOUNT').replaceWith('<span class="badge badge-light" id="CARTCOUNT">' + data[1] + '</span>');
 
-                if (data[1] == 0) {
-                    $('#CARTUP').replaceWith('<div style="padding: 6em 0 6em 0; border-bottom: 2px solid #007bff;" class="text-muted CARTIT">No tiene articulos en su carrito.</div>');
-                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulos)</small></h1>');
-                } else if (data[1] == 1) {
-                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulo)</small></h1>');
-                } else if (data[1] >= 2) {
-                    $('#CARTQTY').replaceWith('<h1 id="CARTQTY">Mi Carrito<small class="text-muted" style="font-size: 24px;"> (' + data[1] + ' Articulos)</small></h1>')
-                }
+               
             }
 
         })

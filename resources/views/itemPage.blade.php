@@ -27,7 +27,16 @@
                         </strong>
                     </small>
                 </p>
-                
+                @if($item->tipoVariante == 'N/A' && $item->sizes[0]->size == " noaplica")
+                    <div class="mb-1 text-red-400 w-full flex">
+                        <div class="mr-1 font-bold">
+                            HN&#76; 
+                        </div>
+                        <div>
+                            {{number_format($item->sizes[0]->precio, 0, '.', ',')}}
+                        </div>
+                    </div>
+                @endif
                 {{-- RATINGS --}}
                 <div class="">
                     <small class="text-muted flex items-center" style="font-size: 14px; left:-18px;">
@@ -60,68 +69,69 @@
 
 
                 <div v-if="item.descripcion" class="content">
-                    <details class="mt-4 py-2 border-b rounde-md" open>
+                    <details class="mt-4 py-2 border-b rounde-md">
                     <summary class="px-2 font-bold">Descripción</summary>
                     <p class="mb-4 mt-4 px-2 hidden lg:block font-bold text-gray-600 text-md text-sm">@{{item.descripcion}}</p>
                     </details>
                 </div>
                 <div v-if="item.keyFeatures" class="content">
-                    <details class="mt-2 mb-4 py-2 border-b rounde-md">
-                    <summary class="px-2 font-bold">Característica</summary>
-                    <ul class="list-disc list-inside my-4">
-                        @foreach(json_decode($item->keyFeatures) as $feature)
-                            <li class="font-bold text-gray-600 text-sm"> 
-                                    {{$feature->feature}}
-                            </li>                                 
-                        @endforeach
-                    </ul>
-                    </details>
+                    @if(count(json_decode($item->keyFeatures)) > 0)
+                        <details class="mt-2 mb-4 py-2 border-b rounde-md">
+                        <summary class="px-2 font-bold">Característica</summary>
+                        <ul class="list-disc list-inside my-4">
+                            @foreach(json_decode($item->keyFeatures) as $feature)
+                                <li class="font-bold text-gray-600 text-sm"> 
+                                        {{$feature->feature}}
+                                </li>                                 
+                            @endforeach
+                        </ul>
+                        </details>
+                    @endif
                 </div>
                 <div class="py-2">
+                    @if($item->tipoVariante != 'N/A') 
                     <div v-if="colors.length > 0" class="my-3" >
-                        
-                            <span for="Items" >
-                                <strong> {{ $item->tipoVariante }}: </strong>
-                            </span>
-                            
-                                <div id="Items" class="grid gap-4 grid-cols-6 ml-4">
-                                    <div :id="img.id" :class="(index == 0) ? 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg  cursor-pointer border-yellow-500 p-2' : 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg cursor-pointer p-2'" v-on:click="updateItem(img.id)" v-for="(img, index) in item.colors">
-                                        <img :src="imgPreUrl + img.colorImages[0]"  alt="">
-                                    </div>
-                                    
-                                </div>
-                     
-                     
-                            
-                      
+                        <span for="Items" >
+                            <strong> {{ $item->tipoVariante }}: </strong>
+                        </span>
+                        <div id="Items" class="grid gap-2 grid-cols-3 lg:gap-4 lg:grid-cols-6 ml-4">
+                            <div :id="img.id" :class="(index == 0) ? 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg  cursor-pointer border-yellow-500 p-2' : 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg cursor-pointer p-2'" v-on:click="updateItem(img.id)" v-for="(img, index) in item.colors">
+                                <img :src="imgPreUrl + img.colorImages[0]"  alt="">
+                            </div>
+                        </div>
                     </div>
+                    @endif
+                    @if($item->sizes[0]->size != " noaplica")
                     <div class="">
                         <div class="my-3">
                             <span style=" margin-top: 15px;">
                                 <strong>Tamaño: </strong>
                             </span>
-                            <div class="grid">
-                                <div id="Sizes" class="flex space-x-3 mr-3 px-4">
-                                    <div v-for="(size, index) in sizes" :id="size.unique_size_id" v-on:click="updateSelectedSize(size.unique_size_id)" :class="(size.quantity > 0) ? 'w-auto grid grid-cols-1 hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer justify-items-center rounded-lg mt-2' : 'w-auto  grid-cols-1 w-auto border-2 cursor-not-allowed bg-gray-200 grid content-center rounded-lg mt-2'">
-                                        <span :class="(size.quantity > 0) ? 'font-bold px-4 mt-1 mx-2 w-full' : 'ont-bold px-4 mx-2 w-full'">
-                                            <div v-if="size.size == ' noaplica'">
-                                                @{{colors[0].color}}
-                                            </div>
-                                            <div v-else>
-                                                @{{size.size}}
-                                            </div>
-                                        </span>
-                                        <div v-if="size.quantity > 0" class="font-bold mb-1 text-yellow-400 px-4 w-full grid">
-                                           HN&#76; @{{size.precio.toLocaleString()}}
+                            
+                            <div id="Sizes" class="grid grid-cols-3 gap-2 lg:grid-cols-4 lg:gap-4 ml-4">
+                                <div v-for="(size, index) in sizes" :id="size.unique_size_id" v-on:click="updateSelectedSize(size.unique_size_id)" :class="(size.quantity > 0) ? 'w-auto px-2 grid grid-cols-1 hover:shadow-lg shadow-md hover:border-yellow-300 border-2 cursor-pointer justify-items-center rounded-lg mt-2' : 'w-auto  grid-cols-1 w-auto border-2 cursor-not-allowed bg-gray-200 grid content-center rounded-lg mt-2'">
+                                    <span :class="(size.quantity > 0) ? 'font-bold lg:px-4 lg:mt-1 mx-2 w-full' : 'font-bold lg:px-4 lg:mx-2 w-full'">
+                                        <div v-if="size.size == ' noaplica'">
+                                            @{{colors[0].color}}
+                                        </div>
+                                        <div v-else>
+                                            @{{size.size}}
+                                        </div>
+                                    </span>
+                                    <div v-if="size.quantity > 0" class="text-xs mb-1 text-red-400 lg:px-4 w-full flex">
+                                        <div class="mr-1 font-bold">
+                                            HN&#76; 
+                                        </div>
+                                        <div>
+                                            @{{size.precio.toLocaleString()}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
-                        
-                        
-                        
                     </div>
+                    @endif
                     <div class="my-3">
                         <span style=" margin-top: 15px;">
                             <strong>
@@ -130,7 +140,7 @@
                         </span>
                         <div v-if="qty > 0" id="QTY" class="grid grid-cols-5 px-4">
                             <div  v-for="index in qty" :id="index" class="hover:shadow-lg mr-3 space-x-2 shadow-md hover:border-yellow-300 grid justify-items-center border-2 cursor-pointer rounded-lg  font-bold mt-2"> 
-                                <div class="Quantity px-4" v-if="qty >= index" v-on:click="updateSelectedQTY($event)">
+                                <div class="Quantity lg:px-4" v-if="qty >= index" v-on:click="updateSelectedQTY($event)">
                                     @{{index}}
                                 </div> 
                             </div>
@@ -142,10 +152,6 @@
                         </div>
                     </div>
                 </div>
-                
-            
-                
-               
                 <div id="ENVI" class="my-4 text-sm md:text-base lg:text-base">
                     <p class="card-text flex" >
                         <svg width="1.5em" 

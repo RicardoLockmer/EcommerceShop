@@ -139,12 +139,13 @@ const itemPage = {
                 console.log("You are not entering a number");
             }
         },
-        updateCart: function (event) {
-            let id = this.selectedSize.id;
-            let item_id = this.selectedSize.item_id;
+        updateCart: function (id, item_id, precio) {
+
+
+
             let qty = parseInt(this.selectedQty);
             let itemName = this.item.nombre;
-            let precio = this.selectedSize.precio;
+
             axios.get('/shoppingCart', {
 
                 params: {
