@@ -197,7 +197,7 @@ const itemLayout = {
             selectedImageHeight: null,
             selectedImageWidth: '',
             maxImageHeight: 1500,
-            currentTab: 0,
+            currentTab: 4,
             selectedType: 'Color',
             otro: '',
             selectedImage: null,
@@ -457,8 +457,6 @@ const itemLayout = {
                 }
                 ).then(function (response) {
 
-                    console.log(response.status);
-
                 }).finally(() => this.isLoading = false, this.isSuccess = true);
             } else {
                 alert('Faltan Cosas!!!')
@@ -506,28 +504,24 @@ const itemLayout = {
             );
         },
         deleteFind: function (index) {
-            console.log(index);
-            console.log(this.variantes);
+
             this.variantes.splice(index, 1);
         },
         deleteSize: function (mainIndex, index) {
-            console.log(index);
-            console.log(this.variantes);
+
             this.variantes[mainIndex].sizes.splice(index, 1);
         },
         deleteDetalle: function (index) {
-            console.log(index);
-            console.log(this.specs[index]);
+
             this.specs.splice(index, 1);
         },
         deleteFeature: function (index) {
-            console.log(index);
-            console.log(this.keyFeatures[index]);
+
             this.keyFeatures.splice(index, 1);
         },
         onFileChange(e) {
             // set IF id i MIMG or indexMainImage
-            console.log(e.target);
+
             this.selectedImage = e.target.files[0];
             var filename = e.target.files[0].name;
             var ext = filename.split('.').pop();
@@ -547,17 +541,13 @@ const itemLayout = {
         },
 
         createImage(file) {
-
-
             var reader = new FileReader();
             var vm = this;
-
             reader.readAsDataURL(file);
             reader.onload = (e) => {
                 var image = new Image();
                 vm.image = e.target.result;
                 image.src = e.target.result;
-
                 image.onload = function () {
                     var height = this.height;
                     if (height > vm.maxImageHeight) {
@@ -565,24 +555,12 @@ const itemLayout = {
                         vm.image = '';
                         vm.selectedImage = '';
                     }
-
                 }
-
-
-
             };
-
-
-
-
         },
 
         createImages(e, index) {
             var imageList = e.target.files || e.dataTransfer.files;
-
-            console.log(imageList);
-
-
             for (var i = 0; i < imageList.length; i++) {
                 var filename = imageList[i].name;
                 var ext = filename.split('.').pop();
@@ -603,10 +581,6 @@ const itemLayout = {
                     this.variantes[index].verified = true;
                     reader.onload = e => {
                         this.variantes[index].imageListed.push(e.target.result);
-                        console.log(imageList.length);
-                        console.log(this.variantes[index].moreImages.length);
-
-
                     }
 
                 } else {
@@ -620,9 +594,6 @@ const itemLayout = {
                     this.variantes[index].myImagesError = "Una o mas imagenes no cumplen con los requisitos";
 
                     reader.abort();
-                    console.log(imageList.length);
-                    console.log(this.variantes[index].imageListed.length)
-                    console.log(this.variantes[index].moreImages.length);
                     this.variantes[index].verified = false;
                     break
 
@@ -645,6 +616,7 @@ const itemLayout = {
         quitarVistaPrevia: function () {
             this.vistaPrevia = !this.vistaPrevia;
         },
+
         AllCR: function () {
             if (!this.allCRChecked) {
                 this.SelectedProv = [];
@@ -710,7 +682,7 @@ const itemLayout = {
 
             this.selectedPresetIndex = index;
             this.showSelectedPreset = this.presets[this.selectedPresetIndex];
-            console.log(typeof this.presets[this.isPresetSelected]);
+
 
         },
         onSuccess: function () {
@@ -734,7 +706,7 @@ const itemLayout = {
                     window.location.replace(homeLink.href);
                 }
             } else {
-                console.log('Not Finished')
+
             }
         }
 

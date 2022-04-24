@@ -465,29 +465,16 @@ class StoreController extends Controller
         } 
         try{
             $myStore = request()->validate([
-            'primerNombre' => 'max:50',
-            'segundoNombre' => 'max:50',
-            'primerApellido' => 'max:50',
-            'segundoApellido' => 'max:50',
-            'email' => 'unique:stores',
+            'primerNombre' => 'nullable|max:50',
+            'segundoNombre' => 'nullable|max:50',
+            'primerApellido' => 'nullable|max:50',
+            'segundoApellido' => 'nullable|max:50',
+            'email' => 'unique:stores|unique:users',
             'nombreNegocio' => 'unique:stores|max:35',
             'descripcion' =>'nullable|max:125',
-            'user_id' => 'unique:stores',
-            'usuario' => 'unique:stores|max:50',
-            'tipoNegocio' => 'nullable',
-            'cedulaJuridica' => 'unique:stores|max:10',
-            'provincia' => 'nullable',
-            'canton' => 'nullable',
+            'cedulaJuridica' => 'unique:stores|max:14',
             'direccion' => 'nullable',
             'phoneNumber' => 'unique:stores',
-            'tyc',
-            'email_verified_at' => 'nullable',
-            'remember_token' => 'nullable',
-            'rep'=> 'nullable',
-            'karma'=> 'nullable',
-            'updated_at' => 'nullable',
-            'created_at' => 'date',
-            'closeDate' => 'nullable',
             ]);
         // UNIQUE INFORMACION OVERRIDE ERROR
 
@@ -507,52 +494,33 @@ class StoreController extends Controller
             $newStore->segundoApellido = $request->segundoApellido;
             }
             if($request->email != NULL) {
-            $newStore->email = Auth::user()->email;
+            $userUpdate = User::find(Auth::user()->id);
+            $newStore->email = $request->email;
+            $userUpdate->email = $request->email;
+            $userUpdate->save();
             }
             if ($request->nombreNegocio != NULL) {
             $newStore->nombreNegocio = $request->nombreNegocio;
             }
-            if ($request->cedulaJuridica != NULL) {
-                $newStore->cedulaJuridica = $request->cedulaJuridica;
-            }
-            if ($request->descripcion){
-            $newStore->descripcion = $request->descripcion;
-            }
-            if ($request->user_id != NULL) {
-            $newStore->user_id = Auth::user()->id;
-            }
-            if ($request->usuario != NULL) {
-            $newStore->usuario = Auth::user()->name;
-            }
-            if($request->tipoNegocio != NULL) {
-            $newStore->tipoNegocio = $request->tipoNegocio;
-            }
-            if ($request->tyc != NULL) {
-            $newStore->tyc = 1;
-            }
-            if ($request->CDJ != NULL) {
-            $newStore->cedulaJuridica = $request->CDJ;
-            }
-            if ($request->BizE != NULL) {
-            $newStore->email = $request->BizE;
-            }
             if ($request->dir != NULL) {
             $newStore->direccion = $request->dir;
             }
-            if ($request->provincia != NULL) {
-                if($request->canton != NULL) {
-                    $newStore->provincia = $request->provincia;
+            if ($request->referencia != NULL) {
+                $newStore->referencia = $request->referencia;
                 }
-            }
-            if ($request->canton != NULL) {
-            $newStore->canton = $request->canton;
-            }
             if ($request->ntel != NULL) {
             $newStore->phoneNumber = $request->ntel;
             }
-            $newStore->created_at = date('dmy');
+            if($request->password != NULL){
+                if($request->password == $request->password_confirmation){
+                    $userUpdate = User::find(Auth::user()->id);
+                    $newStore->password = Hash::make($request->password);
+                    $userUpdate->password = $newStore->password;
+                    $userUpdate->save();
 
-            
+                }
+            }
+            $newStore->updated_at = date('dmy');            
             $newStore->save();
             return redirect('negocio/'.$newStore->nombreNegocio);
         } catch (\Illuminate\Database\QueryException $e) {

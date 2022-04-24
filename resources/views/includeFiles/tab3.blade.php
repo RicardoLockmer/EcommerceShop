@@ -120,16 +120,16 @@
                     <div class="relative rounded-md shadow-sm">
                         <div  class="absolute pl-3 flex items-center pointer-events-none">
                             <span class="pt-2 text-gray-500 sm:text-sm">
-                                &#8353;
+                                &#76; 
                             </span>
                         </div>
-                        <input type="text"  v-model="variante.sizes[index].precio"  name="price" id="price"
+                        <input type="number"  v-model="variante.sizes[index].precio"  name="price" id="price"
                         oninput="this.className ='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-6 sm:text-sm border-gray-300 rounded-md form-control' "  class="@error('price') is-invalid @enderror focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-6 sm:text-sm border-gray-300 rounded-md form-control" placeholder="0.00">
                         <div :class="(vistaPrevia)? 'hidden' : 'absolute inset-y-0 right-0 flex items-center'">
                             <label for="currency" class="sr-only border-l-4">Moneda</label>
-                                <select id="moneda" name="moneda" class="focus:ring-indigo-500 focus:border-indigo-500 h-full py-0 pl-2 pr-2 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
+                                <select id="moneda" name="moneda" class="h-full py-0 pl-2 pr-2 bg-white text-gray-500 sm:text-sm rounded-r-md border-gray-300 border">
                                     <option>
-                                        CRC
+                                        HNL
                                     </option>
                                 
                                 </select>

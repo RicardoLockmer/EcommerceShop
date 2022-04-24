@@ -134,7 +134,7 @@
     <script src="/scripts/MenuCategory.js"></script>
     @yield('categoryOptions')
     
-    @livewireScripts()
+
     
     @yield('bp')
     @yield('cartJQ')

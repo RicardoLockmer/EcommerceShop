@@ -21,7 +21,7 @@
         @if(count($items) > 0)
             @foreach($items as $item)        
             <!-- ITEM BOX -->
-    <div class="grid grid-rows-2 gap-2 p-2 rounded-md shadow-md border-r border-l">
+    <div class="grid grid-rows-1 gap-2 p-2 rounded-md shadow-md border-r border-l">
         <!-- IMAGE BOX -->
         <div class="p-2 self-center" style="min-height: 160px;">
             <a href="/producto/{{$item->colors[0]->link}}">
@@ -69,20 +69,20 @@
                     </p>
                 </div>
                 {{-- VER MAS BUTTON --}}
-                <div class="flex justify-center mt-2">
-                    <div class="my-2">
-                        <a href="/producto/{{$item->colors[0]->link}}" 
-                            class="font-bold rounded-full text-white ">
-                            <div class="items-center px-12 py-1 bg-red-500 rounded-full shadow-sm hover:shadow-md hover:bg-red-600">
-                                {{ __('VER MAS') }}
-                            </div>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-        
+    
+    <div class="flex justify-center mt-2">
+        <div class="my-2">
+            <a href="/producto/{{$item->colors[0]->link}}" 
+                class="font-bold rounded-full text-white ">
+                <div class="items-center px-12 py-1 bg-red-500 rounded-full shadow-sm hover:shadow-md hover:bg-red-600">
+                    {{ __('VER MAS') }}
+                </div>
+            </a>
+        </div>
+    </div>
 </div>
            
 
