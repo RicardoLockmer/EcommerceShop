@@ -23,22 +23,15 @@
              </div>
                 
         </div>
-        <div data-aos="zoom-in" data-aos-duration="2000" class="flex h-auto my-32 block font-bold  my-4 justify-center " style="z-index:100;">
-            <!-- <a href="###" class="justify-self-center mr-2" style="z-index:100;">
-            <div class="grid py-2 px-4 bg-yellow-400 hover:bg-yellow-300 items-center rounded-md shadow-lg">
-                <div class="justify-self-center font-bold  text-sm text-white">
-                    Como Funciona
-                </div>
-            </div> 
-            </a> -->
-            <a href="###" class="justify-self-center " style="z-index:100;">
-            <div class="grid py-2 px-4 bg-yellow-400 hover:bg-yellow-300 items-center rounded-md shadow-lg">
-                <div class="justify-self-center font-bold  text-sm text-white">
-                    Pre-Registrar Negocio
-                </div>
-            </div> 
+        <div class="flex space-x-4 font-bold my-4 justify-center z-20" >
+
+            <a href="###" class="flex justify-center px-4 py-2 bg-red-500 z-10 w-auto hover:bg-red-600 items-center rounded-full text-white font-bold text-xl">
+                Como Funciona
+            </a> 
+            <a href="###" class="flex justify-center px-4 py-2 bg-red-500 z-10 w-auto hover:bg-red-600 items-center rounded-full text-white font-bold text-xl" > 
+                Registrar Negocio
             </a>  
-                
+            
         </div>   
     </div>
 </div>

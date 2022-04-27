@@ -21,7 +21,7 @@ class SearchController extends Controller
             // $q = $request->q;
             $terms = explode(' ', request('q'));
             foreach ($terms as $q) {
-            $items = Items::where ( 'nombre', 'LIKE', '%' . $q . '%' )
+            $items = Items::where( 'nombre', 'LIKE', '%' . $q . '%' )
             ->orWhere ( 'descripcion', 'LIKE', '%' . $q . '%' )
             ->orWhere('categoria', 'LIKE', '%'.$q.'%')
             ->orWhere('subcategoria', 'LIKE', '%'.$q.'%')

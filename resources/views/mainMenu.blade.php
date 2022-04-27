@@ -1,4 +1,4 @@
-<div class="flex grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-2 font-bold" style="background-color: #FF9800">
+<div class="flex grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-2 font-bold bg-red-600" >
         <div class="ml-2">
             <a href="/" class="">
             <img src="/dummy/logoTest2.png" alt="" style="width:auto; height: 40px;">
@@ -50,52 +50,43 @@
         @else
             @if(Auth::user()->acctype == 1)
         
-        <div >
-            <a class="flex-grow hover:text-white  text-white hover:text-black font-bold" href="/perfil/{{Auth::user()->name}}">
-                <!-- Bienvenido, {{ Auth::user()->name }} <span></span> -->Mi Cuenta
-            </a>
-        </div>
-        <div >
-            <a class="hover:text-white  text-white hover:text-black font-bold" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-        </div>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-
-        @else
-        @if(Auth::user())
-            @if(Auth::user()->acctype == 2)
                 <div >
-                    <a class="flex hover:text-white hover:bg-yellow-300 h-10 w-28 justify-center border border-white rounded-md items-center  text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->store->nombreNegocio}}" >
-                        Mi Negocio
+                    <a class="flex-grow hover:text-white  text-white hover:text-black font-bold" href="/perfil/{{Auth::user()->name}}">
+                        <!-- Bienvenido, {{ Auth::user()->name }} <span></span> -->Mi Cuenta
                     </a>
                 </div>
-
-
-
-@endif
-
-
-@endif
-        <div >
-            <a class="flex-grow hover:text-white  text-white hover:text-black font-bold" href="/perfil/{{Auth::user()->name}}">
-                <!-- Bienvenido, {{ Auth::user()->name }} --> Mi Cuenta
-            </a>
-        </div>
-        <div >
-            <a class="hover:text-white  text-white hover:text-black font-bold" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-        </div>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-
-        @endif
-
-
+                <div >
+                    <a class="hover:text-white  text-white hover:text-black font-bold" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                @if(Auth::user())
+                    @if(Auth::user()->acctype == 2)
+                        <div >
+                            <a class="flex hover:text-white hover:shadow-md h-10 w-28 justify-center border border-white rounded-full items-center text-white hover:text-black font-bold hover:shadow-md" href="/negocio/{{Auth::user()->store->nombreNegocio}}" >
+                                Mi Negocio
+                            </a>
+                        </div>
+                    @endif
+                @endif
+                <div >
+                    <a class="flex-grow hover:text-white  text-white hover:text-black font-bold" href="/perfil/{{Auth::user()->name}}">
+                        <!-- Bienvenido, {{ Auth::user()->name }} --> Mi Cuenta
+                    </a>
+                </div>
+                <div >
+                    <a class="hover:text-white  text-white hover:text-black font-bold" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endif
         @endguest
         
         

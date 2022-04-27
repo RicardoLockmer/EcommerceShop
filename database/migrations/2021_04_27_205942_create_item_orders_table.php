@@ -15,11 +15,19 @@ class CreateItemOrdersTable extends Migration
     {
         Schema::create('item_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('orderNumber, 20');
+            $table->string('orderNumber', 20);
             $table->foreignId('order_id')->constrained();
             $table->foreignId('item_id')->constrained();
             $table->decimal('unitPrice');
             $table->integer('quantity');
+            $table->unsignedBigInteger('userId');
+            $table->dateTime('bought_at');
+            $table->boolean('delivered'); //true or false
+            $table->boolean('in_progress'); // true or false
+            
+            $table->string('expected_date');
+            $table->string('delivery_address');
+            $table->string('deliver_to');
             $table->timestamps();
         });
     }

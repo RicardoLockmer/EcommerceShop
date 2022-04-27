@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
         Schema::enableForeignKeyConstraints();
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('orderNumber, 20');
+            $table->string('orderNumber',20);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('item_size_id')->constrained();
             $table->decimal('totalAmount');

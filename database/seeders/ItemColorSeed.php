@@ -35,56 +35,56 @@ class ItemColorSeed extends Seeder
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["red1.jpg", "red2.jpg", "red3.jpg", "red4.jpg", "red5.jpg", "red6.jpg", "red7.jpg"]',
-                'link' => 'DetTM2270421DT60888ea5c64d101509'.now(),
+                'link' => $i.'DetTM2270421DT60888ea5c64d10150900'.now(),
                 'color' => 'Rojo',
                 'created_at' => now()
             ]);
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["blue1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg", "b6.jpg"]',
-                'link' => 'DetTM2270421DT60888efg5c64d101509'.now(),
+                'link' => 'DetTM2270421DT60888efg5c64d1015091'.now(),
                 'color' => 'Azul',
                 'created_at' => now()
             ]);
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg"]',
-                'link' => 'DetTM2270421DT60888effg5c64d101509'.now(),
+                'link' => 'DetTM2270421DT60888effg5c64d1015092'.now(),
                 'color' => 'Rosa',
                 'created_at' => now()
             ]);
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["w1.jpg", "w2.jpg", "w3.jpg", "w4.jpg", "w5.jpg", "w6.jpg", "w7.jpg"]',
-                'link' => 'DetTM2270421DT60888ersw5c64d101509'.now(),
+                'link' => 'DetTM2270421DT60888ersw5c64d1015093'.now(),
                 'color' => 'Blanco',
                 'created_at' => now()
             ]);
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["red1.jpg", "red2.jpg", "red3.jpg", "red4.jpg", "red5.jpg", "red6.jpg", "red7.jpg"]',
-                'link' => 'DetTM2270421DT60888ea5c64d101509'.now(),
+                'link' => 'DetTM2270421DT60888ea5c64d10150921'.now(),
                 'color' => 'Rojo',
                 'created_at' => now()
             ]);
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["blue1.jpg", "b2.jpg", "b3.jpg", "b4.jpg", "b5.jpg", "b6.jpg"]',
-                'link' => 'DetTM2270421DT60888efg5c64d101509'.now(),
+                'link' => 'DetTM2270421DT60888efg5c64d1015092111'.now(),
                 'color' => 'Azul',
                 'created_at' => now()
             ]);
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["p1.jpg", "p2.jpg", "p3.jpg", "p4.jpg", "p5.jpg", "p6.jpg", "p7.jpg"]',
-                'link' => 'DetTM2270421DT60888effg5c64d101509'.now(),
+                'link' => 'DetTM2270421DT60888effg5c64d1015092144'.now(),
                 'color' => 'Rosa',
                 'created_at' => now()
             ]);
             DB::table('item_colors')->insert([
                 'item_id' => $i,
                 'colorImages' => '["w1.jpg", "w2.jpg", "w3.jpg", "w4.jpg", "w5.jpg", "w6.jpg", "w7.jpg"]',
-                'link' => 'DetTM2270421DT60888ersw5c64d101509'.now(),
+                'link' => 'DetTM2270421DT60888ersw5c64d1015094545'.now(),
                 'color' => 'Blanco',
                 'created_at' => now()
             ]);

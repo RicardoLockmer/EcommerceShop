@@ -77,7 +77,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '40 mm',
                 'quantity' => 40,
                 'unique_size_id' => 1111118,
-                'precio' => 250000,
+                'precio' => 25000+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
@@ -87,7 +87,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '44 mm',
                 'quantity' => 40,
                 'unique_size_id' => 1111119,
-                'precio' => 250000,
+                'precio' => 25000+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
@@ -97,7 +97,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '40 mm',
                 'quantity' => 40,
                 'unique_size_id' => 11111101,
-                'precio' => 250000,
+                'precio' => 25000+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
@@ -107,7 +107,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '44 mm',
                 'quantity' => 40,
                 'unique_size_id' => 11111102,
-                'precio' => 250000,
+                'precio' => 25000+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
@@ -117,7 +117,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '40 mm',
                 'quantity' => 40,
                 'unique_size_id' => 11111103,
-                'precio' => 250000,
+                'precio' => 25000+$i+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
@@ -127,7 +127,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '44 mm',
                 'quantity' => 40,
                 'unique_size_id' => 11111104,
-                'precio' => 250000,
+                'precio' => 25000+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
@@ -137,7 +137,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '40 mm',
                 'quantity' => 40,
                 'unique_size_id' => 11111105,
-                'precio' => 250000,
+                'precio' => 25000+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
@@ -147,7 +147,7 @@ class ItemSizeSeed extends Seeder
                 'size' => '44 mm',
                 'quantity' => 40,
                 'unique_size_id' => 11111106,
-                'precio' => 250000,
+                'precio' => 25000+$i,
                 'created_at' => now()
             ]);
             DB::table('item_sizes')->insert([
