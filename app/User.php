@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use HasFactory;
     public function store() {
         return $this->belongsTo(Store::class, 'store_id', 'store_id');
     }
