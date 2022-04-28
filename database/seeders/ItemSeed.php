@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
+
 class ItemSeed extends Seeder
 {
     /**
@@ -13,6 +14,7 @@ class ItemSeed extends Seeder
      */
     public function run()
     {
+        
         //MOCHILA
         for($i = 1; $i < 10; $i++){
             DB::table('items')->insert([
@@ -67,5 +69,6 @@ class ItemSeed extends Seeder
                 'created_at' => now()
             ]);
         }
+        
     }
 }

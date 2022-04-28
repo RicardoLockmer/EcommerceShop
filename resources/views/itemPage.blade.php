@@ -4,7 +4,7 @@
 
 @section('thisItem')
 <div class="container bg-white mt-4"  >
-    <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-12 shadow-md rounded-md p-4">
+    <div class=" grid grid-cols-1 md:grid-cols-5 lg:grid-cols-12 shadow-inner shadow-md shadow-red-600 border-l-2 border-r-2 rounded-md p-4">
         <div class="col-start-3 md:col-span-2 md:col-start-1 lg:col-start-2 lg:col-end-5 lg:w-full lg:ml-10 mb-4">
             <div class="w-full h-full">
                 <a  id="sticky">
@@ -95,8 +95,8 @@
                             <strong> {{ $item->tipoVariante }}: </strong>
                         </span>
                         <div id="Items" class="grid gap-2 grid-cols-3 lg:gap-4 lg:grid-cols-6 ml-4">
-                            <div :id="img.id" :class="(index == 0) ? 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg  cursor-pointer border-yellow-500 p-2' : 'hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg cursor-pointer p-2'" v-on:click="updateItem(img.id)" v-for="(img, index) in item.colors">
-                                <img :src="imgPreUrl + img.colorImages[0]"  alt="">
+                            <div :id="img.id" :class="(index == 0) ? 'w-26 grid hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg  cursor-pointer border-yellow-500 p-2 ' : 'w-26 grid  hover:shadow-lg shadow-md border-2 hover:border-yellow-300 rounded-lg cursor-pointer p-2'" v-on:click="updateItem(img.id)" v-for="(img, index) in item.colors">
+                                <img class="max-h-20 w-auto place-self-center object-scale-down object-contain" :src="imgPreUrl + img.colorImages[0]"  alt="">
                             </div>
                         </div>
                     </div>
