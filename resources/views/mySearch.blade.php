@@ -18,15 +18,15 @@ Resultados de
 
                 {{-- FOTO DEL ITEM --}}
 
-                <div class="px-4" >
+                <div class="px-4 self-center" >
                     <a href="/producto/{{$item->colors[0]->link}}">
                    
-                        <img class="centerMyImages max-w-1/2" src="{{Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
+                        <img class="object-scale-down centerMyImages max-w-1/2 " src="{{Storage::URL('assetItems/'.$item->image)}}" alt="{{$item->nombre}}">
                        
                     </a>
                 </div>
                 {{-- ITEM NAME --}}
-                <div class="px-4">
+                <div class="grid grid-cols-1 px-4">
                     <div class="" >
                         <a href="/producto/{{$item->colors[0]->link}}" class="searchItem">
                             <div class="text-2xl font-bold text-gray-700" style="margin-bottom: 0!important;">
@@ -55,7 +55,7 @@ Resultados de
                             {{$item->descripcion}}
                         </p>
                     </div>
-                    <div class="flex justify-start mt-4 ">
+                    <div class="flex justify-start mt-4 place-self-end">
                         <a href="/producto/{{$item->colors[0]->link}}" class="rounded-l-full rounded-r-full bg-red-500 hover:bg-red-600 shadow-md py-1 px-5 text-white font-bold">VER MAS</a>
                     </div>
                 </div>
