@@ -28,9 +28,10 @@ Route::post('/deleteCartItem', 'ShoppingController@destroy');
 //BUUY ROUTES
 Route::get('/comprar', 'BuyItemController@index');
 Route::get('/ADDR', 'BuyItemController@ADDR');
-Route::post('/newADDR', 'BuyItemController@newADDR');
-Route::get('/drumroll', 'BuyItemController@tryTransaction')->middleware('auth');
-
+Route::get('/newADDR', 'BuyItemController@newADDR');
+Route::get('/drumroll', 'BuyItemController@checkForm')->middleware('auth');
+Route::get('/Purchase', 'ProductOrdersController@index');
+Route::get('BuyItem', 'NewOrdersController@store');
 // MAINPAGE ROUTES
 Route::get('/paraHombres', 'CategoryController@paraHombres');
 Route::get('/ComoVender', 'MainPageController@comoVender')->name('comoVender');

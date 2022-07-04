@@ -1,5 +1,5 @@
 <div class="flex grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 p-2 font-bold bg-red-600" >
-        <div class="ml-2">
+        <div class="content-end ">
             <a href="/" class="">
             <img src="/dummy/logoTest2.png" alt="" style="width:auto; height: 40px;">
             </a>

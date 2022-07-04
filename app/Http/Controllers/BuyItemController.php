@@ -38,11 +38,11 @@ class BuyItemController extends Controller
             $user = Auth::user();
             $userAddress = direcciones::where('user_id', $user->id)->where('selected', 1)->first();
             $itemTotalPrice = $purchaseItem->precio * $qty;
-            $impTax = $itemTotalPrice * 0.13;
+            $impTax = $itemTotalPrice * 0.12;
             $totalPagar = $itemTotalPrice + $impTax;
                 if($userAddress){
         
-                    $provinciass = Shipping::where('items_id', $purchaseItem->items->id)->where('provincia', $userAddress->provincia)->first();
+                    $provinciass = Shipping::where('items_id', $purchaseItem->items->id)->where('provincia', $userAddress->canton)->first();
                         if($provinciass){  
                             $string = $provinciass->tiempoEntrega;
                             $day = '+'.$string.' day';
@@ -151,7 +151,7 @@ class BuyItemController extends Controller
         $qty = $request->qty;
         $selectedItem = itemSizes::where('id', $itemSizeId)->first();
         $address = direcciones::where('user_id', Auth::user()->id)->where('selected', 1)->first();
-        $shipping = Shipping::where('items_id', $selectedItem->item_id)->where('provincia', $address->provincia)->first();
+        $shipping = Shipping::where('items_id', $selectedItem->item_id)->where('provincia', $address->canton)->first();
         $precioEnvio = $shipping->precioEnvio;
         $provincia = $address->provincia;
         $canton = $address->canton;
@@ -160,10 +160,19 @@ class BuyItemController extends Controller
         $codigoPostal = $address->codigoPostal;
         $pais = $address->pais;
         $personaRecibe = $address->nombreCompleto;
+        if($shipping){
+            $isBuyable = true;
+         }else{
+            $isBuyable = false;
+            $precioEnvio = 'No se Envia a esa Direccion';
+            $totalPagar = 'No se Envia a esa Direccion';
+            
+         }
 
         $itemTotalPrice = $selectedItem->precio * $qty;
-        $impTax = $itemTotalPrice * 0.13;
-        $totalPagar = $itemTotalPrice + $impTax + $precioEnvio;
+        $impTax = $itemTotalPrice * 0.12;
+        $totalSum = $itemTotalPrice + $impTax + $precioEnvio;
+        $totalPagar = number_format($totalSum, 0, '.', ',');
         if($address->infoAdicional != NULL){
             $extraInfo = $address->infoAdicional;
         } else {
@@ -171,7 +180,7 @@ class BuyItemController extends Controller
         }
 
 
-        $x = [$provincia, $canton, $direccion, $numero, $codigoPostal, $pais, $personaRecibe, $extraInfo, number_format($precioEnvio, 0, '.', ','), number_format($totalPagar, 0, '.', ',')];
+        $x = [$provincia, $canton, $direccion, $numero, $codigoPostal, $pais, $personaRecibe, $extraInfo, number_format($precioEnvio, 0, '.', ','), $totalPagar, $isBuyable];
         return $x;
     } catch(\Illuminate\Database\QueryException $e){
         echo $e;
@@ -182,42 +191,40 @@ class BuyItemController extends Controller
         $itemSizeId = $request->linkId;
         $qty = $request->qty;
         $provincia = $request->provincia;
-       
+        $ciudad = $request->ciudad;
+        $isBuyable = false;
         $selectedItem = itemSizes::where('id', $itemSizeId)->first();
+        $phoneNumber = $request->phoneNumber;
         
-        $shipping = Shipping::where('items_id', $selectedItem->item_id)->where('provincia', $provincia)->first();
+        $shipping = Shipping::where('items_id', $selectedItem->item_id)->where('provincia', $ciudad)->first();
         if($shipping){
-           
-               $precioEnv = $shipping->precioEnvio;
-               $precioEnvio = number_format($precioEnv, 0, '.', ',');
-               $itemTotalPrice = $selectedItem->precio * $qty;
-               $impTax = $itemTotalPrice * 0.13;
-               $totalSum = $itemTotalPrice + $impTax + $precioEnv;
-               $totalPagar = number_format($totalSum, 0, '.', ',');
+            $precioEnv = $shipping->precioEnvio;
+            $precioEnvio = number_format($precioEnv, 0, '.', ',');
+            $itemTotalPrice = $selectedItem->precio * $qty;
+            $impTax = $itemTotalPrice * 0.12;
+            $totalSum = $itemTotalPrice + $impTax + $precioEnv;
+            $totalPagar = number_format($totalSum, 0, '.', ',');
+            $direccion = $request->direccion;
 
+            $isBuyable = true;
         } else {
             $precioEnvio = 'No se Envia a esa Direccion';
             $totalPagar = 'No se Envia a esa Direccion';
+            $isBuyable = false;
         }
         
         
-        // $provincia = $address->provincia;
-        // $canton = $address->canton;
-        // $direccion = $address->direccion;
-        // $numero = $address->prefix.' '.$address->phoneNumber;
-        // $codigoPostal = $address->codigoPostal;
-        // $pais = $address->pais;
-        // $personaRecibe = $address->nombreCompleto;
+        
 
         
 
 
-        $x = [$precioEnvio, $totalPagar];
+        $x = [$precioEnvio, $totalPagar, $isBuyable];
         return $x;
     
     }
 
-    public function tryTransaction(Request $request){
+    public function checkForm(Request $request){
 
     try{
         
@@ -227,8 +234,6 @@ class BuyItemController extends Controller
             'CardMonth' => 'required|numeric|max:12',
             'CardYear' => 'required|numeric|min:21',
             'CardCVV' => 'required|numeric',
-            
-            
         ]);
         
         $cardName = $request->CardName;
@@ -236,12 +241,19 @@ class BuyItemController extends Controller
         $cardMonth = $request->CardMonth;
         $cardYear = $request->CardYear;
         $cvv = $request->CardCVV;
-        $x = 'Successs';
+        if($cardName == "hello"){
+            $x = [true];
+        } else {
+            $x = [false];
+        }
         return $x;
 
     } catch(\Illuminate\Database\QueryException $e) {
         echo $e;
             
     }
+    }
+    public function BuyItem(Request $request){
+        return $request;
     }
 }
